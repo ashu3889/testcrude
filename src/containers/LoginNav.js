@@ -49,8 +49,8 @@
             startGeneratingServerSession(){ 
 
 //alert('111');
-            var api_key = "ypmxayteat7agml9",
-             secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
+            var api_key = "3iciz5hhzaiitjkj",
+             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -306,8 +306,8 @@ componentWillReceiveProps(nextProps) {
 
 startTrade(data, exchange , type){
           //code to set and get the data
-            var api_key = "ypmxayteat7agml9",
-             secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
+            var api_key = "3iciz5hhzaiitjkj",
+             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -499,7 +499,7 @@ startTrade(data, exchange , type){
 
 
     //  debugger;
-              let  WSS_ROOT_URL = 'wss://ws.kite.trade?api_key=ypmxayteat7agml9&access_token=';
+              let  WSS_ROOT_URL = 'wss://ws.kite.trade?api_key=3iciz5hhzaiitjkj&access_token=';
              // let accessdata = this.props.access.access_token.access_token;
               var ws = new WebSocket(`${WSS_ROOT_URL}${access_token_const}`);
               //alert(accessdata);
@@ -569,6 +569,9 @@ startTrade(data, exchange , type){
 
     function getCrudeOHLC(d){
      
+
+    // d.startTrade('CRUDEOIL18SEPFUT', 'MCX','SELL' );
+
        crudetickopen = crudearr[0];
        crudetickhigh = _.maxBy(crudearr);
        crudeticklow = _.minBy(crudearr);
@@ -975,7 +978,7 @@ startTrade(data, exchange , type){
      
 
           var data = {
-                        'api_key': 'ypmxayteat7agml9',
+                        'api_key': '3iciz5hhzaiitjkj',
                         'access_token': this.props.access,
                 };
 

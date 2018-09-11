@@ -65,8 +65,8 @@
                         // alert(this.props.trendData[strlen].x);
                            //this.placeorder();
            //code to set and get the data
-                var api_key = "ypmxayteat7agml9",
-             secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
+                var api_key = "3iciz5hhzaiitjkj",
+             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -221,7 +221,7 @@
 
               <div>
 
-             <a href="https://kite.trade/connect/login?v=3&api_key=ypmxayteat7agml9" target="_blank"> Login redirect</a>
+             <a href="https://kite.trade/connect/login?v=3&api_key=3iciz5hhzaiitjkj" target="_blank"> Login redirect</a>
 
               </div>
             
