@@ -11,6 +11,8 @@ export default function(state = [], action) {
         if(length >= 1){
           // check the direction and add it in candle
 
+          //debugger;
+
             if(state[state.length-1].high < action.payload.high){
              //up direction
               direction ='up';
@@ -121,31 +123,6 @@ export default function(state = [], action) {
                                }
                        } 
                    }
-
-                   /*//adding current swinghigh and low condition
-                     //this code will make sure swinghigh and swinglow is present in state after pivot is formed
-                    if(state[state.length-1].swingLow != undefined){
-                         //first swing condition                               
-                         action.payload.swingLow = state[state.length-1].swingLow;
-                    }
-                    else if(action.payload.swingLow != undefined){
-                      //do nothing here
-                    }
-                    else if(action.payload.swingLow == undefined && state[state.length-1].swingLow ==undefined ){
-                          action.payload.swingLow = 0;
-                    }
-
-                   if(state[state.length-1].swingHigh != undefined){
-                         //first swing condition                               
-                         action.payload.swingHigh = state[state.length-1].swingHigh;
-                    }
-                    else if(action.payload.swingHigh != undefined){
-                      //do nothing here
-                    }
-                    else if(action.payload.swingHigh == undefined && state[state.length-1].swingHigh ==undefined ){
-                          action.payload.swingHigh = 0;
-                    }*/
-                    
 
 
               action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();

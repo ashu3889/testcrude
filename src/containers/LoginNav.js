@@ -18,6 +18,13 @@
      let countnifty = 1;
      let countnickle = 1;
      let access_token_const =0;
+     let crudelongtrade = false;
+     let crudeshorttrade = false;
+     let startTime = 0;
+     let startingTime = 0;
+
+
+
     export  class LoginNav extends Component{
      
 
@@ -47,8 +54,47 @@
             }
 
             startGeneratingServerSession(){ 
+           
+//debugger;
+           Object.defineProperty(Date.prototype, 'YYYYMMDDHHMMSS', {
+    value: function() {
+        function pad2(n) {  // always returns a string
+            return (n < 10 ? '0' : '') + n;
+        }
 
-//alert('111');
+        return this.getFullYear() +'-'+
+               pad2(this.getMonth() + 1) + '-'+
+               pad2(this.getDate()) + ' '+
+               pad2(this.getHours()) + ':' +
+               pad2(this.getMinutes()) +':' +
+               pad2(this.getSeconds());
+    }
+});
+
+
+startTime = new Date().YYYYMMDDHHMMSS();
+
+               Object.defineProperty(Date.prototype, 'starting', {
+    value: function() {
+        function pad2(n) {  // always returns a string
+            return (n < 10 ? '0' : '') + n;
+        }
+
+        return this.getFullYear() +'-'+
+               pad2(this.getMonth() + 1) + '-'+
+               pad2(this.getDate()) + ' '+
+               '10' + ':' +
+               '30' +':' +
+               '00';
+    }
+});
+
+
+           startingTime = new Date().starting();
+
+           
+
+            var ashutosh = this;
             var api_key = "3iciz5hhzaiitjkj",
              secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
              request_token = this.state.token;
@@ -65,8 +111,9 @@
                   kc.generateSession(request_token, secret)
                     .then(function(response) {
                       access_token_const = response.access_token;
-                      alert(access_token_const);
-                  //    debugger;                     
+                     // alert(access_token_const);
+                  //    debugger;     
+                     init();                
 
                      kc.setAccessToken(access_token_const);
                    //  debugger;
@@ -83,6 +130,61 @@
                kc.setAccessToken(access_token);
 
               }
+
+
+
+              function init(){
+                // debugger;
+                 getHistoricalData(53835015, "5minute", startingTime, startTime);
+                
+                 //getHistoricalData(53835015, "5minute", new Date("2018-09-17 11:00:00"), new Date("2018-09-18 10:00:00"));
+
+              }
+
+              function getHistoricalData(instrument_token, interval, from_date, to_date, continuous) {
+
+              
+
+  kc.getHistoricalData(instrument_token, interval, from_date, to_date, continuous)
+    .then(function(response) {
+     // debugger;
+      populatingTickdata(response);
+      console.log(response);
+    }).catch(function(err) {
+      console.log(err);
+    });
+}
+
+
+function populatingTickdata(response){
+
+var d = ashutosh;
+
+
+response.map((v,i)=> {
+//debugger;
+
+   var crudetickType;
+   if(v.open < v.close){
+         crudetickType ="green";
+     }
+    else if(v.open > v.close){
+          crudetickType ="red";
+    }
+    else if(v.open = v.close){
+          crudetickType ="doji";
+    }
+
+    var crudetickLength = Math.abs(v.high-v.low);
+
+    var crudetickarray = {"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :crudetickType ,'tickLength' : crudetickLength , 'date' : v.date};
+    
+    d.props.addTickData(crudetickarray);
+
+
+})
+
+}
               
             }           
 
@@ -132,9 +234,12 @@ componentWillReceiveProps(nextProps) {
       if(nextProps.tickCombo[len].pivot != undefined ){
 
        //crude oil
-        if(this.state.pivotpoint != nextProps.tickCombo[len].pivot){                     
+        if(this.state.pivotpoint != nextProps.tickCombo[len].pivot){ 
+                      
                 this.setState({pivotpoint: nextProps.tickCombo[len].pivot});
-                let datainput = {x : count , y :  nextProps.tickCombo[len].pivot ,dir : nextProps.tickCombo[len].dir};
+                let datainput = {x : count , y :  nextProps.tickCombo[len].pivot ,dir : nextProps.tickCombo[len].dir , date: nextProps.tickCombo[len].date };
+               
+                  //debugger;  
                 this.props.pivotData(datainput);
                 count = count +1;
         }      
@@ -152,28 +257,32 @@ componentWillReceiveProps(nextProps) {
 
      if(trenlen > 1){ 
 
-      if(this.props.trendData[trenlen].TradeStarted == "upsell" ){
+      if(this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false){
       //debugger;
       alert('up sell crude');
       this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
 
+      crudeshorttrade = true;
+
       }
 
 
-      if(this.props.trendData[trenlen].TradeStarted == "downbuy" ){
+      if(this.props.trendData[trenlen].TradeStarted == "downbuy"  && crudelongtrade == false ){
      // debugger;
         alert('down buy crude');
         this.startTrade('CRUDEOIL18AUGFUT', 'MCX','BUY' );
+         crudelongtrade = true;
+
 
       }
       
      // if(this.props.trendData[trenlen].TimeToEnter  != undefined && this.props.trendData[trenlen].TradeStarted != undefined){
-        if( this.props.trendData[trenlen].TradeStarted == "upsell" && this.state.crudeshorttrade == false){
+        if( this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false){
           this.setState({crudeshorttrade : true});
           this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
         }
 
-       if( this.props.trendData[trenlen].TradeStarted == "downbuy" && this.state.crudelongtrade == false){
+       if( this.props.trendData[trenlen].TradeStarted == "downbuy" && crudelongtrade == false){
           this.setState({crudelongtrade : true});
           this.startTrade('CRUDEOIL18AUGFUT' , 'MCX' ,'BUY');
         }   
@@ -488,7 +597,7 @@ startTrade(data, exchange , type){
        alert(access_token_const);
        
 
-     
+    // debugger;
       
       var self  = this;
 
@@ -509,7 +618,7 @@ startTrade(data, exchange , type){
               }
 
                ws.onopen = function (event) {
-                   var message = {"a": "subscribe", "v": [53787399,12111106,53801479]};
+                   var message = {"a": "subscribe", "v": [53835015,12111106,53801479]};
                    ws.send(JSON.stringify(message));
               };
 
@@ -526,7 +635,7 @@ startTrade(data, exchange , type){
               for (var i = 0 ; i< d.length ; i++){
 
                //debugger;
-                  if(d[i].instrument_token == "53787399"){
+                  if(d[i].instrument_token == "53835015"){
                       
                        get5minDataCrudeTimestamp(d[i].last_price, self);
                   }
@@ -562,8 +671,10 @@ startTrade(data, exchange , type){
     this.connect();
 
     function get5minDataCrudeTimestamp(d,scope){
-       console.log('crudearr is' + crudearr);
-       crudearr.push(d);
+      
+     //  crudearr.push(d);
+
+        console.log('crudearr is' + crudearr);
 
     }
 

@@ -160,7 +160,7 @@ export default function(state = [], action) {
                              action.payload.TradeStarted = 'upsell';
                              action.payload.TimeToEnter = true;
                              action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                             alert('BPB short at ' + action.payload.x);
+                             alert('BPB short at ' + action.payload.date);
                             // alert('time is' + action.payload.time);
                              let newstate = state.concat(action.payload);
                              return newstate ; 
@@ -210,7 +210,14 @@ export default function(state = [], action) {
                                   action.payload.TradeStarted = 'downbuy';
                                   action.payload.TimeToEnter = true;
                                   action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                                  alert('BPB Buy at' + action.payload.x);
+                                 // debugger;
+
+                                  alert('BPB Buy at' + action.payload.date);
+                                  //alert('BPB Buy at' + action.payload.x);
+
+
+
+
                                  // alert('time is' + action.payload.time);
                                   let newstate = state.concat(action.payload);
                                   return newstate ;
@@ -256,7 +263,7 @@ export default function(state = [], action) {
                                 action.payload.TradeStarted = 'upsell';
                                 action.payload.TimeToEnter = true;
                                 action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                                alert('BPB short at ' + action.payload.x);
+                                alert('BPB short at ' + action.payload.date);
                                // alert('time is' + action.payload.time);
                                 let newstate = state.concat(action.payload);
                                 return newstate ;  //ktk20003918  true professional carrier
@@ -275,7 +282,9 @@ export default function(state = [], action) {
                               action.payload.TradeStarted = 'downbuy';
                               action.payload.TimeToEnter = true;
                               action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                             alert('BPB Buy at' + action.payload.x);
+                          //  debugger;
+
+                             alert('BPB Buy at' + action.payload.date);
                              //alert('time is' + action.payload.time);
                               let newstate = state.concat(action.payload);
                               return newstate ;
@@ -308,9 +317,9 @@ export default function(state = [], action) {
                       //time to clear sideways
                       action.payload.highest = state[statelen-1].y;                    
                       action.payload.lowest = state[statelen-2].y;
-                      action.payload.trend = 'uptrend';
+                      action.payload.trend = 'uptrend111111';
                       action.payload.upcount = 0; 
-                      action.payload.sidecount = 1;
+                      action.payload.sidecount = state[state.length-1].sidecount+1;
                       action.payload.downcount =0;  
 
                       action.payload.upblackextreme = 0;
@@ -360,9 +369,15 @@ export default function(state = [], action) {
 
                     action.payload.highest = state[statelen-1].y;                    
                     action.payload.lowest = state[statelen-2].y;
-                    action.payload.trend = 'uptrend';
+                    action.payload.trend = 'uptrend222222';
                     action.payload.upcount = 0; 
-                    action.payload.sidecount = 1;
+
+
+                    //action.payload.sidecount = 1;
+
+                    action.payload.sidecount = state[state.length-1].sidecount +1;      
+
+
                     action.payload.downcount =0;  
                     alert('trend is downtrend ashu' + action.payload.x);
 
