@@ -678,7 +678,7 @@ startTrade(data, exchange , type){
 
     function get5minDataCrudeTimestamp(d,scope){
       
-     //  crudearr.push(d);
+        crudearr.push(d);
 
         console.log('crudearr is' + crudearr);
 
@@ -707,7 +707,7 @@ startTrade(data, exchange , type){
     crudetickLength = Math.abs(crudetickhigh-crudeticklow);
 
     crudetickarray = {"open" : crudetickopen ,"low" :crudeticklow ,"high" :crudetickhigh , "close" : crudetickclose ,"tickType" :crudetickType ,'tickLength' : crudetickLength};
-    
+    //debugger;
     d.props.addTickData(crudetickarray);
 
 
