@@ -135,9 +135,9 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
               function init(){
                 // debugger;
-                 getHistoricalData(53835015, "5minute", startingTime, startTime);
+                     getHistoricalData(53835015, "5minute", startingTime, startTime);
                 
-                 //getHistoricalData(53835015, "5minute", new Date("2018-09-17 11:00:00"), new Date("2018-09-18 10:00:00"));
+                  // getHistoricalData(53835015, "5minute", new Date("2018-09-19 11:00:00"), new Date("2018-09-20 10:00:00"));
 
               }
 
@@ -414,6 +414,9 @@ componentWillReceiveProps(nextProps) {
 }
 
 startTrade(data, exchange , type){
+
+//alert('trade');
+
           //code to set and get the data
             var api_key = "3iciz5hhzaiitjkj",
              secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
@@ -443,6 +446,9 @@ startTrade(data, exchange , type){
                 console.log(err);
              }); 
     //code to set and get the data   */ 
+
+
+
 }
 
 

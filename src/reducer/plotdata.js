@@ -148,7 +148,7 @@ export default function(state = [], action) {
                         let diff = Math.abs(state[statelen-1].upblackextreme-action.payload.y );
                        // alert(diff);
                         
-                         if(diff <= 6 && state[statelen-1].ShortTradeInitiated != true ){
+                         if(diff <= 14 && state[statelen-1].ShortTradeInitiated != true ){
                          //  alert('up black point 1 is' + action.payload.x);
                            //normal bpb short
                              action.payload.retesthappen = true;
@@ -160,7 +160,7 @@ export default function(state = [], action) {
                              action.payload.TradeStarted = 'upsell';
                              action.payload.TimeToEnter = true;
                              action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                             alert('BPB short at ' + action.payload.date);
+                             alert('BPB short at ' + action.payload.x);
                             // alert('time is' + action.payload.time);
                              let newstate = state.concat(action.payload);
                              return newstate ; 
@@ -198,7 +198,7 @@ export default function(state = [], action) {
                         //  alert('long trade initiated' + state[statelen-1].LongTradeInitiated );
                          
                              //now we will enter here
-                              if( diff <= 8 && state[statelen-1].LongTradeInitiated != true){
+                              if( diff <= 14 && state[statelen-1].LongTradeInitiated != true){
                                   //alert('low black point 1 is' + action.payload.x);
 
                                   action.payload.retesthappen = true;
@@ -212,7 +212,7 @@ export default function(state = [], action) {
                                   action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
                                  // debugger;
 
-                                  alert('BPB Buy at' + action.payload.date);
+                                  alert('BPB Buy at' + action.payload.x);
                                   //alert('BPB Buy at' + action.payload.x);
 
 
@@ -263,7 +263,7 @@ export default function(state = [], action) {
                                 action.payload.TradeStarted = 'upsell';
                                 action.payload.TimeToEnter = true;
                                 action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                                alert('BPB short at ' + action.payload.date);
+                                alert('BPB short at ' + action.payload.x);
                                // alert('time is' + action.payload.time);
                                 let newstate = state.concat(action.payload);
                                 return newstate ;  //ktk20003918  true professional carrier
@@ -284,7 +284,7 @@ export default function(state = [], action) {
                               action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
                           //  debugger;
 
-                             alert('BPB Buy at' + action.payload.date);
+                             alert('BPB Buy at' + action.payload.x);
                              //alert('time is' + action.payload.time);
                               let newstate = state.concat(action.payload);
                               return newstate ;
@@ -315,11 +315,11 @@ export default function(state = [], action) {
 
                     if(diff >= 8){
                       //time to clear sideways
-                      action.payload.highest = state[statelen-1].y;                    
-                      action.payload.lowest = state[statelen-2].y;
+                      action.payload.highest = action.payload.y;                    
+                      action.payload.lowest = state[statelen-1].y;
                       action.payload.trend = 'uptrend111111';
                       action.payload.upcount = 0; 
-                      action.payload.sidecount = state[state.length-1].sidecount+1;
+                      action.payload.sidecount = 0;
                       action.payload.downcount =0;  
 
                       action.payload.upblackextreme = 0;
