@@ -22,7 +22,6 @@
      let crudeshorttrade = false;
      let startTime = 0;
      let startingTime = 0;
-     let webSocketClicked = false;
 
 
 
@@ -135,10 +134,10 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
 
               function init(){
-               // debugger;
-                    getHistoricalData(53835271, "5minute", startingTime, startTime);
-                //COPPER
-                 //  getHistoricalData(53835015, "5minute", new Date("2018-09-19 11:00:00"), new Date("2018-09-20 10:00:00"));
+                debugger;
+                     getHistoricalData(53835015, "5minute", startingTime, startTime);
+                
+                  // getHistoricalData(53835015, "5minute", new Date("2018-09-19 11:00:00"), new Date("2018-09-20 10:00:00"));
 
               }
 
@@ -148,7 +147,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
   kc.getHistoricalData(instrument_token, interval, from_date, to_date, continuous)
     .then(function(response) {
-      //debugger;
+     // debugger;
       populatingTickdata(response);
       console.log(response);
     }).catch(function(err) {
@@ -180,7 +179,7 @@ response.map((v,i)=> {
 
     var crudetickarray = {"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :crudetickType ,'tickLength' : crudetickLength , 'date' : v.date};
     
-    d.props.addTickDataNickle(crudetickarray);
+    d.props.addTickData(crudetickarray);
 
 
 })
@@ -258,17 +257,17 @@ componentWillReceiveProps(nextProps) {
 
      if(trenlen > 1){ 
 
-      if(this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false && webSocketClicked === true){
+      if(this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false){
       //debugger;
-         alert('up sell crude');
-         this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
+      alert('up sell crude');
+      this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
 
-         crudeshorttrade = true;
+      crudeshorttrade = true;
 
       }
 
 
-      if(this.props.trendData[trenlen].TradeStarted == "downbuy"  && crudelongtrade == false  && webSocketClicked === true){
+      if(this.props.trendData[trenlen].TradeStarted == "downbuy"  && crudelongtrade == false ){
      // debugger;
         alert('down buy crude');
         this.startTrade('CRUDEOIL18AUGFUT', 'MCX','BUY' );
@@ -278,12 +277,12 @@ componentWillReceiveProps(nextProps) {
       }
       
      // if(this.props.trendData[trenlen].TimeToEnter  != undefined && this.props.trendData[trenlen].TradeStarted != undefined){
-        if( this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false  && webSocketClicked === true){
+        if( this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false){
           this.setState({crudeshorttrade : true});
           this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
         }
 
-       if( this.props.trendData[trenlen].TradeStarted == "downbuy" && crudelongtrade == false  && webSocketClicked === true){
+       if( this.props.trendData[trenlen].TradeStarted == "downbuy" && crudelongtrade == false){
           this.setState({crudelongtrade : true});
           this.startTrade('CRUDEOIL18AUGFUT' , 'MCX' ,'BUY');
         }   
@@ -324,7 +323,7 @@ componentWillReceiveProps(nextProps) {
      
      //if(this.props.trendDataNifty[trenlen].TimeToEnter  != undefined && this.props.trendDataNifty[trenlen].TradeStarted != undefined){
 
-        if(this.props.trendDataNifty[trenlen].TradeStarted == "upsell"  && this.state.niftyshorttrade == false ){
+        if(this.props.trendDataNifty[trenlen].TradeStarted == "upsell"  && this.state.niftyshorttrade == false){
               alert('down sell start karo');
               this.setState({niftyshorttrade : true});
               this.startTrade('NIFTY18AUGFUT','MCX','SELL');
@@ -377,7 +376,7 @@ componentWillReceiveProps(nextProps) {
      if(trenlen > 1){
            //write condition to enter the trade
 
-      if(this.props.trendDataNickle[trenlen].TradeStarted == "upsell" && webSocketClicked === true ){
+      if(this.props.trendDataNickle[trenlen].TradeStarted == "upsell" ){
       //debugger;
       alert('up sell nickle');
       this.startTrade('NICKLE18AUGFUT', 'MCX','SELL' );
@@ -385,7 +384,7 @@ componentWillReceiveProps(nextProps) {
       }
 
 
-      if(this.props.trendDataNickle[trenlen].TradeStarted == "downbuy" && webSocketClicked === true){
+      if(this.props.trendDataNickle[trenlen].TradeStarted == "downbuy" ){
      // debugger;
         alert('down buy NICKLE');
         this.startTrade('NICKLE18AUGFUT', 'MCX','BUY' );
@@ -394,14 +393,14 @@ componentWillReceiveProps(nextProps) {
           
 
      // if(this.props.trendDataNickle[trenlen].TimeToEnter != undefined && this.props.trendDataNickle[trenlen].TradeStarted != undefined ){
-         if(this.props.trendDataNickle[trenlen].TradeStarted == "upsell"  && this.state.nickleshorttrade == false && webSocketClicked === true){
+         if(this.props.trendDataNickle[trenlen].TradeStarted == "upsell"  && this.state.nickleshorttrade == false){
               alert('down sell start karo');
               this.setState({nickleshorttrade : true});
               this.startTrade('NICKLE18AUGFUT','MCX-FUT' ,"SELL");
         }
 
          //write condition to enter the trade
-       if(this.props.trendDataNickle[trenlen].TradeStarted == "downbuy"  && this.state.nicklelongtrade == false && webSocketClicked === true){
+       if(this.props.trendDataNickle[trenlen].TradeStarted == "downbuy"  && this.state.nicklelongtrade == false){
               alert('down buy start karo');
               this.setState({nicklelongtrade : true});
               this.startTrade('NICKLE18AUGFUT' ,'MCX-FUT' , 'BUY');
@@ -436,7 +435,7 @@ startTrade(data, exchange , type){
                "exchange": exchange,
                "tradingsymbol": data,
                "transaction_type": type,
-               "quantity": 1,
+               "quantity": 100,
                "product": "MIS",
                "order_type": "MARKET"
              }).then(function(resp) { 
@@ -454,11 +453,6 @@ startTrade(data, exchange , type){
 
 
    newWebsocketMETHOD(){
-
-
-    webSocketClicked = true ;
-
-
               var self  = this;
               //debugger;
              // alert(this.state.tickdata);
