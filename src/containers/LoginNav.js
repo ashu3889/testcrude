@@ -137,7 +137,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
               function init(){
                // debugger;
-                    getHistoricalData(53835271, "5minute", startingTime, startTime);
+                     getHistoricalData(53835271, "5minute", startingTime, startTime);
                     //getHistoricalData(53835271, "5minute", new Date("2018-09-18 11:00:00"), new Date("2018-09-19 10:00:00"));
 
 
@@ -145,7 +145,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
 
 
-                     getHistoricalData(53986567, "5minute", startingTime, startTime);
+                      getHistoricalData(53986567, "5minute", startingTime, startTime);
 
                     //getHistoricalData(53986567, "5minute", new Date("2018-09-5 11:00:00"), new Date("2018-09-6 10:00:00"));
 
@@ -331,7 +331,7 @@ componentWillReceiveProps(nextProps) {
       if(this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false && webSocketClicked === true){
       //debugger;
          alert('up sell crude');
-         this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
+         this.startTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' );
 
          crudeshorttrade = true;
 
@@ -341,7 +341,7 @@ componentWillReceiveProps(nextProps) {
       if(this.props.trendData[trenlen].TradeStarted == "downbuy"  && crudelongtrade == false  && webSocketClicked === true){
      // debugger;
         alert('down buy crude');
-        this.startTrade('CRUDEOIL18AUGFUT', 'MCX','BUY' );
+        this.startTrade('CRUDEOILM18OCTFUT', 'MCX','BUY' );
          crudelongtrade = true;
 
 
@@ -350,12 +350,12 @@ componentWillReceiveProps(nextProps) {
      // if(this.props.trendData[trenlen].TimeToEnter  != undefined && this.props.trendData[trenlen].TradeStarted != undefined){
         if( this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false  && webSocketClicked === true){
           this.setState({crudeshorttrade : true});
-          this.startTrade('CRUDEOIL18AUGFUT', 'MCX','SELL' );
+          this.startTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' );
         }
 
        if( this.props.trendData[trenlen].TradeStarted == "downbuy" && crudelongtrade == false  && webSocketClicked === true){
           this.setState({crudelongtrade : true});
-          this.startTrade('CRUDEOIL18AUGFUT' , 'MCX' ,'BUY');
+          this.startTrade('CRUDEOILM18OCTFUT' , 'MCX' ,'BUY');
         }   
            
      }
@@ -450,7 +450,7 @@ componentWillReceiveProps(nextProps) {
       if(this.props.trendDataNickle[trenlen].TradeStarted == "upsell" && webSocketClicked === true ){
       //debugger;
       alert('up sell nickle');
-      this.startTrade('NICKLE18AUGFUT', 'MCX','SELL' );
+      this.startTrade('NICKELM18OCTFUT', 'MCX','SELL' );
 
       }
 
@@ -458,7 +458,7 @@ componentWillReceiveProps(nextProps) {
       if(this.props.trendDataNickle[trenlen].TradeStarted == "downbuy" && webSocketClicked === true){
      // debugger;
         alert('down buy NICKLE');
-        this.startTrade('NICKLE18AUGFUT', 'MCX','BUY' );
+        this.startTrade('NICKELM18OCTFUT', 'MCX','BUY' );
 
       }
           
@@ -467,14 +467,14 @@ componentWillReceiveProps(nextProps) {
          if(this.props.trendDataNickle[trenlen].TradeStarted == "upsell"  && this.state.nickleshorttrade == false && webSocketClicked === true){
               alert('down sell start karo');
               this.setState({nickleshorttrade : true});
-              this.startTrade('NICKLE18AUGFUT','MCX-FUT' ,"SELL");
+              this.startTrade('NICKELM18OCTFUT','MCX-FUT' ,"SELL");
         }
 
          //write condition to enter the trade
        if(this.props.trendDataNickle[trenlen].TradeStarted == "downbuy"  && this.state.nicklelongtrade == false && webSocketClicked === true){
               alert('down buy start karo');
               this.setState({nicklelongtrade : true});
-              this.startTrade('NICKLE18AUGFUT' ,'MCX-FUT' , 'BUY');
+              this.startTrade('NICKELM18OCTFUT' ,'MCX-FUT' , 'BUY');
         }
 
      
