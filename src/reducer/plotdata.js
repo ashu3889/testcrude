@@ -160,7 +160,7 @@ export default function(state = [], action) {
                              action.payload.TradeStarted = 'upsell';
                              action.payload.TimeToEnter = true;
                              action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                             alert('BPB short at ' + action.payload.x);
+                             alert('BPB short at  crude' + action.payload.x);
                             // alert('time is' + action.payload.time);
                              let newstate = state.concat(action.payload);
                              return newstate ; 
@@ -212,7 +212,7 @@ export default function(state = [], action) {
                                   action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
                                  // debugger;
 
-                                  alert('BPB Buy at' + action.payload.x);
+                                  alert('crude BPB Buy at' + action.payload.x);
                                   //alert('BPB Buy at' + action.payload.x);
 
 
@@ -263,7 +263,7 @@ export default function(state = [], action) {
                                 action.payload.TradeStarted = 'upsell';
                                 action.payload.TimeToEnter = true;
                                 action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                                alert('BPB short at ' + action.payload.x);
+                                alert('crude BPB short at ' + action.payload.x);
                                // alert('time is' + action.payload.time);
                                 let newstate = state.concat(action.payload);
                                 return newstate ;  //ktk20003918  true professional carrier
@@ -284,7 +284,7 @@ export default function(state = [], action) {
                               action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
                           //  debugger;
 
-                             alert('BPB Buy at' + action.payload.x);
+                             alert('crude BPB Buy at' + action.payload.x);
                              //alert('time is' + action.payload.time);
                               let newstate = state.concat(action.payload);
                               return newstate ;
@@ -357,10 +357,16 @@ export default function(state = [], action) {
                         action.payload.upcount = 0; 
                      }
                      else{
+                      action.payload.downcount = 0; 
                       action.payload.upcount = 0; 
                       action.payload.sidecount = 0; 
                       action.payload.highest = action.payload.y;                    
                       action.payload.lowest = state[statelen-1].y;
+                      action.payload.upblackextreme = 0;
+                      action.payload.lowblackextreme = 0;
+                      action.payload.UPblackpoint = 0;
+                      action.payload.Lowblackpoint = 0;  
+
                      }
 
               }
@@ -489,16 +495,20 @@ export default function(state = [], action) {
                     //time to empty the swing and create a new swing 
                     
                      let diff = state[statelen-1].lowest - action.payload.y;
-                     //alert('diff is' + diff);
+                     
+
 
                      if(diff <= 14){
                      //mark it as inside sideways
+
                         action.payload.sidecount = state[state.length-1].sidecount +1;                      
                         action.payload.highest = state[statelen-1].highest;                    
                         action.payload.lowest = state[statelen-1].lowest; 
                         action.payload.upcount = 0; 
                      }
                      else{
+
+                       debugger;
                        action.payload.downcount = 0; 
                        action.payload.sidecount = 0; 
                        action.payload.upcount = 0; 

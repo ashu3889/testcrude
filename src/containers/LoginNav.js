@@ -11,6 +11,7 @@
     import _ from "lodash";
 
     var crudearr = [];
+    var nicklearr = [];
     
 
 
@@ -137,6 +138,19 @@ startTime = new Date().YYYYMMDDHHMMSS();
               function init(){
                // debugger;
                     getHistoricalData(53835271, "5minute", startingTime, startTime);
+                    //getHistoricalData(53835271, "5minute", new Date("2018-09-18 11:00:00"), new Date("2018-09-19 10:00:00"));
+
+
+                    //getHistoricalData(53843463, "5minute", startingTime, startTime);
+
+
+
+                     getHistoricalData(53986567, "5minute", startingTime, startTime);
+
+                    //getHistoricalData(53986567, "5minute", new Date("2018-09-5 11:00:00"), new Date("2018-09-6 10:00:00"));
+
+ 
+                    //  
                 //COPPER
                  //  getHistoricalData(53835015, "5minute", new Date("2018-09-19 11:00:00"), new Date("2018-09-20 10:00:00"));
 
@@ -149,7 +163,22 @@ startTime = new Date().YYYYMMDDHHMMSS();
   kc.getHistoricalData(instrument_token, interval, from_date, to_date, continuous)
     .then(function(response) {
       //debugger;
-      populatingTickdata(response);
+
+      if(instrument_token === 53835271){
+       
+        populatingCrudeTickdata(response);
+      }
+
+      if(instrument_token === 53843463){
+      //coppper
+      //  populatingCrudeTickdata(response);
+      }
+
+      if(instrument_token === 53986567){
+      //nickle
+        populatingNickleTickdata(response);
+      }
+      
       console.log(response);
     }).catch(function(err) {
       console.log(err);
@@ -157,7 +186,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
 }
 
 
-function populatingTickdata(response){
+function populatingCrudeTickdata(response){
 
 var d = ashutosh;
 
@@ -180,12 +209,53 @@ response.map((v,i)=> {
 
     var crudetickarray = {"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :crudetickType ,'tickLength' : crudetickLength , 'date' : v.date};
     
-    d.props.addTickDataNickle(crudetickarray);
+    d.props.addTickData(crudetickarray);
 
 
 })
 
 }
+
+
+
+function populatingNickleTickdata(response){
+
+var d = ashutosh;
+
+
+response.map((v,i)=> {
+//debugger;
+
+   var nickletickType;
+   if(v.open < v.close){
+         nickletickType ="green";
+     }
+    else if(v.open > v.close){
+          nickletickType ="red";
+    }
+    else if(v.open = v.close){
+          nickletickType ="doji";
+    }
+
+    var nickletickLength = Math.abs(v.high-v.low);
+
+    var nickletickarray = {"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :nickletickType ,'tickLength' : nickletickLength , 'date' : v.date};
+    
+    d.props.addTickDataNickle(nickletickarray);
+
+
+})
+
+}
+
+ var nickletickcount = 0,
+    nickleticklow = 0,
+    nickletickhigh = 0,
+    nickletickopen = 0,
+    nickletickarray =[],
+    nickletickType =0,
+    nickletickLength = 0,
+    nickletickclose = 0;
               
             }           
 
@@ -586,7 +656,7 @@ startTrade(data, exchange , type){
     nickletickclose = 0;
 
 
- var silvertickcount = 0,
+    var silvertickcount = 0,
     silverticklow = 0,
     silvertickhigh = 0,
     silvertickopen = 0,
@@ -595,7 +665,7 @@ startTrade(data, exchange , type){
     silvertickLength = 0,
     silvertickclose = 0;
 
- var first = 0;
+    var first = 0;
 
 
 
@@ -615,6 +685,7 @@ startTrade(data, exchange , type){
 
         setInterval(function(){
             getCrudeOHLC(self);
+            getNickleOHLC(self);
        }, 300000);
 
 
@@ -630,7 +701,7 @@ startTrade(data, exchange , type){
               }
 
                ws.onopen = function (event) {
-                   var message = {"a": "subscribe", "v": [53835015,12111106,53801479]};
+                   var message = {"a": "subscribe", "v": [53835015,53986567]};
                    ws.send(JSON.stringify(message));
               };
 
@@ -656,9 +727,9 @@ startTrade(data, exchange , type){
                           //get5minDataNifty(d[i].last_price, self);
 
                   }  
-                  if(d[i].instrument_token == "53801479"){
+                  if(d[i].instrument_token == "53986567"){
                      //nifty function
-                          //get5minDataNickle(d[i].last_price, self);
+                      get5minDataNickleTimestamp(d[i].last_price, self);
 
                   } 
 
@@ -689,6 +760,48 @@ startTrade(data, exchange , type){
         console.log('crudearr is' + crudearr);
 
     }
+
+    function get5minDataNickleTimestamp(d,scope){
+      
+        nicklearr.push(d);
+
+        console.log('nicklearr is' + nicklearr);
+
+    }
+
+    function getNickleOHLC(d){
+     
+
+    
+       nickletickopen = nicklearr[0];
+       nickletickhigh = _.maxBy(nicklearr);
+       nickleticklow = _.minBy(nicklearr);
+       nickletickclose= nicklearr[nicklearr.length-1];
+
+       if(nickletickopen < nickletickclose){
+         nickletickType ="green";
+     }
+    else if(nickletickopen > nickletickclose){
+          nickletickType ="red";
+    }
+    else if(nickletickopen = nickletickclose){
+          nickletickType ="doji";
+    }
+
+    nickletickLength = Math.abs(nickletickhigh-nickleticklow);
+
+    nickletickarray = {"open" : nickletickopen ,"low" :nickleticklow ,"high" :nickletickhigh , "close" : nickletickclose ,"tickType" :nickletickType ,'tickLength' : nickletickLength};
+    //debugger;
+    d.props.addTickDataNickle(nickletickarray);
+
+
+    first = 0;
+    nicklearr = [];
+
+
+    };
+
+
 
     function getCrudeOHLC(d){
      
