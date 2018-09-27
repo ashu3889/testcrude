@@ -347,9 +347,11 @@ export default function(state = [], action) {
                     //time to empty the swing and create a new swing 
                     //let breakoutlength =  Maths.abs(action.payload.y - state[statelen-1].y);
                     //let prevswinglength = state[statelen-1].highest - state[statelen-1].lowest;
+                    //console.log('bonuuuuuuuuuuuuuuuuuuu');
+                    //debugger;
 
                     let diff = action.payload.y - state[statelen-1].highest ;
-                     if(diff <= 8){
+                     if(diff <= 8 && (action.payload.upcount == 0 || action.payload.upcount == undefined)){
                      //mark it as inside sideways
                         action.payload.sidecount = state[state.length-1].sidecount +1;                      
                         action.payload.highest = state[statelen-1].highest;                    
@@ -415,8 +417,8 @@ export default function(state = [], action) {
                     
                     let diff = state[statelen-1].lowest - action.payload.y;
 
-
-                    if(diff >= 14){
+                   // debugger;
+                    if(diff >= 8 && (action.payload.downcount == 0 || action.payload.downcount == undefined)){
                        action.payload.downcount = 0; 
                        action.payload.sidecount = 0; 
                        action.payload.upcount = 0; 

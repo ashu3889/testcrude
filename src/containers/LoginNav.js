@@ -9,6 +9,7 @@
     import Nifty from './NiftyTest.js';
     import Crude from './CrudeTest.js';
     import _ from "lodash";
+    import axios from 'axios';
 
     var crudearr = [];
     var nicklearr = [];
@@ -115,9 +116,12 @@ startTime = new Date().YYYYMMDDHHMMSS();
                       access_token_const = response.access_token;
                        alert(access_token_const);
                   //    debugger;     
-                     init();                
+                     init();    
 
-                     kc.setAccessToken(access_token_const);
+                     //start selecting isntrument
+                    // initDeribitLogic(access_token_const);            
+
+                   //  kc.setAccessToken(access_token_const);
                    //  debugger;
                       //alert(access_token_const);                    
                     
@@ -133,19 +137,45 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
               }
 
+              function initDeribitLogic(access_token_const){
+
+               // debugger;
+
+                 axios.get('http://localhost:4000/ashu', {
+                      params: {
+                         foo: access_token_const
+                       }
+                   });
+
+              }
+
 
 
               function init(){
                // debugger;
-                     getHistoricalData(53835271, "5minute", startingTime, startTime);
-                    //getHistoricalData(53835271, "5minute", new Date("2018-09-18 11:00:00"), new Date("2018-09-19 10:00:00"));
+                    getHistoricalData(53835271, "5minute", startingTime, startTime);
+                    //getHistoricalData(10991618, "5minute", new Date("2018-09-2 11:00:00"), new Date("2018-09-26 10:00:00"));
 
 
                     //getHistoricalData(53843463, "5minute", startingTime, startTime);
 
 
 
-                      getHistoricalData(53986567, "5minute", startingTime, startTime);
+                //    getHistoricalData(53986567, "5minute", startingTime, startTime);
+
+               /*  <div class="row">
+                   {
+                      (  this.props.tickCombonickle != undefined  &&  this.props.tickCombonickle.length >=1)
+                        ?   <div class="col-md-3">  <KitePlot title="Nickle" plotdata ={this.props.tickCombonickle}/> </div>
+                        : ''
+                    } 
+
+                    {
+                       (  this.props.trendDataNickle != undefined  &&  this.props.trendDataNickle.length >=1)
+                        ?    <div class="col-md-8"> <LineApp  title = "Nickle1" plotdata ={this.props.trendDataNickle}/></div>
+                        : ''
+                    } 
+              </div>*/
 
                     //getHistoricalData(53986567, "5minute", new Date("2018-09-5 11:00:00"), new Date("2018-09-6 10:00:00"));
 
@@ -1280,19 +1310,7 @@ startTrade(data, exchange , type){
                     } 
               </div>
 
-               <div class="row">
-                   {
-                      (  this.props.tickCombonickle != undefined  &&  this.props.tickCombonickle.length >=1)
-                        ?   <div class="col-md-3">  <KitePlot title="Nickle" plotdata ={this.props.tickCombonickle}/> </div>
-                        : ''
-                    } 
-
-                    {
-                       (  this.props.trendDataNickle != undefined  &&  this.props.trendDataNickle.length >=1)
-                        ?    <div class="col-md-8"> <LineApp  title = "Nickle1" plotdata ={this.props.trendDataNickle}/></div>
-                        : ''
-                    } 
-              </div>
+              
 
 
 
