@@ -1,7 +1,7 @@
     import React ,{Component} from 'react';   
     import { connect } from "react-redux";
     import {KiteTicker} from 'kiteconnect';
-    import {getAcessToken ,addTickData ,pivotData,addTickDataNifty,pivotDataNifty ,addTickDataNickle,pivotDataNickle} from '../action/action.js';
+    import {pivotJDData,addJDTickData,getAcessToken ,addTickData ,pivotData,addTickDataNifty,pivotDataNifty ,addTickDataNickle,pivotDataNickle} from '../action/action.js';
     import { withRouter } from "react-router-dom"; 
     import KitePlot from './plot.js'; 
     import LineApp from './lineplot.js';
@@ -119,7 +119,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
                      init();    
 
                      //start selecting isntrument
-                    // initDeribitLogic(access_token_const);            
+                    //initDeribitLogic(access_token_const);            
 
                    //  kc.setAccessToken(access_token_const);
                    //  debugger;
@@ -151,9 +151,53 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
 
 
-              function init(){
+          function init(){
                // debugger;
                     getHistoricalData(53835271, "5minute", startingTime, startTime);
+                   
+                     //   getHistoricalData(53835271, "5minute", new Date("2018-09-27 11:00:00"), new Date("2018-09-28 10:00:00"));
+
+
+                  //just dial
+
+                  //debugger;
+
+
+
+
+                 /* var data =[895745,3001089,5633,60417,2939649,225537,356865,424961,25685250,2672641];
+
+                  for (var i = 1; i <= data.length; ++i){
+                           doSetTimeout(data[i]);
+                    }
+
+                  function doSetTimeout(i) {
+                    debugger;
+                          setTimeout(function() { 
+
+                           // alert(i); 
+                            getHistoricalData(i, "5minute", new Date("2018-10-1 9:15:00"), new Date("2018-10-1 23:15:00"));
+
+
+                          }, 100);
+                  }*/
+
+
+                    
+                      
+
+                  /*data.map((v,i) => {
+                     //  debugger;
+                     getHistoricalData(v, "5minute", new Date("2018-10-1 9:15:00"), new Date("2018-10-1 23:15:00"));
+
+                  });*/
+
+                       
+
+                      // getHistoricalData(7670273, "5minute", new Date("2018-09-28 9:15:00"), new Date("2018-09-29 15:30:00"));
+
+          
+
                     //getHistoricalData(10991618, "5minute", new Date("2018-09-2 11:00:00"), new Date("2018-09-26 10:00:00"));
 
 
@@ -195,11 +239,11 @@ startTime = new Date().YYYYMMDDHHMMSS();
       //debugger;
 
       if(instrument_token === 53835271){
-       
+     //  debugger;
         populatingCrudeTickdata(response);
       }
 
-      if(instrument_token === 53843463){
+     /* if(instrument_token === 53843463){
       //coppper
       //  populatingCrudeTickdata(response);
       }
@@ -207,12 +251,69 @@ startTime = new Date().YYYYMMDDHHMMSS();
       if(instrument_token === 53986567){
       //nickle
         populatingNickleTickdata(response);
-      }
+      }*/
+      
+
+      //justdial
+      //if(instrument_token === 356865){
+          //debugger;
+
+          populatingJustDialTickdata(response);
+
+      //}
       
       console.log(response);
     }).catch(function(err) {
       console.log(err);
     });
+}
+
+function populatingJustDialTickdata(response){
+
+  debugger;
+
+var d = ashutosh;
+
+
+response.map((v,i)=> {
+
+  var jdtickType;
+  var shift = 0;
+
+/*if(i > 0 ){
+    if ((i) % 75 === 0){
+      debugger;
+      shift = 1;
+    }
+    else{
+
+       shift = 0;
+    }
+   
+
+}
+if(i == 0){
+   shift = 1;
+}*/
+
+   
+   if(v.open < v.close){
+        jdtickType ="green";
+     }
+    else if(v.open > v.close){
+          jdtickType ="red";
+    }
+    else if(v.open = v.close){
+          jdtickType ="doji";
+    }
+
+     var jdtickLength = Math.abs(v.high-v.low);
+
+     var jdtickarray = {"shift": shift ,"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :jdtickType ,'tickLength' : jdtickLength , 'hour' : v.date.getHours() , 'minute' :v.date.getMinutes(), 'cumProfit' : 0 , 'date': v.date.getUTCDate()};
+    
+     d.props.addJDTickData(jdtickarray);
+})
+
 }
 
 
@@ -271,7 +372,7 @@ response.map((v,i)=> {
 
     var nickletickarray = {"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :nickletickType ,'tickLength' : nickletickLength , 'date' : v.date};
     
-    d.props.addTickDataNickle(nickletickarray);
+    d.props.addTickDataNifty(nickletickarray);
 
 
 })
@@ -317,6 +418,31 @@ response.map((v,i)=> {
 componentWillReceiveProps(nextProps) {
 
 // testing/////
+//babu code  starts here
+
+if( (this.props.tickDataJD !=undefined) && (this.props.tickDataJD.length > 1)){
+         var data = this.props.tickDataJD;
+         var nextData = nextProps.tickDataJD;
+         var length = data.length-1;
+         var nextDataLength = nextData.length-1;
+         if(length >= 1){
+           
+              if(nextData[nextDataLength].tradeFire != undefined ){
+                     
+                     var tradeDirection = nextData[nextDataLength].tradeFireType;
+                     var tradeTime = nextData[nextDataLength].hour + ':' + nextData[nextDataLength].minute;
+                     var alertText = 'just dial ' + tradeDirection + ' at time ' + tradeTime + 'at date ' + nextData[nextDataLength].date;
+
+                     //debugger;
+                     alert(alertText);
+              } 
+
+         }
+}
+
+
+
+//babu code ends here
    
 
           
@@ -339,8 +465,7 @@ componentWillReceiveProps(nextProps) {
                       
                 this.setState({pivotpoint: nextProps.tickCombo[len].pivot});
                 let datainput = {x : count , y :  nextProps.tickCombo[len].pivot ,dir : nextProps.tickCombo[len].dir , date: nextProps.tickCombo[len].date };
-               
-                  //debugger;  
+                
                 this.props.pivotData(datainput);
                 count = count +1;
         }      
@@ -1310,6 +1435,20 @@ startTrade(data, exchange , type){
                     } 
               </div>
 
+              <div class="row">
+                   {
+                      (  this.props.tickDataJD != undefined  &&  this.props.tickDataJD.length >=1)
+                        ?   <div class="col-md-3">  <KitePlot title="justdial" plotdata ={this.props.tickDataJD}/> </div>
+                        : ''
+                    } 
+
+                    {
+                       (  this.props.trendDataNifty != undefined  &&  this.props.trendDataNifty.length >=1)
+                        ?    <div class="col-md-8"> <LineApp  title = "justdial" plotdata ={this.props.tickDataJD}/></div>
+                        : ''
+                    } 
+              </div>
+
               
 
 
@@ -1331,8 +1470,9 @@ startTrade(data, exchange , type){
          trendDataNifty : state.plDataNifty,
          trendDataNickle : state.plDataNickle,
          tickCombonickle : state.tickDataNickle,
+         tickDataJD : state.tickDataJD,
        }
     };
 
-    export default withRouter(connect(mapStateToProps,{getAcessToken,addTickData,pivotData,addTickDataNifty,pivotDataNifty ,addTickDataNickle ,pivotDataNickle})(LoginNav));
+    export default withRouter(connect(mapStateToProps,{pivotJDData,addJDTickData,getAcessToken,addTickData,pivotData,addTickDataNifty,pivotDataNifty ,addTickDataNickle ,pivotDataNickle})(LoginNav));
 

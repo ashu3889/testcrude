@@ -16,6 +16,7 @@ import tickDataNifty from './tickdata_nifty.js';
 
 import plDataNifty from './plotdata_nifty.js';
 
+import tickDataJD from './tickdata_justdial.js';
 
 import tickDataNickle from './tickdata_nickle.js';
 
@@ -40,6 +41,7 @@ plDataNifty:plDataNifty,
 tickDataNifty :tickDataNifty,
 plDataNickle: plDataNickle,
 tickDataNickle :tickDataNickle,
+tickDataJD: tickDataJD,
 });
 
 const persistedstate = {

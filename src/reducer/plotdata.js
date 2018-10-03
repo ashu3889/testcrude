@@ -170,6 +170,7 @@ export default function(state = [], action) {
                             //alert('up black point is ' + action.payload.x);
                              action.payload.highest = state[statelen-1].highest;                    
                              action.payload.lowest = state[statelen-1].lowest; 
+                             action.payload.upblackextreme = action.payload.y;
                              action.payload.UPblackpoint = action.payload.upblackextreme;
                              action.payload.UPblackpointindex = action.payload.upblackextremeindex;
                       }
@@ -201,6 +202,8 @@ export default function(state = [], action) {
                               if( diff <= 14 && state[statelen-1].LongTradeInitiated != true){
                                   //alert('low black point 1 is' + action.payload.x);
 
+                                  debugger;
+
                                   action.payload.retesthappen = true;
                                   action.payload.highest = state[statelen-1].highest;                    
                                   action.payload.lowest = state[statelen-1].lowest;
@@ -224,8 +227,11 @@ export default function(state = [], action) {
                               }
                                // alert('low black point 2 is' + action.payload.x);
 
+                               debugger;
+
                                action.payload.highest = state[statelen-1].highest;                    
                                action.payload.lowest = state[statelen-1].lowest; 
+                               action.payload.lowblackextreme = action.payload.y;
                                action.payload.Lowblackpoint = action.payload.lowblackextreme;
                                action.payload.lowblackindex = action.payload.lowblackextremeindex;
                              
@@ -273,6 +279,9 @@ export default function(state = [], action) {
                       else if((state[statelen-1].Lowblackpoint != undefined &&  state[statelen-1].Lowblackpoint != 0) && state[statelen-1].dir =="up"  && action.payload.caution != true){
                              //newww codeeee hereeee
                              //alert('22');
+                             //ashutohsssssssssss
+
+                             debugger;
                             let diff = Math.abs(state[statelen-1].Lowblackpoint-action.payload.y);
                             if( state[statelen-1].LongTradeInitiated != true && (state[statelen-1].Lowblackpoint >= action.payload.y || diff <= 8)){
                               action.payload.retesthappen = true;
@@ -445,7 +454,7 @@ export default function(state = [], action) {
 
                 if(state[statelen-1].Lowblackpoint - action.payload.y > 14){
                       
-                        alert('clear sideways all together at' + action.payload.x); 
+                      alert('clear sideways all together at' + action.payload.x); 
                        action.payload.ShortTradeInitiated = false;
                        action.payload.LongTradeInitiated = false;
                        action.payload.downcount = 0; 

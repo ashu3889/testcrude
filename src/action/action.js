@@ -45,7 +45,21 @@ export function pivotData(data){
     })
 }
 
+export function pivotJDData(data){
+ // alert(JSON.stringify(data));
+    return ({
+     type :'PLOT_PIVOT_DATA_JD',
+     payload : data,
+    })
+}
 
+export function addJDTickData(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_JD',
+     payload : data
+    })
+}
 
 export function addTickData(data){
   //alert(JSON.stringify(data));

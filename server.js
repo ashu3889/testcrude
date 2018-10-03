@@ -32,19 +32,35 @@ setInterval(function(){
 
 let param = req.query.foo;
 
- 
-
 var KiteTicker = require("kiteconnect").KiteTicker;
 var ticker = new KiteTicker({
 	api_key: "3iciz5hhzaiitjkj",
 	access_token: param
 });
 
+callWebsocket();
+
+function callWebsocket(){
 ticker.connect();
 ticker.on("ticks", onTicks);
 ticker.on("connect", subscribe);
+ticker.on("disconnect", unsubscribe);
+
+}
+
+
+function unsubscribe(){
+
+	console.log('websocket is closed now');
+}
+ 
+
+
 
 function onTicks(ticks) {
+
+	//ticker.disconnect();
+
    if(detectionStatus === false){
          ticks.map((v,i) => {
                comboarr.push(v);
@@ -55,7 +71,7 @@ function onTicks(ticks) {
 
 function subscribe() {
 	//var items = [259849,1850625,15571970,2747905,408065,3465729,969473,738561,22837250,4267265,519937,4343041];
-	var items = [24900610];
+	var items = [53986823];
 	ticker.subscribe(items);
 	ticker.setMode(ticker.modeFull, items);
 }
@@ -158,9 +174,9 @@ if(v.depth !== undefined){
          
           //console.log('CER is' + CER);
 
-if (depth >= MinDepth && spread >= MinSpread && CER >= MinCER) {
+//if (depth >= MinDepth && spread >= MinSpread && CER >= MinCER) {
     //depth condition
-//if (depth >= MinDepth && spread >= 0 && CER >= MinCER) {
+if (depth >= MinDepth && spread >= 0 && CER >= MinCER) {
     
     v.Depth = depth;
     v.Spread = spread;
@@ -697,18 +713,18 @@ optiondata.map((value,index) => {
      }
 
  }
+
+ console.log('optimal price data is ' + JSON.stringify(optiondata[0].SendTrade));
 });
-
-
-console.log('optimal price data is ' + JSON.stringify(optiondata));
-
+    
     callWSAgain();
-
 }
 
 function callWSAgain(){
-console.log('it is going to closeeee');
-	ticker.on("unsubscribe", ashu);
+
+	 detectionStatus = false;
+   // console.log('it is going to closeeee');
+	
 
 }
 
