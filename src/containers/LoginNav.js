@@ -169,9 +169,9 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
           function init(){
                // debugger;
-                        //getHistoricalData(53835271, "5minute", startingTime, startTime);
+                        getHistoricalData(53835271, "5minute", startingTime, startTime);
                    
-                       getHistoricalData(53835271, "5minute", new Date("2018-9-28 11:00:00"), new Date("2018-9-29 10:00:00"));
+                       //getHistoricalData(53835271, "5minute", new Date("2018-9-28 11:00:00"), new Date("2018-9-29 10:00:00"));
 
 
                   //just dial
