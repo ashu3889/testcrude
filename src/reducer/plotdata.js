@@ -57,18 +57,19 @@ export default function(state = [], action) {
               if(state[statelen-1].sidecount ==4){
                 let high = state[statelen-1].highest;
                 let low = state[statelen-1].lowest;
-
-
-
-                 //   alert('sideways formed');
-                    //alert(action.payload.x);
-                   // alert('high' + high);                    
-                   // alert('low' + low);
-                   
               }
 
 
-              if(state[statelen-1].trend != undefined){
+                if(state[statelen-1].highest != undefined){
+                  action.payload.highest = state[statelen-1].highest;
+                } 
+
+                if(state[statelen-1].lowest != undefined){
+                  action.payload.lowest = state[statelen-1].lowest;
+                } 
+
+
+               if(state[statelen-1].trend != undefined){
                   action.payload.trend = state[statelen-1].trend;
                 }  
 
@@ -139,6 +140,8 @@ export default function(state = [], action) {
               if(state[statelen-1].trend == 'sideways'){
                     //write logic of blackline setup here
 
+                    //debugger;
+
 
                     if(action.payload.dir == "up" && state[statelen-1].highest < action.payload.y){
                       //alert('111');
@@ -151,6 +154,9 @@ export default function(state = [], action) {
                          if(diff <= 14 && state[statelen-1].ShortTradeInitiated != true ){
                          //  alert('up black point 1 is' + action.payload.x);
                            //normal bpb short
+
+                           //debugger;
+
                              action.payload.retesthappen = true;
                              action.payload.highest = state[statelen-1].highest;                    
                              action.payload.lowest = state[statelen-1].lowest;
@@ -160,12 +166,12 @@ export default function(state = [], action) {
                              action.payload.TradeStarted = 'upsell';
                              action.payload.TimeToEnter = true;
                              action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                             alert('BPB short at  crude' + action.payload.x);
+                            // alert('BPB short at  crude' + action.payload.x);
                             // alert('time is' + action.payload.time);
                              let newstate = state.concat(action.payload);
                              return newstate ; 
                          }
-                            
+                            //debugger;
                            // alert('up black point 2 is' + state[statelen-1].x);
                             //alert('up black point is ' + action.payload.x);
                              action.payload.highest = state[statelen-1].highest;                    
@@ -173,16 +179,16 @@ export default function(state = [], action) {
                              action.payload.upblackextreme = action.payload.y;
                              action.payload.UPblackpoint = action.payload.upblackextreme;
                              action.payload.UPblackpointindex = action.payload.upblackextremeindex;
+
                       }
                       else{ 
-
-                           // alert('up black point 3 is' + action.payload.x);
-                           // alert('up black point is ' + action.payload.x);
+                          //  debugger;
                        
                             action.payload.UPblackpoint = action.payload.y;
                             action.payload.UPblackpointindex = action.payload.x;
                             action.payload.highest = state[statelen-1].highest;                    
                             action.payload.lowest = state[statelen-1].lowest;
+                            action.payload.upcount = 1; 
                       }
 
                     }
@@ -199,10 +205,11 @@ export default function(state = [], action) {
                         //  alert('long trade initiated' + state[statelen-1].LongTradeInitiated );
                          
                              //now we will enter here
+                              // debugger;
                               if( diff <= 14 && state[statelen-1].LongTradeInitiated != true){
                                   //alert('low black point 1 is' + action.payload.x);
 
-                                  debugger;
+                                 // debugger;
 
                                   action.payload.retesthappen = true;
                                   action.payload.highest = state[statelen-1].highest;                    
@@ -215,7 +222,7 @@ export default function(state = [], action) {
                                   action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
                                  // debugger;
 
-                                  alert('crude BPB Buy at' + action.payload.x);
+                                  //alert('crude BPB Buy at' + action.payload.x);
                                   //alert('BPB Buy at' + action.payload.x);
 
 
@@ -227,22 +234,29 @@ export default function(state = [], action) {
                               }
                                // alert('low black point 2 is' + action.payload.x);
 
-                               debugger;
+                              //  debugger;
 
                                action.payload.highest = state[statelen-1].highest;                    
                                action.payload.lowest = state[statelen-1].lowest; 
-                               action.payload.lowblackextreme = action.payload.y;
-                               action.payload.Lowblackpoint = action.payload.lowblackextreme;
-                               action.payload.lowblackindex = action.payload.lowblackextremeindex;
-                             
+                               //low black extreme lovely
+                               if(Math.abs(action.payload.y-action.payload.lowest) >10){
+                                  action.payload.lowblackextreme = action.payload.y;
+                                  action.payload.Lowblackpoint = action.payload.lowblackextreme;
+                                  action.payload.lowblackindex = action.payload.lowblackextremeindex;
+                               }
+
                         }
                         else{
                             // alert('low black point 3 is' + action.payload.x);
-
+                            // debugger
+                             action.payload.lowblackextreme = action.payload.y;
                              action.payload.Lowblackpoint = action.payload.y;
                              action.payload.lowblackindex = action.payload.x;
                              action.payload.highest = state[statelen-1].highest;                    
                              action.payload.lowest = state[statelen-1].lowest; 
+                             let newstate = state.concat(action.payload);
+                             return newstate ;
+
                         }
                     }
                 }
@@ -269,7 +283,7 @@ export default function(state = [], action) {
                                 action.payload.TradeStarted = 'upsell';
                                 action.payload.TimeToEnter = true;
                                 action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
-                                alert('crude BPB short at ' + action.payload.x);
+                                //alert('crude BPB short at ' + action.payload.x);
                                // alert('time is' + action.payload.time);
                                 let newstate = state.concat(action.payload);
                                 return newstate ;  //ktk20003918  true professional carrier
@@ -281,7 +295,7 @@ export default function(state = [], action) {
                              //alert('22');
                              //ashutohsssssssssss
 
-                             debugger;
+                             //debugger;
                             let diff = Math.abs(state[statelen-1].Lowblackpoint-action.payload.y);
                             if( state[statelen-1].LongTradeInitiated != true && (state[statelen-1].Lowblackpoint >= action.payload.y || diff <= 8)){
                               action.payload.retesthappen = true;
@@ -293,7 +307,7 @@ export default function(state = [], action) {
                               action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
                           //  debugger;
 
-                             alert('crude BPB Buy at' + action.payload.x);
+                             //alert('crude BPB Buy at' + action.payload.x);
                              //alert('time is' + action.payload.time);
                               let newstate = state.concat(action.payload);
                               return newstate ;
@@ -318,12 +332,14 @@ export default function(state = [], action) {
                     //check the length of this breakout ..if it exceed normal length then time to empty sideways
 
                     //let breakoutlength =  Maths.abs(action.payload.y - state[statelen-1].y);
+                    //debugger;
                     let prevswinglength = state[statelen-1].highest - state[statelen-1].lowest;
-
                     let diff = action.payload.y - state[statelen-1].highest ;
 
-                    if(diff >= 8){
+                    if(diff >= 11){
                       //time to clear sideways
+                     //  alert('1');
+                     // debugger;
                       action.payload.highest = action.payload.y;                    
                       action.payload.lowest = state[statelen-1].y;
                       action.payload.trend = 'uptrend111111';
@@ -342,6 +358,7 @@ export default function(state = [], action) {
                     }
                     else{
                      // alert('ashutosh up black extreme' + action.payload.y);
+                       // debugger;
                         action.payload.sidecount = state[state.length-1].sidecount +1;                      
                         action.payload.highest = state[statelen-1].highest;                    
                         action.payload.lowest = state[statelen-1].lowest; 
@@ -357,10 +374,12 @@ export default function(state = [], action) {
                     //let breakoutlength =  Maths.abs(action.payload.y - state[statelen-1].y);
                     //let prevswinglength = state[statelen-1].highest - state[statelen-1].lowest;
                     //console.log('bonuuuuuuuuuuuuuuuuuuu');
-                    //debugger;
+                      // debugger;
 
-                    let diff = action.payload.y - state[statelen-1].highest ;
-                     if(diff <= 8 && (action.payload.upcount == 0 || action.payload.upcount == undefined)){
+                     var tradeDir = action.payload.y - state[statelen-1].upblackextreme;
+
+                     let diff = action.payload.y - state[statelen-1].highest ;
+                     if(diff <= 11 && tradeDir <= 0){
                      //mark it as inside sideways
                         action.payload.sidecount = state[state.length-1].sidecount +1;                      
                         action.payload.highest = state[statelen-1].highest;                    
@@ -368,6 +387,8 @@ export default function(state = [], action) {
                         action.payload.upcount = 0; 
                      }
                      else{
+                      // alert('2');
+                     // debugger;
                       action.payload.downcount = 0; 
                       action.payload.upcount = 0; 
                       action.payload.sidecount = 0; 
@@ -424,10 +445,12 @@ export default function(state = [], action) {
               }
               else if(action.payload.dir == "low" && action.payload.y < state[statelen-1].lowest && (state[statelen-1].downcount == undefined || state[statelen-1].downcount ==0)){
                     
-                    let diff = state[statelen-1].lowest - action.payload.y;
+                    var diff = state[statelen-1].lowest - action.payload.y;
 
                    // debugger;
-                    if(diff >= 8 && (action.payload.downcount == 0 || action.payload.downcount == undefined)){
+                    if(diff >= 11 && (action.payload.downcount == 0 || action.payload.downcount == undefined)){
+                       //alert('3');
+                      // debugger;
                        action.payload.downcount = 0; 
                        action.payload.sidecount = 0; 
                        action.payload.upcount = 0; 
@@ -436,12 +459,19 @@ export default function(state = [], action) {
                      }
                      else{
                       //alert('low black extrems is ' + action.payload.x);
+                       //debugger;
                        action.payload.sidecount = state[state.length-1].sidecount +1;                    
                        action.payload.highest = state[statelen-1].highest;                    
                        action.payload.lowest = state[statelen-1].lowest; 
-                       action.payload.downcount =1; 
-                       action.payload.lowblackextreme = action.payload.y;
-                       action.payload.lowblackextremeindex = action.payload.x;
+                       
+
+                       if(Math.abs(action.payload.y-action.payload.lowest) >5){
+                            //debugger;
+                            action.payload.downcount =1; 
+                            action.payload.lowblackextreme = action.payload.y;
+                            action.payload.lowblackextremeindex = action.payload.x;
+                       }
+                       
 
                      }
                    }
@@ -453,6 +483,7 @@ export default function(state = [], action) {
                 // alert(state[statelen-1].Lowblackpoint - action.payload.y );
 
                 if(state[statelen-1].Lowblackpoint - action.payload.y > 14){
+                       //  debugger;
                       
                       alert('clear sideways all together at' + action.payload.x); 
                        action.payload.ShortTradeInitiated = false;
@@ -478,8 +509,14 @@ export default function(state = [], action) {
                  
                 // alert(' up diff is');
                  //alert(state[statelen-1].UPblackpoint - action.payload.y );
+                // alert('x');
+
+                    if(action.payload.LongTradeInitiated !== undefined || action.payload.ShortTradeInitiated !== undefined){
+
+                       if(action.payload.LongTradeInitiated == false){
 
                   if(action.payload.y - state[statelen-1].UPblackpoint> 14){
+                     //  debugger;
                         
                       alert('clear sideways all together at' + action.payload.x); 
 
@@ -497,7 +534,15 @@ export default function(state = [], action) {
                        action.payload.UPblackpoint = 0;
                        action.payload.Lowblackpoint = 0; 
 
-                  }
+                       }
+
+
+
+                       }
+
+                    }
+
+                 
                  
 
                 } 
@@ -505,9 +550,10 @@ export default function(state = [], action) {
               else if(action.payload.dir == "low" && action.payload.y < state[statelen-1].lowest && state[state.length-1].sidecount < 4 && state[statelen-1].downcount == 1 ){
                     //time to empty the swing and create a new swing 
                     
-                     let diff = state[statelen-1].lowest - action.payload.y;
-                     
-
+                     var diff = state[statelen-1].lowest - action.payload.y;
+                     //var tradeDir = state[statelen-1].upblackextreme;
+                     //ashutosh singh
+                    // debugger;
 
                      if(diff <= 14){
                      //mark it as inside sideways
@@ -519,7 +565,7 @@ export default function(state = [], action) {
                      }
                      else{
 
-                       debugger;
+                       //debugger;
                        action.payload.downcount = 0; 
                        action.payload.sidecount = 0; 
                        action.payload.upcount = 0; 
@@ -532,9 +578,9 @@ export default function(state = [], action) {
               else {
                   if(action.payload.dir == "low" ){ 
 
-                       if(action.payload.y >= state[statelen-1].highest && action.payload.upcount ==1 && state[statelen-1].trend != 'sideways'){
-                         //uptredn started
-                         alert('uptrend started');
+                          if(action.payload.y >= state[statelen-1].highest && action.payload.upcount ==1 && state[statelen-1].trend != 'sideways'){
+                            //uptredn started
+                           alert('uptrend started');
                            action.payload.sidecount = 0;
                            action.payload.trend = 'uptrend';
                            action.payload.highest = action.payload.y;

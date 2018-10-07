@@ -7,6 +7,7 @@ export default function(state = [], action) {
          let length = state.length;
          let direction = '';
          const now = new Date();
+         let shift = action.payload.shift;
         
         if(length >= 1){
           // check the direction and add it in candle
@@ -64,14 +65,18 @@ export default function(state = [], action) {
                          //condition of inflection treend will be decided by direction
 
                          if(direction == "down"){
+                          //debugger;
                            action.payload.trend = "downtrend";
                            action.payload.pivot = state[state.length-2].high; 
                            action.payload.dir = 'up'; 
+                           action.payload.currentPrice = action.payload.close ;
                          } 
                          else if(direction == "up"){
+                           // debugger;
                             action.payload.trend = "upward";
                             action.payload.pivot = state[state.length-2].low; 
                             action.payload.dir = 'low'; 
+                            action.payload.currentPrice = action.payload.close ;
                          }
 
                        }  

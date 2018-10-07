@@ -20,11 +20,27 @@
      let countnifty = 1;
      let countnickle = 1;
      let access_token_const =0;
-     let crudelongtrade = false;
-     let crudeshorttrade = false;
      let startTime = 0;
      let startingTime = 0;
+
+
+     //////////////////////////
+     var crudelongtrade = false;
+     var crudeshorttrade = false;
+     var crudeStop = 0;
+     var crudeTarget = 0;
+     var crudeTradeStatus = 'not started';
+     var crudeTradePrice = 0;
+     var crudeNetProfit = 0;
+     var crudeTrendLen = 0;
+     var crudePivot = 0;
+     //////////////////////////
+
+
+
      let webSocketClicked = false;
+
+     //let webSocketClicked = true;
 
 
 
@@ -116,7 +132,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
                       access_token_const = response.access_token;
                        alert(access_token_const);
                   //    debugger;     
-                     init();    
+                        init();    
 
                      //start selecting isntrument
                     //initDeribitLogic(access_token_const);            
@@ -153,9 +169,9 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
           function init(){
                // debugger;
-                    getHistoricalData(53835271, "5minute", startingTime, startTime);
+                        //getHistoricalData(53835271, "5minute", startingTime, startTime);
                    
-                     //   getHistoricalData(53835271, "5minute", new Date("2018-09-27 11:00:00"), new Date("2018-09-28 10:00:00"));
+                       getHistoricalData(53835271, "5minute", new Date("2018-9-28 11:00:00"), new Date("2018-9-29 10:00:00"));
 
 
                   //just dial
@@ -239,8 +255,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
       //debugger;
 
       if(instrument_token === 53835271){
-     //  debugger;
-        populatingCrudeTickdata(response);
+          populatingCrudeTickdata(response);
       }
 
      /* if(instrument_token === 53843463){
@@ -258,7 +273,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
       //if(instrument_token === 356865){
           //debugger;
 
-          populatingJustDialTickdata(response);
+       //populatingJustDialTickdata(response);
 
       //}
       
@@ -323,9 +338,31 @@ var d = ashutosh;
 
 
 response.map((v,i)=> {
-//debugger;
 
    var crudetickType;
+   var startDetecting = false;
+   var shift = 0;
+   var stop = 0;
+   var target = 0;
+
+
+/*if(i > 0 ){
+    if ((i) % 75 === 0){
+      debugger;
+      shift = 1;
+    }
+    else{
+
+       shift = 0;
+    }
+   
+
+}
+if(i == 0){
+   shift = 1;
+}*/
+
+
    if(v.open < v.close){
          crudetickType ="green";
      }
@@ -336,9 +373,99 @@ response.map((v,i)=> {
           crudetickType ="doji";
     }
 
+     //var crudeStop = 0;
+     //var crudeTarget = 0;
+
     var crudetickLength = Math.abs(v.high-v.low);
 
-    var crudetickarray = {"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :crudetickType ,'tickLength' : crudetickLength , 'date' : v.date};
+    if(crudelongtrade == true || crudeTradeStatus == "vigil" || crudeshorttrade == true && (crudeStop !== 0 &&  crudeTarget!== 0)) {
+         // debugger;
+         startDetecting = true;
+         stop = crudeStop;
+         target = crudeTarget;
+
+         if(crudeTradeStatus == "vigil"){
+           //  debugger;
+
+           // crudeTradePrice
+
+           var diff = v.close-crudePivot;
+
+              if(diff < 15){
+                 // debugger;
+                // alert('11');
+                 //alert(v.close);
+                     if(stop > target){
+                         // debugger;
+                          //var a = crudeTradePrice;
+
+                          crudeTradePrice = v.close;
+                          alert('sell at' + crudeTradePrice );
+                          d.startTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,crudeTradePrice ,stop ,target);
+
+                         // d.stopTrade('CRUDEOILM18OCTFUT', 'MCX','BUY' , stop );
+                         //  d.targetTrade('CRUDEOILM18OCTFUT', 'MCX','BUY' ,target);
+
+
+                          crudeshorttrade = true;
+                          crudeTradeStatus = "started";
+                     }
+                     else{
+                           //debugger;
+                           
+                           crudeTradePrice = v.close;
+
+                           alert('buy at' + crudeTradePrice);
+
+                           d.startTrade('CRUDEOILM18OCTFUT', 'MCX','BUY' ,crudeTradePrice,stop ,target);
+
+
+                           //d.stopTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,stop );
+                          // d.targetTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,target);
+
+
+                           crudelongtrade = true;
+                           crudeTradeStatus = "started";
+                     }
+
+               }
+
+         }
+
+
+         if (v.low < stop && stop < v.high && crudeTradeStatus !== "vigil") {
+           // debugger;
+            crudeTradeStatus = "loss";
+            var losspoint = Math.abs(crudeTradePrice-stop);
+            alert('loss hapeended' + losspoint);
+            crudelongtrade = false;
+            crudeshorttrade = false;
+            crudeTarget =0;
+            crudeStop = 0;
+            crudeTradePrice = 0;
+            crudePivot = 0;
+            crudeNetProfit = losspoint;
+            crudeTradeStatus = "start again";
+         }
+         else if(v.low < target && target < v.high && crudeTradeStatus !== "vigil"){
+           // debugger;
+            crudeTradeStatus = "profit";
+            var profitpoint = Math.abs(crudeTradePrice-target);
+            alert('profit happened of' + profitpoint);
+            crudelongtrade = false;
+            crudeshorttrade = false;
+            crudeTarget =0;
+            crudeStop = 0;
+            crudeTradePrice = 0;
+            crudePivot = 0;
+            crudeNetProfit = profitpoint;
+            crudeTradeStatus = "start again";
+         }
+
+    }
+     
+
+    var crudetickarray = {"stop" : stop, "target" : target ,"shift": shift ,"open" : v.open ,"low" :v.low ,"high" :v.high , "close" : v.close ,"tickType" :crudetickType ,'tickLength' : crudetickLength , 'date' : v.date ,"detecting" : startDetecting};
     
     d.props.addTickData(crudetickarray);
 
@@ -432,8 +559,6 @@ if( (this.props.tickDataJD !=undefined) && (this.props.tickDataJD.length > 1)){
                      var tradeDirection = nextData[nextDataLength].tradeFireType;
                      var tradeTime = nextData[nextDataLength].hour + ':' + nextData[nextDataLength].minute;
                      var alertText = 'just dial ' + tradeDirection + ' at time ' + tradeTime + 'at date ' + nextData[nextDataLength].date;
-
-                     //debugger;
                      alert(alertText);
               } 
 
@@ -464,8 +589,7 @@ if( (this.props.tickDataJD !=undefined) && (this.props.tickDataJD.length > 1)){
         if(this.state.pivotpoint != nextProps.tickCombo[len].pivot){ 
                       
                 this.setState({pivotpoint: nextProps.tickCombo[len].pivot});
-                let datainput = {x : count , y :  nextProps.tickCombo[len].pivot ,dir : nextProps.tickCombo[len].dir , date: nextProps.tickCombo[len].date };
-                
+                let datainput = {x : count , y :  nextProps.tickCombo[len].pivot ,dir : nextProps.tickCombo[len].dir , date: nextProps.tickCombo[len].date  , currentPrice : nextProps.tickCombo[len].currentPrice};
                 this.props.pivotData(datainput);
                 count = count +1;
         }      
@@ -477,42 +601,81 @@ if( (this.props.tickDataJD !=undefined) && (this.props.tickDataJD.length > 1)){
   
   if((this.props.trendData)!=undefined && this.props.trendData.length > 1){
 
-    //debugger;
-    var trenlen = this.props.trendData.length-1;
-   // debugger;
+    
+          var trenlen = this.props.trendData.length-1;
+          if(crudeTrendLen === trenlen){
+            var detect = false;
+          }
+          else{
+             var detect = true;
+             crudeTrendLen = trenlen;
+           }
+  
 
      if(trenlen > 1){ 
 
       if(this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false && webSocketClicked === true){
-      //debugger;
-         alert('up sell crude');
-         this.startTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' );
+         crudePivot = this.props.trendData[trenlen].y;
+         var diff = this.props.trendData[trenlen].y-this.props.trendData[trenlen].currentPrice;
+         crudeStop = this.props.trendData[trenlen].y+8;
+         crudeTarget = (this.props.trendData[trenlen].highest+this.props.trendData[trenlen].lowest)/2;
+         //crudeTarget = this.props.trendData[trenlen].lowest;
+         crudeTradePrice = this.props.trendData[trenlen].currentPrice;
 
-         crudeshorttrade = true;
+        if((crudeTradePrice - this.props.trendData[trenlen].highest) > 22){
+            crudeTarget = this.props.trendData[trenlen].highest;
+         }
+         else{
+            crudeTarget = (this.props.trendData[trenlen].highest+this.props.trendData[trenlen].lowest)/2;
+         }
+         
 
+          if(diff <= 15 && detect == true){
+             alert('up sell crude'+ this.props.trendData[trenlen].x);
+             this.startTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' , crudeTradePrice,crudeStop,crudeTarget);
+             crudeshorttrade = true;
+             crudeTradeStatus = "started";
+          }
+          else if(diff > 15 && detect == true){
+              crudeTradeStatus = "vigil";
+          }
       }
 
 
       if(this.props.trendData[trenlen].TradeStarted == "downbuy"  && crudelongtrade == false  && webSocketClicked === true){
-     // debugger;
-        alert('down buy crude');
-        this.startTrade('CRUDEOILM18OCTFUT', 'MCX','BUY' );
-         crudelongtrade = true;
+         crudePivot = this.props.trendData[trenlen].y;
+         var diff = this.props.trendData[trenlen].currentPrice-this.props.trendData[trenlen].y;
+         crudeStop = this.props.trendData[trenlen].y-8;
+         
+        // crudeTarget = (this.props.trendData[trenlen].highest+this.props.trendData[trenlen].lowest)/2;
+         crudeTradePrice = this.props.trendData[trenlen].currentPrice;
 
+         debugger;
 
+         if((this.props.trendData[trenlen].lowest-crudeTradePrice) > 22){
+            crudeTarget = this.props.trendData[trenlen].lowest;
+         }
+         else{
+            crudeTarget = (this.props.trendData[trenlen].highest+this.props.trendData[trenlen].lowest)/2;
+         }
+
+       
+          if(diff <= 15 && detect == true){
+              alert('down buy crude at '+ this.props.trendData[trenlen].x);  
+              this.startTrade('CRUDEOILM18OCTFUT', 'MCX','BUY', crudeTradePrice, crudeStop,crudeTarget);
+
+             // this.stopTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' , crudeStop );
+             // this.targetTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,crudeTarget);
+
+              crudelongtrade = true;
+              crudeTradeStatus = "started";
+          }
+         else if(diff > 15 && detect == true){
+              //debugger;
+              crudeTradeStatus = "vigil";
+          }
       }
-      
-     // if(this.props.trendData[trenlen].TimeToEnter  != undefined && this.props.trendData[trenlen].TradeStarted != undefined){
-        if( this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false  && webSocketClicked === true){
-          this.setState({crudeshorttrade : true});
-          this.startTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' );
-        }
 
-       if( this.props.trendData[trenlen].TradeStarted == "downbuy" && crudelongtrade == false  && webSocketClicked === true){
-          this.setState({crudelongtrade : true});
-          this.startTrade('CRUDEOILM18OCTFUT' , 'MCX' ,'BUY');
-        }   
-           
      }
   }  
 
@@ -639,9 +802,70 @@ if( (this.props.tickDataJD !=undefined) && (this.props.tickDataJD.length > 1)){
    }
 }
 
-startTrade(data, exchange , type){
+startTrade(data, exchange , type, price , stop, target){
 
-//alert('trade');
+
+//debugger;
+
+var squareoff = Math.abs(price-target);
+var stoploss =  Math.abs(stop-price);
+
+
+debugger;
+          //code to set and get the data
+            var api_key = "3iciz5hhzaiitjkj",
+             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
+             request_token = this.state.token;
+             let access_token = ''; 
+
+             var options = {
+               "api_key": api_key,
+               "debug": false,
+               "access_token" : access_token_const,
+             };   
+
+             let kc = new KiteConnect(options);
+
+             /*kc.placeOrder("regular", {
+               "exchange": exchange,
+               "tradingsymbol": data,
+               "transaction_type": type,
+               "quantity": 1000,
+               "product": "MIS",
+               "order_type": "MARKET"
+             }).then(function(resp) { 
+              alert('success order placed');
+                console.log(resp);
+              }).catch(function(err) {
+                alert('error is palcing order');
+                console.log(err);
+             }); */
+
+
+  kc.placeOrder(kc.VARIETY_BO, {
+      "exchange": exchange,
+      "tradingsymbol": data,
+      "transaction_type": type,
+      "order_type": "LIMIT",
+      "quantity": 1,
+      "price": price,
+      "squareoff": squareoff,
+      "stoploss": stoploss,
+      "validity": "DAY"
+    },
+  ).then(function(resp) {
+     alert('success order placed');
+    console.log(resp);
+  }).catch(function(err) {
+    alert('error in order placed');
+    alert(JSON.stringify(err));
+  });
+
+
+
+}
+
+stopTrade(data, exchange , type ,price){
 
           //code to set and get the data
             var api_key = "3iciz5hhzaiitjkj",
@@ -661,9 +885,10 @@ startTrade(data, exchange , type){
                "exchange": exchange,
                "tradingsymbol": data,
                "transaction_type": type,
-               "quantity": 1,
+               "quantity": 1000,
                "product": "MIS",
-               "order_type": "MARKET"
+               "order_type": "LIMIT",
+               "price": price
              }).then(function(resp) { 
               alert('success order placed');
                 console.log(resp);
@@ -671,10 +896,40 @@ startTrade(data, exchange , type){
                 alert('error is palcing order');
                 console.log(err);
              }); 
-    //code to set and get the data   */ 
+}
 
 
+targetTrade(data, exchange , type ,price){
 
+          //code to set and get the data
+            var api_key = "3iciz5hhzaiitjkj",
+             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
+             request_token = this.state.token;
+             let access_token = ''; 
+
+             var options = {
+               "api_key": api_key,
+               "debug": false,
+               "access_token" : access_token_const,
+             };   
+
+             let kc = new KiteConnect(options);
+
+             kc.placeOrder("regular", {
+               "exchange": exchange,
+               "tradingsymbol": data,
+               "transaction_type": type,
+               "quantity": 1000,
+               "product": "MIS",
+               "order_type": "LIMIT",
+               "price": price,
+             }).then(function(resp) { 
+              alert('success order placed');
+                console.log(resp);
+              }).catch(function(err) {
+                alert('error is palcing order');
+                console.log(err);
+             }); 
 }
 
 
