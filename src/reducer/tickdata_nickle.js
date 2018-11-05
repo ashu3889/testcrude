@@ -7,9 +7,12 @@ export default function(state = [], action) {
          let length = state.length;
          let direction = '';
          const now = new Date();
+         let shift = action.payload.shift;
         
         if(length >= 1){
           // check the direction and add it in candle
+
+          //debugger;
 
             if(state[state.length-1].high < action.payload.high){
              //up direction
@@ -62,14 +65,18 @@ export default function(state = [], action) {
                          //condition of inflection treend will be decided by direction
 
                          if(direction == "down"){
+                          //debugger;
                            action.payload.trend = "downtrend";
                            action.payload.pivot = state[state.length-2].high; 
                            action.payload.dir = 'up'; 
+                           action.payload.currentPrice = action.payload.close ;
                          } 
                          else if(direction == "up"){
+                           // debugger;
                             action.payload.trend = "upward";
                             action.payload.pivot = state[state.length-2].low; 
                             action.payload.dir = 'low'; 
+                            action.payload.currentPrice = action.payload.close ;
                          }
 
                        }  
@@ -121,31 +128,6 @@ export default function(state = [], action) {
                                }
                        } 
                    }
-
-                   /*//adding current swinghigh and low condition
-                     //this code will make sure swinghigh and swinglow is present in state after pivot is formed
-                    if(state[state.length-1].swingLow != undefined){
-                         //first swing condition                               
-                         action.payload.swingLow = state[state.length-1].swingLow;
-                    }
-                    else if(action.payload.swingLow != undefined){
-                      //do nothing here
-                    }
-                    else if(action.payload.swingLow == undefined && state[state.length-1].swingLow ==undefined ){
-                          action.payload.swingLow = 0;
-                    }
-
-                   if(state[state.length-1].swingHigh != undefined){
-                         //first swing condition                               
-                         action.payload.swingHigh = state[state.length-1].swingHigh;
-                    }
-                    else if(action.payload.swingHigh != undefined){
-                      //do nothing here
-                    }
-                    else if(action.payload.swingHigh == undefined && state[state.length-1].swingHigh ==undefined ){
-                          action.payload.swingHigh = 0;
-                    }*/
-                    
 
 
               action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();

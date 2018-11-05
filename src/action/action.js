@@ -38,9 +38,18 @@ export function addTickDataTest(data){
 }
 
 export function pivotData(data){
+
+  //debugger;
  // alert(JSON.stringify(data));
     return ({
      type :'PLOT_PIVOT_DATA',
+     payload : data,
+    })
+}
+
+export function pivotDataTCS(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_TCS',
      payload : data,
     })
 }
@@ -65,6 +74,16 @@ export function addTickData(data){
   //alert(JSON.stringify(data));
    return ({
      type :'ADD_DATA_SCOPE',
+     payload : data
+    })
+}
+
+export function addTickDataTCS(data){
+  //alert(JSON.stringify(data));
+
+
+   return ({
+     type :'ADD_DATA_SCOPE_TCS',
      payload : data
     })
 }

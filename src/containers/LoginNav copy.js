@@ -96,7 +96,7 @@ startTime = new Date().YYYYMMDDHHMMSS();
 
             var ashutosh = this;
             var api_key = "3iciz5hhzaiitjkj",
-             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
+             secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -419,7 +419,7 @@ startTrade(data, exchange , type){
 
           //code to set and get the data
             var api_key = "3iciz5hhzaiitjkj",
-             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
+             secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -1084,7 +1084,7 @@ startTrade(data, exchange , type){
 
              //  alert('called');
               //alert(this.props.access);KiteTicker("your_api_key", "your_access_token")
-              let  SIGNIN_ROOT_URL = 'token ypmxayteat7agml9:';
+              let  SIGNIN_ROOT_URL = 'token g7ctyvle0x2ufyzm:';
                 let accessdata = this.props.access;
 
               var headers = {

@@ -10,6 +10,9 @@ import accessReducer from './access.js';
 
 import tickData from './tickdata.js';
 
+import tickDataTCS from './tickdata_tcs.js';
+import plDataTCS from './plotdata_tcs.js';
+
 import plData from './plotdata.js';
 
 import tickDataNifty from './tickdata_nifty.js';
@@ -42,6 +45,8 @@ tickDataNifty :tickDataNifty,
 plDataNickle: plDataNickle,
 tickDataNickle :tickDataNickle,
 tickDataJD: tickDataJD,
+tickDataTCS :tickDataTCS,
+plDataTCS:  plDataTCS,
 });
 
 const persistedstate = {

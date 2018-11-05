@@ -48,7 +48,7 @@
                         // alert(this.props.trendData[strlen].x);
                            //this.placeorder();
            //code to set and get the data
-                var api_key = "ypmxayteat7agml9",
+                var api_key = "g7ctyvle0x2ufyzm",
              secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
              request_token = this.state.token;
              let access_token = ''; 
@@ -96,7 +96,7 @@
        if(nextProps.tickCombo[len].TimeToEnter == true){
 
         //code to set and get the data
-            var api_key = "ypmxayteat7agml9",
+            var api_key = "g7ctyvle0x2ufyzm",
              secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
              request_token = this.state.token;
              let access_token = ''; 
@@ -216,7 +216,7 @@
 		       <div>
 		          <p>Start login</p> 
 
-                 <a href="https://kite.trade/connect/login?v=3&api_key=ypmxayteat7agml9" target="_blank"> Login redirect</a>
+                 <a href="https://kite.trade/connect/login?v=3&api_key=g7ctyvle0x2ufyzm" target="_blank"> Login redirect</a>
 
 
 

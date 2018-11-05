@@ -52,7 +52,7 @@
 
             componentWillReceiveProps(nextProps) {
 
-
+alert('11');
               //trigger order code
               let strlen = this.props.trendData.length-1;
 
@@ -65,8 +65,8 @@
                         // alert(this.props.trendData[strlen].x);
                            //this.placeorder();
            //code to set and get the data
-                var api_key = "3iciz5hhzaiitjkj",
-             secret = "4c0wc0rqnze0hx2c3x9y72tg8wpqbgap",
+                var api_key = "g7ctyvle0x2ufyzm",
+             secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -221,7 +221,7 @@
 
               <div>
 
-             <a href="https://kite.trade/connect/login?v=3&api_key=3iciz5hhzaiitjkj" target="_blank"> Login redirect</a>
+             <a href="https://kite.trade/connect/login?v=3&api_key=g7ctyvle0x2ufyzm" target="_blank"> Login redirect</a>
 
               </div>
             

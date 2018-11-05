@@ -2,7 +2,7 @@
 export default function(state = [], action) {
   switch(action.type) {
     case 'ADD_DATA_SCOPE':
-   // alert('asuss');
+  //  debugger;
     
          let length = state.length;
          let direction = '';
@@ -65,18 +65,35 @@ export default function(state = [], action) {
                          //condition of inflection treend will be decided by direction
 
                          if(direction == "down"){
-                          //debugger;
+                          // debugger;
                            action.payload.trend = "downtrend";
                            action.payload.pivot = state[state.length-2].high; 
                            action.payload.dir = 'up'; 
                            action.payload.currentPrice = action.payload.close ;
+
+                           //new code data
+                            action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();
+                            action.payload.x = state.length+1;
+                            action.payload.direction = direction;
+                            var newstate = state.concat(action.payload);                
+                            return newstate ;
+                             //new code data
+
                          } 
                          else if(direction == "up"){
-                           // debugger;
+                          //  debugger;
                             action.payload.trend = "upward";
                             action.payload.pivot = state[state.length-2].low; 
                             action.payload.dir = 'low'; 
                             action.payload.currentPrice = action.payload.close ;
+
+                            //new code data
+                            action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();
+                            action.payload.x = state.length+1;
+                            action.payload.direction = direction;
+                            var newstate = state.concat(action.payload);                
+                            return newstate ;
+                             //new code data
                          }
 
                        }  
@@ -133,15 +150,15 @@ export default function(state = [], action) {
               action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();
               action.payload.x = state.length+1;
               action.payload.direction = direction;
-              let newstate = state.concat(action.payload);                
-               return newstate ;
+              var newstate = state.concat(action.payload);                
+              return newstate ;
             }
       }
          //plot x and y based on time 
          action.payload.trend = "";
          action.payload.time = now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();
          action.payload.x = 1;
-         let newstate = state.concat(action.payload);
+         var newstate = state.concat(action.payload);
          return newstate ;
    
      

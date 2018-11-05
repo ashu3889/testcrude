@@ -4,6 +4,8 @@
 		//import DrawnCardDeck from './DrawnCardDeck.js';		
 		import Kitelogin from './KiteLogin.js';			
 		import LoginNav from './LoginNav.js';
+		import TestLoginNav from './testLoginNav.js';
+		import DojiLogin from './dojiLogin.js';
         import { Switch, Route } from 'react-router-dom';
 
 
@@ -17,6 +19,8 @@
 		        <Switch>
                      <Route  path='/login' component={Kitelogin}/>                     
                      <Route exact path='/success/' component={LoginNav}/>
+                     <Route exact path='/test' component={TestLoginNav}/>
+                     <Route exact path='/doji' component={DojiLogin}/>
                 </Switch>		 
 		        </div>)
 		    }
