@@ -1416,7 +1416,7 @@ export class LoginNav extends Component {
             setInterval(function() {
                 getCrudeOHLC(self);
                 getNickleOHLC(self);
-            }, 3000);
+            }, 300000);
 
 
 
