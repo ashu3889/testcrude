@@ -45,6 +45,294 @@ var kiteNickle = [{"date":"2018-09-03T04:30:00.000Z","open":911,"high":911,"low"
 
 
 
+var kiteCrude11 = [{
+      open: 4593,
+      low: 4590,
+      high: 4595,
+      close: 4591,
+    },
+    {
+      open: 4591,
+      low: 4589,
+      high: 4598,
+      close: 4596,
+      
+    },
+    {
+      open: 4596,
+      low: 4595,
+      high: 4600,
+      close: 4599,
+     
+    },
+    {
+      open: 4597,
+      low: 4594,
+      high: 4598,
+      close: 4598,
+      
+    },
+    {
+      open: 4595,
+      low: 4593,
+      high: 4602,
+      close: 4601,
+      
+    },
+    {
+      open: 4597,
+      low: 4597,
+      high: 4603,
+      close: 4600,
+      
+    },
+    {
+      open: 4598,
+      low: 4590,
+      high: 4599,
+      close: 4591,
+      
+    },
+    {
+      open: 4591,
+      low: 4589,
+      high: 4596,
+      close: 4594,
+      
+    },
+    {
+      open: 4592,
+      low: 4588,
+      high: 4592,
+      close: 4590,
+      
+    },
+    {
+      open: 4582,
+      low: 4580,
+      high: 4584,
+      close: 4583,
+      
+    },
+    {
+      open: 4582,
+      low: 4578,
+      high: 4582,
+      close: 4578,
+      
+    },
+    {
+      open: 4578,
+      low: 4578,
+      high: 4586,
+      close: 4585,
+      
+    },
+    {
+      open: 4585,
+      low: 4583,
+      high: 4589,
+      close: 4585,
+      
+    },
+    {
+      open: 4589,
+      low: 4586,
+      high: 4593,
+      close: 4593,
+      
+    },
+    {
+      open: 4594,
+      low: 4591,
+      high: 4597,
+      close: 4591,
+      
+    },
+    {
+      open: 4591,
+      low: 4591,
+      high: 4598,
+      close: 4594,
+      
+    },
+    {
+      open: 4594,
+      low: 4593,
+      high: 4599,
+      close: 4598,
+    },
+    {
+      open: 4598,
+      low: 4597,
+      high: 4600,
+      close: 4599,
+    },
+    {
+      open: 4591,
+      low: 4591,
+      high: 4608,
+      close: 4607,
+    },
+    {
+      open: 4608,
+      low: 4598,
+      high: 4612,
+      close: 4609,
+    },
+    {
+      open: 4609,
+      low: 4608,
+      high: 4618,
+      close: 4617,
+    },
+    {
+      open: 4617,
+      low: 4614,
+      high: 4620,
+      close: 4616,
+    },
+    {
+      open: 4613,
+      low: 4612,
+      high: 4618,
+      close: 4614,
+    },
+    {
+      open: 4605,
+      low: 4603,
+      high: 4611,
+      close: 4609,
+    },
+    {
+      open: 4609,
+      low: 4607,
+      high: 4617,
+      close: 4613,
+    },
+    {
+      open: 4610,
+      low: 4608,
+      high: 4623,
+      close: 4621,
+    },
+    {
+      open: 4616,
+      low: 4606,
+      high: 4618,
+      close: 4608,
+    },
+    {
+      open: 4609,
+      low: 4599,
+      high: 4610,
+      close: 4602,
+    },
+    {
+      open: 4601,
+      low: 4593,
+      high: 4607,
+      close: 4601,
+    },
+    {
+      open: 4607,
+      low: 4587,
+      high: 4610,
+      close: 4588,
+    },
+    {
+      open: 4589,
+      low: 4582,
+      high: 4593,
+      close: 4585,
+    },
+    {
+      open: 4585,
+      low: 4547,
+      high: 4586,
+      close: 4550,
+    },
+    {
+      open: 4548,
+      low: 4529,
+      high: 4550,
+      close: 4532,
+    },
+    {
+      open: 4543,
+      low: 4539,
+      high: 4555,
+      close: 4547,
+    },
+    {
+      open: 4547,
+      low: 4544,
+      high: 4559,
+      close: 4553,
+    },
+    {
+      open: 4548,
+      low: 4547,
+      high: 4560,
+      close: 4551,
+    },
+    {
+      open: 4551,
+      low: 4533,
+      high: 4553,
+      close: 4535,
+    },
+    {
+      open: 4535,
+      low: 4502,
+      high: 4535,
+      close: 4504,
+    },
+    {
+      open: 4512,
+      low: 4494,
+      high: 4513,
+      close: 4496,
+    },
+    {
+      open: 4497,
+      low: 4481,
+      high: 4501,
+      close: 4488,
+    },
+    {
+      open: 4492,
+      low: 4491,
+      high: 4502,
+      close: 4502
+    },
+    {
+      open: 4501,
+      low: 4495,
+      high: 4504,
+      close: 4499,
+    },
+    {
+      open: 4499,
+      low: 4493,
+      high: 4503,
+      close: 4498,
+    },
+    {
+      open: 4498,
+      low: 4487,
+      high: 4499,
+      close: 4493,
+    },
+    {
+      open: 4497,
+      low: 4497,
+      high: 4505,
+      close: 4504,
+    }
+  ];
+
+
 let count = 1;
 let countnifty = 1;
 let countnickle = 1;
@@ -255,13 +543,13 @@ export class TestLoginNav extends Component {
               // debugger;
 
 
-            kiteCrude.map((v, i) => {
+            kiteCrude11.map((v, i) => {
 
                   
-                        if(v.date.beginsWith(kitedate)) {
-                              v.date = v.date.replace('T', ' ').replace('Z','0');
+                        //if(v.date.beginsWith(kitedate)) {
+                            //  v.date = v.date.replace('T', ' ').replace('Z','0');
                               kiteArray.push(v);
-                        }
+                       // }
 
 
             });

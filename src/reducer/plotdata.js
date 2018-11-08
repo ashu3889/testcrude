@@ -16,7 +16,7 @@ export default function(state = [], action) {
     let retestDiff = 14;
     let dayRetestDiff = 8;
     let sidewaysClearDiff =11;
-    let crudeBigDay = 100;
+    let crudeBigDay = 90;
 
     //////////
 
