@@ -147,7 +147,7 @@ export default function(state = [], action) {
 
               if(Math.abs(action.payload.y - state[statelen-1].y) > crudeBigDay){
                  //time to clear everything and loop for short and look respectivity
-                 //debugger;
+                 debugger;
                    if(action.payload.y > state[statelen-1].y){
                       action.payload.bigDayTrade = 'short'; 
                       action.payload.bigDayTradePrice = action.payload.y; 

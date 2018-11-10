@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "http://localhost:8080/cspine/trunk/hplabs/build/",
   "dependencies": {
+    "csvtojson": "^2.0.8",
+    "express-ws": "^4.0.0",
     "jStat": "^1.7.1",
     "kiteconnect": "^3.0.0",
     "lodash": "^4.17.4",

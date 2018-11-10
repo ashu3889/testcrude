@@ -52,7 +52,7 @@
 
             componentWillReceiveProps(nextProps) {
 
-alert('11');
+
               //trigger order code
               let strlen = this.props.trendData.length-1;
 
@@ -164,7 +164,9 @@ alert('11');
 
               ws.onmessage = function(e) {
 
-               // alert('message received');
+                 alert('message received');
+                  debugger;
+
                   testdata = e.data;
                   splitData(testdata , self);
               }
