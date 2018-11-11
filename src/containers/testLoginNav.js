@@ -55,14 +55,14 @@ var val = 1;
 dataSet.map((v, i) => {
      
 
-    //if(i>145){
+    if(i>145){
 
            v.open = v.Open*val;
            v.low = v.Low*val;
            v.close = v.Close*val;
            v.high = v.High*val;
            kiteCrude11.push(v);
-    //}
+    }
 })
 
 
@@ -90,7 +90,7 @@ var crudeStopVal = 8 ;
 var crudeMinTarget = 22;
 var crudeMaxEntryThreshold = 10;
 var crudeBigDayTarget = 35;
-var crudeBigDayStop = 20;
+var crudeBigDayStop = 22;
 var crudeVigilValue = 15;
 
 //////////////////////////
@@ -422,63 +422,7 @@ export class TestLoginNav extends Component {
                 });
         }
 
-        function populatingJustDialTickdata(response) {
-
-          //  debugger;
-
-            var d = ashutosh;
-
-
-            response.map((v, i) => {
-
-                var jdtickType;
-                var shift = 0;
-
-                /*if(i > 0 ){
-                    if ((i) % 75 === 0){
-                      debugger;
-                      shift = 1;
-                    }
-                    else{
-
-                       shift = 0;
-                    }
-                   
-
-                }
-                if(i == 0){
-                   shift = 1;
-                }*/
-
-
-                if (v.open < v.close) {
-                    jdtickType = "green";
-                } else if (v.open > v.close) {
-                    jdtickType = "red";
-                } else if (v.open = v.close) {
-                    jdtickType = "doji";
-                }
-
-                var jdtickLength = Math.abs(v.high - v.low);
-
-                var jdtickarray = {
-                    "shift": shift,
-                    "open": v.open,
-                    "low": v.low,
-                    "high": v.high,
-                    "close": v.close,
-                    "tickType": jdtickType,
-                    'tickLength': jdtickLength,
-                    'hour': v.date.getHours(),
-                    'minute': v.date.getMinutes(),
-                    'cumProfit': 0,
-                    'date': v.date.getUTCDate()
-                };
-
-                d.props.addJDTickData(jdtickarray);
-            })
-
-        }
+       
 
 
         function populatingCrudeTickdata(response) {
@@ -508,12 +452,15 @@ export class TestLoginNav extends Component {
                                
                                if (v.low < crudeBigTradePrice && crudeBigTradePrice < v.high && crudeBigTradeDirection === "short") {
                                         
+
+                                         alert(JSON.stringify(v));
+
                                          crudeTradePrice = v.close;
                                          crudeStop = v.close+crudeBigDayStop;
                                          crudeTarget = v.close-crudeBigDayTarget;
                                          crudeshorttrade = true;
 
-                                         alert(JSON.stringify(v))
+                                        
 
                                          
 
@@ -594,7 +541,7 @@ export class TestLoginNav extends Component {
 
 
                     if (v.low < stop && stop < v.high && crudeTradeStatus !== "vigil") {
-                       //  debugger;
+                         debugger;
                         crudeTradeStatus = "loss";
                         var losspoint = Math.abs(crudeTradePrice - stop);
                         alert('loss hapeended' + losspoint);
@@ -721,7 +668,7 @@ export class TestLoginNav extends Component {
                                
                                 nickleTradePrice = v.close;
 
-                                 debugger;
+                               
                                  
                                  //new line start
                                  nickleTarget = nickleTradePrice-2;
@@ -1027,7 +974,7 @@ export class TestLoginNav extends Component {
                        nickleTarget = nickleTradePrice+1;
                     }
 
-                     debugger;
+                    
 
 
                     if (Math.abs(diff) <= nickleMaxEntryThreshold && detect == true) {

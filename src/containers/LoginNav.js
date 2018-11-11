@@ -417,7 +417,7 @@ export class LoginNav extends Component {
                                          
 
                                          alert(' big  sell at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
                                          crudeTradeStatus = "sell started";
                                         
                                }
@@ -430,7 +430,7 @@ export class LoginNav extends Component {
                                          crudeTarget = v.close+crudeBigDayTarget;
                                          crudelongtrade = true;
                                          alert('big buy at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
                                          crudeTradeStatus = "buy started";
                                         
                                 }
@@ -462,7 +462,7 @@ export class LoginNav extends Component {
                                 
                                 //if(crudetickType === "red"){
                                          alert('vigil sell at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
                                          crudeshorttrade = true;
                                          crudeTradeStatus = "sell started";
 
@@ -479,7 +479,7 @@ export class LoginNav extends Component {
 
                                // if(crudetickType === "green"){
                                         alert('vigil buy crude  at' + crudeTradePrice);
-                                        d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                        d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
                                         crudelongtrade = true;
                                         crudeTradeStatus = "buy started";
 
@@ -581,7 +581,7 @@ export class LoginNav extends Component {
                                          nickleshorttrade = true;
                                         // alert('1234');
                                          alert('sell at' + nickleTradePrice);
-                                         d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', nickleTradePrice, stop, target);
+                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', nickleTradePrice, stop, target);
                                          nickleTradeStatus = "sell started";
                                         
                                }
@@ -594,7 +594,7 @@ export class LoginNav extends Component {
                                          nickleTarget = v.close+nickleBigDayTarget;
                                          nicklelongtrade = true;
                                          alert('buy at' + nickleTradePrice);
-                                         d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'BUY', nickleTradePrice, stop, target);
+                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', nickleTradePrice, stop, target);
                                          nickleTradeStatus = "buy started";
                                         
                                 }
@@ -633,7 +633,7 @@ export class LoginNav extends Component {
                                 
                                 if(nickletickType === "red"){
                                          alert('vigil sell at' + nickleTradePrice);
-                                         d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', nickleTradePrice, stop, target);
+                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', nickleTradePrice, stop, target);
                                          nickleshorttrade = true;
                                          nickleTradeStatus = "sell started";
 
@@ -659,7 +659,7 @@ export class LoginNav extends Component {
                                           alert('target is' + nickleTarget);
 
 
-                                        d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'BUY', nickleTradePrice, stop, target);
+                                        d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', nickleTradePrice, stop, target);
                                         nicklelongtrade = true;
                                         nickleTradeStatus = "buy started";
 
@@ -880,7 +880,7 @@ export class LoginNav extends Component {
 
                     if (diff <= nickleMaxEntryThreshold && detect == true) {
                         alert('up sell crude' + this.props.trendDataNickle[trenlen].x);
-                        this.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', nickleTradePrice, nickleStop, nickleTarget);
+                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', nickleTradePrice, nickleStop, nickleTarget);
                         nickleshorttrade = true;
                         nickleTradeStatus = "sell started";
                     } else if (diff > nickleMaxEntryThreshold && detect == true) {
@@ -931,7 +931,7 @@ export class LoginNav extends Component {
 
                     if (Math.abs(diff) <= nickleMaxEntryThreshold && detect == true) {
                         alert('down buy crude at ' + this.props.trendDataNickle[trenlen].x);
-                        this.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'BUY', nickleTradePrice, nickleStop, nickleTarget);
+                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', nickleTradePrice, nickleStop, nickleTarget);
 
                         // this.stopTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' , crudeStop );
                         // this.targetTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,crudeTarget);
@@ -1057,7 +1057,7 @@ export class LoginNav extends Component {
 
                     if (diff <= crudeMaxEntryThreshold && detect == true) {
                         alert('up sell crude' + this.props.trendData[trenlen].x);
-                        this.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', crudeTradePrice, crudeStop, crudeTarget);
+                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, crudeStop, crudeTarget);
                         crudeshorttrade = true;
                         crudeTradeStatus = "sell started";
                     } else if (diff > crudeMaxEntryThreshold && detect == true) {
