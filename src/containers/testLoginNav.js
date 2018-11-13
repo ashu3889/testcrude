@@ -55,14 +55,20 @@ var val = 1;
 dataSet.map((v, i) => {
      
 
-    if(i>145){
+  /* if(i>145){
 
            v.open = v.Open*val;
            v.low = v.Low*val;
            v.close = v.Close*val;
            v.high = v.High*val;
            kiteCrude11.push(v);
-    }
+   }*/
+
+           v.open = v.open*val;
+           v.low = v.low*val;
+           v.close = v.close*val;
+           v.high = v.high*val;
+           kiteCrude11.push(v);
 })
 
 

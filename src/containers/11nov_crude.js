@@ -1,4 +1,4 @@
-var ducasoft =[
+tickData: [
     {
       open: 4435,A
       low: 4435,
@@ -1178,6 +1178,4 @@ var ducasoft =[
       x: 91,
       direction: 'down'
     }
-  ]
-
-export {ducasoft} ;
+  ],
