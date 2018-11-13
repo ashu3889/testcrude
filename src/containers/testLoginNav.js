@@ -50,26 +50,23 @@ var dataSet = ducasoft;
 var val = 1;
 
 
-
-
 dataSet.map((v, i) => {
      
 
-  /* if(i>145){
+
+
+  //if(i>145){
 
            v.open = v.Open*val;
            v.low = v.Low*val;
            v.close = v.Close*val;
            v.high = v.High*val;
            kiteCrude11.push(v);
-   }*/
+  // }*/
 
-           v.open = v.open*val;
-           v.low = v.low*val;
-           v.close = v.close*val;
-           v.high = v.high*val;
-           kiteCrude11.push(v);
 })
+
+
 
 
 let count = 1;
@@ -267,19 +264,6 @@ export class TestLoginNav extends Component {
             var kitedate = '2018-09-21';
             var kiteArray = [];
 
-            
-          /*  kiteCrude.map((v, i) => {
-
-                  
-                        if(v.date.beginsWith(kitedate)) {
-                              v.date = v.date.replace('T', ' ').replace('Z','0');
-                              kiteArray.push(v);
-                        }
-
-
-            });*/
-
-              // debugger;
 
 
             kiteCrude11.map((v, i) => {
@@ -302,88 +286,6 @@ export class TestLoginNav extends Component {
 
 
 
-            // debugger;
-           // getHistoricalData(53835015, "5minute", startingTime, startTime);
-
-           // getHistoricalData(53986823 ,"5minute", startingTime, startTime);
-
-            //getHistoricalData(53835015, "5minute", new Date("2018-9-26 11:00:00"), new Date("2018-9-27 10:00:00"));
- 
-
-
-            //debugger;
-
-           // getHistoricalData(53986823, "5minute", new Date("2018-9-28 11:00:00"), new Date("2018-9-29 10:00:00"));
-
-
-            //just dial
-
-            //debugger;
-
-
-
-
-            /* var data =[895745,3001089,5633,60417,2939649,225537,356865,424961,25685250,2672641];
-
-             for (var i = 1; i <= data.length; ++i){
-                      doSetTimeout(data[i]);
-               }
-
-             function doSetTimeout(i) {
-               debugger;
-                     setTimeout(function() { 
-
-                      // alert(i); 
-                       getHistoricalData(i, "5minute", new Date("2018-10-1 9:15:00"), new Date("2018-10-1 23:15:00"));
-
-
-                     }, 100);
-             }*/
-
-
-
-
-            /*data.map((v,i) => {
-               //  debugger;
-               getHistoricalData(v, "5minute", new Date("2018-10-1 9:15:00"), new Date("2018-10-1 23:15:00"));
-
-            });*/
-
-
-
-            // getHistoricalData(7670273, "5minute", new Date("2018-09-28 9:15:00"), new Date("2018-09-29 15:30:00"));
-
-
-
-            //getHistoricalData(10991618, "5minute", new Date("2018-09-2 11:00:00"), new Date("2018-09-26 10:00:00"));
-
-
-            //getHistoricalData(53843463, "5minute", startingTime, startTime);
-
-
-
-            //    getHistoricalData(53986567, "5minute", startingTime, startTime);
-
-            /*  <div class="row">
-                   {
-                      (  this.props.tickCombonickle != undefined  &&  this.props.tickCombonickle.length >=1)
-                        ?   <div class="col-md-3">  <KitePlot title="Nickle" plotdata ={this.props.tickCombonickle}/> </div>
-                        : ''
-                    } 
-
-                    {
-                       (  this.props.trendDataNickle != undefined  &&  this.props.trendDataNickle.length >=1)
-                        ?    <div class="col-md-8"> <LineApp  title = "Nickle1" plotdata ={this.props.trendDataNickle}/></div>
-                        : ''
-                    } 
-              </div>*/
-
-            //getHistoricalData(53986567, "5minute", new Date("2018-09-5 11:00:00"), new Date("2018-09-6 10:00:00"));
-
-
-            //  
-            //COPPER
-            //  getHistoricalData(53835015, "5minute", new Date("2018-09-19 11:00:00"), new Date("2018-09-20 10:00:00"));
 
         }
 
@@ -515,6 +417,9 @@ export class TestLoginNav extends Component {
                                 }
                                 
                                 //if(crudetickType === "red"){
+                                        target =  crudeTradePrice -8;
+
+                                         debugger;
                                          alert('vigil sell at' + crudeTradePrice);
                                          d.startTrade('CRUDEOILM18OCTFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
                                          crudeshorttrade = true;

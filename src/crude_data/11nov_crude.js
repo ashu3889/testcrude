@@ -1,6 +1,6 @@
 tickData: [
     {
-      open: 4435,A
+      open: 4435,
       low: 4435,
       high: 4440,
       close: 4437,
