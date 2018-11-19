@@ -289,7 +289,7 @@ export class LoginNav extends Component {
                 .then(function(response) {
                     //debugger;
 
-                    if (instrument_token === 53835015) {
+                    if (instrument_token === 54056967) {
 
                       //  debugger;
                         populatingCrudeTickdata(response);
@@ -1581,7 +1581,7 @@ export class LoginNav extends Component {
             ws.onopen = function(event) {
                 var message = {
                     "a": "subscribe",
-                    "v": [53896199]
+                    "v": [54056967]
                 };
                 ws.send(JSON.stringify(message));
             };
@@ -1599,7 +1599,7 @@ export class LoginNav extends Component {
                         for (var i = 0; i < d.length; i++) {
 
                             //debugger;
-                            if (d[i].instrument_token == "53896199") {
+                            if (d[i].instrument_token == "54056967") {
                                 get5minDataCrudeTimestamp(d[i].last_price, self);
                             }
                             if (d[i].instrument_token == "12111106") {

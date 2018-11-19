@@ -29,6 +29,7 @@ import Crude from './CrudeTest.js';
 import _ from "lodash";
 import axios from 'axios';
 import {ducasoft} from './ducasoft.js';
+import {crudedata} from './data.js';
 
 
 String.prototype.beginsWith = function (string) {
@@ -46,7 +47,11 @@ var kiteNickle = [{"date":"2018-09-03T04:30:00.000Z","open":911,"high":911,"low"
 
 var kiteCrude11 =  [];
 
-var dataSet = ducasoft;
+
+var traderJiCrude =  [];
+
+
+var dataSet = crudedata;
 var val = 1;
 
 
@@ -57,11 +62,11 @@ dataSet.map((v, i) => {
 
   //if(i>145){
 
-           v.open = v.Open*val;
-           v.low = v.Low*val;
-           v.close = v.Close*val;
-           v.high = v.High*val;
-           kiteCrude11.push(v);
+           v.open = v.OPEN*val;
+           v.low = v.LOW*val;
+           v.close = v.CLOSE*val;
+           v.high = v.HIGH*val;
+           traderJiCrude.push(v);
   // }*/
 
 })
@@ -90,6 +95,7 @@ var crudePivot = 0;
 var crudeBigTradePrice = 0;
 var crudeBigTradeDirection = '';
 var crudeStopVal = 8 ;
+//var crudeStopVal = 15 ;
 var crudeMinTarget = 22;
 var crudeMaxEntryThreshold = 10;
 var crudeBigDayTarget = 35;
@@ -258,34 +264,132 @@ export class TestLoginNav extends Component {
 
 //v.date.substring(11,13)
 
+        
 
         function init() {
 
-            var kitedate = '2018-09-21';
+            var kitedate = '20130401';
             var kiteArray = [];
 
 
 
-            kiteCrude11.map((v, i) => {
-
+            traderJiCrude.map((v, i) => {
                   
-                        //if(v.date.beginsWith(kitedate)) {
-                            //  v.date = v.date.replace('T', ' ').replace('Z','0');
+                        if(v.Local.beginsWith(kitedate)) {
+                             // v.date = v.date.replace('T', ' ').replace('Z','0');
                               kiteArray.push(v);
-                       // }
+                       }
+            });
+
+           // debugger;
+
+            //CODE FOR HANDLING NEW DATA
+            var finalArr = [];
+            var start = 0;
+            var end = 0;
+            var detectStart = 0;
+            var temparr = [];
+ 
+
+            kiteArray.splice(0, 150);
+            var newarr = kiteArray;
+
+            newarr.map((v, i) => {
+                  
+                        if(i ==0 ){
+                              start = 1;
+                             //add data in temp array
+
+                              temparr.push(v.open);
+                              temparr.push(v.low);
+                              temparr.push(v.high);
+                              temparr.push(v.close);
+                              
+                              
+                        }
+
+
+                        if( i != 0 && (i%5) != 0 ){
+                             //add data in temp array
+                              temparr.push(v.open);
+                              temparr.push(v.low);
+                              temparr.push(v.high);
+                              temparr.push(v.close);
+                        }
+
+                        if( i != 0 && (i%5) == 0 && start == 1){
+                             //add data in temp array
+                              
+                              /*temparr.push(v.open);
+                              temparr.push(v.low);
+                              temparr.push(v.high);
+                              temparr.push(v.close);*/
+                            
+                             //pass data to calculate the final 5 min OHLC
+                              finalArr.push(temparr);
+
+                             // time to clear temp array
+                              temparr = [];
+                              start = 0;
+                        }
+
+                        if( i != 0 && (i%5) == 0 && start == 0){
+                            //new array starts here
+
+                            //add data in temp array
+                              temparr.push(v.open);
+                              temparr.push(v.low);
+                              temparr.push(v.high);
+                              temparr.push(v.close);
+                              start = 1;
+                        }
+            });
+
+
+             
+              console.log('final array is' + finalArr);
+
+              var traderJiFinaldata = getFinalData(finalArr);
+              populatingCrudeTickdata(traderJiFinaldata);
+
+             
+
+
+             //uncomment it for testing older data
+               //kiteArray =  kiteArray.slice(0,kiteArray.length-1);
+               //populatingCrudeTickdata(kiteArray);
+
+              // populatingNickleTickdata(kiteArray);
+
+             
+
+        }
+
+
+        function getFinalData(data){
+
+            var accounting = [];
+
+            data.map((v ,i ) => {
+
+                   var crudehigh = _.maxBy(v);
+                   var crudelow = _.minBy(v);
+                   var crudeopen = v[0];
+                   var crudeclose = v[v.length-1]
+
+             
+
+                    accounting.push({ 
+                         "open" : crudeopen,
+                         "high" : crudehigh,
+                         "low"  : crudelow ,
+                         "close" : crudeclose
+                    });
 
 
             });
 
-
-             kiteArray =  kiteArray.slice(0,kiteArray.length-1);
-
-            // populatingNickleTickdata(kiteArray);
-
-             populatingCrudeTickdata(kiteArray);
-
-
-
+           return accounting;
 
         }
 
