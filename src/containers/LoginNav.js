@@ -1554,7 +1554,8 @@ export class LoginNav extends Component {
 
         this.connect = function() {
 
-            alert(access_token_const);
+           // alert(access_token_const);
+            alert('lets start');
 
 
             // debugger;
@@ -1575,10 +1576,13 @@ export class LoginNav extends Component {
             //alert(accessdata);
 
             ws.onclose = function() {
-
-            }
+                      setTimeout(function() {
+                              self.connect();
+                      }, 1000);
+            } 
 
             ws.onopen = function(event) {
+
                 var message = {
                     "a": "subscribe",
                     "v": [54056967]

@@ -144,6 +144,8 @@
             
 
             startfetchingdata(){
+
+              alert('ranuuuuuuu');
              
               var self = this;
              let  WSS_ROOT_URL = 'ws://localhost:4000/echo';
@@ -151,12 +153,14 @@
               var ws = new WebSocket(`${WSS_ROOT_URL}`);
               //alert(accessdata);
 
-              ws.onclose = function(){
+                ws.onclose = function(){
 
-              }
+                }
 
                ws.onopen = function (event) {
                // alert('on open');
+
+                   self.startfetchingdata();
                    var message = {"a": "subscribe", "v": [779521]};
 
                    ws.send(JSON.stringify(message));

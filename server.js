@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var csv= require('csvtojson');
-var csvFilePath='./data.csv';
+var csvFilePath='./crude.csv';
 var jsonArray;
 
 var expressWs = require('express-ws')(app);
