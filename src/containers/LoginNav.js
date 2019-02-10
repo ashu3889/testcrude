@@ -24,11 +24,9 @@ import {
 import KitePlot from './plot.js';
 import LineApp from './lineplot.js';
 import * as KiteConnect from './connect.js';
-import Nifty from './NiftyTest.js';
 import Crude from './CrudeTest.js';
 import _ from "lodash";
 import axios from 'axios';
-import {ducasoft} from './ducasoft.js';
 
 
 String.prototype.beginsWith = function (string) {
@@ -46,7 +44,7 @@ var kiteNickle = [{"date":"2018-09-03T04:30:00.000Z","open":911,"high":911,"low"
 
 var kiteCrude11 =  [];
 
-var dataSet = ducasoft;
+var dataSet = [];
 var val = 1;
 
 
@@ -86,13 +84,35 @@ var crudeTrendLen = 0;
 var crudePivot = 0;
 var crudeBigTradePrice = 0;
 var crudeBigTradeDirection = '';
-var crudeStopVal = 8 ;
+var crudeStopVal = 10 ;
+//var crudeStopVal = 15 ;
 var crudeMinTarget = 22;
 var crudeMaxEntryThreshold = 10;
 var crudeBigDayTarget = 35;
-var crudeBigDayStop = 20;
+var crudeBigDayStop = 22;
 var crudeVigilValue = 15;
+var crudeTradeManagement = false;
+var trailingStatus = false;
+var trailBigTarget = 100;
+var trailTolerableDiff = 10;
+var bigPermissiblePriceDiff = 10;
+var sidewaysTop = 0;
+var sidewaysBottom = 0;
+var crudeTrailManagementValue = 40;
 var startDetecting = false;
+var pivotTickAdd = 0;
+var crudeTrailStopPermitted= 10;
+var trailMimimumTarget = 40;
+var safeTrailMimimumTarget = 0;
+var minimumSwingLength = 55;
+
+var crudeTradePriceLM =0;
+var crudeStopLM =0;
+var crudeTargetLM = 0;
+var minimumStopLM = 20;
+var crudeLMManagement = false;
+var minTargetLM = 35;
+
 
 //////////////////////////
 
@@ -295,85 +315,14 @@ export class LoginNav extends Component {
                         populatingCrudeTickdata(response);
                     }
 
-                    /* if(instrument_token === 53843463){
-                     //coppper
-                     //  populatingCrudeTickdata(response);
-                     }*/
-
-                    
-
-                    //justdial
-                    //if(instrument_token === 356865){
-                    //debugger;
-
-                    //populatingJustDialTickdata(response);
-
-                    //}
-
+                   
                     console.log(response);
                 }).catch(function(err) {
                     console.log(err);
                 });
         }
 
-        function populatingJustDialTickdata(response) {
-
-          //  debugger;
-
-            var d = ashutosh;
-
-
-            response.map((v, i) => {
-
-                var jdtickType;
-                var shift = 0;
-
-                /*if(i > 0 ){
-                    if ((i) % 75 === 0){
-                      debugger;
-                      shift = 1;
-                    }
-                    else{
-
-                       shift = 0;
-                    }
-                   
-
-                }
-                if(i == 0){
-                   shift = 1;
-                }*/
-
-
-                if (v.open < v.close) {
-                    jdtickType = "green";
-                } else if (v.open > v.close) {
-                    jdtickType = "red";
-                } else if (v.open = v.close) {
-                    jdtickType = "doji";
-                }
-
-                var jdtickLength = Math.abs(v.high - v.low);
-
-                var jdtickarray = {
-                    "shift": shift,
-                    "open": v.open,
-                    "low": v.low,
-                    "high": v.high,
-                    "close": v.close,
-                    "tickType": jdtickType,
-                    'tickLength': jdtickLength,
-                    'hour': v.date.getHours(),
-                    'minute': v.date.getMinutes(),
-                    'cumProfit': 0,
-                    'date': v.date.getUTCDate()
-                };
-
-                d.props.addJDTickData(jdtickarray);
-            })
-
-        }
-
+     
 
         function populatingCrudeTickdata(response) {
 
@@ -402,31 +351,35 @@ export class LoginNav extends Component {
                                
                                if (v.low < crudeBigTradePrice && crudeBigTradePrice < v.high && crudeBigTradeDirection === "short") {
                                         
-                                         crudeTradePrice = v.close;
-                                         crudeStop = v.close+crudeBigDayStop;
-                                         crudeTarget = v.close-crudeBigDayTarget;
-                                         crudeshorttrade = true;
 
-                                         alert(JSON.stringify(v))
+                                        var priceDiff = Math.abs(crudeBigTradePrice-crudeTradePrice);
 
-                                         
-
-                                         alert(' big  sell at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
-                                         crudeTradeStatus = "sell started";
-                                        
-                               }
+                                        if(priceDiff < bigPermissiblePriceDiff){ 
+                                             crudeTradePrice = v.close;
+                                             crudeStop = v.close+crudeBigDayStop;
+                                             crudeTarget = v.close-crudeBigDayTarget;
+                                             crudeshorttrade = true;
+                                             alert(' big  sell at' + crudeTradePrice);
+                                             d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                             crudeTradeStatus = "sell started";
+                                        }
+                                }
 
 
                                 if (v.low < crudeBigTradePrice && crudeBigTradePrice < v.high && crudeBigTradeDirection === "long") {
                                          
+
+                                         var priceDiff = Math.abs(crudeBigTradePrice-crudeTradePrice);
+
+                                         if(priceDiff < bigPermissiblePriceDiff){
                                          crudeTradePrice = v.close;
                                          crudeStop = v.close-crudeBigDayStop;
                                          crudeTarget = v.close+crudeBigDayTarget;
                                          crudelongtrade = true;
                                          alert('big buy at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                         d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
                                          crudeTradeStatus = "buy started";
+                                          }
                                         
                                 }
 
@@ -457,7 +410,7 @@ export class LoginNav extends Component {
                                 
                                 //if(crudetickType === "red"){
                                          alert('vigil sell at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                         d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
                                          crudeshorttrade = true;
                                          crudeTradeStatus = "sell started";
 
@@ -474,7 +427,7 @@ export class LoginNav extends Component {
 
                                // if(crudetickType === "green"){
                                         alert('vigil buy crude  at' + crudeTradePrice);
-                                        d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                        d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
                                         crudelongtrade = true;
                                         crudeTradeStatus = "buy started";
 
@@ -545,195 +498,9 @@ export class LoginNav extends Component {
 
 
 
-         function populatingNickleTickdata(response) {
-
-            var d = ashutosh;
 
 
-            response.map((v, i) => {
-
-                var nickletickType;
-                var startDetecting = false;
-                var shift = 0;
-                var stop = 0;
-                var target = 0;
-
-                if (v.open < v.close) {
-                    nickletickType = "green";
-                } else if (v.open > v.close) {
-                    nickletickType = "red";
-                } else if (v.open = v.close) {
-                    nickletickType = "doji";
-                }
-
-                var nickletickLength = Math.abs(v.high - v.low);
-
-                       if(nickleBigTradePrice !== 0 &&  nickleBigTradeDirection !== '' && nickleTradeStatus === "not started"){
-                               
-                               if (v.low < nickleBigTradePrice && nickleBigTradePrice < v.high && nickleBigTradeDirection === "short") {
-                                        
-                                         nickleTradePrice = v.close;
-                                         nickleStop = v.close+nickleBigDayStop;
-                                         nickleTarget = v.close-nickleBigDayTarget;
-                                         nickleshorttrade = true;
-                                        // alert('1234');
-                                         alert('sell at' + nickleTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', nickleTradePrice, stop, target);
-                                         nickleTradeStatus = "sell started";
-                                        
-                               }
-
-
-                                if (v.low < nickleBigTradePrice && nickleBigTradePrice < v.high && nickleBigTradeDirection === "long") {
-                                         
-                                         nickleTradePrice = v.close;
-                                         nickleStop = v.close-nickleBigDayStop;
-                                         nickleTarget = v.close+nickleBigDayTarget;
-                                         nicklelongtrade = true;
-                                         alert('buy at' + nickleTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', nickleTradePrice, stop, target);
-                                         nickleTradeStatus = "buy started";
-                                        
-                                }
-
-
-                       }
-
-                if (nicklelongtrade == true || nickleTradeStatus == "vigil" || nickleshorttrade == true && (nickleStop !== 0 && nickleTarget !== 0)) {
-                   // debugger;
-                    startDetecting = true;
-                    stop = nickleStop;
-                    target = nickleTarget;
-
-                    if (nickleTradeStatus == "vigil") {
-                       
-                        var diff = Math.abs(v.close - nicklePivot);
-                         
-
-                         //change this 7 paramter asap.....depending on strength of movement
-                        if (diff < nickleVigilValue) {
-                            
-                            if (stop > target) {
-                               
-                                nickleTradePrice = v.close;
-
-                                 debugger;
-                                 
-                                 //new line start
-                                 nickleTarget = nickleTradePrice-2;
-                                 target = nickleTarget;
-                                 //new line ends
-
-                                if(nickleTradePrice > nicklePivot){
-                                  stop = nickleTradePrice + nickleMaxEntryThreshold;
-                                }
-                                
-                                if(nickletickType === "red"){
-                                         alert('vigil sell at' + nickleTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', nickleTradePrice, stop, target);
-                                         nickleshorttrade = true;
-                                         nickleTradeStatus = "sell started";
-
-                                }
-
-                                
-                            } else {
-
-                                nickleTradePrice = v.close;
-
-                                  //new line start
-                                 nickleTarget = nickleTradePrice+2;
-                                 target = nickleTarget;
-                                 //new line ends
-
-                                if(nickleTradePrice < nicklePivot){
-                                  stop = nickleTradePrice-nickleMaxEntryThreshold;
-                                }
-
-                               if(nickletickType === "green"){
-                                          alert('vigil buy nickle  at' + nickleTradePrice);
-
-                                          alert('target is' + nickleTarget);
-
-
-                                        d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', nickleTradePrice, stop, target);
-                                        nicklelongtrade = true;
-                                        nickleTradeStatus = "buy started";
-
-                                }
-                                
-                            }
-
-                        }
-
-                    }
-
-
-                    if (v.low < stop && stop < v.high && nickleTradeStatus !== "vigil") {
-                       //  debugger;
-                        nickleTradeStatus = "loss";
-                        var losspoint = Math.abs(nickleTradePrice - stop);
-                        alert('loss hapeended' + losspoint);
-                        nicklelongtrade = false;
-                        nickleshorttrade = false;
-                        nickleTarget = 0;
-                        nickleStop = 0;
-                        nickleTradePrice = 0;
-                        nicklePivot = 0;
-                        nickleNetProfit = losspoint;
-                        nickleTradeStatus = "start again";
-                    } else if (v.low < target && target < v.high && nickleTradeStatus !== "vigil") {
-                      //   debugger;
-                        nickleTradeStatus = "profit";
-                        var profitpoint = Math.abs(nickleTradePrice - target);
-                        alert('profit happened of' + profitpoint);
-                        nicklelongtrade = false;
-                        nickleshorttrade = false;
-                        nickleTarget = 0;
-                        nickleStop = 0;
-                        nickleTradePrice = 0;
-                        nicklePivot = 0;
-                        nickleNetProfit = profitpoint;
-                        nickleTradeStatus = "start again";
-                    }
-
-                }
-
-
-                var nickletickarray = {
-                    "stop": stop,
-                    "target": target,
-                    "shift": shift,
-                    "open": v.open,
-                    "low": v.low,
-                    "high": v.high,
-                    "close": v.close,
-                    "tickType": nickletickType,
-                    'tickLength': nickletickLength,
-                    'date': v.date,
-                    "detecting": startDetecting,
-                    "tradeStatus" : nickleTradeStatus,
-                };
-
-                d.props.addTickDataNickle(nickletickarray);
-
-
-            })
-
-        }
-
-
-
-       
-
-         var nickletickcount = 0,
-            nickleticklow = 0,
-            nickletickhigh = 0,
-            nickletickopen = 0,
-            nickletickarray = [],
-            nickletickType = 0,
-            nickletickLength = 0,
-            nickletickclose = 0;
+   
 
          }
 
@@ -766,200 +533,9 @@ export class LoginNav extends Component {
 
 
 
-    componentWillReceiveProps(nextProps) {
+ componentWillReceiveProps(nextProps) {
 
-        // testing/////
-        //babu code  starts here
-
-        if ((this.props.tickDataJD != undefined) && (this.props.tickDataJD.length > 1)) {
-            var data = this.props.tickDataJD;
-            var nextData = nextProps.tickDataJD;
-            var length = data.length - 1;
-            var nextDataLength = nextData.length - 1;
-            if (length >= 1) {
-
-                if (nextData[nextDataLength].tradeFire != undefined) {
-
-                    var tradeDirection = nextData[nextDataLength].tradeFireType;
-                    var tradeTime = nextData[nextDataLength].hour + ':' + nextData[nextDataLength].minute;
-                    var alertText = 'just dial ' + tradeDirection + ' at time ' + tradeTime + 'at date ' + nextData[nextDataLength].date;
-                    alert(alertText);
-                }
-
-            }
-        }
-
-
-
-
-         let nicklelen = nextProps.tickCombonickle.length - 1;
-
-        if ((this.props.tickCombonickle) != undefined) {
-
-            if ((nextProps.tickCombonickle).length >= 1) {
-
-                if (nextProps.tickCombonickle[nicklelen].pivot != undefined) {
-
-                    if (this.state.pivotpointnickle != nextProps.tickCombonickle[nicklelen].pivot) {
-                        this.setState({
-                            pivotpointnickle: nextProps.tickCombonickle[nicklelen].pivot
-                        });
-                        let datainputnickle = {
-                            x: countnickle,
-                            y: nextProps.tickCombonickle[nicklelen].pivot,
-                            dir: nextProps.tickCombonickle[nicklelen].dir,
-                            currentPrice: nextProps.tickCombonickle[nicklelen].currentPrice,
-                            date: nextProps.tickCombonickle[nicklelen].date,
-                        };
-                        this.props.pivotDataNickle(datainputnickle);
-                        countnickle = countnickle + 1;
-                    }
-                }
-            }
-        }
-
-
-
-
-         
-            if ((this.props.trendDataNickle) != undefined && this.props.trendDataNickle.length > 1) {
-
-
-            var trenlen = this.props.trendDataNickle.length - 1;
-            if (nickleTrendLen === trenlen) {
-                var detect = false;
-            } else {
-                var detect = true;
-                nickleTrendLen = trenlen;
-            }
-
-
-            if (trenlen > 1) {
-
-                if (this.props.trendDataNickle[trenlen].TradeStarted == "upsell" && nickleshorttrade == false && webSocketClicked === true && this.props.trendDataNickle[trenlen].bigDayTrade === undefined) {
-                    //var crudePivot = 0;
-                    var diff = 0;
-
-                    if(this.props.trendDataNickle[trenlen].UPblackpoint >= this.props.trendDataNickle[trenlen].y){
-                        //when sell point is lower that top black point
-                         nicklePivot = this.props.trendDataNickle[trenlen].UPblackpoint;
-                         diff = this.props.trendDataNickle[trenlen].UPblackpoint - this.props.trendDataNickle[trenlen].currentPrice;
-                         nickleStop = this.props.trendDataNickle[trenlen].UPblackpoint + nickleStopVal;
-                    }
-                    else{
-                         nicklePivot = this.props.trendDataNickle[trenlen].y;
-                         diff = this.props.trendDataNickle[trenlen].y - this.props.trendDataNickle[trenlen].currentPrice;
-                         nickleStop = this.props.trendDataNickle[trenlen].y + nickleStopVal;
-                    }
-                   
-
-
-                   // crudeStop = this.props.trendData[trenlen].y + 8;
-                    nickleTarget = (this.props.trendDataNickle[trenlen].highest + this.props.trendDataNickle[trenlen].lowest) / 2;
-                    //crudeTarget = this.props.trendData[trenlen].lowest;
-                    nickleTradePrice = this.props.trendDataNickle[trenlen].currentPrice;
-
-                    if ((nickleTradePrice - this.props.trendDataNickle[trenlen].highest) > nickleMinTarget) {
-                        //alert('1');
-                        nickleTarget = this.props.trendDataNickle[trenlen].highest;
-                    } else {
-                       //alert('2');
-
-                       nickleTarget = nickleTradePrice-2;
-                        //nickleTarget = this.props.trendDataNickle[trenlen].lowest;
-                     
-
-                       //nickleTarget = (this.props.trendDataNickle[trenlen].highest + this.props.trendDataNickle[trenlen].lowest) / 2;
-                    }
-
-                   //  debugger;
-
-
-                    if (diff <= nickleMaxEntryThreshold && detect == true) {
-                        alert('up sell crude' + this.props.trendDataNickle[trenlen].x);
-                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', nickleTradePrice, nickleStop, nickleTarget);
-                        nickleshorttrade = true;
-                        nickleTradeStatus = "sell started";
-                    } else if (diff > nickleMaxEntryThreshold && detect == true) {
-                       nickleTradeStatus = "vigil";
-                    }
-                }
-
-
-                if (this.props.trendDataNickle[trenlen].TradeStarted == "downbuy" && nicklelongtrade == false && webSocketClicked === true && this.props.trendDataNickle[trenlen].bigDayTrade === undefined) {
-
-                        var diff = 0;
-                        if(this.props.trendDataNickle[trenlen].Lowblackpoint <= this.props.trendDataNickle[trenlen].y){
-                            //when sell point is lower that top black point
-                           nicklePivot = this.props.trendDataNickle[trenlen].Lowblackpoint;
-                           diff = this.props.trendDataNickle[trenlen].Lowblackpoint - this.props.trendDataNickle[trenlen].currentPrice;
-                           nickleStop = this.props.trendDataNickle[trenlen].Lowblackpoint - nickleStopVal;
-                        }
-                        else{
-                            nicklePivot = this.props.trendDataNickle[trenlen].y;
-                            diff = this.props.trendDataNickle[trenlen].y - this.props.trendDataNickle[trenlen].currentPrice;
-                            nickleStop = this.props.trendDataNickle[trenlen].y - nickleStopVal;
-                        }
-
-
-
-                   // crudePivot = this.props.trendData[trenlen].y;
-                    //var diff = this.props.trendData[trenlen].currentPrice - this.props.trendData[trenlen].y;
-                    //crudeStop = this.props.trendData[trenlen].y - 8;
-
-                    // crudeTarget = (this.props.trendData[trenlen].highest+this.props.trendData[trenlen].lowest)/2;
-
-                   // debugger;
-                    nickleTradePrice = this.props.trendDataNickle[trenlen].currentPrice;
-
-                  //   debugger;
-
-                    if (Math.abs(this.props.trendDataNickle[trenlen].lowest - nickleTradePrice) > nickleMinTarget) {
-                        nickleTarget = this.props.trendDataNickle[trenlen].lowest;
-                    } else {
-                      // nickleTarget = (this.props.trendDataNickle[trenlen].highest + this.props.trendDataNickle[trenlen].lowest) / 2;
-                       //crudeTarget = this.props.trendData[trenlen].lowest;
-
-                       nickleTarget = nickleTradePrice+1;
-                    }
-
-                     debugger;
-
-
-                    if (Math.abs(diff) <= nickleMaxEntryThreshold && detect == true) {
-                        alert('down buy crude at ' + this.props.trendDataNickle[trenlen].x);
-                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', nickleTradePrice, nickleStop, nickleTarget);
-
-                        // this.stopTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' , crudeStop );
-                        // this.targetTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,crudeTarget);
-
-                        nicklelongtrade = true;
-                        nickleTradeStatus = "buy started";
-                    } else if (Math.abs(diff) > nickleMaxEntryThreshold && detect == true) {
-                        //debugger;
-                        nickleTradeStatus = "vigil";
-                    }
-                }
-
-
-                 if(this.props.trendDataNickle[trenlen].bigDayTrade !== undefined && nickleBigTradePrice === 0 ){
-                      
-
-                       nickleBigTradePrice = this.props.trendDataNickle[trenlen].bigDayTradePrice;
-                       nickleBigTradeDirection = this.props.trendDataNickle[trenlen].bigDayTrade;
-                       nickleTradeStatus ="not started";
-
-                       // debugger;
-
-                 }
-
-
-            }
-        }
-
-      
-        ///NEWWWWWW///////////////////
-
+        
 
         let len = nextProps.tickCombo.length - 1;
 
@@ -981,6 +557,9 @@ export class LoginNav extends Component {
                             pivotpoint: nextProps.tickCombo[len].pivot
                         });
 
+                        var trailDiff = Math.abs(nextProps.tickCombo[len].pivot- crudeTarget);
+                      
+                        var pivotValue = nextProps.tickCombo[len].pivot;
 
                         let datainput = {
                             x: count,
@@ -990,6 +569,7 @@ export class LoginNav extends Component {
                             currentPrice: nextProps.tickCombo[len].currentPrice,
                             tradeStatus : nextProps.tickCombo[len].tradeStatus,
                             crudeTradePrice : crudeTradePrice,
+                            crudeTradeManagement : crudeTradeManagement
                         };
 
                         this.props.pivotData(datainput);
@@ -998,10 +578,6 @@ export class LoginNav extends Component {
                 }
             }
         }
-
-
-
-
 
 
         if ((this.props.trendData) != undefined && this.props.trendData.length > 1) {
@@ -1016,257 +592,291 @@ export class LoginNav extends Component {
             }
 
 
+
+/// trailing stop managemnet here
+              var tradeDirection = nextProps.trendData[trenlen].dir;
+              var pivotValue = nextProps.trendData[trenlen].y;
+             var swingLength = Math.abs(nextProps.trendData[trenlen].y-nextProps.trendData[trenlen-1].y);
+             
+              if(crudeTradeManagement == "trailing" && trailingStatus == "stop moved to BE"){
+
+                            if(crudeTradeStatus == "sell started" && pivotValue < sidewaysBottom){
+                                
+                                if(swingLength >= minimumSwingLength){
+                                    //exit immediately
+                                    alert('exit IMMEDIATELY at'+ nextProps.trendData[trenlen].currentPrice );
+                                    trailingStatus = "exit immediately ";
+                                    crudeStop = nextProps.trendData[trenlen].currentPrice;
+                                }
+                                else if(tradeDirection === "up"){
+                                    trailingStatus = "stop moved to mid of sideways short";
+                                    crudeStop =  parseInt((sidewaysTop+sidewaysBottom)/2);
+                                    alert("move stop to mid of sideways at value " + crudeStop);
+                                }
+                                  
+                            }
+                            else if(crudeTradeStatus == "buy started"  && pivotValue > sidewaysTop){
+
+                                if(swingLength >= minimumSwingLength){
+                                    //exit immediately
+                                    alert('exit IMMEDIATELY at'+ nextProps.trendData[trenlen].currentPrice );
+                                    trailingStatus = "exit immediately ";
+                                    crudeStop = nextProps.trendData[trenlen].currentPrice;
+                                }
+                                else if(tradeDirection === "low"){
+                                    trailingStatus = "stop moved to mid of sideways long";
+                                    crudeStop =  parseInt((sidewaysTop+sidewaysBottom)/2);
+                                    alert("move stop to mid of sideways at value " + crudeStop);
+                                }
+                                  
+                            }
+                }
+
+                        if(crudeTradeManagement == "trailing" && trailingStatus == "stop moved to mid of sideways short" && tradeDirection === "up"){
+                           // alert('ashu');
+                              let prevUpPivot = nextProps.trendData[trenlen-2].y;
+                              let pivotDiff = Math.abs(prevUpPivot-pivotValue);
+
+                              if(prevUpPivot > pivotValue && pivotDiff > trailTolerableDiff){
+                                   //condition when price goes further down
+                                   trailingStatus = "stop moved to top of swing short";
+                                   crudeStop = pivotValue;
+                                   alert('stop moved to ' + crudeStop);
+                              }
+                              else if(prevUpPivot <= pivotValue && pivotDiff > trailTolerableDiff){
+                                //condition when price goes up
+                                 
+                                   trailingStatus = "exit immediately short";
+                                   crudeStop = pivotValue;
+                                   alert('exit IMMEDIATELY at'+ crudeStop );
+                              }
+                              else if(prevUpPivot > pivotValue && pivotDiff <trailTolerableDiff){
+                                  //condition when price goes up
+                                  crudeStop =  parseInt((sidewaysTop+sidewaysBottom)/2);
+                                  trailingStatus = "stop moved to top of swing short";
+                                  alert('stop remained at mid of sidewyas');
+                              }
+                         
+                          }
+
+                           if(crudeTradeManagement == "trailing" && trailingStatus == "stop moved to top of swing short" && tradeDirection === "up"){
+                              let prevUpPivot = nextProps.trendData[trenlen-2].y;
+                              let pivotDiff = Math.abs(prevUpPivot-pivotValue);
+                              
+                              if(prevUpPivot > pivotValue && pivotDiff > trailTolerableDiff){
+                                   //condition when price goes further down
+                                   trailingStatus = "stop moved to top of swing short";
+                                   crudeStop = pivotValue;
+                                   alert('stop moved to ' + crudeStop);
+                              }
+                              else if(prevUpPivot <= pivotValue && pivotDiff > trailTolerableDiff){
+                                //condition when price goes up
+                                   alert('exit IMMEDIATELY at'+ pivotValue );
+                                   trailingStatus = "exit immediately short";
+                                   crudeStop = pivotValue;
+                              }
+                              else if(prevUpPivot > pivotValue && pivotDiff <trailTolerableDiff){
+                                  //condition when price goes up
+                                   //alert('stop not changed remained at top of pivot at' + pivotValue);
+                                   trailingStatus = "stop moved to top of swing short";
+                                   crudeStop = pivotValue;
+                                   alert('stop remained at' + crudeStop);
+                              }
+                         
+                          }
+
+
+                           if(crudeTradeManagement == "trailing" && trailingStatus == "stop moved to mid of sideways long" && tradeDirection === "low"){
+                         
+                              var prevUpPivot = nextProps.trendData[trenlen-2].y;
+                              var pivotDiff = Math.abs(prevUpPivot-pivotValue);
+
+                              //alert('12');
+
+                              if(prevUpPivot < pivotValue && pivotDiff > trailTolerableDiff){
+                                  
+                                   alert('set this new pivot as stop at ' + pivotValue);
+                                   crudeStop = pivotValue;
+                                   trailingStatus = "stop moved to top of swing long at " + crudeStop;
+                                 
+                              }
+                              else if(prevUpPivot >= pivotValue && pivotDiff > trailTolerableDiff){
+                                   trailingStatus = "exit immediately long";
+                                   crudeStop = pivotValue;
+                                   alert('exit IMMEDIATELY at'+ crudeStop );
+                              }
+                              else if(prevUpPivot < pivotValue && pivotDiff <trailTolerableDiff){
+                                  //condition when price goes up
+                                   trailingStatus = "stop moved to top of swing long";
+                                   crudeStop =  parseInt((sidewaysTop+sidewaysBottom)/2);
+                                   alert('stop remained at mid of sidewyas');
+                              }
+                         
+                          }
+
+                           if(crudeTradeManagement == "trailing" && trailingStatus == "stop moved to top of swing long" && tradeDirection === "low"){
+                              let prevUpPivot = nextProps.trendData[trenlen-2].y;
+                              let pivotDiff = Math.abs(prevUpPivot-pivotValue);
+
+                              if(prevUpPivot > pivotValue && pivotDiff > trailTolerableDiff){
+                                   //condition when price goes further down
+                                  
+                                  
+                                   alert('set this new pivot as stop ' + pivotValue);
+                                   trailingStatus = "stop moved to top of swing long";
+                                  // alert(crudeTradeStatus);
+                                   crudeStop = pivotValue;
+                              }
+                              else if(prevUpPivot > pivotValue && pivotDiff > trailTolerableDiff){
+                                //condition when price goes up
+                                   alert('exit IMMEDIATELY at'+ pivotValue );
+                                   trailingStatus = "exit immediately long";
+                                   crudeStop = pivotValue;
+                              }
+                              else if(prevUpPivot < pivotValue && pivotDiff <trailTolerableDiff){
+                                  //condition when price goes up
+                                   alert('stop not changed remained at top of pivot at' + pivotValue);
+                                   trailingStatus = "stop moved to top of swing long";
+                                   crudeStop = pivotValue;
+                              }
+                         
+                          }
+
+/// trailing stop ends managemnet here
+
             if (trenlen > 1) {
 
                 if (this.props.trendData[trenlen].TradeStarted == "upsell" && crudeshorttrade == false && webSocketClicked === true && this.props.trendData[trenlen].bigDayTrade === undefined) {
                     //var crudePivot = 0;
                     var diff = 0;
 
-                    if(this.props.trendData[trenlen].UPblackpoint >= this.props.trendData[trenlen].y){
+                    if(this.props.trendData[trenlen].UPblackpoint >= this.props.trendData[trenlen].y && crudeTradeManagement != "trailing"){
                         //when sell point is lower that top black point
                          crudePivot = this.props.trendData[trenlen].UPblackpoint;
                          diff = this.props.trendData[trenlen].UPblackpoint - this.props.trendData[trenlen].currentPrice;
                          crudeStop = this.props.trendData[trenlen].UPblackpoint + crudeStopVal;
                     }
-                    else{
+                    else if(this.props.trendData[trenlen].UPblackpoint < this.props.trendData[trenlen].y && crudeTradeManagement != "trailing"){
                          crudePivot = this.props.trendData[trenlen].y;
                          diff = this.props.trendData[trenlen].y - this.props.trendData[trenlen].currentPrice;
                          crudeStop = this.props.trendData[trenlen].y + crudeStopVal;
                     }
                    
 
+                   if(crudeTradeManagement != "trailing"){
+                            crudeTarget = (this.props.trendData[trenlen].highest + this.props.trendData[trenlen].lowest) / 2;
+                            crudeTradePrice = this.props.trendData[trenlen].currentPrice;
+                   }
 
-                   // crudeStop = this.props.trendData[trenlen].y + 8;
-                    crudeTarget = (this.props.trendData[trenlen].highest + this.props.trendData[trenlen].lowest) / 2;
-                    //crudeTarget = this.props.trendData[trenlen].lowest;
-                    crudeTradePrice = this.props.trendData[trenlen].currentPrice;
+                   
 
-                    if ((crudeTradePrice - this.props.trendData[trenlen].highest) > crudeMinTarget) {
+                    if ((crudeTradePrice - this.props.trendData[trenlen].highest) > crudeMinTarget && crudeTradeManagement != "trailing") {
                         crudeTarget = this.props.trendData[trenlen].highest;
-                    } else {
 
+                    } else if( (crudeTradePrice - this.props.trendData[trenlen].highest) < crudeMinTarget && crudeTradeManagement != "trailing"){
                         crudeTarget = this.props.trendData[trenlen].lowest;
-                      //  crudeTarget = (this.props.trendData[trenlen].highest + this.props.trendData[trenlen].lowest) / 2;
                     }
 
-                  //debugger;
+                   //bholuuu
 
 
-                    if (diff <= crudeMaxEntryThreshold && detect == true) {
-                        alert('up sell crude' + this.props.trendData[trenlen].x);
-                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, crudeStop, crudeTarget);
+                    if (diff <= crudeMaxEntryThreshold && detect == true && crudeTradeManagement != "trailing") {
+
+                       let targetDiff = Math.abs(crudeTarget-crudeTradePrice);
+
+
+                       if(targetDiff < crudeTrailManagementValue){
+                            crudeTradeManagement = "trailing";
+                            crudeTarget = crudeTradePrice - trailBigTarget;
+                            sidewaysTop = this.props.trendData[trenlen].highest;
+                            sidewaysBottom = this.props.trendData[trenlen].lowest;
+                            safeTrailMimimumTarget = crudeTradePrice-trailMimimumTarget;
+                       }
+                          // debugger;
+
+                        alert('up sell crude' + crudeTradePrice);
+                       
+                        this.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, crudeStop, crudeTarget);
                         crudeshorttrade = true;
                         crudeTradeStatus = "sell started";
-                    } else if (diff > crudeMaxEntryThreshold && detect == true) {
-                        crudeTradeStatus = "vigil";
+                    } else if (diff > crudeMaxEntryThreshold && detect == true && crudeTradeManagement != "trailing") {
+                         crudeTradeStatus = "vigil";
+                         sidewaysTop = this.props.trendData[trenlen].highest;
+                         sidewaysBottom = this.props.trendData[trenlen].lowest;
                     }
                 }
 
 
                 if (this.props.trendData[trenlen].TradeStarted == "downbuy" && crudelongtrade == false && webSocketClicked === true && this.props.trendData[trenlen].bigDayTrade === undefined) {
 
-                     var diff = 0;
+                         var diff = 0;
+                       // debugger;
 
-
-                        if(this.props.trendData[trenlen].Lowblackpoint <= this.props.trendData[trenlen].y){
-                        //when sell point is lower that top black point
+                        if(this.props.trendData[trenlen].Lowblackpoint <= this.props.trendData[trenlen].y  && crudeTradeManagement != "trailing"){
                            crudePivot = this.props.trendData[trenlen].Lowblackpoint;
                            diff = this.props.trendData[trenlen].Lowblackpoint - this.props.trendData[trenlen].currentPrice;
                            crudeStop = this.props.trendData[trenlen].Lowblackpoint - crudeStopVal;
                         }
-                        else{
+                        else if(this.props.trendData[trenlen].Lowblackpoint > this.props.trendData[trenlen].y  && crudeTradeManagement != "trailing"){
                             crudePivot = this.props.trendData[trenlen].y;
                             diff = this.props.trendData[trenlen].y - this.props.trendData[trenlen].currentPrice;
                             crudeStop = this.props.trendData[trenlen].y - crudeStopVal;
                         }
+                          
+
+                        if(crudeTradeManagement != "trailing"){
+                              crudeTradePrice = this.props.trendData[trenlen].currentPrice;
+                        }
+
+                        
+
+                        if (Math.abs(this.props.trendData[trenlen].lowest - crudeTradePrice) > crudeMinTarget && crudeTradeManagement != "trailing") {
+                             crudeTarget = this.props.trendData[trenlen].lowest;
+                        } else if(Math.abs(this.props.trendData[trenlen].lowest - crudeTradePrice) < crudeMinTarget && crudeTradeManagement != "trailing") {
+                             crudeTarget = this.props.trendData[trenlen].lowest;
+                        }
+
+                   
+
+                         if (Math.abs(diff) <= crudeMaxEntryThreshold && detect == true && crudeTradeManagement != "trailing") {
 
 
+                             let targetDiff = Math.abs(crudeTarget-crudeTradePrice);
 
-                   // crudePivot = this.props.trendData[trenlen].y;
-                    //var diff = this.props.trendData[trenlen].currentPrice - this.props.trendData[trenlen].y;
-                    //crudeStop = this.props.trendData[trenlen].y - 8;
+                             if(targetDiff < crudeTrailManagementValue){
+                                  crudeTradeManagement = "trailing";
+                                  crudeTarget = crudeTradePrice + trailBigTarget;
+                                  sidewaysTop = this.props.trendData[trenlen].highest;
+                                  sidewaysBottom = this.props.trendData[trenlen].lowest;
+                                  safeTrailMimimumTarget = crudeTradePrice+trailMimimumTarget;
+                             }
 
-                    // crudeTarget = (this.props.trendData[trenlen].highest+this.props.trendData[trenlen].lowest)/2;
-
-                   // debugger;
-                    crudeTradePrice = this.props.trendData[trenlen].currentPrice;
-
-                    if (Math.abs(this.props.trendData[trenlen].lowest - crudeTradePrice) > crudeMinTarget) {
-                        crudeTarget = this.props.trendData[trenlen].lowest;
-                    } else {
-                       crudeTarget = (this.props.trendData[trenlen].highest + this.props.trendData[trenlen].lowest) / 2;
-                       //crudeTarget = this.props.trendData[trenlen].lowest;
-                    }
-
-                    //debugger;
-
-
-                    if (Math.abs(diff) <= crudeMaxEntryThreshold && detect == true) {
-                        alert('down buy crude at ' + this.props.trendData[trenlen].x);
-                        this.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, crudeStop, crudeTarget);
-
-                        // this.stopTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' , crudeStop );
-                        // this.targetTrade('CRUDEOILM18OCTFUT', 'MCX','SELL' ,crudeTarget);
-
-                        crudelongtrade = true;
-                        crudeTradeStatus = "buy started";
-                    } else if (Math.abs(diff) > crudeMaxEntryThreshold && detect == true) {
-                        //debugger;
-                        crudeTradeStatus = "vigil";
-                    }
+                            // alert('crude stop is' +  crudeStop);
+                             alert('down buy crude at ' + crudeTradePrice);
+                             //alert('down buy crude at ' + this.props.trendData[trenlen].x);
+                             this.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudeTradePrice, crudeStop, crudeTarget);
+                             crudelongtrade = true;
+                             crudeTradeStatus = "buy started";
+                             } else if (Math.abs(diff) > crudeMaxEntryThreshold && detect == true && crudeTradeManagement != "trailing") {
+                                  //debugger;
+                                  crudeTradeStatus = "vigil";
+                                  sidewaysTop = this.props.trendData[trenlen].highest;
+                                  sidewaysBottom = this.props.trendData[trenlen].lowest;
+                            }
                 }
 
 
-                 if(this.props.trendData[trenlen].bigDayTrade !== undefined && crudeBigTradePrice === 0 ){
-                      
-
+                 if(this.props.trendData[trenlen].bigDayTrade !== undefined && crudeBigTradePrice === 0 && crudeTradeManagement != "trailing"){
                        crudeBigTradePrice = this.props.trendData[trenlen].bigDayTradePrice;
                        crudeBigTradeDirection = this.props.trendData[trenlen].bigDayTrade;
                        crudeTradeStatus ="not started";
+                }
 
-                       // debugger;
-
-                 }
-
-
-
-
-                      /*  if(this.props.trendData[trenlen].tradeStatus === "sell started" && (crudeTradePrice > this.props.trendData[trenlen].y) && (this.props.trendData[trenlen].dir === "up")){
-                            //if price is between high and low then we will move the stop to BE 
-                           debugger;
-
-                           if (this.props.trendData[trenlen].lowest < this.props.trendData[trenlen].y && this.props.trendData[trenlen].y < this.props.trendData[trenlen].highest){
-                                  //MOVE STOP TO BE
-                                  alert('stop moved to BE');
-                            }
-                            if (this.props.trendData[trenlen].lowest > this.props.trendData[trenlen].y){
-                                  //MOVE STOP TO BE
-                                  //EXIT IMMEDIATELY
-                                   alert('EXITED');
-
-                            }
-                        }*/
-
-            }
+             }
         }
-
-        //write condition to enter the trade  
-
-
-        //nifty end
-
-        //niftyyyyyy
-        let niftylen = nextProps.tickComboNifty.length - 1;
-
-        if ((this.props.tickComboNifty) != undefined) {
-
-            if ((nextProps.tickComboNifty).length >= 1) {
-
-                if (nextProps.tickComboNifty[niftylen].pivot != undefined) {
-                    //nifty
-                    if (this.state.pivotpointNifty != nextProps.tickComboNifty[niftylen].pivot) {
-                        this.setState({
-                            pivotpointNifty: nextProps.tickComboNifty[niftylen].pivot
-                        });
-                        let datainputnifty = {
-                            x: countnifty,
-                            y: nextProps.tickComboNifty[niftylen].pivot,
-                            dir: nextProps.tickComboNifty[niftylen].dir
-                        };
-                        this.props.pivotDataNifty(datainputnifty);
-                        countnifty = countnifty + 1;
-                    }
-                }
-            }
-        }
+}
 
 
-        if ((this.props.trendDataNifty) != undefined && this.props.trendDataNifty.length > 0) {
-
-            var trenlen = this.props.trendDataNifty.length - 1;
-
-            if (trenlen > 1) {
-
-                //if(this.props.trendDataNifty[trenlen].TimeToEnter  != undefined && this.props.trendDataNifty[trenlen].TradeStarted != undefined){
-
-                if (this.props.trendDataNifty[trenlen].TradeStarted == "upsell" && this.state.niftyshorttrade == false) {
-                    alert('down sell start karo');
-                    this.setState({
-                        niftyshorttrade: true
-                    });
-                    this.startTrade('NIFTY18AUGFUT', 'MCX', 'SELL');
-                }
-
-                //write condition to enter the trade
-                if (this.props.trendDataNifty[trenlen].TradeStarted == "downbuy" && this.state.niftylongtrade == false) {
-                    alert('down buy start karo');
-                    this.setState({
-                        niftylongtrade: true
-                    });
-                    this.startTrade('NIFTY18AUGFUT', 'MCX', 'BUY');
-                }
-
-
-
-            }
-
-        }
-
-
-
-
-        //////////
-
-       
-
-       /* if ((this.props.trendDataNickle) != undefined && this.props.trendDataNickle.length > 0) {
-
-            var trenlen = this.props.trendDataNickle.length - 1;
-            //debugger;
-
-            if (trenlen > 1) {
-                //write condition to enter the trade
-
-                if (this.props.trendDataNickle[trenlen].TradeStarted == "upsell" && webSocketClicked === true) {
-                    //debugger;
-                    alert('up sell nickle');
-                    this.startTrade('NICKELM18OCTFUT', 'MCX', 'SELL');
-
-                }
-
-
-                if (this.props.trendDataNickle[trenlen].TradeStarted == "downbuy" && webSocketClicked === true) {
-                    // debugger;
-                    alert('down buy NICKLE');
-                    this.startTrade('NICKELM18OCTFUT', 'MCX', 'BUY');
-
-                }
-
-
-                // if(this.props.trendDataNickle[trenlen].TimeToEnter != undefined && this.props.trendDataNickle[trenlen].TradeStarted != undefined ){
-                if (this.props.trendDataNickle[trenlen].TradeStarted == "upsell" && this.state.nickleshorttrade == false && webSocketClicked === true) {
-                    alert('down sell start karo');
-                    this.setState({
-                        nickleshorttrade: true
-                    });
-                    this.startTrade('NICKELM18OCTFUT', 'MCX-FUT', "SELL");
-                }
-
-                //write condition to enter the trade
-                if (this.props.trendDataNickle[trenlen].TradeStarted == "downbuy" && this.state.nicklelongtrade == false && webSocketClicked === true) {
-                    alert('down buy start karo');
-                    this.setState({
-                        nicklelongtrade: true
-                    });
-                    this.startTrade('NICKELM18OCTFUT', 'MCX-FUT', 'BUY');
-                }
-
-
-
-            }
-
-        }*/
-    }
 
     startTrade(data, exchange, type, price, stop, target) {
 
@@ -1554,8 +1164,7 @@ export class LoginNav extends Component {
 
         this.connect = function() {
 
-           // alert(access_token_const);
-            alert('lets start');
+            alert(access_token_const);
 
 
             // debugger;
@@ -1575,14 +1184,13 @@ export class LoginNav extends Component {
             var ws = new WebSocket(`${WSS_ROOT_URL}${access_token_const}`);
             //alert(accessdata);
 
-            ws.onclose = function() {
+             ws.onclose = function() {
                       setTimeout(function() {
                               self.connect();
                       }, 1000);
             } 
 
             ws.onopen = function(event) {
-
                 var message = {
                     "a": "subscribe",
                     "v": [54056967]
@@ -1742,6 +1350,10 @@ export class LoginNav extends Component {
                 var stop = 0;
                 var target = 0;
 
+                pivotTickAdd = pivotTickAdd+1;
+
+
+
             crudetickopen = crudearr[0];
             crudetickhigh = _.maxBy(crudearr);
             crudeticklow = _.minBy(crudearr);
@@ -1758,45 +1370,51 @@ export class LoginNav extends Component {
             crudetickLength = Math.abs(crudetickhigh - crudeticklow);
 
 
-
-             if(crudeBigTradePrice !== 0 &&  crudeBigTradeDirection !== '' && crudeTradeStatus === "not started"){
+                   if(crudeBigTradePrice !== 0 &&  crudeBigTradeDirection !== '' && crudeTradeStatus === "not started"){
                                
                                if (crudeticklow < crudeBigTradePrice && crudeBigTradePrice < crudetickhigh && crudeBigTradeDirection === "short") {
-                                        
+                                        var priceDiff = Math.abs(crudeBigTradePrice-crudeTradePrice);
+                                        if(priceDiff < bigPermissiblePriceDiff){ 
                                          crudeTradePrice = crudetickclose;
                                          crudeStop = crudetickclose+crudeBigDayStop;
                                          crudeTarget = crudetickclose-crudeBigDayTarget;
                                          crudeshorttrade = true;
+                                         var priceDiff = Math.abs(crudeBigTradePrice-crudeTradePrice);
                                          alert(' big  sell at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                         d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
                                          crudeTradeStatus = "sell started";
+                                     }
                                         
                                }
 
 
                                 if (crudeticklow < crudeBigTradePrice && crudeBigTradePrice < crudetickhigh && crudeBigTradeDirection === "long") {
+                                        
+                                         var priceDiff = Math.abs(crudeBigTradePrice-crudeTradePrice);
+
+                                         if(priceDiff < bigPermissiblePriceDiff){
+                                               crudeTradePrice = crudetickclose;
+                                               crudeStop = crudetickclose-crudeBigDayStop;
+                                               crudeTarget = crudetickclose+crudeBigDayTarget;
+                                               crudelongtrade = true;
+                                               alert('big buy at' + crudeTradePrice);
+                                               d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                               crudeTradeStatus = "buy started";
+                                         }
                                          
-                                         crudeTradePrice = crudetickclose;
-                                         crudeStop = crudetickclose-crudeBigDayStop;
-                                         crudeTarget = crudetickclose+crudeBigDayTarget;
-                                         crudelongtrade = true;
-                                         alert('big buy at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
-                                         crudeTradeStatus = "buy started";
                                         
                                 }
 
 
                        }
 
-
-              if (crudelongtrade == true || crudeTradeStatus == "vigil" || crudeshorttrade == true && (crudeStop !== 0 && crudeTarget !== 0)) {
+                if (crudelongtrade == true || crudeTradeStatus == "vigil" || crudeshorttrade == true && (crudeStop !== 0 && crudeTarget !== 0)) {
                    // debugger;
                     startDetecting = true;
                     stop = crudeStop;
                     target = crudeTarget;
 
-                    if (crudeTradeStatus == "vigil") {
+                    if (crudeTradeStatus == "vigil" && crudeTradeManagement != "trailing") {
                        
                         var diff = Math.abs(crudetickclose - crudePivot);
                          
@@ -1812,13 +1430,39 @@ export class LoginNav extends Component {
                                   stop = crudeTradePrice + crudeMaxEntryThreshold;
                                 }
                                 
-                                //if(crudetickType === "red"){
-                                         alert('vigil sell at' + crudeTradePrice);
-                                         d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
-                                         crudeshorttrade = true;
-                                         crudeTradeStatus = "sell started";
+                              //  if(crudetickType === "red"){
+                                       // target =  crudeTradePrice -8;
 
-                               // }
+
+                                        let targetDiff = Math.abs(crudeTarget-crudeTradePrice);
+
+                                        if(targetDiff < crudeTrailManagementValue){
+                                          crudeTradeManagement = "trailing";
+                                          crudeTarget = crudeTradePrice - trailBigTarget;
+                                          safeTrailMimimumTarget = crudeTradePrice-trailMimimumTarget;
+                                        }
+
+  
+                                         if(crudeTradePrice <= sidewaysTop ){
+
+                                                      if(Math.abs(sidewaysTop-crudeTradePrice) < 5){
+                                                                 alert('vigil sell at' + crudeTradePrice);
+                                                                 d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                                                 crudeshorttrade = true;
+                                                                 crudeTradeStatus = "sell started";
+
+                                                      }
+                                            }
+                                            else{
+                                                    alert('vigil sell at' + crudeTradePrice);
+                                                    d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+                                                    crudeshorttrade = true;
+                                                    crudeTradeStatus = "sell started";
+
+                                            }
+                                           
+
+                              //  }
 
                                 
                             } else {
@@ -1829,23 +1473,175 @@ export class LoginNav extends Component {
                                   stop = crudeTradePrice-crudeMaxEntryThreshold;
                                 }
 
-                               // if(crudetickType === "green"){
-                                        alert('vigil buy crude  at' + crudeTradePrice);
-                                        d.startTrade('CRUDEOIL18NOVFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
-                                        crudelongtrade = true;
-                                        crudeTradeStatus = "buy started";
+                                        var targetDiff = Math.abs(crudeTarget-crudeTradePrice);
 
-                               // }
+                                        if(targetDiff < crudeTrailManagementValue){
+                                          crudeTradeManagement = "trailing";
+                                          crudeTarget = crudeTradePrice+trailBigTarget;
+                                          safeTrailMimimumTarget = crudeTradePrice+trailMimimumTarget;
+                                        }
+
+                                        if(crudeTradePrice >= sidewaysTop ){
+                                                 if(Math.abs(sidewaysTop-crudeTradePrice) < 5){
+                                                     alert('vigil buy crude  at' + crudeTradePrice);
+                                                     d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                                     crudelongtrade = true;
+                                                     crudeTradeStatus = "buy started";
+                                                 }
+                                          }
+                                          else{
+                                                  alert('vigil buy crude  at' + crudeTradePrice);
+                                                  d.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudeTradePrice, stop, target);
+                                                  crudelongtrade = true;
+                                                  crudeTradeStatus = "buy started";
+                                          }
                                 
-                            }
+                             }
 
                         }
 
                     }
 
 
-                    if (crudeticklow < stop && stop < crudetickhigh && crudeTradeStatus !== "vigil") {
-                       //  debugger;
+                    if (crudeTradeManagement === "trailing") {
+
+
+                        if(crudeTradeStatus === "sell started" && trailingStatus === false){
+
+                                if(crudeticklow <= sidewaysBottom && sidewaysBottom <= crudetickhigh ){
+                                   // crudeStop = crudeTradePrice-2;
+                                    crudeStop = crudeTradePrice+crudeTrailStopPermitted;
+                                    alert('time to move the stop at BE of sell trade at ' + crudeStop);
+                                    trailingStatus = "stop moved to BE";
+                                }
+                                else  if(crudeticklow <= safeTrailMimimumTarget && safeTrailMimimumTarget <= crudetickhigh ){
+                                    //exit immediately
+                                    alert('exit IMMEDIATELY at'+ safeTrailMimimumTarget );
+                                    trailingStatus = "exit immediately ";
+                                    crudeStop = safeTrailMimimumTarget;
+                                }
+
+                        }
+                         else if(crudeTradeStatus === "buy started" && trailingStatus === false){
+
+                                if(crudeticklow <= sidewaysTop && sidewaysTop <= crudetickhigh ){
+                                   // alert('sidewaysTop at ' + sidewaysTop);
+                                  //  crudeStop = crudeTradePrice+2;
+                                    crudeStop = crudeTradePrice-crudeTrailStopPermitted;
+                                    alert('time to move the stop at BE of buy trade at' + crudeStop);
+                                    trailingStatus = "stop moved to BE";
+                                }
+                                else  if(crudeticklow <= safeTrailMimimumTarget && safeTrailMimimumTarget <= crudetickhigh ){
+                                    //exit immediately
+                                    alert('exit IMMEDIATELY at'+ safeTrailMimimumTarget );
+                                    trailingStatus = "exit immediately ";
+                                    crudeStop = safeTrailMimimumTarget;
+                                }
+                        }
+
+                    }
+
+
+                    if (crudeTradeManagement == "trailing" && crudeTradeStatus == "sell started") {
+
+                      
+                         let bigProfitPrice = crudeTradePrice-trailBigTarget;
+                        // alert('crudeTarget is' + crudeTarget);
+                         if(crudeticklow <= crudeTarget && crudeTarget < crudetickhigh){
+                                crudeTradeStatus = "profit";
+                                alert('trailBigTarget profit happened of' + trailBigTarget);
+                                crudelongtrade = false;
+                                crudeshorttrade = false;
+                                crudeTarget = 0;
+                                crudeStop = 0;
+                                crudeTradePrice = 0;
+                                crudePivot = 0;
+                                crudeNetProfit = 60;
+                                crudeTradeStatus = "start again";
+                                crudeTradeManagement = false;
+                                crudeTradeManagement = "trailing end";
+                         }
+
+                          else if (crudeticklow < stop && stop < crudetickhigh){
+                                   // alert('else ashu');
+                                   crudeTradeStatus = "loss";
+                                   var losspoint = crudeTradePrice - crudeStop;
+                                   alert('net hapeended' + losspoint);
+                                   crudelongtrade = false;
+                                   crudeshorttrade = false;
+                                   crudeTarget = 0;
+                                   crudeStop = 0;
+                                   crudeTradePrice = 0;
+                                   crudePivot = 0;
+                                   crudeNetProfit = losspoint;
+                                   crudeTradeStatus = "start again";
+                                   crudeTradeManagement = "trailing end";
+                         }
+                        
+                    }
+
+                     if (crudeTradeManagement == "trailing" && crudeTradeStatus == "buy started") {
+
+                         let bigProfitPrice = crudeTradePrice+trailBigTarget;
+                         if(crudeticklow <= crudeTarget && crudeTarget < crudetickhigh){
+                                crudeTradeStatus = "profit";
+                                alert('trail BigTarget profit happened of' + trailBigTarget);
+                                crudelongtrade = false;
+                                crudeshorttrade = false;
+                                crudeTarget = 0;
+                                crudeStop = 0;
+                                crudeTradePrice = 0;
+                                crudePivot = 0;
+                                //crudeNetProfit = profitpoint;
+                                crudeTradeStatus = "start again";
+                                crudeTradeManagement = "trailing end";
+                         }
+                         else if (crudeticklow < stop && stop < crudetickhigh){
+                                  // debugger;
+                                   crudeTradeStatus = "loss";
+                                   var losspoint =  crudeStop - crudeTradePrice;
+                                   alert('net hapeended' + losspoint);
+                                 
+                                      if(crudelongtrade == true && crudeLMManagement == false){
+                                       crudelongtrade = false;
+                                       crudeLMManagement = "short";
+                                       crudeTradePriceLM = stop;
+                                       alert('crude short trade after loss at price of ' + crudeTradePriceLM);
+                                       crudeStopLM = stop+minimumStopLM;
+                                       crudeTargetLM = stop-minTargetLM;
+
+                                       debugger;
+                                       
+                                       //crudeTargetLM =0;
+                                    }
+                                    else if(crudeshorttrade == true && crudeLMManagement == false){
+                                       crudeshorttrade = false;
+                                       crudeLMManagement = "long";
+                                       crudeTradePriceLM = stop;
+                                       alert('crude long trade after loss at price of ' + crudeTradePriceLM);
+                                       crudeStopLM = stop-minimumStopLM;
+                                       crudeTargetLM = stop+minTargetLM;
+                                       //crudeTargetLM
+                                    }
+
+
+
+                                   crudeTarget = 0;
+                                   crudeStop = 0;
+                                   crudeTradePrice = 0;
+                                   crudePivot = 0;
+                                   crudeNetProfit = losspoint;
+                                   crudeTradeStatus = "start again";
+                                   crudeTradeManagement = "trailing end";
+                         }
+                        
+                    }
+
+
+
+
+                    if (crudeticklow < stop && stop < crudetickhigh && crudeTradeStatus !== "vigil" && crudeTradeManagement != "trailing" && crudeTradeManagement != "trailing end") {
+                        //debugger;
                         crudeTradeStatus = "loss";
                         var losspoint = Math.abs(crudeTradePrice - stop);
                         alert('loss hapeended' + losspoint);
@@ -1857,10 +1653,12 @@ export class LoginNav extends Component {
                         crudePivot = 0;
                         crudeNetProfit = losspoint;
                         crudeTradeStatus = "start again";
-                    } else if (crudeticklow < target && target < crudetickhigh && crudeTradeStatus !== "vigil") {
+                    } else if (crudeticklow < target && target < crudetickhigh && crudeTradeStatus !== "vigil" && crudeTradeManagement != "trailing" && crudeTradeManagement != "trailing end") {
                       //   debugger;
                         crudeTradeStatus = "profit";
+                      //  debugger;
                         var profitpoint = Math.abs(crudeTradePrice - target);
+                        //alert('bonu');
                         alert('profit happened of' + profitpoint);
                         crudelongtrade = false;
                         crudeshorttrade = false;
@@ -1874,26 +1672,36 @@ export class LoginNav extends Component {
 
                 }
 
-            crudetickarray = {
-                "open": crudetickopen,
-                "low": crudeticklow,
-                "high": crudetickhigh,
-                "close": crudetickclose,
-                "tickType": crudetickType,
-                'tickLength': crudetickLength,
-                "detecting": startDetecting,
-                "tradeStatus" : crudeTradeStatus,
-                "stop": stop,
-                "target": target,
-                "shift": shift,
-            };
-            //debugger;
-            d.props.addTickData(crudetickarray);
 
+                var crudetickarray = {
+                    "stop": stop,
+                    "target": target,
+                    "shift": shift,
+                    "open": crudetickopen,
+                    "low": crudeticklow,
+                    "high": crudetickhigh,
+                    "close": crudetickclose,
+                    "tickType": crudetickType,
+                    'tickLength': crudetickLength,
+                    'date': '',
+                    "detecting": startDetecting,
+                    "tradeStatus" : crudeTradeStatus,
+                };
 
-            first = 0;
-            crudearr = [];
+                d.props.addTickData(crudetickarray);
 
+                if(pivotTickAdd==1){
+
+                        let datainput = {
+                            x: 0,
+                            y: crudetickhigh
+                        };
+
+                        d.props.pivotData(datainput);
+                }
+
+               first = 0;
+               crudearr = [];
 
         };
 

@@ -9,10 +9,20 @@ export function pivotDataTest(data){
     })
 } 
 
+
+
 export function removePlotdatatest(data){
  // alert(JSON.stringify(data));
     return ({
-     type :'REMOVE_PLOT_PIVOT_DATA_TEST',
+     type :'REMOVE_PLOT_PIVOT_DATA',
+     payload : '',
+    })
+} 
+
+
+export function removeTickData(data){
+    return ({
+     type :'REMOVE_TICK_DATA',
      payload : '',
     })
 } 

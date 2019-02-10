@@ -24,10 +24,11 @@
                 <div className="App">
                     <h1>{this.props.title}</h1>
                     <LineChart 
-                       id= {this.props.title}
+                        id= {this.props.title}
                         width={400}
                         height={400}
                         data={data}
+                        fillColor={"red"}
                     />
                     
                 </div>				

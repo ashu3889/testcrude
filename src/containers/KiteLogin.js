@@ -17,6 +17,9 @@
 		export  class KiteLogin extends Component{
 
 		  constructor(props){
+
+
+        
               super(props);
                this.state ={
                 token : '',  

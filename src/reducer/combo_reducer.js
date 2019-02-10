@@ -1,33 +1,10 @@
 import {combineReducers, createStore,applyMiddleware} from 'redux';
 
-import cards from './card_reducer.js';
-
-import cardDeckReducers from './card_reducer.js';
-
-import drawnCardReducer from './drawn_cards_reducers.js';
-
-import accessReducer from './access.js';
 
 import tickData from './tickdata.js';
-
-import tickDataTCS from './tickdata_tcs.js';
-import plDataTCS from './plotdata_tcs.js';
-
 import plData from './plotdata.js';
 
-import tickDataNifty from './tickdata_nifty.js';
 
-import plDataNifty from './plotdata_nifty.js';
-
-import tickDataJD from './tickdata_justdial.js';
-
-import tickDataNickle from './tickdata_nickle.js';
-
-import plDataNickle from './plotdata_nickle.js';
-
-import tickDataTest from './tickdata_test.js';
-
-import plDataTest from './plotdata_test.js';
 
 import reduxThunk from 'redux-thunk';
 
@@ -35,18 +12,9 @@ import reduxThunk from 'redux-thunk';
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 const rootreducer = combineReducers({
-access : accessReducer,
 tickData :tickData,
 plData:plData,
-tickDataTest :tickDataTest,
-plDataTest:plDataTest,
-plDataNifty:plDataNifty,
-tickDataNifty :tickDataNifty,
-plDataNickle: plDataNickle,
-tickDataNickle :tickDataNickle,
-tickDataJD: tickDataJD,
-tickDataTCS :tickDataTCS,
-plDataTCS:  plDataTCS,
+
 });
 
 const persistedstate = {
