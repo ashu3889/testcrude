@@ -1,7 +1,7 @@
     import React ,{Component} from 'react';   
     import { connect } from "react-redux";
     import {KiteTicker} from 'kiteconnect';
-    import {getAcessToken ,addTickData ,pivotData} from '../action/action.js';
+    import {addTickData ,pivotData} from '../action/action.js';
     import { withRouter } from "react-router-dom"; 
     import KitePlot from './plot.js'; 
     import LineApp from './lineplot.js';
@@ -793,5 +793,5 @@ sidewaysFormed(data){
        }
     };
 
-    export default withRouter(connect(mapStateToProps,{getAcessToken,addTickData,pivotData})(LoginNav));
+    export default withRouter(connect(mapStateToProps,{addTickData,pivotData})(LoginNav));
 

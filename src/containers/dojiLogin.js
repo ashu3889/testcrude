@@ -194,7 +194,7 @@ export class TestLoginNav extends Component {
 
         var ashutosh = this;
         var api_key = "3iciz5hhzaiitjkj",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -2046,7 +2046,7 @@ var data = {
         debugger;
         //code to set and get the data
         var api_key = "3iciz5hhzaiitjkj",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -2100,7 +2100,7 @@ var data = {
 
         //code to set and get the data
         var api_key = "3iciz5hhzaiitjkj",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -2134,7 +2134,7 @@ var data = {
 
         //code to set and get the data
         var api_key = "3iciz5hhzaiitjkj",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -2857,7 +2857,7 @@ var data = {
 
         //  alert('called');
         //alert(this.props.access);KiteTicker("your_api_key", "your_access_token")
-        let SIGNIN_ROOT_URL = 'token g7ctyvle0x2ufyzm:';
+        let SIGNIN_ROOT_URL = 'token vlu1o53tt1makdu3:';
         let accessdata = this.props.access;
 
         var headers = {

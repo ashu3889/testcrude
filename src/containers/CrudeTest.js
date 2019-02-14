@@ -1,7 +1,7 @@
     import React ,{Component} from 'react';   
     import { connect } from "react-redux";
     import {KiteTicker} from 'kiteconnect';
-    import {getAcessToken ,addTickData ,pivotData} from '../action/action.js';
+    import {addTickData ,pivotData} from '../action/action.js';
     import { withRouter } from "react-router-dom"; 
     import KitePlot from './plot.js'; 
     import LineApp from './lineplot.js';
@@ -33,7 +33,7 @@
 
             startGeneratingServerSession(){ 
 
-            var api_key = "g7ctyvle0x2ufyzm",
+            var api_key = "vlu1o53tt1makdu3",
              secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
              request_token = this.state.token;
              let access_token = ''; 
@@ -110,7 +110,7 @@ componentWillReceiveProps(nextProps) {
    
 
 //code to set and get the data
-            var api_key = "g7ctyvle0x2ufyzm",
+            var api_key = "vlu1o53tt1makdu3",
              secret = "0ob46jtno6x3vqixhkmn5ok5qhp1eyax",
              request_token = this.state.token;
              let access_token = ''; 
@@ -422,7 +422,7 @@ sidewaysFormed(data){
        
       
      
-              let  WSS_ROOT_URL = 'wss://ws.kite.trade?api_key=g7ctyvle0x2ufyzm&access_token=';
+              let  WSS_ROOT_URL = 'wss://ws.kite.trade?api_key=vlu1o53tt1makdu3&access_token=';
              // let accessdata = this.props.access.access_token.access_token;
               var ws = new WebSocket(`${WSS_ROOT_URL}${access_token_const}`);
               //alert(accessdata);
@@ -726,7 +726,7 @@ sidewaysFormed(data){
 
              //  alert('called');
               //alert(this.props.access);KiteTicker("your_api_key", "your_access_token")
-              let  SIGNIN_ROOT_URL = 'token g7ctyvle0x2ufyzm:';
+              let  SIGNIN_ROOT_URL = 'token vlu1o53tt1makdu3:';
                 let accessdata = this.props.access;
 
               var headers = {
@@ -737,7 +737,7 @@ sidewaysFormed(data){
      
 
           var data = {
-                        'api_key': 'g7ctyvle0x2ufyzm',
+                        'api_key': 'vlu1o53tt1makdu3',
                         'access_token': this.props.access,
                 };
 
@@ -793,5 +793,5 @@ sidewaysFormed(data){
        }
     };
 
-    export default withRouter(connect(mapStateToProps,{getAcessToken,addTickData,pivotData})(LoginNav));
+    export default withRouter(connect(mapStateToProps,{addTickData,pivotData})(LoginNav));
 

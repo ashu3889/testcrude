@@ -154,8 +154,8 @@ export class LoginNav extends Component {
 
 
         var ashutosh = this;
-        var api_key = "g7ctyvle0x2ufyzm",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+        var api_key = "vlu1o53tt1makdu3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -1136,8 +1136,8 @@ export class LoginNav extends Component {
 
         debugger;
         //code to set and get the data
-        var api_key = "g7ctyvle0x2ufyzm",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+        var api_key = "vlu1o53tt1makdu3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -1190,8 +1190,8 @@ export class LoginNav extends Component {
     stopTrade(data, exchange, type, price) {
 
         //code to set and get the data
-        var api_key = "g7ctyvle0x2ufyzm",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+        var api_key = "vlu1o53tt1makdu3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -1224,8 +1224,8 @@ export class LoginNav extends Component {
     targetTrade(data, exchange, type, price) {
 
         //code to set and get the data
-        var api_key = "g7ctyvle0x2ufyzm",
-            secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+        var api_key = "vlu1o53tt1makdu3",
+            secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
             request_token = this.state.token;
         let access_token = '';
 
@@ -1421,7 +1421,7 @@ export class LoginNav extends Component {
 
 
             //  debugger;
-            let WSS_ROOT_URL = 'wss://ws.kite.trade?api_key=g7ctyvle0x2ufyzm&access_token=';
+            let WSS_ROOT_URL = 'wss://ws.kite.trade?api_key=vlu1o53tt1makdu3&access_token=';
             // let accessdata = this.props.access.access_token.access_token;
             var ws = new WebSocket(`${WSS_ROOT_URL}${access_token_const}`);
             //alert(accessdata);
@@ -1948,7 +1948,7 @@ export class LoginNav extends Component {
 
         //  alert('called');
         //alert(this.props.access);KiteTicker("your_api_key", "your_access_token")
-        let SIGNIN_ROOT_URL = 'token g7ctyvle0x2ufyzm:';
+        let SIGNIN_ROOT_URL = 'token vlu1o53tt1makdu3:';
         let accessdata = this.props.access;
 
         var headers = {
@@ -1959,7 +1959,7 @@ export class LoginNav extends Component {
 
 
         var data = {
-            'api_key': 'g7ctyvle0x2ufyzm',
+            'api_key': 'vlu1o53tt1makdu3',
             'access_token': this.props.access,
         };
 

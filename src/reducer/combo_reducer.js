@@ -5,6 +5,110 @@ import tickData from './tickdata.js';
 import plData from './plotdata.js';
 
 
+import tickDataCopper from './tickdata_copper.js';
+import plDataCopper from './plotdata_copper.js';
+
+import tickDatabanknifty from './tickdata_banknifty.js';
+import plDatabanknifty from './plotdata_banknifty.js';
+
+
+import tickDatabosch from './tickdata_bosch.js';
+import plDatabosch from './plotdata_bosch.js';
+
+
+import tickDatacadila from './tickdata_cadila.js';
+import plDatacadila  from './plotdata_cadila.js';
+
+
+import tickDatacipla from './tickdata_cipla.js';
+import plDatacipla from './plotdata_cipla.js';
+
+
+import tickDatacoal from './tickdata_coal.js';
+import plDatacoal from './plotdata_coal.js';
+
+
+import tickDataconcor from './tickdata_concor.js';
+import plDataconcor from './plotdata_concor.js';
+
+
+import tickDatacummsind from './tickdata_cummsind.js';
+import plDatacummsind from './plotdata_cummsind.js';
+
+
+import tickDatadabur from './tickdata_dabur.js';
+import plDatadabur from './plotdata_dabur.js';
+
+
+import tickDatadhfl from './tickdata_dhfl.js';
+import plDatadhfl from './plotdata_dhfl.js';
+
+
+import tickDataemami from './tickdata_emami.js';
+import plDataemami from './plotdata_emami.js';
+
+
+import tickDatagail from './tickdata_gail.js';
+import plDatagail from './plotdata_gail.js';
+
+
+import tickDatahavells from './tickdata_havells.js';
+import plDatahavells from './plotdata_havells.js';
+
+
+import tickDatahdfc from './tickdata_hdfc.js';
+import plDatahdfc from './plotdata_hdfc.js';
+
+
+import tickDatahindzinc from './tickdata_hindzinc.js';
+import plDatahindzinc from './plotdata_hindzinc.js';
+
+
+import tickDatainfratel from './tickdata_infratel.js';
+import plDatainfratel from './plotdata_infratel.js';
+
+
+import tickDatareddy from './tickdata_reddy.js';
+import plDatareddy from './plotdata_reddy.js';
+
+
+import tickDatareliance from './tickdata_reliance.js';
+import plDatareliance from './plotdata_reliance.js';
+
+
+import tickDatasbin from './tickdata_sbin.js';
+import plDatasbin from './plotdata_sbin.js';
+
+
+import tickDataseimens from './tickdata_seimens.js';
+import plDataseimens  from './plotdata_seimens.js';
+
+
+import tickDatatcs from './tickdata_tcs.js';
+import plDatatcs from './plotdata_tcs.js';
+
+
+import tickDataunilever from './tickdata_unilever.js';
+import plDataunilever from './plotdata_unilever.js';
+
+
+/*import tickDataCopper from './tickdata_copper.js';
+import plDataCopper from './plotdata_copper.js';
+
+
+import tickDataCopper from './tickdata_copper.js';
+import plDataCopper from './plotdata_copper.js';
+
+
+import tickDataCopper from './tickdata_copper.js';
+import plDataCopper from './plotdata_copper.js';
+
+
+import tickDataCopper from './tickdata_copper.js';
+import plDataCopper from './plotdata_copper.js';*/
+
+
+
 
 import reduxThunk from 'redux-thunk';
 
@@ -14,6 +118,74 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const rootreducer = combineReducers({
 tickData :tickData,
 plData:plData,
+
+tickDataCopper :tickDataCopper,
+plDataCopper:plDataCopper,
+
+tickDataunilever :tickDataunilever,
+plDataunilever:plDataunilever,
+
+tickDatatcs :tickDatatcs,
+plDatatcs:plDatatcs,
+
+
+tickDataseimens :tickDataseimens,
+plDataseimens:plDataseimens,
+
+
+tickDatasbin :tickDatasbin,
+plDatasbin:plDatasbin,
+
+tickDatareliance :tickDatareliance,
+plDatareliance:plDatareliance,
+
+tickDatareddy :tickDatareddy,
+plDatareddy:plDatareddy,
+
+tickDatainfratel :tickDatainfratel,
+plDatainfratel:plDatainfratel,
+
+tickDatahindzinc :tickDatahindzinc,
+plDatahindzinc:plDatahindzinc,
+
+tickDatahdfc :tickDatahdfc,
+plDatahdfc:plDatahdfc,
+
+tickDatahavells :tickDatahavells,
+plDatahavells:plDatahavells,
+
+tickDatagail :tickDatagail,
+plDatagail:plDatagail,
+
+tickDataemami :tickDataemami,
+plDataemami:plDataemami,
+
+tickDatadhfl :tickDatadhfl,
+plDatadhfl:plDatadhfl,
+
+tickDatadabur :tickDatadabur,
+plDatadabur:plDatadabur,
+
+tickDatacummsind :tickDatacummsind,
+plDatacummsind:plDatacummsind,
+
+tickDataconcor :tickDataconcor,
+plDataconcor:plDataconcor,
+
+tickDatacoal :tickDatacoal,
+plDatacoal:plDatacoal,
+
+tickDatacipla :tickDatacipla,
+plDatacipla:plDatacipla,
+
+tickDatacadila :tickDatacadila,
+plDatacadila:plDatacadila,
+
+tickDatabosch :tickDatabosch,
+plDatabosch:plDatabosch,
+
+tickDatabanknifty :tickDatabanknifty,
+plDatabanknifty:plDatabanknifty,
 
 });
 

@@ -1,82 +1,9 @@
 import axios from 'axios';
 
-//getAcessToken  ADD_DATA_SCOPE
-export function pivotDataTest(data){
- // alert(JSON.stringify(data));
-    return ({
-     type :'PLOT_PIVOT_DATA_TEST',
-     payload : data,
-    })
-} 
-
-
-
-export function removePlotdatatest(data){
- // alert(JSON.stringify(data));
-    return ({
-     type :'REMOVE_PLOT_PIVOT_DATA',
-     payload : '',
-    })
-} 
-
-
-export function removeTickData(data){
-    return ({
-     type :'REMOVE_TICK_DATA',
-     payload : '',
-    })
-} 
-
-
-
-
-export function removeTickDataTest(data){
- // alert(JSON.stringify(data));
-   return ({
-     type :'REMOVE_DATA_SCOPE_TEST',
-     payload : ''
-    })
-}
-
-
-export function addTickDataTest(data){
- // alert(JSON.stringify(data));
-   return ({
-     type :'ADD_DATA_SCOPE_TEST',
-     payload : data
-    })
-}
-
 export function pivotData(data){
-
-  //debugger;
- // alert(JSON.stringify(data));
     return ({
      type :'PLOT_PIVOT_DATA',
      payload : data,
-    })
-}
-
-export function pivotDataTCS(data){
-    return ({
-     type :'PLOT_PIVOT_DATA_TCS',
-     payload : data,
-    })
-}
-
-export function pivotJDData(data){
- // alert(JSON.stringify(data));
-    return ({
-     type :'PLOT_PIVOT_DATA_JD',
-     payload : data,
-    })
-}
-
-export function addJDTickData(data){
-  //alert(JSON.stringify(data));
-   return ({
-     type :'ADD_DATA_SCOPE_JD',
-     payload : data
     })
 }
 
@@ -88,177 +15,534 @@ export function addTickData(data){
     })
 }
 
-export function addTickDataTCS(data){
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
   //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatabanknifty(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_BANKNIFTY',
+     payload : data,
+    })
+}
+
+export function addTickDatabanknifty(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_BANKNIFTY',
+     payload : data
+    })
+}
+
+export function pivotDatabosch(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_BOSCH',
+     payload : data,
+    })
+}
+
+export function addTickDatabosch(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_BOSCH',
+     payload : data
+    })
+}
 
 
+export function addTickDatacadila(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_CADILA',
+     payload : data
+    })
+}
+export function pivotDatacadila(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_CADILA',
+     payload : data,
+    })
+}
+
+export function addTickDatacipla(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_CIPLA',
+     payload : data
+    })
+}
+
+export function pivotDatacipla(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_CIPLA',
+     payload : data,
+    })
+}
+
+export function addTickDatacoal(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COAL',
+     payload : data
+    })
+}
+
+export function pivotDatacoal(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COAL',
+     payload : data,
+    })
+}
+
+export function addTickDataconcor(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_CONCOR',
+     payload : data
+    })
+}
+
+export function pivotDataconcor(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_CONCOR',
+     payload : data,
+    })
+}
+
+export function addTickDatacummsind(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_CUMMSIND',
+     payload : data
+    })
+}
+export function pivotDatacummsind(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_CUMMSIND',
+     payload : data,
+    })
+}
+
+export function addTickDatadabur(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_DABUR',
+     payload : data
+    })
+}
+
+export function pivotDatadabur(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_DABUR',
+     payload : data,
+    })
+}
+
+export function addTickDatadhfl(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_DHFL',
+     payload : data
+    })
+}
+
+export function pivotDatadhfl(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_DHFL',
+     payload : data,
+    })
+}
+
+export function addTickDataemami(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_EMAMI',
+     payload : data
+    })
+}
+
+export function pivotDataemami(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_EMAMI',
+     payload : data,
+    })
+}
+
+export function addTickDatagail(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_GAIL',
+     payload : data
+    })
+}
+export function pivotDatagail(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_GAIL',
+     payload : data,
+    })
+}
+
+export function addTickDatahavells(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_HAVELLS',
+     payload : data
+    })
+}
+
+export function pivotDatahavells(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HAVELLS',
+     payload : data,
+    })
+}
+
+export function addTickDatahdfc(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_HDFC',
+     payload : data
+    })
+}
+
+export function pivotDatahdfc(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HDFC',
+     payload : data,
+    })
+}
+
+export function addTickDatahindzinc(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_HINDZINC',
+     payload : data
+    })
+}
+
+export function pivotDatahindzinc(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HINDZINC',
+     payload : data,
+    })
+}
+
+export function addTickDatainfratel(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_INFRATEL',
+     payload : data
+    })
+}
+export function pivotDatainfratel(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_INFRATEL',
+     payload : data,
+    })
+}
+
+export function addTickDatareddy(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_REDDY',
+     payload : data
+    })
+}
+
+export function pivotDatareddy(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_REDDY',
+     payload : data,
+    })
+}
+
+export function addTickDatareliance(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_RELIANCE',
+     payload : data
+    })
+}
+
+export function pivotDatareliance(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_RELIANCE',
+     payload : data,
+    })
+}
+
+export function addTickDatasbin(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_SBIN',
+     payload : data
+    })
+}
+
+export function pivotDatasbin(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_SBIN',
+     payload : data,
+    })
+}
+
+export function addTickDataseimens(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_SEIMENS',
+     payload : data
+    })
+}
+export function pivotDataseimens(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_SEIMENS',
+     payload : data,
+    })
+}
+
+export function addTickDatatcs(data){
+  //alert(JSON.stringify(data));
    return ({
      type :'ADD_DATA_SCOPE_TCS',
      payload : data
     })
 }
 
-export function addTickDataNifty(data){
-  //alert(JSON.stringify(data));
-   return ({
-     type :'ADD_DATA_SCOPE_NIFTY',
-     payload : data
-    })
-}
-
-export function addTickDataNickle(data){
-  //alert(JSON.stringify(data));
-   return ({
-     type :'ADD_DATA_SCOPE_NICKLE',
-     payload : data
-    })
-}
-
-export function pivotDataNickle(data){
- // alert(JSON.stringify(data));
+export function pivotDatatcs(data){
     return ({
-     type :'PLOT_PIVOT_DATA_NICKLE',
+     type :'PLOT_PIVOT_DATA_TCS',
      payload : data,
     })
 }
 
-export function pivotDataNifty(data){
- // alert(JSON.stringify(data));
+export function addTickDataunilever(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_UNILEVER',
+     payload : data
+    })
+}
+
+export function pivotDataunilever(data){
     return ({
-     type :'PLOT_PIVOT_DATA_NIFTY',
+     type :'PLOT_PIVOT_DATA_UNILEVER',
      payload : data,
     })
 }
 
-
-
-export function passingAcessToken(api_key, secret, request_token,access_token){  
-
-alert('passing access token');
-
-  return function(dispatch) {
-    // Submit email/password to the server 
-    //{"username":"admin", "password": "adminpass"} 
-    let postData = {
-      "api_key": api_key,
-     "secret": secret,
-     "request_token" : request_token,
-     "access_token" : access_token,
-    };
-    
-  
-    
-     axios({
-       method: 'post',
-       url: 'http://localhost:4000/kite/login',
-       data: postData,
-       config: { headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }}    
-      })
-      .then(response => {
-      //debugger;
-     alert(JSON.stringify(response));
-
-    // dispatch({type: 'ACCESS',payload: response.data});
-
-      })
-      .catch((error) => {
-        console.log("Error Response"+error);
-       
-      });
-  }
-}
-
-
-
-
- export function getAcessToken(api_key, secret, request_token){  
-
-
-  return function(dispatch) {
-    // Submit email/password to the server 
-    //{"username":"admin", "password": "adminpass"} 
-    let postData = {
-      "api_key": api_key,
-     "secret": secret,
-     "request_token" : request_token,
-    };
-    
-    
-    
-     axios({
-       method: 'post',
-       url: 'http://localhost:4000/kite/login',
-       data: postData,
-       config: { headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        }}    
-      })
-      .then(response => {
-      //debugger;
-    // alert(JSON.stringify(response));
-
-     dispatch({type: 'ACCESS',payload: response.data});
-
-      })
-      .catch((error) => {
-        console.log("Error Response"+error);
-        // If request is bad...
-        // - Show an error to the user
-        // dispatch({type: 'UNAUTH_USER',payload: 'User not authenticated'}); 
-      });
-  }
-}
-
-
-
- 
-
-export function shufflecards(data){
+/*export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
    return ({
-     type :'Shuffle',
+     type :'ADD_DATA_SCOPE_COPPER',
      payload : data
     })
 }
 
-export function sortcards(data){
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
    return ({
-     type :'Sortcards',
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
      payload : data
     })
 }
 
-export function deletecards(count){
+export function pivotDatacopper(data){
     return ({
-      type :'DeleteCard',
-      payload : count
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
     })
 }
 
-export function addDrawnCards(count){	
-     return ({
-       type :'AddDrawnCard',
-       payload : count
-   })
-}
-
-
-export function sortDrawnCards(count){	
-    return ({
-      type :'SortDrawnCard',
-      payload : count
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
     })
 }
 
-export function shuffleDrawnCard(count){	
+export function pivotDatacopper(data){
     return ({
-      type :'ShufflerawnCard',
-      payload : count
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
     })
 }
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}
+
+export function pivotDatacopper(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_COPPER',
+     payload : data,
+    })
+}
+
+export function addTickDatacopper(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_COPPER',
+     payload : data
+    })
+}*/
+
+
+
 
 
 

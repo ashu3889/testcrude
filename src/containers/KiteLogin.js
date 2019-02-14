@@ -1,7 +1,7 @@
 	import React ,{Component} from 'react';		
 		import { connect } from "react-redux";
     import {KiteTicker} from 'kiteconnect';
-    import {getAcessToken ,addTickDataTest, pivotDataTest,removeTickDataTest, removePlotdatatest} from '../action/action.js';
+    import {} from '../action/action.js';
     import { withRouter } from "react-router-dom"; 
     import KitePlot from './plot.js'; 
 
@@ -68,8 +68,8 @@
                         // alert(this.props.trendData[strlen].x);
                            //this.placeorder();
            //code to set and get the data
-                var api_key = "g7ctyvle0x2ufyzm",
-             secret = "r6zihyrvlsw7hd35rzova7p7lg0fe5y3",
+                var api_key = "vlu1o53tt1makdu3",
+             secret = "i2flrvtqc784yabsdhl8obbmi1dmoxed",
              request_token = this.state.token;
              let access_token = ''; 
 
@@ -230,7 +230,7 @@
 
               <div>
 
-             <a href="https://kite.trade/connect/login?v=3&api_key=g7ctyvle0x2ufyzm" target="_blank"> Login redirect</a>
+             <a href="https://kite.trade/connect/login?v=3&api_key=vlu1o53tt1makdu3" target="_blank"> Login redirect</a>
 
               </div>
             
@@ -282,6 +282,6 @@
     };
 
 
-     export default connect(mapStateToProps,{addTickDataTest,pivotDataTest,removeTickDataTest,removePlotdatatest})(KiteLogin);
+     export default connect(mapStateToProps,{})(KiteLogin);
 
 
