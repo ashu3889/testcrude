@@ -341,212 +341,372 @@ export function pivotDataunilever(data){
     })
 }
 
-/*export function addTickDatacopper(data){
+
+
+
+export function addTickDatantpc(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_NTPC',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDatantpc(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_NTPC',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDatabpcl(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_BPCL',
      payload : data
     })
 }
-export function pivotDatacopper(data){
+
+export function pivotDatabpcl(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_BPCL',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDatapowergrid(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_POWERGRID',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDatapowergrid(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_POWERGRID',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDataongc(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_ONGC',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDataongc(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_ONGC',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDatalarsen(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_LARSEN',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDatalarsen(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_LARSEN',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+
+export function addTickDatatatamotors(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_TATAMOTORS',
      payload : data
     })
 }
-export function pivotDatacopper(data){
+
+export function pivotDatatatamotors(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_TATAMOTORS',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDataitc(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_ITC',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDataitc(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_ITC',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDataadaniports(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_ADANIPORTS',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDataadaniports(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_ADANIPORTS',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+
+export function addTickDataasianpaints(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_ASIANPAINT',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDataasianpaints(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_ASIANPAINT',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDataupl(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_UPL',
      payload : data
     })
 }
-export function pivotDatacopper(data){
+
+export function pivotDataupl(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_UPL',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDatazeel(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_ZEEL',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDatazeel(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_ZEEL',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+
+export function addTickDatagrasim(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_GRASIM',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDatagrasim(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_GRASIM',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDatabajajfinserv(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_BAJAJFINSV',
      payload : data
     })
 }
 
-export function pivotDatacopper(data){
+export function pivotDatabajajfinserv(data){
     return ({
-     type :'PLOT_PIVOT_DATA_COPPER',
+     type :'PLOT_PIVOT_DATA_BAJAJFINSV',
      payload : data,
     })
 }
 
-export function addTickDatacopper(data){
+export function addTickDatahindalco(data){
   //alert(JSON.stringify(data));
    return ({
-     type :'ADD_DATA_SCOPE_COPPER',
+     type :'ADD_DATA_SCOPE_HINDALCO',
      payload : data
     })
-}*/
+}
+
+export function pivotDatahindalco(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HINDALCO',
+     payload : data,
+    })
+}
 
 
+export function addTickDataheromotoco(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_HEROMOTOCO',
+     payload : data
+    })
+}
+
+export function pivotDataheromotoco(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HEROMOTOCO',
+     payload : data,
+    })
+}
+
+export function addTickDatasunpharma(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_SUNPHARMA',
+     payload : data
+    })
+}
+
+export function pivotDatasunpharma(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_SUNPHARMA',
+     payload : data,
+    })
+}
 
 
+export function addTickDatatatasteel(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_TATASTEEL',
+     payload : data
+    })
+}
 
+export function pivotDatatatasteel(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_TATASTEEL',
+     payload : data,
+    })
+}
 
+export function addTickDatakotakbank(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_KOTAKBANK',
+     payload : data
+    })
+}
 
+export function pivotDatakotakbank(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_KOTAKBANK',
+     payload : data,
+    })
+}
 
+export function addTickDatamarico(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_MARICO',
+     payload : data
+    })
+}
+
+export function pivotDatamarico(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_MARICO',
+     payload : data,
+    })
+}
+
+export function addTickDatalupin(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_LUPIN',
+     payload : data
+    })
+}
+
+export function pivotDatalupin(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_LUPIN',
+     payload : data,
+    })
+}
+
+export function addTickDatapidilitind(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_PIDILITIND',
+     payload : data
+    })
+}
+
+export function pivotDatapidilitind(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_PIDILITIND',
+     payload : data,
+    })
+}
+
+export function addTickDataofss(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_OFSS',
+     payload : data
+    })
+}
+
+export function pivotDataofss(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_OFSS',
+     payload : data,
+    })
+}
+
+export function addTickDatahcltech(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_HCLTECH',
+     payload : data
+    })
+}
+
+export function pivotDatahcltech(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HCLTECH',
+     payload : data,
+    })
+}
+
+export function addTickDatagodrejcp(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_GODREJCP',
+     payload : data
+    })
+}
+
+export function pivotDatagodrejcp(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_GODREJCP',
+     payload : data,
+    })
+}
 
 

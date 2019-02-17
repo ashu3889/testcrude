@@ -54,6 +54,55 @@ import {
         pivotDatatcs,
         addTickDataunilever,
         pivotDataunilever,
+        addTickDatantpc,
+        pivotDatantpc,
+        pivotDatabpcl,
+        addTickDatabpcl,
+        addTickDatapowergrid,
+        pivotDatapowergrid,
+        addTickDataongc,
+        pivotDataongc,
+        addTickDatatatamotors,
+        pivotDatatatamotors,
+        addTickDatalarsen,
+        pivotDatalarsen,
+        addTickDataitc,
+        pivotDataitc,
+        addTickDataadaniports,
+         pivotDataadaniports,
+         addTickDataasianpaints,
+        pivotDataasianpaints,
+        addTickDataupl,
+pivotDataupl,
+addTickDatabajajfinserv,
+pivotDatabajajfinserv,
+addTickDatatatasteel,
+pivotDatatatasteel,
+addTickDatazeel,
+pivotDatazeel,
+addTickDatagrasim,
+pivotDatagrasim,
+addTickDatahindalco,
+pivotDatahindalco,
+addTickDataheromotoco,
+pivotDataheromotoco,
+addTickDatasunpharma,
+pivotDatasunpharma,
+addTickDatakotakbank,
+pivotDatakotakbank,
+
+addTickDatamarico,
+pivotDatamarico,
+addTickDatalupin,
+pivotDatalupin,
+addTickDatapidilitind,
+pivotDatapidilitind,
+addTickDataofss,
+pivotDataofss,
+addTickDatahcltech,
+pivotDatahcltech,
+addTickDatagodrejcp,
+pivotDatagodrejcp,
     
 } from '../action/action.js';
 import {
@@ -85,6 +134,411 @@ var val = 1;
 
 
 //ALL NEW SARTS HERE
+
+var breakevenRatio = 0.001;
+
+var godrejcp_currentSwingDirection = '' ;
+var godrejcp_prevCandleMarumbo = '';
+var godrejcp_marumboThresholdHigh = 0;
+var godrejcp_marumboThresholdLow = 0;
+var godrejcp_prevCandleHeight = [];
+var godrejcp_count = 0;
+var godrejcparr = [];
+var godrejcptickcount = 0,
+    godrejcpticklow = 0,
+    godrejcptickhigh = 0,
+    godrejcptickopen = 0,
+    godrejcptickarray = [],
+    godrejcptickType = 0,
+    godrejcptickLength = 0,
+    godrejcptickclose = 0;
+
+
+var hcltech_currentSwingDirection = '' ;
+var hcltech_prevCandleMarumbo = '';
+var hcltech_marumboThresholdHigh = 0;
+var hcltech_marumboThresholdLow = 0;
+var hcltech_prevCandleHeight = [];
+var hcltech_count = 0;
+var hcltecharr = [];
+var hcltechtickcount = 0,
+    hcltechticklow = 0,
+    hcltechtickhigh = 0,
+    hcltechtickopen = 0,
+    hcltechtickarray = [],
+    hcltechtickType = 0,
+    hcltechtickLength = 0,
+    hcltechtickclose = 0;
+
+var ofss_currentSwingDirection = '' ;
+var ofss_prevCandleMarumbo = '';
+var ofss_marumboThresholdHigh = 0;
+var ofss_marumboThresholdLow = 0;
+var ofss_prevCandleHeight = [];
+var ofss_count = 0;
+var ofssarr = [];
+var ofsstickcount = 0,
+    ofssticklow = 0,
+    ofsstickhigh = 0,
+    ofsstickopen = 0,
+    ofsstickarray = [],
+    ofsstickType = 0,
+    ofsstickLength = 0,
+    ofsstickclose = 0;
+
+var pidilitind_currentSwingDirection = '' ;
+var pidilitind_prevCandleMarumbo = '';
+var pidilitind_marumboThresholdHigh = 0;
+var pidilitind_marumboThresholdLow = 0;
+var pidilitind_prevCandleHeight = [];
+var pidilitind_count = 0;
+var pidilitindarr = [];
+var pidilitindtickcount = 0,
+    pidilitindticklow = 0,
+    pidilitindtickhigh = 0,
+    pidilitindtickopen = 0,
+    pidilitindtickarray = [],
+    pidilitindtickType = 0,
+    pidilitindtickLength = 0,
+    pidilitindtickclose = 0;
+
+
+var lupin_currentSwingDirection = '' ;
+var lupin_prevCandleMarumbo = '';
+var lupin_marumboThresholdHigh = 0;
+var lupin_marumboThresholdLow = 0;
+var lupin_prevCandleHeight = [];
+var lupin_count = 0;
+var lupinarr = [];
+var lupintickcount = 0,
+    lupinticklow = 0,
+    lupintickhigh = 0,
+    lupintickopen = 0,
+    lupintickarray = [],
+    lupintickType = 0,
+    lupintickLength = 0,
+    lupintickclose = 0;
+
+var marico_currentSwingDirection = '' ;
+var marico_prevCandleMarumbo = '';
+var marico_marumboThresholdHigh = 0;
+var marico_marumboThresholdLow = 0;
+var marico_prevCandleHeight = [];
+var marico_count = 0;
+var maricoarr = [];
+var maricotickcount = 0,
+    maricoticklow = 0,
+    maricotickhigh = 0,
+    maricotickopen = 0,
+    maricotickarray = [],
+    maricotickType = 0,
+    maricotickLength = 0,
+    maricotickclose = 0;
+
+
+var kotakbank_currentSwingDirection = '' ;
+var kotakbank_prevCandleMarumbo = '';
+var kotakbank_marumboThresholdHigh = 0;
+var kotakbank_marumboThresholdLow = 0;
+var kotakbank_prevCandleHeight = [];
+var kotakbank_count = 0;
+var kotakbankarr = [];
+var kotakbanktickcount = 0,
+    kotakbankticklow = 0,
+    kotakbanktickhigh = 0,
+    kotakbanktickopen = 0,
+    kotakbanktickarray = [],
+    kotakbanktickType = 0,
+    kotakbanktickLength = 0,
+    kotakbanktickclose = 0;
+
+var tatasteel_currentSwingDirection = '' ;
+var tatasteel_prevCandleMarumbo = '';
+var tatasteel_marumboThresholdHigh = 0;
+var tatasteel_marumboThresholdLow = 0;
+var tatasteel_prevCandleHeight = [];
+var tatasteel_count = 0;
+var tatasteelarr = [];
+var tatasteeltickcount = 0,
+    tatasteelticklow = 0,
+    tatasteeltickhigh = 0,
+    tatasteeltickopen = 0,
+    tatasteeltickarray = [],
+    tatasteeltickType = 0,
+    tatasteeltickLength = 0,
+    tatasteeltickclose = 0;
+
+var sunpharma_currentSwingDirection = '' ;
+var sunpharma_prevCandleMarumbo = '';
+var sunpharma_marumboThresholdHigh = 0;
+var sunpharma_marumboThresholdLow = 0;
+var sunpharma_prevCandleHeight = [];
+var sunpharma_count = 0;
+var sunpharmaarr = [];
+var sunpharmatickcount = 0,
+    sunpharmaticklow = 0,
+    sunpharmatickhigh = 0,
+    sunpharmatickopen = 0,
+    sunpharmatickarray = [],
+    sunpharmatickType = 0,
+    sunpharmatickLength = 0,
+    sunpharmatickclose = 0;
+
+
+
+var heromotoco_currentSwingDirection = '' ;
+var heromotoco_prevCandleMarumbo = '';
+var heromotoco_marumboThresholdHigh = 0;
+var heromotoco_marumboThresholdLow = 0;
+var heromotoco_prevCandleHeight = [];
+var heromotoco_count = 0;
+var heromotocoarr = [];
+var heromotocotickcount = 0,
+    heromotocoticklow = 0,
+    heromotocotickhigh = 0,
+    heromotocotickopen = 0,
+    heromotocotickarray = [],
+    heromotocotickType = 0,
+    heromotocotickLength = 0,
+    heromotocotickclose = 0;
+
+
+var hindalco_currentSwingDirection = '' ;
+var hindalco_prevCandleMarumbo = '';
+var hindalco_marumboThresholdHigh = 0;
+var hindalco_marumboThresholdLow = 0;
+var hindalco_prevCandleHeight = [];
+var hindalco_count = 0;
+var hindalcoarr = [];
+var hindalcotickcount = 0,
+    hindalcoticklow = 0,
+    hindalcotickhigh = 0,
+    hindalcotickopen = 0,
+    hindalcotickarray = [],
+    hindalcotickType = 0,
+    hindalcotickLength = 0,
+    hindalcotickclose = 0;
+
+
+var bajajfinserv_currentSwingDirection = '' ;
+var bajajfinserv_prevCandleMarumbo = '';
+var bajajfinserv_marumboThresholdHigh = 0;
+var bajajfinserv_marumboThresholdLow = 0;
+var bajajfinserv_prevCandleHeight = [];
+var bajajfinserv_count = 0;
+var bajajfinservarr = [];
+var bajajfinservtickcount = 0,
+    bajajfinservticklow = 0,
+    bajajfinservtickhigh = 0,
+    bajajfinservtickopen = 0,
+    bajajfinservtickarray = [],
+    bajajfinservtickType = 0,
+    bajajfinservtickLength = 0,
+    bajajfinservtickclose = 0;
+
+
+var grasim_currentSwingDirection = '' ;
+var grasim_prevCandleMarumbo = '';
+var grasim_marumboThresholdHigh = 0;
+var grasim_marumboThresholdLow = 0;
+var grasim_prevCandleHeight = [];
+var grasim_count = 0;
+var grasimarr = [];
+var grasimtickcount = 0,
+    grasimticklow = 0,
+    grasimtickhigh = 0,
+    grasimtickopen = 0,
+    grasimtickarray = [],
+    grasimtickType = 0,
+    grasimtickLength = 0,
+    grasimtickclose = 0;
+
+
+
+var zeel_currentSwingDirection = '' ;
+var zeel_prevCandleMarumbo = '';
+var zeel_marumboThresholdHigh = 0;
+var zeel_marumboThresholdLow = 0;
+var zeel_prevCandleHeight = [];
+var zeel_count = 0;
+var zeelarr = [];
+var zeeltickcount = 0,
+    zeelticklow = 0,
+    zeeltickhigh = 0,
+    zeeltickopen = 0,
+    zeeltickarray = [],
+    zeeltickType = 0,
+    zeeltickLength = 0,
+    zeeltickclose = 0;
+
+var upl_currentSwingDirection = '' ;
+var upl_prevCandleMarumbo = '';
+var upl_marumboThresholdHigh = 0;
+var upl_marumboThresholdLow = 0;
+var upl_prevCandleHeight = [];
+var upl_count = 0;
+var uplarr = [];
+var upltickcount = 0,
+    uplticklow = 0,
+    upltickhigh = 0,
+    upltickopen = 0,
+    upltickarray = [],
+    upltickType = 0,
+    upltickLength = 0,
+    upltickclose = 0;
+
+var asianpaints_currentSwingDirection = '' ;
+var asianpaints_prevCandleMarumbo = '';
+var asianpaints_marumboThresholdHigh = 0;
+var asianpaints_marumboThresholdLow = 0;
+var asianpaints_prevCandleHeight = [];
+var asianpaints_count = 0;
+var asianpaintsarr = [];
+var asianpaintstickcount = 0,
+    asianpaintsticklow = 0,
+    asianpaintstickhigh = 0,
+    asianpaintstickopen = 0,
+    asianpaintstickarray = [],
+    asianpaintstickType = 0,
+    asianpaintstickLength = 0,
+    asianpaintstickclose = 0;
+
+var adaniports_currentSwingDirection = '' ;
+var adaniports_prevCandleMarumbo = '';
+var adaniports_marumboThresholdHigh = 0;
+var adaniports_marumboThresholdLow = 0;
+var adaniports_prevCandleHeight = [];
+var adaniports_count = 0;
+var adaniportsarr = [];
+var adaniportstickcount = 0,
+    adaniportsticklow = 0,
+    adaniportstickhigh = 0,
+    adaniportstickopen = 0,
+    adaniportstickarray = [],
+    adaniportstickType = 0,
+    adaniportstickLength = 0,
+    adaniportstickclose = 0;
+
+var itc_currentSwingDirection = '' ;
+var itc_prevCandleMarumbo = '';
+var itc_marumboThresholdHigh = 0;
+var itc_marumboThresholdLow = 0;
+var itc_prevCandleHeight = [];
+var itc_count = 0;
+var itcarr = [];
+var itctickcount = 0,
+    itcticklow = 0,
+    itctickhigh = 0,
+    itctickopen = 0,
+    itctickarray = [],
+    itctickType = 0,
+    itctickLength = 0,
+    itctickclose = 0;
+
+
+
+var tatamotors_currentSwingDirection = '' ;
+var tatamotors_prevCandleMarumbo = '';
+var tatamotors_marumboThresholdHigh = 0;
+var tatamotors_marumboThresholdLow = 0;
+var tatamotors_prevCandleHeight = [];
+var tatamotors_count = 0;
+var tatamotorsarr = [];
+var tatamotorstickcount = 0,
+    tatamotorsticklow = 0,
+    tatamotorstickhigh = 0,
+    tatamotorstickopen = 0,
+    tatamotorstickarray = [],
+    tatamotorstickType = 0,
+    tatamotorstickLength = 0,
+    tatamotorstickclose = 0;
+
+
+
+
+var ongc_currentSwingDirection = '' ;
+var ongc_prevCandleMarumbo = '';
+var ongc_marumboThresholdHigh = 0;
+var ongc_marumboThresholdLow = 0;
+var ongc_prevCandleHeight = [];
+var ongc_count = 0;
+var ongcarr = [];
+var ongctickcount = 0,
+    ongcticklow = 0,
+    ongctickhigh = 0,
+    ongctickopen = 0,
+    ongctickarray = [],
+    ongctickType = 0,
+    ongctickLength = 0,
+    ongctickclose = 0;
+
+    var powergrid_currentSwingDirection = '' ;
+var powergrid_prevCandleMarumbo = '';
+var powergrid_marumboThresholdHigh = 0;
+var powergrid_marumboThresholdLow = 0;
+var powergrid_prevCandleHeight = [];
+var powergrid_count = 0;
+var powergridarr = [];
+var powergridtickcount = 0,
+    powergridticklow = 0,
+    powergridtickhigh = 0,
+    powergridtickopen = 0,
+    powergridtickarray = [],
+    powergridtickType = 0,
+    powergridtickLength = 0,
+    powergridtickclose = 0;
+
+    var larsen_currentSwingDirection = '' ;
+var larsen_prevCandleMarumbo = '';
+var larsen_marumboThresholdHigh = 0;
+var larsen_marumboThresholdLow = 0;
+var larsen_prevCandleHeight = [];
+var larsen_count = 0;
+var larsenarr = [];
+var larsentickcount = 0,
+    larsenticklow = 0,
+    larsentickhigh = 0,
+    larsentickopen = 0,
+    larsentickarray = [],
+    larsentickType = 0,
+    larsentickLength = 0,
+    larsentickclose = 0;
+
+
+var bpcl_currentSwingDirection = '' ;
+var bpcl_prevCandleMarumbo = '';
+var bpcl_marumboThresholdHigh = 0;
+var bpcl_marumboThresholdLow = 0;
+var bpcl_prevCandleHeight = [];
+var bpcl_count = 0;
+var bpclarr = [];
+var bpcltickcount = 0,
+    bpclticklow = 0,
+    bpcltickhigh = 0,
+    bpcltickopen = 0,
+    bpcltickarray = [],
+    bpcltickType = 0,
+    bpcltickLength = 0,
+    bpcltickclose = 0;
+
+
+var ntpc_currentSwingDirection = '' ;
+var ntpc_prevCandleMarumbo = '';
+var ntpc_marumboThresholdHigh = 0;
+var ntpc_marumboThresholdLow = 0;
+var ntpc_prevCandleHeight = [];
+var ntpc_count = 0;
+var ntpcarr = [];
+var ntpctickcount = 0,
+    ntpcticklow = 0,
+    ntpctickhigh = 0,
+    ntpctickopen = 0,
+    ntpctickarray = [],
+    ntpctickType = 0,
+    ntpctickLength = 0,
+    ntpctickclose = 0;
+
+
 
 var crude_currentSwingDirection = '' ;
 var crude_prevCandleMarumbo = '';
@@ -593,7 +1047,7 @@ let kc = new KiteConnect(options);
    
   })
   .catch(function (error) {
-    debugger;
+    ;
     console.log(error);
   });
 
@@ -713,7 +1167,7 @@ checkArg(0);
                    //var date = v.splice(0,1)[0];
                    var date = v.splice(0,1)[0];
 
-                  // debugger;
+                  // ;
                    var crudehigh = _.maxBy(v);
                    var crudelow = _.minBy(v);
                    var crudeopen = v[0];
@@ -769,6 +1223,714 @@ checkArg(0);
 
 
     componentWillReceiveProps(nextProps) {
+
+
+         let godrejcp_len = nextProps.tickCombogodrejcp.length - 1;
+
+        if ((this.props.tickCombogodrejcp) != undefined) {
+
+            if ((nextProps.tickCombogodrejcp).length >= 1) {
+
+
+            if (godrejcp_len > 2) {
+                godrejcp_prevCandleHeight = [];
+                godrejcp_prevCandleHeight.push(nextProps.tickCombogodrejcp[godrejcp_len-1].high);
+                godrejcp_prevCandleHeight.push(nextProps.tickCombogodrejcp[godrejcp_len-1].low);
+            }
+
+
+                  
+
+
+            if (godrejcp_len > 1) {
+
+                if (nextProps.tickCombogodrejcp[godrejcp_len].marumbo == true){
+                     godrejcp_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombogodrejcp[godrejcp_len].marumbo == false){
+                     godrejcp_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombogodrejcp[godrejcp_len].pivot != undefined) {
+
+                    //godrejcp oil
+                    if (this.state.godrejcp_pivotpoint != nextProps.tickCombogodrejcp[godrejcp_len].pivot) {
+
+                        godrejcp_count = godrejcp_count + 1;
+
+                        this.setState({
+                            godrejcp_pivotpoint: nextProps.tickCombogodrejcp[godrejcp_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombogodrejcp[godrejcp_len].pivot;
+
+                        let datainput = {
+                            x: godrejcp_count,
+                            y: nextProps.tickCombogodrejcp[godrejcp_len].pivot,
+                            dir: nextProps.tickCombogodrejcp[godrejcp_len].dir,
+                            date: nextProps.tickCombogodrejcp[godrejcp_len].date,
+                            currentPrice: nextProps.tickCombogodrejcp[godrejcp_len].currentPrice,
+                            tradeStatus : nextProps.tickCombogodrejcp[godrejcp_len].tradeStatus
+                        };
+
+                        this.props.pivotDatagodrejcp(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatagodrejcp) != undefined && this.props.trendDatagodrejcp.length > 1 && (nextProps.trendDatagodrejcp) != undefined && nextProps.trendDatagodrejcp.length >1) {
+            var godrejcp_nextPropslen = nextProps.trendDatagodrejcp.length-1;
+
+            if (godrejcp_nextPropslen > 1) {
+                if (nextProps.trendDatagodrejcp[godrejcp_nextPropslen].dir == "up"){
+                     godrejcp_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatagodrejcp[godrejcp_nextPropslen].dir == "low"){
+                     godrejcp_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+
+         let hcltech_len = nextProps.tickCombohcltech.length - 1;
+
+        if ((this.props.tickCombohcltech) != undefined) {
+
+            if ((nextProps.tickCombohcltech).length >= 1) {
+
+
+            if (hcltech_len > 2) {
+                hcltech_prevCandleHeight = [];
+                hcltech_prevCandleHeight.push(nextProps.tickCombohcltech[hcltech_len-1].high);
+                hcltech_prevCandleHeight.push(nextProps.tickCombohcltech[hcltech_len-1].low);
+            }
+
+
+                  
+
+
+            if (hcltech_len > 1) {
+
+                if (nextProps.tickCombohcltech[hcltech_len].marumbo == true){
+                     hcltech_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombohcltech[hcltech_len].marumbo == false){
+                     hcltech_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombohcltech[hcltech_len].pivot != undefined) {
+
+                    //hcltech oil
+                    if (this.state.hcltech_pivotpoint != nextProps.tickCombohcltech[hcltech_len].pivot) {
+
+                        hcltech_count = hcltech_count + 1;
+
+                        this.setState({
+                            hcltech_pivotpoint: nextProps.tickCombohcltech[hcltech_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombohcltech[hcltech_len].pivot;
+
+                        let datainput = {
+                            x: hcltech_count,
+                            y: nextProps.tickCombohcltech[hcltech_len].pivot,
+                            dir: nextProps.tickCombohcltech[hcltech_len].dir,
+                            date: nextProps.tickCombohcltech[hcltech_len].date,
+                            currentPrice: nextProps.tickCombohcltech[hcltech_len].currentPrice,
+                            tradeStatus : nextProps.tickCombohcltech[hcltech_len].tradeStatus
+                        };
+
+                        this.props.pivotDatahcltech(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatahcltech) != undefined && this.props.trendDatahcltech.length > 1 && (nextProps.trendDatahcltech) != undefined && nextProps.trendDatahcltech.length >1) {
+            var hcltech_nextPropslen = nextProps.trendDatahcltech.length-1;
+
+            if (hcltech_nextPropslen > 1) {
+                if (nextProps.trendDatahcltech[hcltech_nextPropslen].dir == "up"){
+                     hcltech_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatahcltech[hcltech_nextPropslen].dir == "low"){
+                     hcltech_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+        let pidilitind_len = nextProps.tickCombopidilitind.length - 1;
+
+        if ((this.props.tickCombopidilitind) != undefined) {
+
+            if ((nextProps.tickCombopidilitind).length >= 1) {
+
+
+            if (pidilitind_len > 2) {
+                pidilitind_prevCandleHeight = [];
+                pidilitind_prevCandleHeight.push(nextProps.tickCombopidilitind[pidilitind_len-1].high);
+                pidilitind_prevCandleHeight.push(nextProps.tickCombopidilitind[pidilitind_len-1].low);
+            }
+
+
+                  
+
+
+            if (pidilitind_len > 1) {
+
+                if (nextProps.tickCombopidilitind[pidilitind_len].marumbo == true){
+                     pidilitind_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombopidilitind[pidilitind_len].marumbo == false){
+                     pidilitind_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombopidilitind[pidilitind_len].pivot != undefined) {
+
+                    //pidilitind oil
+                    if (this.state.pidilitind_pivotpoint != nextProps.tickCombopidilitind[pidilitind_len].pivot) {
+
+                        pidilitind_count = pidilitind_count + 1;
+
+                        this.setState({
+                            pidilitind_pivotpoint: nextProps.tickCombopidilitind[pidilitind_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombopidilitind[pidilitind_len].pivot;
+
+                        let datainput = {
+                            x: pidilitind_count,
+                            y: nextProps.tickCombopidilitind[pidilitind_len].pivot,
+                            dir: nextProps.tickCombopidilitind[pidilitind_len].dir,
+                            date: nextProps.tickCombopidilitind[pidilitind_len].date,
+                            currentPrice: nextProps.tickCombopidilitind[pidilitind_len].currentPrice,
+                            tradeStatus : nextProps.tickCombopidilitind[pidilitind_len].tradeStatus
+                        };
+
+                        this.props.pivotDatapidilitind(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatapidilitind) != undefined && this.props.trendDatapidilitind.length > 1 && (nextProps.trendDatapidilitind) != undefined && nextProps.trendDatapidilitind.length >1) {
+            var pidilitind_nextPropslen = nextProps.trendDatapidilitind.length-1;
+
+            if (pidilitind_nextPropslen > 1) {
+                if (nextProps.trendDatapidilitind[pidilitind_nextPropslen].dir == "up"){
+                     pidilitind_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatapidilitind[pidilitind_nextPropslen].dir == "low"){
+                     pidilitind_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+       let lupin_len = nextProps.tickCombolupin.length - 1;
+
+        if ((this.props.tickCombolupin) != undefined) {
+
+            if ((nextProps.tickCombolupin).length >= 1) {
+
+
+            if (lupin_len > 2) {
+                lupin_prevCandleHeight = [];
+                lupin_prevCandleHeight.push(nextProps.tickCombolupin[lupin_len-1].high);
+                lupin_prevCandleHeight.push(nextProps.tickCombolupin[lupin_len-1].low);
+            }
+
+
+                  
+
+
+            if (lupin_len > 1) {
+
+                if (nextProps.tickCombolupin[lupin_len].marumbo == true){
+                     lupin_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombolupin[lupin_len].marumbo == false){
+                     lupin_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombolupin[lupin_len].pivot != undefined) {
+
+                    //lupin oil
+                    if (this.state.lupin_pivotpoint != nextProps.tickCombolupin[lupin_len].pivot) {
+
+                        lupin_count = lupin_count + 1;
+
+                        this.setState({
+                            lupin_pivotpoint: nextProps.tickCombolupin[lupin_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombolupin[lupin_len].pivot;
+
+                        let datainput = {
+                            x: lupin_count,
+                            y: nextProps.tickCombolupin[lupin_len].pivot,
+                            dir: nextProps.tickCombolupin[lupin_len].dir,
+                            date: nextProps.tickCombolupin[lupin_len].date,
+                            currentPrice: nextProps.tickCombolupin[lupin_len].currentPrice,
+                            tradeStatus : nextProps.tickCombolupin[lupin_len].tradeStatus
+                        };
+
+                        this.props.pivotDatalupin(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatalupin) != undefined && this.props.trendDatalupin.length > 1 && (nextProps.trendDatalupin) != undefined && nextProps.trendDatalupin.length >1) {
+            var lupin_nextPropslen = nextProps.trendDatalupin.length-1;
+
+            if (lupin_nextPropslen > 1) {
+                if (nextProps.trendDatalupin[lupin_nextPropslen].dir == "up"){
+                     lupin_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatalupin[lupin_nextPropslen].dir == "low"){
+                     lupin_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+        let ofss_len = nextProps.tickComboofss.length - 1;
+
+        if ((this.props.tickComboofss) != undefined) {
+
+            if ((nextProps.tickComboofss).length >= 1) {
+
+
+            if (ofss_len > 2) {
+                ofss_prevCandleHeight = [];
+                ofss_prevCandleHeight.push(nextProps.tickComboofss[ofss_len-1].high);
+                ofss_prevCandleHeight.push(nextProps.tickComboofss[ofss_len-1].low);
+            }
+
+
+                  
+
+
+            if (ofss_len > 1) {
+
+                if (nextProps.tickComboofss[ofss_len].marumbo == true){
+                     ofss_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickComboofss[ofss_len].marumbo == false){
+                     ofss_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickComboofss[ofss_len].pivot != undefined) {
+
+                    //ofss oil
+                    if (this.state.ofss_pivotpoint != nextProps.tickComboofss[ofss_len].pivot) {
+
+                        ofss_count = ofss_count + 1;
+
+                        this.setState({
+                            ofss_pivotpoint: nextProps.tickComboofss[ofss_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickComboofss[ofss_len].pivot;
+
+                        let datainput = {
+                            x: ofss_count,
+                            y: nextProps.tickComboofss[ofss_len].pivot,
+                            dir: nextProps.tickComboofss[ofss_len].dir,
+                            date: nextProps.tickComboofss[ofss_len].date,
+                            currentPrice: nextProps.tickComboofss[ofss_len].currentPrice,
+                            tradeStatus : nextProps.tickComboofss[ofss_len].tradeStatus
+                        };
+
+                        this.props.pivotDataofss(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDataofss) != undefined && this.props.trendDataofss.length > 1 && (nextProps.trendDataofss) != undefined && nextProps.trendDataofss.length >1) {
+            var ofss_nextPropslen = nextProps.trendDataofss.length-1;
+
+            if (ofss_nextPropslen > 1) {
+                if (nextProps.trendDataofss[ofss_nextPropslen].dir == "up"){
+                     ofss_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDataofss[ofss_nextPropslen].dir == "low"){
+                     ofss_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+          let marico_len = nextProps.tickCombomarico.length - 1;
+
+        if ((this.props.tickCombomarico) != undefined) {
+
+            if ((nextProps.tickCombomarico).length >= 1) {
+
+
+            if (marico_len > 2) {
+                marico_prevCandleHeight = [];
+                marico_prevCandleHeight.push(nextProps.tickCombomarico[marico_len-1].high);
+                marico_prevCandleHeight.push(nextProps.tickCombomarico[marico_len-1].low);
+            }
+
+
+                  
+
+
+            if (marico_len > 1) {
+
+                if (nextProps.tickCombomarico[marico_len].marumbo == true){
+                     marico_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombomarico[marico_len].marumbo == false){
+                     marico_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombomarico[marico_len].pivot != undefined) {
+
+                    //marico oil
+                    if (this.state.marico_pivotpoint != nextProps.tickCombomarico[marico_len].pivot) {
+
+                        marico_count = marico_count + 1;
+
+                        this.setState({
+                            marico_pivotpoint: nextProps.tickCombomarico[marico_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombomarico[marico_len].pivot;
+
+                        let datainput = {
+                            x: marico_count,
+                            y: nextProps.tickCombomarico[marico_len].pivot,
+                            dir: nextProps.tickCombomarico[marico_len].dir,
+                            date: nextProps.tickCombomarico[marico_len].date,
+                            currentPrice: nextProps.tickCombomarico[marico_len].currentPrice,
+                            tradeStatus : nextProps.tickCombomarico[marico_len].tradeStatus
+                        };
+
+                        this.props.pivotDatamarico(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatamarico) != undefined && this.props.trendDatamarico.length > 1 && (nextProps.trendDatamarico) != undefined && nextProps.trendDatamarico.length >1) {
+            var marico_nextPropslen = nextProps.trendDatamarico.length-1;
+
+            if (marico_nextPropslen > 1) {
+                if (nextProps.trendDatamarico[marico_nextPropslen].dir == "up"){
+                     marico_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatamarico[marico_nextPropslen].dir == "low"){
+                     marico_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+        let kotakbank_len = nextProps.tickCombokotakbank.length - 1;
+
+        if ((this.props.tickCombokotakbank) != undefined) {
+
+            if ((nextProps.tickCombokotakbank).length >= 1) {
+
+
+            if (kotakbank_len > 2) {
+                kotakbank_prevCandleHeight = [];
+                kotakbank_prevCandleHeight.push(nextProps.tickCombokotakbank[kotakbank_len-1].high);
+                kotakbank_prevCandleHeight.push(nextProps.tickCombokotakbank[kotakbank_len-1].low);
+            }
+
+
+                  
+
+
+            if (kotakbank_len > 1) {
+
+                if (nextProps.tickCombokotakbank[kotakbank_len].marumbo == true){
+                     kotakbank_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombokotakbank[kotakbank_len].marumbo == false){
+                     kotakbank_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombokotakbank[kotakbank_len].pivot != undefined) {
+
+                    //kotakbank oil
+                    if (this.state.kotakbank_pivotpoint != nextProps.tickCombokotakbank[kotakbank_len].pivot) {
+
+                        kotakbank_count = kotakbank_count + 1;
+
+                        this.setState({
+                            kotakbank_pivotpoint: nextProps.tickCombokotakbank[kotakbank_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombokotakbank[kotakbank_len].pivot;
+
+                        let datainput = {
+                            x: kotakbank_count,
+                            y: nextProps.tickCombokotakbank[kotakbank_len].pivot,
+                            dir: nextProps.tickCombokotakbank[kotakbank_len].dir,
+                            date: nextProps.tickCombokotakbank[kotakbank_len].date,
+                            currentPrice: nextProps.tickCombokotakbank[kotakbank_len].currentPrice,
+                            tradeStatus : nextProps.tickCombokotakbank[kotakbank_len].tradeStatus
+                        };
+
+                        this.props.pivotDatakotakbank(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatakotakbank) != undefined && this.props.trendDatakotakbank.length > 1 && (nextProps.trendDatakotakbank) != undefined && nextProps.trendDatakotakbank.length >1) {
+            var kotakbank_nextPropslen = nextProps.trendDatakotakbank.length-1;
+
+            if (kotakbank_nextPropslen > 1) {
+                if (nextProps.trendDatakotakbank[kotakbank_nextPropslen].dir == "up"){
+                     kotakbank_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatakotakbank[kotakbank_nextPropslen].dir == "low"){
+                     kotakbank_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+        let tatasteel_len = nextProps.tickCombotatasteel.length - 1;
+
+        if ((this.props.tickCombotatasteel) != undefined) {
+
+            if ((nextProps.tickCombotatasteel).length >= 1) {
+
+
+            if (tatasteel_len > 2) {
+                tatasteel_prevCandleHeight = [];
+                tatasteel_prevCandleHeight.push(nextProps.tickCombotatasteel[tatasteel_len-1].high);
+                tatasteel_prevCandleHeight.push(nextProps.tickCombotatasteel[tatasteel_len-1].low);
+            }
+
+
+                  
+
+
+            if (tatasteel_len > 1) {
+
+                if (nextProps.tickCombotatasteel[tatasteel_len].marumbo == true){
+                     tatasteel_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombotatasteel[tatasteel_len].marumbo == false){
+                     tatasteel_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombotatasteel[tatasteel_len].pivot != undefined) {
+
+                    //tatasteel oil
+                    if (this.state.tatasteel_pivotpoint != nextProps.tickCombotatasteel[tatasteel_len].pivot) {
+
+                        tatasteel_count = tatasteel_count + 1;
+
+                        this.setState({
+                            tatasteel_pivotpoint: nextProps.tickCombotatasteel[tatasteel_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombotatasteel[tatasteel_len].pivot;
+
+                        let datainput = {
+                            x: tatasteel_count,
+                            y: nextProps.tickCombotatasteel[tatasteel_len].pivot,
+                            dir: nextProps.tickCombotatasteel[tatasteel_len].dir,
+                            date: nextProps.tickCombotatasteel[tatasteel_len].date,
+                            currentPrice: nextProps.tickCombotatasteel[tatasteel_len].currentPrice,
+                            tradeStatus : nextProps.tickCombotatasteel[tatasteel_len].tradeStatus
+                        };
+
+                        this.props.pivotDatatatasteel(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatatatasteel) != undefined && this.props.trendDatatatasteel.length > 1 && (nextProps.trendDatatatasteel) != undefined && nextProps.trendDatatatasteel.length >1) {
+            var tatasteel_nextPropslen = nextProps.trendDatatatasteel.length-1;
+
+            if (tatasteel_nextPropslen > 1) {
+                if (nextProps.trendDatatatasteel[tatasteel_nextPropslen].dir == "up"){
+                     tatasteel_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatatatasteel[tatasteel_nextPropslen].dir == "low"){
+                     tatasteel_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+          let sunpharma_len = nextProps.tickCombosunpharma.length - 1;
+
+        if ((this.props.tickCombosunpharma) != undefined) {
+
+            if ((nextProps.tickCombosunpharma).length >= 1) {
+
+
+            if (sunpharma_len > 2) {
+                sunpharma_prevCandleHeight = [];
+                sunpharma_prevCandleHeight.push(nextProps.tickCombosunpharma[sunpharma_len-1].high);
+                sunpharma_prevCandleHeight.push(nextProps.tickCombosunpharma[sunpharma_len-1].low);
+            }
+
+
+                  
+
+
+            if (sunpharma_len > 1) {
+
+                if (nextProps.tickCombosunpharma[sunpharma_len].marumbo == true){
+                     sunpharma_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombosunpharma[sunpharma_len].marumbo == false){
+                     sunpharma_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombosunpharma[sunpharma_len].pivot != undefined) {
+
+                    //sunpharma oil
+                    if (this.state.sunpharma_pivotpoint != nextProps.tickCombosunpharma[sunpharma_len].pivot) {
+
+                        sunpharma_count = sunpharma_count + 1;
+
+                        this.setState({
+                            sunpharma_pivotpoint: nextProps.tickCombosunpharma[sunpharma_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombosunpharma[sunpharma_len].pivot;
+
+                        let datainput = {
+                            x: sunpharma_count,
+                            y: nextProps.tickCombosunpharma[sunpharma_len].pivot,
+                            dir: nextProps.tickCombosunpharma[sunpharma_len].dir,
+                            date: nextProps.tickCombosunpharma[sunpharma_len].date,
+                            currentPrice: nextProps.tickCombosunpharma[sunpharma_len].currentPrice,
+                            tradeStatus : nextProps.tickCombosunpharma[sunpharma_len].tradeStatus
+                        };
+
+                        this.props.pivotDatasunpharma(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatasunpharma) != undefined && this.props.trendDatasunpharma.length > 1 && (nextProps.trendDatasunpharma) != undefined && nextProps.trendDatasunpharma.length >1) {
+            var sunpharma_nextPropslen = nextProps.trendDatasunpharma.length-1;
+
+            if (sunpharma_nextPropslen > 1) {
+                if (nextProps.trendDatasunpharma[sunpharma_nextPropslen].dir == "up"){
+                     sunpharma_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatasunpharma[sunpharma_nextPropslen].dir == "low"){
+                     sunpharma_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
 
         let crude_len = nextProps.tickCombocrude.length - 1;
 
@@ -840,6 +2002,83 @@ checkArg(0);
 
                 if (nextProps.trendDatacrude[crude_nextPropslen].dir == "low"){
                      crude_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+       let heromotoco_len = nextProps.tickComboheromotoco.length - 1;
+
+        if ((this.props.tickComboheromotoco) != undefined) {
+
+            if ((nextProps.tickComboheromotoco).length >= 1) {
+
+
+            if (heromotoco_len > 2) {
+                heromotoco_prevCandleHeight = [];
+                heromotoco_prevCandleHeight.push(nextProps.tickComboheromotoco[heromotoco_len-1].high);
+                heromotoco_prevCandleHeight.push(nextProps.tickComboheromotoco[heromotoco_len-1].low);
+            }
+
+
+                  
+
+
+            if (heromotoco_len > 1) {
+
+                if (nextProps.tickComboheromotoco[heromotoco_len].marumbo == true){
+                     heromotoco_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickComboheromotoco[heromotoco_len].marumbo == false){
+                     heromotoco_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickComboheromotoco[heromotoco_len].pivot != undefined) {
+
+                    //heromotoco oil
+                    if (this.state.heromotoco_pivotpoint != nextProps.tickComboheromotoco[heromotoco_len].pivot) {
+
+                        heromotoco_count = heromotoco_count + 1;
+
+                        this.setState({
+                            heromotoco_pivotpoint: nextProps.tickComboheromotoco[heromotoco_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickComboheromotoco[heromotoco_len].pivot;
+
+                        let datainput = {
+                            x: heromotoco_count,
+                            y: nextProps.tickComboheromotoco[heromotoco_len].pivot,
+                            dir: nextProps.tickComboheromotoco[heromotoco_len].dir,
+                            date: nextProps.tickComboheromotoco[heromotoco_len].date,
+                            currentPrice: nextProps.tickComboheromotoco[heromotoco_len].currentPrice,
+                            tradeStatus : nextProps.tickComboheromotoco[heromotoco_len].tradeStatus
+                        };
+
+                        this.props.pivotDataheromotoco(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDataheromotoco) != undefined && this.props.trendDataheromotoco.length > 1 && (nextProps.trendDataheromotoco) != undefined && nextProps.trendDataheromotoco.length >1) {
+            var heromotoco_nextPropslen = nextProps.trendDataheromotoco.length-1;
+
+            if (heromotoco_nextPropslen > 1) {
+                if (nextProps.trendDataheromotoco[heromotoco_nextPropslen].dir == "up"){
+                     heromotoco_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDataheromotoco[heromotoco_nextPropslen].dir == "low"){
+                     heromotoco_currentSwingDirection = 'upSwing';
                 }
 
             }
@@ -925,6 +2164,484 @@ checkArg(0);
 
         }
 
+
+         let hindalco_len = nextProps.tickCombohindalco.length - 1;
+
+        if ((this.props.tickCombohindalco) != undefined) {
+
+            if ((nextProps.tickCombohindalco).length >= 1) {
+
+
+            if (hindalco_len > 2) {
+                hindalco_prevCandleHeight = [];
+                hindalco_prevCandleHeight.push(nextProps.tickCombohindalco[hindalco_len-1].high);
+                hindalco_prevCandleHeight.push(nextProps.tickCombohindalco[hindalco_len-1].low);
+            }
+
+
+                  
+
+
+            if (hindalco_len > 1) {
+
+                if (nextProps.tickCombohindalco[hindalco_len].marumbo == true){
+                     hindalco_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombohindalco[hindalco_len].marumbo == false){
+                     hindalco_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombohindalco[hindalco_len].pivot != undefined) {
+
+                    //hindalco oil
+                    if (this.state.hindalco_pivotpoint != nextProps.tickCombohindalco[hindalco_len].pivot) {
+
+                        hindalco_count = hindalco_count + 1;
+
+                        this.setState({
+                            hindalco_pivotpoint: nextProps.tickCombohindalco[hindalco_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombohindalco[hindalco_len].pivot;
+
+                        let datainput = {
+                            x: hindalco_count,
+                            y: nextProps.tickCombohindalco[hindalco_len].pivot,
+                            dir: nextProps.tickCombohindalco[hindalco_len].dir,
+                            date: nextProps.tickCombohindalco[hindalco_len].date,
+                            currentPrice: nextProps.tickCombohindalco[hindalco_len].currentPrice,
+                            tradeStatus : nextProps.tickCombohindalco[hindalco_len].tradeStatus
+                        };
+
+                        this.props.pivotDatahindalco(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatahindalco) != undefined && this.props.trendDatahindalco.length > 1 && (nextProps.trendDatahindalco) != undefined && nextProps.trendDatahindalco.length >1) {
+            var hindalco_nextPropslen = nextProps.trendDatahindalco.length-1;
+
+            if (hindalco_nextPropslen > 1) {
+                if (nextProps.trendDatahindalco[hindalco_nextPropslen].dir == "up"){
+                     hindalco_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatahindalco[hindalco_nextPropslen].dir == "low"){
+                     hindalco_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+          let adaniports_len = nextProps.tickComboadaniports.length - 1;
+
+        if ((this.props.tickComboadaniports) != undefined) {
+
+            if ((nextProps.tickComboadaniports).length >= 1) {
+
+
+            if (adaniports_len > 2) {
+                adaniports_prevCandleHeight = [];
+                adaniports_prevCandleHeight.push(nextProps.tickComboadaniports[adaniports_len-1].high);
+                adaniports_prevCandleHeight.push(nextProps.tickComboadaniports[adaniports_len-1].low);
+            }
+
+
+                  
+
+
+            if (adaniports_len > 1) {
+
+                if (nextProps.tickComboadaniports[adaniports_len].marumbo == true){
+                     adaniports_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickComboadaniports[adaniports_len].marumbo == false){
+                     adaniports_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickComboadaniports[adaniports_len].pivot != undefined) {
+
+                    //adaniports oil
+                    if (this.state.adaniports_pivotpoint != nextProps.tickComboadaniports[adaniports_len].pivot) {
+
+                        adaniports_count = adaniports_count + 1;
+
+                        this.setState({
+                            adaniports_pivotpoint: nextProps.tickComboadaniports[adaniports_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickComboadaniports[adaniports_len].pivot;
+
+                        let datainput = {
+                            x: adaniports_count,
+                            y: nextProps.tickComboadaniports[adaniports_len].pivot,
+                            dir: nextProps.tickComboadaniports[adaniports_len].dir,
+                            date: nextProps.tickComboadaniports[adaniports_len].date,
+                            currentPrice: nextProps.tickComboadaniports[adaniports_len].currentPrice,
+                            tradeStatus : nextProps.tickComboadaniports[adaniports_len].tradeStatus
+                        };
+
+                        this.props.pivotDataadaniports(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDataadaniports) != undefined && this.props.trendDataadaniports.length > 1 && (nextProps.trendDataadaniports) != undefined && nextProps.trendDataadaniports.length >1) {
+            var adaniports_nextPropslen = nextProps.trendDataadaniports.length-1;
+
+            if (adaniports_nextPropslen > 1) {
+                if (nextProps.trendDataadaniports[adaniports_nextPropslen].dir == "up"){
+                     adaniports_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDataadaniports[adaniports_nextPropslen].dir == "low"){
+                     adaniports_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+       let tatamotors_len = nextProps.tickCombotatamotors.length - 1;
+
+        if ((this.props.tickCombotatamotors) != undefined) {
+
+            if ((nextProps.tickCombotatamotors).length >= 1) {
+
+
+            if (tatamotors_len > 2) {
+                tatamotors_prevCandleHeight = [];
+                tatamotors_prevCandleHeight.push(nextProps.tickCombotatamotors[tatamotors_len-1].high);
+                tatamotors_prevCandleHeight.push(nextProps.tickCombotatamotors[tatamotors_len-1].low);
+            }
+
+
+                  
+
+
+            if (tatamotors_len > 1) {
+
+                if (nextProps.tickCombotatamotors[tatamotors_len].marumbo == true){
+                     tatamotors_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombotatamotors[tatamotors_len].marumbo == false){
+                     tatamotors_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombotatamotors[tatamotors_len].pivot != undefined) {
+
+                    //tatamotors oil
+                    if (this.state.tatamotors_pivotpoint != nextProps.tickCombotatamotors[tatamotors_len].pivot) {
+
+                        tatamotors_count = tatamotors_count + 1;
+
+                        this.setState({
+                            tatamotors_pivotpoint: nextProps.tickCombotatamotors[tatamotors_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombotatamotors[tatamotors_len].pivot;
+
+                        let datainput = {
+                            x: tatamotors_count,
+                            y: nextProps.tickCombotatamotors[tatamotors_len].pivot,
+                            dir: nextProps.tickCombotatamotors[tatamotors_len].dir,
+                            date: nextProps.tickCombotatamotors[tatamotors_len].date,
+                            currentPrice: nextProps.tickCombotatamotors[tatamotors_len].currentPrice,
+                            tradeStatus : nextProps.tickCombotatamotors[tatamotors_len].tradeStatus
+                        };
+
+                        this.props.pivotDatatatamotors(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatatatamotors) != undefined && this.props.trendDatatatamotors.length > 1 && (nextProps.trendDatatatamotors) != undefined && nextProps.trendDatatatamotors.length >1) {
+            var tatamotors_nextPropslen = nextProps.trendDatatatamotors.length-1;
+
+            if (tatamotors_nextPropslen > 1) {
+                if (nextProps.trendDatatatamotors[tatamotors_nextPropslen].dir == "up"){
+                     tatamotors_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatatatamotors[tatamotors_nextPropslen].dir == "low"){
+                     tatamotors_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+         let bajajfinserv_len = nextProps.tickCombobajajfinserv.length - 1;
+
+        if ((this.props.tickCombobajajfinserv) != undefined) {
+
+            if ((nextProps.tickCombobajajfinserv).length >= 1) {
+
+
+            if (bajajfinserv_len > 2) {
+                bajajfinserv_prevCandleHeight = [];
+                bajajfinserv_prevCandleHeight.push(nextProps.tickCombobajajfinserv[bajajfinserv_len-1].high);
+                bajajfinserv_prevCandleHeight.push(nextProps.tickCombobajajfinserv[bajajfinserv_len-1].low);
+            }
+
+
+                  
+
+
+            if (bajajfinserv_len > 1) {
+
+                if (nextProps.tickCombobajajfinserv[bajajfinserv_len].marumbo == true){
+                     bajajfinserv_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombobajajfinserv[bajajfinserv_len].marumbo == false){
+                     bajajfinserv_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombobajajfinserv[bajajfinserv_len].pivot != undefined) {
+
+                    //bajajfinserv oil
+                    if (this.state.bajajfinserv_pivotpoint != nextProps.tickCombobajajfinserv[bajajfinserv_len].pivot) {
+
+                        bajajfinserv_count = bajajfinserv_count + 1;
+
+                        this.setState({
+                            bajajfinserv_pivotpoint: nextProps.tickCombobajajfinserv[bajajfinserv_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombobajajfinserv[bajajfinserv_len].pivot;
+
+                        let datainput = {
+                            x: bajajfinserv_count,
+                            y: nextProps.tickCombobajajfinserv[bajajfinserv_len].pivot,
+                            dir: nextProps.tickCombobajajfinserv[bajajfinserv_len].dir,
+                            date: nextProps.tickCombobajajfinserv[bajajfinserv_len].date,
+                            currentPrice: nextProps.tickCombobajajfinserv[bajajfinserv_len].currentPrice,
+                            tradeStatus : nextProps.tickCombobajajfinserv[bajajfinserv_len].tradeStatus
+                        };
+
+                        this.props.pivotDatabajajfinserv(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatabajajfinserv) != undefined && this.props.trendDatabajajfinserv.length > 1 && (nextProps.trendDatabajajfinserv) != undefined && nextProps.trendDatabajajfinserv.length >1) {
+            var bajajfinserv_nextPropslen = nextProps.trendDatabajajfinserv.length-1;
+
+            if (bajajfinserv_nextPropslen > 1) {
+                if (nextProps.trendDatabajajfinserv[bajajfinserv_nextPropslen].dir == "up"){
+                     bajajfinserv_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatabajajfinserv[bajajfinserv_nextPropslen].dir == "low"){
+                     bajajfinserv_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+         let zeel_len = nextProps.tickCombozeel.length - 1;
+
+        if ((this.props.tickCombozeel) != undefined) {
+
+            if ((nextProps.tickCombozeel).length >= 1) {
+
+
+            if (zeel_len > 2) {
+                zeel_prevCandleHeight = [];
+                zeel_prevCandleHeight.push(nextProps.tickCombozeel[zeel_len-1].high);
+                zeel_prevCandleHeight.push(nextProps.tickCombozeel[zeel_len-1].low);
+            }
+
+
+                  
+
+
+            if (zeel_len > 1) {
+
+                if (nextProps.tickCombozeel[zeel_len].marumbo == true){
+                     zeel_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombozeel[zeel_len].marumbo == false){
+                     zeel_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombozeel[zeel_len].pivot != undefined) {
+
+                    //zeel oil
+                    if (this.state.zeel_pivotpoint != nextProps.tickCombozeel[zeel_len].pivot) {
+
+                        zeel_count = zeel_count + 1;
+
+                        this.setState({
+                            zeel_pivotpoint: nextProps.tickCombozeel[zeel_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombozeel[zeel_len].pivot;
+
+                        let datainput = {
+                            x: zeel_count,
+                            y: nextProps.tickCombozeel[zeel_len].pivot,
+                            dir: nextProps.tickCombozeel[zeel_len].dir,
+                            date: nextProps.tickCombozeel[zeel_len].date,
+                            currentPrice: nextProps.tickCombozeel[zeel_len].currentPrice,
+                            tradeStatus : nextProps.tickCombozeel[zeel_len].tradeStatus
+                        };
+
+                        this.props.pivotDatazeel(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatazeel) != undefined && this.props.trendDatazeel.length > 1 && (nextProps.trendDatazeel) != undefined && nextProps.trendDatazeel.length >1) {
+            var zeel_nextPropslen = nextProps.trendDatazeel.length-1;
+
+            if (zeel_nextPropslen > 1) {
+                if (nextProps.trendDatazeel[zeel_nextPropslen].dir == "up"){
+                     zeel_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatazeel[zeel_nextPropslen].dir == "low"){
+                     zeel_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+       let larsen_len = nextProps.tickCombolarsen.length - 1;
+
+        if ((this.props.tickCombolarsen) != undefined) {
+
+            if ((nextProps.tickCombolarsen).length >= 1) {
+
+
+            if (larsen_len > 2) {
+                larsen_prevCandleHeight = [];
+                larsen_prevCandleHeight.push(nextProps.tickCombolarsen[larsen_len-1].high);
+                larsen_prevCandleHeight.push(nextProps.tickCombolarsen[larsen_len-1].low);
+            }
+
+
+                  
+
+
+            if (larsen_len > 1) {
+
+                if (nextProps.tickCombolarsen[larsen_len].marumbo == true){
+                     larsen_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombolarsen[larsen_len].marumbo == false){
+                     larsen_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombolarsen[larsen_len].pivot != undefined) {
+
+                    //larsen oil
+                    if (this.state.larsen_pivotpoint != nextProps.tickCombolarsen[larsen_len].pivot) {
+
+                        larsen_count = larsen_count + 1;
+
+                        this.setState({
+                            larsen_pivotpoint: nextProps.tickCombolarsen[larsen_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombolarsen[larsen_len].pivot;
+
+                        let datainput = {
+                            x: larsen_count,
+                            y: nextProps.tickCombolarsen[larsen_len].pivot,
+                            dir: nextProps.tickCombolarsen[larsen_len].dir,
+                            date: nextProps.tickCombolarsen[larsen_len].date,
+                            currentPrice: nextProps.tickCombolarsen[larsen_len].currentPrice,
+                            tradeStatus : nextProps.tickCombolarsen[larsen_len].tradeStatus
+                        };
+
+                        this.props.pivotDatalarsen(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatalarsen) != undefined && this.props.trendDatalarsen.length > 1 && (nextProps.trendDatalarsen) != undefined && nextProps.trendDatalarsen.length >1) {
+            var larsen_nextPropslen = nextProps.trendDatalarsen.length-1;
+
+            if (larsen_nextPropslen > 1) {
+                if (nextProps.trendDatalarsen[larsen_nextPropslen].dir == "up"){
+                     larsen_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatalarsen[larsen_nextPropslen].dir == "low"){
+                     larsen_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
          let banknifty_len = nextProps.tickCombobanknifty.length - 1;
 
         if ((this.props.tickCombobanknifty) != undefined) {
@@ -995,6 +2712,324 @@ checkArg(0);
 
                 if (nextProps.trendDatabanknifty[banknifty_nextPropslen].dir == "low"){
                      banknifty_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+       let asianpaints_len = nextProps.tickComboasianpaints.length - 1;
+
+        if ((this.props.tickComboasianpaints) != undefined) {
+
+            if ((nextProps.tickComboasianpaints).length >= 1) {
+
+
+            if (asianpaints_len > 2) {
+                asianpaints_prevCandleHeight = [];
+                asianpaints_prevCandleHeight.push(nextProps.tickComboasianpaints[asianpaints_len-1].high);
+                asianpaints_prevCandleHeight.push(nextProps.tickComboasianpaints[asianpaints_len-1].low);
+            }
+
+
+                  
+
+
+            if (asianpaints_len > 1) {
+
+                if (nextProps.tickComboasianpaints[asianpaints_len].marumbo == true){
+                     asianpaints_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickComboasianpaints[asianpaints_len].marumbo == false){
+                     asianpaints_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickComboasianpaints[asianpaints_len].pivot != undefined) {
+
+                    //asianpaints oil
+                    if (this.state.asianpaints_pivotpoint != nextProps.tickComboasianpaints[asianpaints_len].pivot) {
+
+                        asianpaints_count = asianpaints_count + 1;
+
+                        this.setState({
+                            asianpaints_pivotpoint: nextProps.tickComboasianpaints[asianpaints_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickComboasianpaints[asianpaints_len].pivot;
+
+                        let datainput = {
+                            x: asianpaints_count,
+                            y: nextProps.tickComboasianpaints[asianpaints_len].pivot,
+                            dir: nextProps.tickComboasianpaints[asianpaints_len].dir,
+                            date: nextProps.tickComboasianpaints[asianpaints_len].date,
+                            currentPrice: nextProps.tickComboasianpaints[asianpaints_len].currentPrice,
+                            tradeStatus : nextProps.tickComboasianpaints[asianpaints_len].tradeStatus
+                        };
+
+                        this.props.pivotDataasianpaints(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDataasianpaints) != undefined && this.props.trendDataasianpaints.length > 1 && (nextProps.trendDataasianpaints) != undefined && nextProps.trendDataasianpaints.length >1) {
+            var asianpaints_nextPropslen = nextProps.trendDataasianpaints.length-1;
+
+            if (asianpaints_nextPropslen > 1) {
+                if (nextProps.trendDataasianpaints[asianpaints_nextPropslen].dir == "up"){
+                     asianpaints_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDataasianpaints[asianpaints_nextPropslen].dir == "low"){
+                     asianpaints_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+        let upl_len = nextProps.tickComboupl.length - 1;
+
+        if ((this.props.tickComboupl) != undefined) {
+
+            if ((nextProps.tickComboupl).length >= 1) {
+
+
+            if (upl_len > 2) {
+                upl_prevCandleHeight = [];
+                upl_prevCandleHeight.push(nextProps.tickComboupl[upl_len-1].high);
+                upl_prevCandleHeight.push(nextProps.tickComboupl[upl_len-1].low);
+            }
+
+
+                  
+
+
+            if (upl_len > 1) {
+
+                if (nextProps.tickComboupl[upl_len].marumbo == true){
+                     upl_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickComboupl[upl_len].marumbo == false){
+                     upl_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickComboupl[upl_len].pivot != undefined) {
+
+                    //upl oil
+                    if (this.state.upl_pivotpoint != nextProps.tickComboupl[upl_len].pivot) {
+
+                        upl_count = upl_count + 1;
+
+                        this.setState({
+                            upl_pivotpoint: nextProps.tickComboupl[upl_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickComboupl[upl_len].pivot;
+
+                        let datainput = {
+                            x: upl_count,
+                            y: nextProps.tickComboupl[upl_len].pivot,
+                            dir: nextProps.tickComboupl[upl_len].dir,
+                            date: nextProps.tickComboupl[upl_len].date,
+                            currentPrice: nextProps.tickComboupl[upl_len].currentPrice,
+                            tradeStatus : nextProps.tickComboupl[upl_len].tradeStatus
+                        };
+
+                        this.props.pivotDataupl(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDataupl) != undefined && this.props.trendDataupl.length > 1 && (nextProps.trendDataupl) != undefined && nextProps.trendDataupl.length >1) {
+            var upl_nextPropslen = nextProps.trendDataupl.length-1;
+
+            if (upl_nextPropslen > 1) {
+                if (nextProps.trendDataupl[upl_nextPropslen].dir == "up"){
+                     upl_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDataupl[upl_nextPropslen].dir == "low"){
+                     upl_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+         let grasim_len = nextProps.tickCombograsim.length - 1;
+
+        if ((this.props.tickCombograsim) != undefined) {
+
+            if ((nextProps.tickCombograsim).length >= 1) {
+
+
+            if (grasim_len > 2) {
+                grasim_prevCandleHeight = [];
+                grasim_prevCandleHeight.push(nextProps.tickCombograsim[grasim_len-1].high);
+                grasim_prevCandleHeight.push(nextProps.tickCombograsim[grasim_len-1].low);
+            }
+
+
+                  
+
+
+            if (grasim_len > 1) {
+
+                if (nextProps.tickCombograsim[grasim_len].marumbo == true){
+                     grasim_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombograsim[grasim_len].marumbo == false){
+                     grasim_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombograsim[grasim_len].pivot != undefined) {
+
+                    //grasim oil
+                    if (this.state.grasim_pivotpoint != nextProps.tickCombograsim[grasim_len].pivot) {
+
+                        grasim_count = grasim_count + 1;
+
+                        this.setState({
+                            grasim_pivotpoint: nextProps.tickCombograsim[grasim_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombograsim[grasim_len].pivot;
+
+                        let datainput = {
+                            x: grasim_count,
+                            y: nextProps.tickCombograsim[grasim_len].pivot,
+                            dir: nextProps.tickCombograsim[grasim_len].dir,
+                            date: nextProps.tickCombograsim[grasim_len].date,
+                            currentPrice: nextProps.tickCombograsim[grasim_len].currentPrice,
+                            tradeStatus : nextProps.tickCombograsim[grasim_len].tradeStatus
+                        };
+
+                        this.props.pivotDatagrasim(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatagrasim) != undefined && this.props.trendDatagrasim.length > 1 && (nextProps.trendDatagrasim) != undefined && nextProps.trendDatagrasim.length >1) {
+            var grasim_nextPropslen = nextProps.trendDatagrasim.length-1;
+
+            if (grasim_nextPropslen > 1) {
+                if (nextProps.trendDatagrasim[grasim_nextPropslen].dir == "up"){
+                     grasim_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatagrasim[grasim_nextPropslen].dir == "low"){
+                     grasim_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+        //bpcl
+
+
+       let bpcl_len = nextProps.tickCombobpcl.length - 1;
+
+        if ((this.props.tickCombobpcl) != undefined) {
+
+            if ((nextProps.tickCombobpcl).length >= 1) {
+
+
+            if (bpcl_len > 2) {
+                bpcl_prevCandleHeight = [];
+                bpcl_prevCandleHeight.push(nextProps.tickCombobpcl[bpcl_len-1].high);
+                bpcl_prevCandleHeight.push(nextProps.tickCombobpcl[bpcl_len-1].low);
+            }
+
+
+                  
+
+
+            if (bpcl_len > 1) {
+
+                if (nextProps.tickCombobpcl[bpcl_len].marumbo == true){
+                     bpcl_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombobpcl[bpcl_len].marumbo == false){
+                     bpcl_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombobpcl[bpcl_len].pivot != undefined) {
+
+                    //bpcl oil
+                    if (this.state.bpcl_pivotpoint != nextProps.tickCombobpcl[bpcl_len].pivot) {
+
+                        bpcl_count = bpcl_count + 1;
+
+                        this.setState({
+                            bpcl_pivotpoint: nextProps.tickCombobpcl[bpcl_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombobpcl[bpcl_len].pivot;
+
+                        let datainput = {
+                            x: bpcl_count,
+                            y: nextProps.tickCombobpcl[bpcl_len].pivot,
+                            dir: nextProps.tickCombobpcl[bpcl_len].dir,
+                            date: nextProps.tickCombobpcl[bpcl_len].date,
+                            currentPrice: nextProps.tickCombobpcl[bpcl_len].currentPrice,
+                            tradeStatus : nextProps.tickCombobpcl[bpcl_len].tradeStatus
+                        };
+
+                        this.props.pivotDatabpcl(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatabpcl) != undefined && this.props.trendDatabpcl.length > 1 && (nextProps.trendDatabpcl) != undefined && nextProps.trendDatabpcl.length >1) {
+            var bpcl_nextPropslen = nextProps.trendDatabpcl.length-1;
+
+            if (bpcl_nextPropslen > 1) {
+                if (nextProps.trendDatabpcl[bpcl_nextPropslen].dir == "up"){
+                     bpcl_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatabpcl[bpcl_nextPropslen].dir == "low"){
+                     bpcl_currentSwingDirection = 'upSwing';
                 }
 
             }
@@ -1080,6 +3115,86 @@ checkArg(0);
 
 
         }
+        //itc
+        let itc_len = nextProps.tickComboitc.length - 1;
+
+        if ((this.props.tickComboitc) != undefined) {
+
+            if ((nextProps.tickComboitc).length >= 1) {
+
+
+            if (itc_len > 2) {
+                itc_prevCandleHeight = [];
+                itc_prevCandleHeight.push(nextProps.tickComboitc[itc_len-1].high);
+                itc_prevCandleHeight.push(nextProps.tickComboitc[itc_len-1].low);
+            }
+
+
+                  
+
+
+            if (itc_len > 1) {
+
+                if (nextProps.tickComboitc[itc_len].marumbo == true){
+                     itc_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickComboitc[itc_len].marumbo == false){
+                     itc_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickComboitc[itc_len].pivot != undefined) {
+
+                    //itc oil
+                    if (this.state.itc_pivotpoint != nextProps.tickComboitc[itc_len].pivot) {
+
+                        itc_count = itc_count + 1;
+
+                        this.setState({
+                            itc_pivotpoint: nextProps.tickComboitc[itc_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickComboitc[itc_len].pivot;
+
+                        let datainput = {
+                            x: itc_count,
+                            y: nextProps.tickComboitc[itc_len].pivot,
+                            dir: nextProps.tickComboitc[itc_len].dir,
+                            date: nextProps.tickComboitc[itc_len].date,
+                            currentPrice: nextProps.tickComboitc[itc_len].currentPrice,
+                            tradeStatus : nextProps.tickComboitc[itc_len].tradeStatus
+                        };
+
+                        this.props.pivotDataitc(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDataitc) != undefined && this.props.trendDataitc.length > 1 && (nextProps.trendDataitc) != undefined && nextProps.trendDataitc.length >1) {
+            var itc_nextPropslen = nextProps.trendDataitc.length-1;
+
+            if (itc_nextPropslen > 1) {
+                if (nextProps.trendDataitc[itc_nextPropslen].dir == "up"){
+                     itc_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDataitc[itc_nextPropslen].dir == "low"){
+                     itc_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
 
 
         //cadilla
@@ -1707,6 +3822,88 @@ checkArg(0);
 
 
         }
+
+        //ntpc 
+
+
+       let ntpc_len = nextProps.tickCombontpc.length - 1;
+
+        if ((this.props.tickCombontpc) != undefined) {
+
+            if ((nextProps.tickCombontpc).length >= 1) {
+
+
+            if (ntpc_len > 2) {
+                ntpc_prevCandleHeight = [];
+                ntpc_prevCandleHeight.push(nextProps.tickCombontpc[ntpc_len-1].high);
+                ntpc_prevCandleHeight.push(nextProps.tickCombontpc[ntpc_len-1].low);
+            }
+
+
+                  
+
+
+            if (ntpc_len > 1) {
+
+                if (nextProps.tickCombontpc[ntpc_len].marumbo == true){
+                     ntpc_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombontpc[ntpc_len].marumbo == false){
+                     ntpc_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombontpc[ntpc_len].pivot != undefined) {
+
+                    //ntpc oil
+                    if (this.state.ntpc_pivotpoint != nextProps.tickCombontpc[ntpc_len].pivot) {
+
+                        ntpc_count = ntpc_count + 1;
+
+                        this.setState({
+                            ntpc_pivotpoint: nextProps.tickCombontpc[ntpc_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombontpc[ntpc_len].pivot;
+
+                        let datainput = {
+                            x: ntpc_count,
+                            y: nextProps.tickCombontpc[ntpc_len].pivot,
+                            dir: nextProps.tickCombontpc[ntpc_len].dir,
+                            date: nextProps.tickCombontpc[ntpc_len].date,
+                            currentPrice: nextProps.tickCombontpc[ntpc_len].currentPrice,
+                            tradeStatus : nextProps.tickCombontpc[ntpc_len].tradeStatus
+                        };
+
+                        this.props.pivotDatantpc(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatantpc) != undefined && this.props.trendDatantpc.length > 1 && (nextProps.trendDatantpc) != undefined && nextProps.trendDatantpc.length >1) {
+            var ntpc_nextPropslen = nextProps.trendDatantpc.length-1;
+
+            if (ntpc_nextPropslen > 1) {
+                if (nextProps.trendDatantpc[ntpc_nextPropslen].dir == "up"){
+                     ntpc_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatantpc[ntpc_nextPropslen].dir == "low"){
+                     ntpc_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
 
         //gail
          let gail_len = nextProps.tickCombogail.length - 1;
@@ -2570,6 +4767,85 @@ checkArg(0);
         //
 
 
+       let powergrid_len = nextProps.tickCombopowergrid.length - 1;
+
+        if ((this.props.tickCombopowergrid) != undefined) {
+
+            if ((nextProps.tickCombopowergrid).length >= 1) {
+
+
+            if (powergrid_len > 2) {
+                powergrid_prevCandleHeight = [];
+                powergrid_prevCandleHeight.push(nextProps.tickCombopowergrid[powergrid_len-1].high);
+                powergrid_prevCandleHeight.push(nextProps.tickCombopowergrid[powergrid_len-1].low);
+            }
+
+
+                  
+
+
+            if (powergrid_len > 1) {
+
+                if (nextProps.tickCombopowergrid[powergrid_len].marumbo == true){
+                     powergrid_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombopowergrid[powergrid_len].marumbo == false){
+                     powergrid_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombopowergrid[powergrid_len].pivot != undefined) {
+
+                    //powergrid oil
+                    if (this.state.powergrid_pivotpoint != nextProps.tickCombopowergrid[powergrid_len].pivot) {
+
+                        powergrid_count = powergrid_count + 1;
+
+                        this.setState({
+                            powergrid_pivotpoint: nextProps.tickCombopowergrid[powergrid_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombopowergrid[powergrid_len].pivot;
+
+                        let datainput = {
+                            x: powergrid_count,
+                            y: nextProps.tickCombopowergrid[powergrid_len].pivot,
+                            dir: nextProps.tickCombopowergrid[powergrid_len].dir,
+                            date: nextProps.tickCombopowergrid[powergrid_len].date,
+                            currentPrice: nextProps.tickCombopowergrid[powergrid_len].currentPrice,
+                            tradeStatus : nextProps.tickCombopowergrid[powergrid_len].tradeStatus
+                        };
+
+                        this.props.pivotDatapowergrid(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatapowergrid) != undefined && this.props.trendDatapowergrid.length > 1 && (nextProps.trendDatapowergrid) != undefined && nextProps.trendDatapowergrid.length >1) {
+            var powergrid_nextPropslen = nextProps.trendDatapowergrid.length-1;
+
+            if (powergrid_nextPropslen > 1) {
+                if (nextProps.trendDatapowergrid[powergrid_nextPropslen].dir == "up"){
+                     powergrid_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatapowergrid[powergrid_nextPropslen].dir == "low"){
+                     powergrid_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+        
+
 
 
 
@@ -2831,7 +5107,7 @@ checkArg(0);
             ws.onopen = function(event) {
                 var message = {
                     "a": "subscribe",
-                    "v": [54362375, 54087431 ,54363399]
+                    "v": [2585345,1850625,2748929,681985,2672641,1041153,492033,895745,857857,345089,348929,4268801,315393,975873,2889473,60417,3861249,424961,884737,2939649,633601,3834113,134657,2977281 ,2953217,806401,779521,738561,225537,7458561,364545,340481,1207553,3460353,215553,197633,54261767, 54087431 ,54363399 ,558337 ,11615490 ,2029825,356865,2029825,177665,5215745,1215745,486657]
                 };
                 ws.send(JSON.stringify(message));
             };
@@ -2848,16 +5124,286 @@ checkArg(0);
 
                         for (var i = 0; i < d.length; i++) {
 
-                            //
-                          
-                            if (d[i].instrument_token == "54087431") {
 
-                                get5minDataCopperTimestamp(d[i].last_price, self);
+                       if (d[i].instrument_token == "1041153") {
+                                 get5minDatamaricoTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                            if (d[i].instrument_token == "492033") {
+                                  get5minDatakotakbankTimestamp(d[i].last_price, self);
+                            }
+
+
+                             if (d[i].instrument_token == "895745") {
+                                 get5minDatatatasteelTimestamp(d[i].last_price, self);
+                            }
+
+                             if (d[i].instrument_token == "857857") {
+                                 get5minDatasunpharmaTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                       if (d[i].instrument_token == "345089") {
+                                 get5minDataheromotocoTimestamp(d[i].last_price, self);
+                            }
+
+
+
+
+                       if (d[i].instrument_token == "348929") {
+                                 get5minDatahindalcoTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                       if (d[i].instrument_token == "4268801") {
+                                 get5minDatabajajfinservTimestamp(d[i].last_price, self);
+                            }
+
+
+
+
+                            if (d[i].instrument_token == "315393") {
+                                 get5minDatagrasimTimestamp(d[i].last_price, self);
+                            }
+
+
+                             if (d[i].instrument_token == "975873") {
+                                 get5minDatazeelTimestamp(d[i].last_price, self);
+                            }
+
+
+
+
+                       if (d[i].instrument_token == "2889473") {
+                                 get5minDatauplTimestamp(d[i].last_price, self);
+                            }
+
+                            if (d[i].instrument_token == "60417") {
+                                 get5minDataasianpaintsTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                            if (d[i].instrument_token == "3861249") {
+                                 get5minDataadaniportsTimestamp(d[i].last_price, self);
+                            }
+
+                            if (d[i].instrument_token == "424961") {
+                                 get5minDataitcTimestamp(d[i].last_price, self);
+                            }
+
+
+                             if (d[i].instrument_token == "884737") {
+                                 get5minDatatatamotorsTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                            if (d[i].instrument_token == "2939649") {
+                                 get5minDatalarsenTimestamp(d[i].last_price, self);
+                            }
+
+
+
+
+
+                           if (d[i].instrument_token == "633601") {
+                                 get5minDataongcTimestamp(d[i].last_price, self);
+                            }
+
+                            
+                            if (d[i].instrument_token == "3834113") {
+                                 get5minDatapowergridTimestamp(d[i].last_price, self);
+                            }
+
+                            //bpcl. 
+                             if (d[i].instrument_token == "134657") {
+                                 get5minDatabpclTimestamp(d[i].last_price, self);
+                            }
+
+                            //bpcl. get5minDatabpclTimestamp
+
+                            if (d[i].instrument_token == "2977281") {
+                                 get5minDatantpcTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //ntpc 2977281
+
+                             if (d[i].instrument_token == "2977281") {
+                                 get5minDatantpcTimestamp(d[i].last_price, self);
+                            }
+
+
+                          
+                            if (d[i].instrument_token == "54261767") {
+                                 get5minDataCopperTimestamp(d[i].last_price, self);
                             }
 
                             if (d[i].instrument_token == "54362375") {
                                 get5minDatahindzincTimestamp(d[i].last_price, self);
                             }
+
+                            //banknifty 
+                            if (d[i].instrument_token == "11615490") {
+                                 get5minDatabankniftyTimestamp(d[i].last_price, self);
+                            }
+
+                            //bosch 558337
+                            if (d[i].instrument_token == "558337") {
+                                 get5minDataboschTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                            //cadila 2029825
+                            if (d[i].instrument_token == "2029825") {
+                                 get5minDatacadilaTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //cipla
+                            if (d[i].instrument_token == "177665") {
+                                 get5minDataciplaTimestamp(d[i].last_price, self);
+                            }
+
+
+
+                            //coal
+                            if (d[i].instrument_token == "5215745") {
+                                 get5minDatacoalTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //concor
+                            if (d[i].instrument_token == "1215745") {
+                                 get5minDataconcorTimestamp(d[i].last_price, self);
+                            }
+
+
+                           
+
+
+                            //cummsind
+                            if (d[i].instrument_token == "486657") {
+                                 get5minDatacummsindTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //dabur
+                            if (d[i].instrument_token == "197633") {
+                                 get5minDatadaburTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //dhfl
+                            if (d[i].instrument_token == "558337") {
+                                 get5minDatadhflTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //emami
+                            if (d[i].instrument_token == "3460353") {
+                                 get5minDataemamiTimestamp(d[i].last_price, self);
+                            }
+
+                            
+
+                            //gail
+                            if (d[i].instrument_token == "1207553") {
+                                 get5minDatagailTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //havells
+                            if (d[i].instrument_token == "558337") {
+                                 get5minDatahavellsTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //hdfc
+                            if (d[i].instrument_token == "340481") {
+                                 get5minDatahdfcTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //hindzinc
+                            if (d[i].instrument_token == "364545") {
+                                 get5minDatahindzincTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //infratel
+                            if (d[i].instrument_token == "7458561") {
+                                 get5minDatainfratelTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //reddy
+                            if (d[i].instrument_token == "225537") {
+                                 get5minDatareddyTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //reliance
+                            if (d[i].instrument_token == "738561") {
+                                 get5minDatarelianceTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //sbin
+                            if (d[i].instrument_token == "779521") {
+                                 get5minDatasbinTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //seimens
+                            if (d[i].instrument_token == "806401") {
+                                 get5minDataseimensTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //tcs 
+                            if (d[i].instrument_token == "2953217") {
+                                 get5minDatatcsTimestamp(d[i].last_price, self);
+                            }
+
+
+                            //unilever
+                            if (d[i].instrument_token == "356865") {
+                                 get5minDataunileverTimestamp(d[i].last_price, self);
+                            }
+
+
+                             if (d[i].instrument_token == "2672641") {
+                                 get5minDatalupinTimestamp(d[i].last_price, self);
+                            }
+
+
+                       if (d[i].instrument_token == "681985") {
+                                 get5minDatapidilitindTimestamp(d[i].last_price, self);
+                            }
+
+                             if (d[i].instrument_token == "2748929") {
+                                 get5minDataofssTimestamp(d[i].last_price, self);
+                            }
+
+                                if (d[i].instrument_token == "1850625") {
+                                 get5minDatahcltechTimestamp(d[i].last_price, self);
+                            }
+
+
+                       if (d[i].instrument_token == "2585345") {
+                                 get5minDatagodrejcpTimestamp(d[i].last_price, self);
+                            }
+
+
+
+
                            
 
 
@@ -2880,26 +5426,26 @@ checkArg(0);
 
 
         setInterval(function() {
-                getCrudeOHLC(self);
-                getCopperOHLC(self);
+                 getCrudeOHLC(self);
+                 getCopperOHLC(self);
 
 
-                getbankniftyOHLC(self);
-                getboschOHLC(self);
+                 getbankniftyOHLC(self);
+                 getboschOHLC(self);
 
 
-                getcadilaOHLC(self);
-                getciplaOHLC(self);
+                 getcadilaOHLC(self);
+                 getciplaOHLC(self);
 
-                getcoalOHLC(self);
-                getconcorOHLC(self);
+                 getcoalOHLC(self);
+                 getconcorOHLC(self);
 
                 // getcopperOHLC(self);
-                getcummsindOHLC(self);
+                 getcummsindOHLC(self);
 
 
                  getdaburOHLC(self);
-                getdhflOHLC(self);
+                 getdhflOHLC(self);
 
 
                  getemamiOHLC(self);
@@ -2907,37 +5453,1510 @@ checkArg(0);
 
 
                  gethavellsOHLC(self);
-                gethdfcOHLC(self);
+                 gethdfcOHLC(self);
 
 
-                gethdfcOHLC(self);
-                gethindzincOHLC(self);
+                 gethdfcOHLC(self);
+                 gethindzincOHLC(self);
 
 
-                getinfratelOHLC(self);
-                getreddyOHLC(self);
+                 getinfratelOHLC(self);
+                 getreddyOHLC(self);
 
 
                  getrelianceOHLC(self);
-                getsbinOHLC(self);
+                 getsbinOHLC(self);
 
 
-                getseimensOHLC(self);
-                gettcsOHLC(self);
+                 getseimensOHLC(self);
+                 gettcsOHLC(self);
 
-                getunileverOHLC(self);
+                 getunileverOHLC(self);
+
+                 getntpcOHLC(self);
+                 getbpclOHLC(self);
+                 getongcOHLC(self);
+                 getpowergridOHLC(self);
+                 getlarsenOHLC(self);
+                 gettatamotorsOHLC(self);
+                 getitcOHLC(self);
+                 getadaniportsOHLC(self);
+                 getasianpaintsOHLC(self);
+                 getuplOHLC(self);
+                 getzeelOHLC(self);
+                 getgrasimOHLC(self);
+                 getbajajfinservOHLC(self);
+                 gethindalcoOHLC(self);
+                 getheromotocoOHLC(self);
+                 getsunpharmaOHLC(self);
+                 gettatasteelOHLC(self);
+                 getlupinOHLC(self);
+                 getpidilitindOHLC(self);
+                 getofssOHLC(self);
+                 gethcltechOHLC(self);
+                 getgodrejcpOHLC(self);
+
                 
-        }, 25000);
+        }, 10000);
+
+ function getlarsenOHLC(d) {
+
+            larsentickopen = larsenarr[0];
+            larsentickhigh = _.maxBy(larsenarr);
+            larsenticklow = _.minBy(larsenarr);
+            larsentickclose = larsenarr[larsenarr.length - 1];
+
+            if (larsentickopen < larsentickclose) {
+                larsentickType = "green";
+            } else if (larsentickopen > larsentickclose) {
+                larsentickType = "red";
+            } else if (larsentickopen = larsentickclose) {
+                larsentickType = "doji";
+            }
+
+            larsentickLength = Math.abs(larsentickhigh - larsenticklow);
+
+
+                var marumbo = false;
+                if(larsentickType == "red" && larsen_currentSwingDirection == 'downSwing'){
+                        if(larsentickopen == larsentickhigh && larsentickclose == larsenticklow && larsenticklow < larsen_prevCandleHeight[1]){
+                            marumbo = true;
+                            larsen_marumboThresholdHigh = larsentickhigh;
+                            larsen_marumboThresholdLow = larsenticklow;
+                        }
+                }
+
+                if(larsentickType == "green" && larsen_currentSwingDirection == "upSwing"){
+                        if(larsentickopen == larsenticklow && larsentickclose == larsentickhigh && larsentickhigh > larsen_prevCandleHeight[0]){
+                            marumbo = true;
+                            larsen_marumboThresholdHigh = larsentickhigh;
+                            larsen_marumboThresholdLow = larsenticklow;
+                        }
+                }
+
+                if(larsentickType == "doji"){
+                         marumbo = false;
+                         larsen_marumboThresholdHigh = 0;
+                         larsen_marumboThresholdLow = 0;
+                }
+
+              
+
+            larsentickarray = {
+                "open": larsentickopen,
+                "low": larsenticklow,
+                "high": larsentickhigh,
+                "close": larsentickclose,
+                "tickType": larsentickType,
+                'tickLength': larsentickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatalarsen(larsentickarray);
+            first = 0;
+            larsenarr = [];
+        };
+
+
+         function get5minDatalarsenTimestamp(d, scope) {
+
+               if(larsen_prevCandleMarumbo == true && larsenarr.length == 1){
+                    ;
+                    
+                    if(larsen_currentSwingDirection == "upSwing"){
+                        if(larsenarr[0] >=  larsen_marumboThresholdHigh){
+                            console.log('buy long here at' + larsen_marumboThresholdHigh);
+                            scope.startTrade('LT', 'NSE', 'BUY', larsenarr[0],(larsen_marumboThresholdHigh+larsen_marumboThresholdLow)/2, larsenarr[0] + parseInt(larsenarr[0])*breakevenRatio);
+                        }
+
+                        if(larsenarr[0] <= larsen_marumboThresholdHigh){
+
+                        }
+                         larsen_prevCandleMarumbo = false;
+                         larsen_marumboThresholdHigh = 0;
+                         larsen_marumboThresholdLow = 0;
+                    }
+
+
+                    if(larsen_currentSwingDirection == "downSwing"){
+                        if(larsenarr[0] > larsen_marumboThresholdLow){
+                            console.log('sell short here at' + larsen_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', larsenTradePrice, stop, target);
+
+                            scope.startTrade('LT', 'NSE', 'SELL', larsenarr[0],(larsen_marumboThresholdHigh+larsen_marumboThresholdLow)/2 , larsenarr[0]-parseInt(larsenarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(larsenarr[0] <= larsen_marumboThresholdLow){
+                    
+                        }
+
+                            larsen_prevCandleMarumbo = false;
+                            larsen_marumboThresholdHigh = 0;
+                            larsen_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            larsenarr.push(d);
+        }
+
+
+
+function getgodrejcpOHLC(d) {
+
+            godrejcptickopen = godrejcparr[0];
+            godrejcptickhigh = _.maxBy(godrejcparr);
+            godrejcpticklow = _.minBy(godrejcparr);
+            godrejcptickclose = godrejcparr[godrejcparr.length - 1];
+
+            if (godrejcptickopen < godrejcptickclose) {
+                godrejcptickType = "green";
+            } else if (godrejcptickopen > godrejcptickclose) {
+                godrejcptickType = "red";
+            } else if (godrejcptickopen = godrejcptickclose) {
+                godrejcptickType = "doji";
+            }
+
+            godrejcptickLength = Math.abs(godrejcptickhigh - godrejcpticklow);
+
+
+                var marumbo = false;
+                if(godrejcptickType == "red" && godrejcp_currentSwingDirection == 'downSwing'){
+                        if(godrejcptickopen == godrejcptickhigh && godrejcptickclose == godrejcpticklow && godrejcpticklow < godrejcp_prevCandleHeight[1]){
+                            marumbo = true;
+                            godrejcp_marumboThresholdHigh = godrejcptickhigh;
+                            godrejcp_marumboThresholdLow = godrejcpticklow;
+                        }
+                }
+
+                if(godrejcptickType == "green" && godrejcp_currentSwingDirection == "upSwing"){
+                        if(godrejcptickopen == godrejcpticklow && godrejcptickclose == godrejcptickhigh && godrejcptickhigh > godrejcp_prevCandleHeight[0]){
+                            marumbo = true;
+                            godrejcp_marumboThresholdHigh = godrejcptickhigh;
+                            godrejcp_marumboThresholdLow = godrejcpticklow;
+                        }
+                }
+
+                if(godrejcptickType == "doji"){
+                         marumbo = false;
+                         godrejcp_marumboThresholdHigh = 0;
+                         godrejcp_marumboThresholdLow = 0;
+                }
+
+              
+
+            godrejcptickarray = {
+                "open": godrejcptickopen,
+                "low": godrejcpticklow,
+                "high": godrejcptickhigh,
+                "close": godrejcptickclose,
+                "tickType": godrejcptickType,
+                'tickLength': godrejcptickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatagodrejcp(godrejcptickarray);
+            first = 0;
+            godrejcparr = [];
+        };
+
+
+         function get5minDatagodrejcpTimestamp(d, scope) {
+
+               if(godrejcp_prevCandleMarumbo == true && godrejcparr.length == 1){
+                    ;
+                    
+                    if(godrejcp_currentSwingDirection == "upSwing"){
+                        if(godrejcparr[0] >=  godrejcp_marumboThresholdHigh){
+                            console.log('buy long here at' + godrejcp_marumboThresholdHigh);
+                            scope.startTrade('GODREJCP', 'NSE', 'BUY', godrejcparr[0],(godrejcp_marumboThresholdHigh+godrejcp_marumboThresholdLow)/2, godrejcparr[0] + parseInt(godrejcparr[0])*breakevenRatio);
+                        }
+
+                        if(godrejcparr[0] <= godrejcp_marumboThresholdHigh){
+
+                        }
+                         godrejcp_prevCandleMarumbo = false;
+                         godrejcp_marumboThresholdHigh = 0;
+                         godrejcp_marumboThresholdLow = 0;
+                    }
+
+
+                    if(godrejcp_currentSwingDirection == "downSwing"){
+                        if(godrejcparr[0] > godrejcp_marumboThresholdLow){
+                            console.log('sell short here at' + godrejcp_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', godrejcpTradePrice, stop, target);
+
+                            scope.startTrade('GODREJCP', 'NSE', 'SELL', godrejcparr[0],(godrejcp_marumboThresholdHigh+godrejcp_marumboThresholdLow)/2 , godrejcparr[0]-parseInt(godrejcparr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(godrejcparr[0] <= godrejcp_marumboThresholdLow){
+                    
+                        }
+
+                            godrejcp_prevCandleMarumbo = false;
+                            godrejcp_marumboThresholdHigh = 0;
+                            godrejcp_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            godrejcparr.push(d);
+        }
+
+
+
+
+        function gethcltechOHLC(d) {
+
+            hcltechtickopen = hcltecharr[0];
+            hcltechtickhigh = _.maxBy(hcltecharr);
+            hcltechticklow = _.minBy(hcltecharr);
+            hcltechtickclose = hcltecharr[hcltecharr.length - 1];
+
+            if (hcltechtickopen < hcltechtickclose) {
+                hcltechtickType = "green";
+            } else if (hcltechtickopen > hcltechtickclose) {
+                hcltechtickType = "red";
+            } else if (hcltechtickopen = hcltechtickclose) {
+                hcltechtickType = "doji";
+            }
+
+            hcltechtickLength = Math.abs(hcltechtickhigh - hcltechticklow);
+
+
+                var marumbo = false;
+                if(hcltechtickType == "red" && hcltech_currentSwingDirection == 'downSwing'){
+                        if(hcltechtickopen == hcltechtickhigh && hcltechtickclose == hcltechticklow && hcltechticklow < hcltech_prevCandleHeight[1]){
+                            marumbo = true;
+                            hcltech_marumboThresholdHigh = hcltechtickhigh;
+                            hcltech_marumboThresholdLow = hcltechticklow;
+                        }
+                }
+
+                if(hcltechtickType == "green" && hcltech_currentSwingDirection == "upSwing"){
+                        if(hcltechtickopen == hcltechticklow && hcltechtickclose == hcltechtickhigh && hcltechtickhigh > hcltech_prevCandleHeight[0]){
+                            marumbo = true;
+                            hcltech_marumboThresholdHigh = hcltechtickhigh;
+                            hcltech_marumboThresholdLow = hcltechticklow;
+                        }
+                }
+
+                if(hcltechtickType == "doji"){
+                         marumbo = false;
+                         hcltech_marumboThresholdHigh = 0;
+                         hcltech_marumboThresholdLow = 0;
+                }
+
+              
+
+            hcltechtickarray = {
+                "open": hcltechtickopen,
+                "low": hcltechticklow,
+                "high": hcltechtickhigh,
+                "close": hcltechtickclose,
+                "tickType": hcltechtickType,
+                'tickLength': hcltechtickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatahcltech(hcltechtickarray);
+            first = 0;
+            hcltecharr = [];
+        };
+
+
+         function get5minDatahcltechTimestamp(d, scope) {
+
+               if(hcltech_prevCandleMarumbo == true && hcltecharr.length == 1){
+                    ;
+                    
+                    if(hcltech_currentSwingDirection == "upSwing"){
+                        if(hcltecharr[0] >=  hcltech_marumboThresholdHigh){
+                            console.log('buy long here at' + hcltech_marumboThresholdHigh);
+                            scope.startTrade('HCLTECH', 'NSE', 'BUY', hcltecharr[0],(hcltech_marumboThresholdHigh+hcltech_marumboThresholdLow)/2, hcltecharr[0] + parseInt(hcltecharr[0])*breakevenRatio);
+                        }
+
+                        if(hcltecharr[0] <= hcltech_marumboThresholdHigh){
+
+                        }
+                         hcltech_prevCandleMarumbo = false;
+                         hcltech_marumboThresholdHigh = 0;
+                         hcltech_marumboThresholdLow = 0;
+                    }
+
+
+                    if(hcltech_currentSwingDirection == "downSwing"){
+                        if(hcltecharr[0] > hcltech_marumboThresholdLow){
+                            console.log('sell short here at' + hcltech_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', hcltechTradePrice, stop, target);
+
+                            scope.startTrade('HCLTECH', 'NSE', 'SELL', hcltecharr[0],(hcltech_marumboThresholdHigh+hcltech_marumboThresholdLow)/2 , hcltecharr[0]-parseInt(hcltecharr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(hcltecharr[0] <= hcltech_marumboThresholdLow){
+                    
+                        }
+
+                            hcltech_prevCandleMarumbo = false;
+                            hcltech_marumboThresholdHigh = 0;
+                            hcltech_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            hcltecharr.push(d);
+        }
+
+
+function getofssOHLC(d) {
+
+            ofsstickopen = ofssarr[0];
+            ofsstickhigh = _.maxBy(ofssarr);
+            ofssticklow = _.minBy(ofssarr);
+            ofsstickclose = ofssarr[ofssarr.length - 1];
+
+            if (ofsstickopen < ofsstickclose) {
+                ofsstickType = "green";
+            } else if (ofsstickopen > ofsstickclose) {
+                ofsstickType = "red";
+            } else if (ofsstickopen = ofsstickclose) {
+                ofsstickType = "doji";
+            }
+
+            ofsstickLength = Math.abs(ofsstickhigh - ofssticklow);
+
+
+                var marumbo = false;
+                if(ofsstickType == "red" && ofss_currentSwingDirection == 'downSwing'){
+                        if(ofsstickopen == ofsstickhigh && ofsstickclose == ofssticklow && ofssticklow < ofss_prevCandleHeight[1]){
+                            marumbo = true;
+                            ofss_marumboThresholdHigh = ofsstickhigh;
+                            ofss_marumboThresholdLow = ofssticklow;
+                        }
+                }
+
+                if(ofsstickType == "green" && ofss_currentSwingDirection == "upSwing"){
+                        if(ofsstickopen == ofssticklow && ofsstickclose == ofsstickhigh && ofsstickhigh > ofss_prevCandleHeight[0]){
+                            marumbo = true;
+                            ofss_marumboThresholdHigh = ofsstickhigh;
+                            ofss_marumboThresholdLow = ofssticklow;
+                        }
+                }
+
+                if(ofsstickType == "doji"){
+                         marumbo = false;
+                         ofss_marumboThresholdHigh = 0;
+                         ofss_marumboThresholdLow = 0;
+                }
+
+              
+
+            ofsstickarray = {
+                "open": ofsstickopen,
+                "low": ofssticklow,
+                "high": ofsstickhigh,
+                "close": ofsstickclose,
+                "tickType": ofsstickType,
+                'tickLength': ofsstickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataofss(ofsstickarray);
+            first = 0;
+            ofssarr = [];
+        };
+
+
+         function get5minDataofssTimestamp(d, scope) {
+
+               if(ofss_prevCandleMarumbo == true && ofssarr.length == 1){
+                    ;
+                    
+                    if(ofss_currentSwingDirection == "upSwing"){
+                        if(ofssarr[0] >=  ofss_marumboThresholdHigh){
+                            console.log('buy long here at' + ofss_marumboThresholdHigh);
+                            scope.startTrade('OFSS', 'NSE', 'BUY', ofssarr[0],(ofss_marumboThresholdHigh+ofss_marumboThresholdLow)/2, ofssarr[0] + parseInt(ofssarr[0])*breakevenRatio);
+                        }
+
+                        if(ofssarr[0] <= ofss_marumboThresholdHigh){
+
+                        }
+                         ofss_prevCandleMarumbo = false;
+                         ofss_marumboThresholdHigh = 0;
+                         ofss_marumboThresholdLow = 0;
+                    }
+
+
+                    if(ofss_currentSwingDirection == "downSwing"){
+                        if(ofssarr[0] > ofss_marumboThresholdLow){
+                            console.log('sell short here at' + ofss_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', ofssTradePrice, stop, target);
+
+                            scope.startTrade('OFSS', 'NSE', 'SELL', ofssarr[0],(ofss_marumboThresholdHigh+ofss_marumboThresholdLow)/2 , ofssarr[0]-parseInt(ofssarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(ofssarr[0] <= ofss_marumboThresholdLow){
+                    
+                        }
+
+                            ofss_prevCandleMarumbo = false;
+                            ofss_marumboThresholdHigh = 0;
+                            ofss_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            ofssarr.push(d);
+        }
+
+
+
+function getpidilitindOHLC(d) {
+
+            pidilitindtickopen = pidilitindarr[0];
+            pidilitindtickhigh = _.maxBy(pidilitindarr);
+            pidilitindticklow = _.minBy(pidilitindarr);
+            pidilitindtickclose = pidilitindarr[pidilitindarr.length - 1];
+
+            if (pidilitindtickopen < pidilitindtickclose) {
+                pidilitindtickType = "green";
+            } else if (pidilitindtickopen > pidilitindtickclose) {
+                pidilitindtickType = "red";
+            } else if (pidilitindtickopen = pidilitindtickclose) {
+                pidilitindtickType = "doji";
+            }
+
+            pidilitindtickLength = Math.abs(pidilitindtickhigh - pidilitindticklow);
+
+
+                var marumbo = false;
+                if(pidilitindtickType == "red" && pidilitind_currentSwingDirection == 'downSwing'){
+                        if(pidilitindtickopen == pidilitindtickhigh && pidilitindtickclose == pidilitindticklow && pidilitindticklow < pidilitind_prevCandleHeight[1]){
+                            marumbo = true;
+                            pidilitind_marumboThresholdHigh = pidilitindtickhigh;
+                            pidilitind_marumboThresholdLow = pidilitindticklow;
+                        }
+                }
+
+                if(pidilitindtickType == "green" && pidilitind_currentSwingDirection == "upSwing"){
+                        if(pidilitindtickopen == pidilitindticklow && pidilitindtickclose == pidilitindtickhigh && pidilitindtickhigh > pidilitind_prevCandleHeight[0]){
+                            marumbo = true;
+                            pidilitind_marumboThresholdHigh = pidilitindtickhigh;
+                            pidilitind_marumboThresholdLow = pidilitindticklow;
+                        }
+                }
+
+                if(pidilitindtickType == "doji"){
+                         marumbo = false;
+                         pidilitind_marumboThresholdHigh = 0;
+                         pidilitind_marumboThresholdLow = 0;
+                }
+
+              
+
+            pidilitindtickarray = {
+                "open": pidilitindtickopen,
+                "low": pidilitindticklow,
+                "high": pidilitindtickhigh,
+                "close": pidilitindtickclose,
+                "tickType": pidilitindtickType,
+                'tickLength': pidilitindtickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatapidilitind(pidilitindtickarray);
+            first = 0;
+            pidilitindarr = [];
+        };
+
+
+         function get5minDatapidilitindTimestamp(d, scope) {
+
+               if(pidilitind_prevCandleMarumbo == true && pidilitindarr.length == 1){
+                    ;
+                    
+                    if(pidilitind_currentSwingDirection == "upSwing"){
+                        if(pidilitindarr[0] >=  pidilitind_marumboThresholdHigh){
+                            console.log('buy long here at' + pidilitind_marumboThresholdHigh);
+                            scope.startTrade('PIDILITIND', 'NSE', 'BUY', pidilitindarr[0],(pidilitind_marumboThresholdHigh+pidilitind_marumboThresholdLow)/2, pidilitindarr[0] + parseInt(pidilitindarr[0])*breakevenRatio);
+                        }
+
+                        if(pidilitindarr[0] <= pidilitind_marumboThresholdHigh){
+
+                        }
+                         pidilitind_prevCandleMarumbo = false;
+                         pidilitind_marumboThresholdHigh = 0;
+                         pidilitind_marumboThresholdLow = 0;
+                    }
+
+
+                    if(pidilitind_currentSwingDirection == "downSwing"){
+                        if(pidilitindarr[0] > pidilitind_marumboThresholdLow){
+                            console.log('sell short here at' + pidilitind_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', pidilitindTradePrice, stop, target);
+
+                            scope.startTrade('PIDILITIND', 'NSE', 'SELL', pidilitindarr[0],(pidilitind_marumboThresholdHigh+pidilitind_marumboThresholdLow)/2 , pidilitindarr[0]-parseInt(pidilitindarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(pidilitindarr[0] <= pidilitind_marumboThresholdLow){
+                    
+                        }
+
+                            pidilitind_prevCandleMarumbo = false;
+                            pidilitind_marumboThresholdHigh = 0;
+                            pidilitind_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            pidilitindarr.push(d);
+        }
+
+
+        function getlupinOHLC(d) {
+
+            lupintickopen = lupinarr[0];
+            lupintickhigh = _.maxBy(lupinarr);
+            lupinticklow = _.minBy(lupinarr);
+            lupintickclose = lupinarr[lupinarr.length - 1];
+
+            if (lupintickopen < lupintickclose) {
+                lupintickType = "green";
+            } else if (lupintickopen > lupintickclose) {
+                lupintickType = "red";
+            } else if (lupintickopen = lupintickclose) {
+                lupintickType = "doji";
+            }
+
+            lupintickLength = Math.abs(lupintickhigh - lupinticklow);
+
+
+                var marumbo = false;
+                if(lupintickType == "red" && lupin_currentSwingDirection == 'downSwing'){
+                        if(lupintickopen == lupintickhigh && lupintickclose == lupinticklow && lupinticklow < lupin_prevCandleHeight[1]){
+                            marumbo = true;
+                            lupin_marumboThresholdHigh = lupintickhigh;
+                            lupin_marumboThresholdLow = lupinticklow;
+                        }
+                }
+
+                if(lupintickType == "green" && lupin_currentSwingDirection == "upSwing"){
+                        if(lupintickopen == lupinticklow && lupintickclose == lupintickhigh && lupintickhigh > lupin_prevCandleHeight[0]){
+                            marumbo = true;
+                            lupin_marumboThresholdHigh = lupintickhigh;
+                            lupin_marumboThresholdLow = lupinticklow;
+                        }
+                }
+
+                if(lupintickType == "doji"){
+                         marumbo = false;
+                         lupin_marumboThresholdHigh = 0;
+                         lupin_marumboThresholdLow = 0;
+                }
+
+              
+
+            lupintickarray = {
+                "open": lupintickopen,
+                "low": lupinticklow,
+                "high": lupintickhigh,
+                "close": lupintickclose,
+                "tickType": lupintickType,
+                'tickLength': lupintickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatalupin(lupintickarray);
+            first = 0;
+            lupinarr = [];
+        };
+
+
+         function get5minDatalupinTimestamp(d, scope) {
+
+               if(lupin_prevCandleMarumbo == true && lupinarr.length == 1){
+                    ;
+                    
+                    if(lupin_currentSwingDirection == "upSwing"){
+                        if(lupinarr[0] >=  lupin_marumboThresholdHigh){
+                            console.log('buy long here at' + lupin_marumboThresholdHigh);
+                            scope.startTrade('LUPIN', 'NSE', 'BUY', lupinarr[0],(lupin_marumboThresholdHigh+lupin_marumboThresholdLow)/2, lupinarr[0] + parseInt(lupinarr[0])*breakevenRatio);
+                        }
+
+                        if(lupinarr[0] <= lupin_marumboThresholdHigh){
+
+                        }
+                         lupin_prevCandleMarumbo = false;
+                         lupin_marumboThresholdHigh = 0;
+                         lupin_marumboThresholdLow = 0;
+                    }
+
+
+                    if(lupin_currentSwingDirection == "downSwing"){
+                        if(lupinarr[0] > lupin_marumboThresholdLow){
+                            console.log('sell short here at' + lupin_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', lupinTradePrice, stop, target);
+
+                            scope.startTrade('LUPIN', 'NSE', 'SELL', lupinarr[0],(lupin_marumboThresholdHigh+lupin_marumboThresholdLow)/2 , lupinarr[0]-parseInt(lupinarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(lupinarr[0] <= lupin_marumboThresholdLow){
+                    
+                        }
+
+                            lupin_prevCandleMarumbo = false;
+                            lupin_marumboThresholdHigh = 0;
+                            lupin_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            lupinarr.push(d);
+        }
+
+
+
+
+ function gettatamotorsOHLC(d) {
+
+            tatamotorstickopen = tatamotorsarr[0];
+            tatamotorstickhigh = _.maxBy(tatamotorsarr);
+            tatamotorsticklow = _.minBy(tatamotorsarr);
+            tatamotorstickclose = tatamotorsarr[tatamotorsarr.length - 1];
+
+            if (tatamotorstickopen < tatamotorstickclose) {
+                tatamotorstickType = "green";
+            } else if (tatamotorstickopen > tatamotorstickclose) {
+                tatamotorstickType = "red";
+            } else if (tatamotorstickopen = tatamotorstickclose) {
+                tatamotorstickType = "doji";
+            }
+
+            tatamotorstickLength = Math.abs(tatamotorstickhigh - tatamotorsticklow);
+
+
+                var marumbo = false;
+                if(tatamotorstickType == "red" && tatamotors_currentSwingDirection == 'downSwing'){
+                        if(tatamotorstickopen == tatamotorstickhigh && tatamotorstickclose == tatamotorsticklow && tatamotorsticklow < tatamotors_prevCandleHeight[1]){
+                            marumbo = true;
+                            tatamotors_marumboThresholdHigh = tatamotorstickhigh;
+                            tatamotors_marumboThresholdLow = tatamotorsticklow;
+                        }
+                }
+
+                if(tatamotorstickType == "green" && tatamotors_currentSwingDirection == "upSwing"){
+                        if(tatamotorstickopen == tatamotorsticklow && tatamotorstickclose == tatamotorstickhigh && tatamotorstickhigh > tatamotors_prevCandleHeight[0]){
+                            marumbo = true;
+                            tatamotors_marumboThresholdHigh = tatamotorstickhigh;
+                            tatamotors_marumboThresholdLow = tatamotorsticklow;
+                        }
+                }
+
+                if(tatamotorstickType == "doji"){
+                         marumbo = false;
+                         tatamotors_marumboThresholdHigh = 0;
+                         tatamotors_marumboThresholdLow = 0;
+                }
+
+              
+
+            tatamotorstickarray = {
+                "open": tatamotorstickopen,
+                "low": tatamotorsticklow,
+                "high": tatamotorstickhigh,
+                "close": tatamotorstickclose,
+                "tickType": tatamotorstickType,
+                'tickLength': tatamotorstickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatatatamotors(tatamotorstickarray);
+            first = 0;
+            tatamotorsarr = [];
+        };
+
+        function getitcOHLC(d) {
+
+            itctickopen = itcarr[0];
+            itctickhigh = _.maxBy(itcarr);
+            itcticklow = _.minBy(itcarr);
+            itctickclose = itcarr[itcarr.length - 1];
+
+            if (itctickopen < itctickclose) {
+                itctickType = "green";
+            } else if (itctickopen > itctickclose) {
+                itctickType = "red";
+            } else if (itctickopen = itctickclose) {
+                itctickType = "doji";
+            }
+
+            itctickLength = Math.abs(itctickhigh - itcticklow);
+
+
+                var marumbo = false;
+                if(itctickType == "red" && itc_currentSwingDirection == 'downSwing'){
+                        if(itctickopen == itctickhigh && itctickclose == itcticklow && itcticklow < itc_prevCandleHeight[1]){
+                            marumbo = true;
+                            itc_marumboThresholdHigh = itctickhigh;
+                            itc_marumboThresholdLow = itcticklow;
+                        }
+                }
+
+                if(itctickType == "green" && itc_currentSwingDirection == "upSwing"){
+                        if(itctickopen == itcticklow && itctickclose == itctickhigh && itctickhigh > itc_prevCandleHeight[0]){
+                            marumbo = true;
+                            itc_marumboThresholdHigh = itctickhigh;
+                            itc_marumboThresholdLow = itcticklow;
+                        }
+                }
+
+                if(itctickType == "doji"){
+                         marumbo = false;
+                         itc_marumboThresholdHigh = 0;
+                         itc_marumboThresholdLow = 0;
+                }
+
+              
+
+            itctickarray = {
+                "open": itctickopen,
+                "low": itcticklow,
+                "high": itctickhigh,
+                "close": itctickclose,
+                "tickType": itctickType,
+                'tickLength': itctickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataitc(itctickarray);
+            first = 0;
+            itcarr = [];
+        };
+
+
+         function get5minDataitcTimestamp(d, scope) {
+
+               if(itc_prevCandleMarumbo == true && itcarr.length == 1){
+                    ;
+                    
+                    if(itc_currentSwingDirection == "upSwing"){
+                        if(itcarr[0] >=  itc_marumboThresholdHigh){
+                            console.log('buy long here at' + itc_marumboThresholdHigh);
+                            scope.startTrade('ITC', 'NSE', 'BUY', itcarr[0],(itc_marumboThresholdHigh+itc_marumboThresholdLow)/2, itcarr[0] + parseInt(itcarr[0])*breakevenRatio);
+                        }
+
+                        if(itcarr[0] <= itc_marumboThresholdHigh){
+
+                        }
+                         itc_prevCandleMarumbo = false;
+                         itc_marumboThresholdHigh = 0;
+                         itc_marumboThresholdLow = 0;
+                    }
+
+
+                    if(itc_currentSwingDirection == "downSwing"){
+                        if(itcarr[0] > itc_marumboThresholdLow){
+                            console.log('sell short here at' + itc_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', itcTradePrice, stop, target);
+
+                            scope.startTrade('ITC', 'NSE', 'SELL', itcarr[0],(itc_marumboThresholdHigh+itc_marumboThresholdLow)/2 , itcarr[0]-parseInt(itcarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(itcarr[0] <= itc_marumboThresholdLow){
+                    
+                        }
+
+                            itc_prevCandleMarumbo = false;
+                            itc_marumboThresholdHigh = 0;
+                            itc_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            itcarr.push(d);
+        }
+
+        function getzeelOHLC(d) {
+
+            zeeltickopen = zeelarr[0];
+            zeeltickhigh = _.maxBy(zeelarr);
+            zeelticklow = _.minBy(zeelarr);
+            zeeltickclose = zeelarr[zeelarr.length - 1];
+
+            if (zeeltickopen < zeeltickclose) {
+                zeeltickType = "green";
+            } else if (zeeltickopen > zeeltickclose) {
+                zeeltickType = "red";
+            } else if (zeeltickopen = zeeltickclose) {
+                zeeltickType = "doji";
+            }
+
+            zeeltickLength = Math.abs(zeeltickhigh - zeelticklow);
+
+
+                var marumbo = false;
+                if(zeeltickType == "red" && zeel_currentSwingDirection == 'downSwing'){
+                        if(zeeltickopen == zeeltickhigh && zeeltickclose == zeelticklow && zeelticklow < zeel_prevCandleHeight[1]){
+                            marumbo = true;
+                            zeel_marumboThresholdHigh = zeeltickhigh;
+                            zeel_marumboThresholdLow = zeelticklow;
+                        }
+                }
+
+                if(zeeltickType == "green" && zeel_currentSwingDirection == "upSwing"){
+                        if(zeeltickopen == zeelticklow && zeeltickclose == zeeltickhigh && zeeltickhigh > zeel_prevCandleHeight[0]){
+                            marumbo = true;
+                            zeel_marumboThresholdHigh = zeeltickhigh;
+                            zeel_marumboThresholdLow = zeelticklow;
+                        }
+                }
+
+                if(zeeltickType == "doji"){
+                         marumbo = false;
+                         zeel_marumboThresholdHigh = 0;
+                         zeel_marumboThresholdLow = 0;
+                }
+
+              
+
+            zeeltickarray = {
+                "open": zeeltickopen,
+                "low": zeelticklow,
+                "high": zeeltickhigh,
+                "close": zeeltickclose,
+                "tickType": zeeltickType,
+                'tickLength': zeeltickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatazeel(zeeltickarray);
+            first = 0;
+            zeelarr = [];
+        };
+
+
+         function get5minDatazeelTimestamp(d, scope) {
+
+               if(zeel_prevCandleMarumbo == true && zeelarr.length == 1){
+                    ;
+                    
+                    if(zeel_currentSwingDirection == "upSwing"){
+                        if(zeelarr[0] >=  zeel_marumboThresholdHigh){
+                            console.log('buy long here at' + zeel_marumboThresholdHigh);
+                            scope.startTrade('ZEEL', 'NSE', 'BUY', zeelarr[0],(zeel_marumboThresholdHigh+zeel_marumboThresholdLow)/2, zeelarr[0] + parseInt(zeelarr[0])*breakevenRatio);
+                        }
+
+                        if(zeelarr[0] <= zeel_marumboThresholdHigh){
+
+                        }
+                         zeel_prevCandleMarumbo = false;
+                         zeel_marumboThresholdHigh = 0;
+                         zeel_marumboThresholdLow = 0;
+                    }
+
+
+                    if(zeel_currentSwingDirection == "downSwing"){
+                        if(zeelarr[0] > zeel_marumboThresholdLow){
+                            console.log('sell short here at' + zeel_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', zeelTradePrice, stop, target);
+
+                            scope.startTrade('ZEEL', 'NSE', 'SELL', zeelarr[0],(zeel_marumboThresholdHigh+zeel_marumboThresholdLow)/2 , zeelarr[0]-parseInt(zeelarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(zeelarr[0] <= zeel_marumboThresholdLow){
+                    
+                        }
+
+                            zeel_prevCandleMarumbo = false;
+                            zeel_marumboThresholdHigh = 0;
+                            zeel_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            zeelarr.push(d);
+        }
+
+
+
+         function get5minDatatatamotorsTimestamp(d, scope) {
+
+               if(tatamotors_prevCandleMarumbo == true && tatamotorsarr.length == 1){
+                    ;
+                    
+                    if(tatamotors_currentSwingDirection == "upSwing"){
+                        if(tatamotorsarr[0] >=  tatamotors_marumboThresholdHigh){
+                            console.log('buy long here at' + tatamotors_marumboThresholdHigh);
+                            scope.startTrade('TATAMOTORS', 'NSE', 'BUY', tatamotorsarr[0],(tatamotors_marumboThresholdHigh+tatamotors_marumboThresholdLow)/2, tatamotorsarr[0] + parseInt(tatamotorsarr[0])*breakevenRatio);
+                        }
+
+                        if(tatamotorsarr[0] <= tatamotors_marumboThresholdHigh){
+
+                        }
+                         tatamotors_prevCandleMarumbo = false;
+                         tatamotors_marumboThresholdHigh = 0;
+                         tatamotors_marumboThresholdLow = 0;
+                    }
+
+
+                    if(tatamotors_currentSwingDirection == "downSwing"){
+                        if(tatamotorsarr[0] > tatamotors_marumboThresholdLow){
+                            console.log('sell short here at' + tatamotors_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', tatamotorsTradePrice, stop, target);
+
+                            scope.startTrade('TATAMOTORS', 'NSE', 'SELL', tatamotorsarr[0],(tatamotors_marumboThresholdHigh+tatamotors_marumboThresholdLow)/2 , tatamotorsarr[0]-parseInt(tatamotorsarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(tatamotorsarr[0] <= tatamotors_marumboThresholdLow){
+                    
+                        }
+
+                            tatamotors_prevCandleMarumbo = false;
+                            tatamotors_marumboThresholdHigh = 0;
+                            tatamotors_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            tatamotorsarr.push(d);
+        }
+
+         function gettatasteelOHLC(d) {
+
+            tatasteeltickopen = tatasteelarr[0];
+            tatasteeltickhigh = _.maxBy(tatasteelarr);
+            tatasteelticklow = _.minBy(tatasteelarr);
+            tatasteeltickclose = tatasteelarr[tatasteelarr.length - 1];
+
+            if (tatasteeltickopen < tatasteeltickclose) {
+                tatasteeltickType = "green";
+            } else if (tatasteeltickopen > tatasteeltickclose) {
+                tatasteeltickType = "red";
+            } else if (tatasteeltickopen = tatasteeltickclose) {
+                tatasteeltickType = "doji";
+            }
+
+            tatasteeltickLength = Math.abs(tatasteeltickhigh - tatasteelticklow);
+
+
+                var marumbo = false;
+                if(tatasteeltickType == "red" && tatasteel_currentSwingDirection == 'downSwing'){
+                        if(tatasteeltickopen == tatasteeltickhigh && tatasteeltickclose == tatasteelticklow && tatasteelticklow < tatasteel_prevCandleHeight[1]){
+                            marumbo = true;
+                            tatasteel_marumboThresholdHigh = tatasteeltickhigh;
+                            tatasteel_marumboThresholdLow = tatasteelticklow;
+                        }
+                }
+
+                if(tatasteeltickType == "green" && tatasteel_currentSwingDirection == "upSwing"){
+                        if(tatasteeltickopen == tatasteelticklow && tatasteeltickclose == tatasteeltickhigh && tatasteeltickhigh > tatasteel_prevCandleHeight[0]){
+                            marumbo = true;
+                            tatasteel_marumboThresholdHigh = tatasteeltickhigh;
+                            tatasteel_marumboThresholdLow = tatasteelticklow;
+                        }
+                }
+
+                if(tatasteeltickType == "doji"){
+                         marumbo = false;
+                         tatasteel_marumboThresholdHigh = 0;
+                         tatasteel_marumboThresholdLow = 0;
+                }
+
+              
+
+            tatasteeltickarray = {
+                "open": tatasteeltickopen,
+                "low": tatasteelticklow,
+                "high": tatasteeltickhigh,
+                "close": tatasteeltickclose,
+                "tickType": tatasteeltickType,
+                'tickLength': tatasteeltickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatatatasteel(tatasteeltickarray);
+            first = 0;
+            tatasteelarr = [];
+        };
+
+
+         function get5minDatatatasteelTimestamp(d, scope) {
+
+               if(tatasteel_prevCandleMarumbo == true && tatasteelarr.length == 1){
+                    ;
+                    
+                    if(tatasteel_currentSwingDirection == "upSwing"){
+                        if(tatasteelarr[0] >=  tatasteel_marumboThresholdHigh){
+                            console.log('buy long here at' + tatasteel_marumboThresholdHigh);
+                            scope.startTrade('TATASTEEL', 'NSE', 'BUY', tatasteelarr[0],(tatasteel_marumboThresholdHigh+tatasteel_marumboThresholdLow)/2, tatasteelarr[0] + parseInt(tatasteelarr[0])*breakevenRatio);
+                        }
+
+                        if(tatasteelarr[0] <= tatasteel_marumboThresholdHigh){
+
+                        }
+                         tatasteel_prevCandleMarumbo = false;
+                         tatasteel_marumboThresholdHigh = 0;
+                         tatasteel_marumboThresholdLow = 0;
+                    }
+
+
+                    if(tatasteel_currentSwingDirection == "downSwing"){
+                        if(tatasteelarr[0] > tatasteel_marumboThresholdLow){
+                            console.log('sell short here at' + tatasteel_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', tatasteelTradePrice, stop, target);
+
+                            scope.startTrade('TATASTEEL', 'NSE', 'SELL', tatasteelarr[0],(tatasteel_marumboThresholdHigh+tatasteel_marumboThresholdLow)/2 , tatasteelarr[0]-parseInt(tatasteelarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(tatasteelarr[0] <= tatasteel_marumboThresholdLow){
+                    
+                        }
+
+                            tatasteel_prevCandleMarumbo = false;
+                            tatasteel_marumboThresholdHigh = 0;
+                            tatasteel_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            tatasteelarr.push(d);
+        }
+
+
+ function getongcOHLC(d) {
+
+            ongctickopen = ongcarr[0];
+            ongctickhigh = _.maxBy(ongcarr);
+            ongcticklow = _.minBy(ongcarr);
+            ongctickclose = ongcarr[ongcarr.length - 1];
+
+            if (ongctickopen < ongctickclose) {
+                ongctickType = "green";
+            } else if (ongctickopen > ongctickclose) {
+                ongctickType = "red";
+            } else if (ongctickopen = ongctickclose) {
+                ongctickType = "doji";
+            }
+
+            ongctickLength = Math.abs(ongctickhigh - ongcticklow);
+
+
+                var marumbo = false;
+                if(ongctickType == "red" && ongc_currentSwingDirection == 'downSwing'){
+                        if(ongctickopen == ongctickhigh && ongctickclose == ongcticklow && ongcticklow < ongc_prevCandleHeight[1]){
+                            marumbo = true;
+                            ongc_marumboThresholdHigh = ongctickhigh;
+                            ongc_marumboThresholdLow = ongcticklow;
+                        }
+                }
+
+                if(ongctickType == "green" && ongc_currentSwingDirection == "upSwing"){
+                        if(ongctickopen == ongcticklow && ongctickclose == ongctickhigh && ongctickhigh > ongc_prevCandleHeight[0]){
+                            marumbo = true;
+                            ongc_marumboThresholdHigh = ongctickhigh;
+                            ongc_marumboThresholdLow = ongcticklow;
+                        }
+                }
+
+                if(ongctickType == "doji"){
+                         marumbo = false;
+                         ongc_marumboThresholdHigh = 0;
+                         ongc_marumboThresholdLow = 0;
+                }
+
+              
+
+            ongctickarray = {
+                "open": ongctickopen,
+                "low": ongcticklow,
+                "high": ongctickhigh,
+                "close": ongctickclose,
+                "tickType": ongctickType,
+                'tickLength': ongctickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataongc(ongctickarray);
+            first = 0;
+            ongcarr = [];
+        };
+
+
+         function get5minDataongcTimestamp(d, scope) {
+
+               if(ongc_prevCandleMarumbo == true && ongcarr.length == 1){
+                    ;
+                    
+                    if(ongc_currentSwingDirection == "upSwing"){
+                        if(ongcarr[0] >=  ongc_marumboThresholdHigh){
+                            console.log('buy long here at' + ongc_marumboThresholdHigh);
+                            scope.startTrade('ONGC', 'NSE', 'BUY', ongcarr[0],(ongc_marumboThresholdHigh+ongc_marumboThresholdLow)/2, ongcarr[0] + parseInt(ongcarr[0])*breakevenRatio);
+                        }
+
+                        if(ongcarr[0] <= ongc_marumboThresholdHigh){
+
+                        }
+                         ongc_prevCandleMarumbo = false;
+                         ongc_marumboThresholdHigh = 0;
+                         ongc_marumboThresholdLow = 0;
+                    }
+
+
+                    if(ongc_currentSwingDirection == "downSwing"){
+                        if(ongcarr[0] > ongc_marumboThresholdLow){
+                            console.log('sell short here at' + ongc_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', ongcTradePrice, stop, target);
+
+                            scope.startTrade('ONGC', 'NSE', 'SELL', ongcarr[0],(ongc_marumboThresholdHigh+ongc_marumboThresholdLow)/2 , ongcarr[0]-parseInt(ongcarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(ongcarr[0] <= ongc_marumboThresholdLow){
+                    
+                        }
+
+                            ongc_prevCandleMarumbo = false;
+                            ongc_marumboThresholdHigh = 0;
+                            ongc_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            ongcarr.push(d);
+        }
+
+
+ function gethindalcoOHLC(d) {
+
+            hindalcotickopen = hindalcoarr[0];
+            hindalcotickhigh = _.maxBy(hindalcoarr);
+            hindalcoticklow = _.minBy(hindalcoarr);
+            hindalcotickclose = hindalcoarr[hindalcoarr.length - 1];
+
+            if (hindalcotickopen < hindalcotickclose) {
+                hindalcotickType = "green";
+            } else if (hindalcotickopen > hindalcotickclose) {
+                hindalcotickType = "red";
+            } else if (hindalcotickopen = hindalcotickclose) {
+                hindalcotickType = "doji";
+            }
+
+            hindalcotickLength = Math.abs(hindalcotickhigh - hindalcoticklow);
+
+
+                var marumbo = false;
+                if(hindalcotickType == "red" && hindalco_currentSwingDirection == 'downSwing'){
+                        if(hindalcotickopen == hindalcotickhigh && hindalcotickclose == hindalcoticklow && hindalcoticklow < hindalco_prevCandleHeight[1]){
+                            marumbo = true;
+                            hindalco_marumboThresholdHigh = hindalcotickhigh;
+                            hindalco_marumboThresholdLow = hindalcoticklow;
+                        }
+                }
+
+                if(hindalcotickType == "green" && hindalco_currentSwingDirection == "upSwing"){
+                        if(hindalcotickopen == hindalcoticklow && hindalcotickclose == hindalcotickhigh && hindalcotickhigh > hindalco_prevCandleHeight[0]){
+                            marumbo = true;
+                            hindalco_marumboThresholdHigh = hindalcotickhigh;
+                            hindalco_marumboThresholdLow = hindalcoticklow;
+                        }
+                }
+
+                if(hindalcotickType == "doji"){
+                         marumbo = false;
+                         hindalco_marumboThresholdHigh = 0;
+                         hindalco_marumboThresholdLow = 0;
+                }
+
+              
+
+            hindalcotickarray = {
+                "open": hindalcotickopen,
+                "low": hindalcoticklow,
+                "high": hindalcotickhigh,
+                "close": hindalcotickclose,
+                "tickType": hindalcotickType,
+                'tickLength': hindalcotickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatahindalco(hindalcotickarray);
+            first = 0;
+            hindalcoarr = [];
+        };
+
+
+         function get5minDatahindalcoTimestamp(d, scope) {
+
+               if(hindalco_prevCandleMarumbo == true && hindalcoarr.length == 1){
+                    ;
+                    
+                    if(hindalco_currentSwingDirection == "upSwing"){
+                        if(hindalcoarr[0] >=  hindalco_marumboThresholdHigh){
+                            console.log('buy long here at' + hindalco_marumboThresholdHigh);
+                            scope.startTrade('HINDALCO', 'NSE', 'BUY', hindalcoarr[0],(hindalco_marumboThresholdHigh+hindalco_marumboThresholdLow)/2, hindalcoarr[0] + parseInt(hindalcoarr[0])*breakevenRatio);
+                        }
+
+                        if(hindalcoarr[0] <= hindalco_marumboThresholdHigh){
+
+                        }
+                         hindalco_prevCandleMarumbo = false;
+                         hindalco_marumboThresholdHigh = 0;
+                         hindalco_marumboThresholdLow = 0;
+                    }
+
+
+                    if(hindalco_currentSwingDirection == "downSwing"){
+                        if(hindalcoarr[0] > hindalco_marumboThresholdLow){
+                            console.log('sell short here at' + hindalco_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', hindalcoTradePrice, stop, target);
+
+                            scope.startTrade('HINDALCO', 'NSE', 'SELL', hindalcoarr[0],(hindalco_marumboThresholdHigh+hindalco_marumboThresholdLow)/2 , hindalcoarr[0]-parseInt(hindalcoarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(hindalcoarr[0] <= hindalco_marumboThresholdLow){
+                    
+                        }
+
+                            hindalco_prevCandleMarumbo = false;
+                            hindalco_marumboThresholdHigh = 0;
+                            hindalco_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            hindalcoarr.push(d);
+        }
+
+        function getmaricoOHLC(d) {
+
+            maricotickopen = maricoarr[0];
+            maricotickhigh = _.maxBy(maricoarr);
+            maricoticklow = _.minBy(maricoarr);
+            maricotickclose = maricoarr[maricoarr.length - 1];
+
+            if (maricotickopen < maricotickclose) {
+                maricotickType = "green";
+            } else if (maricotickopen > maricotickclose) {
+                maricotickType = "red";
+            } else if (maricotickopen = maricotickclose) {
+                maricotickType = "doji";
+            }
+
+            maricotickLength = Math.abs(maricotickhigh - maricoticklow);
+
+
+                var marumbo = false;
+                if(maricotickType == "red" && marico_currentSwingDirection == 'downSwing'){
+                        if(maricotickopen == maricotickhigh && maricotickclose == maricoticklow && maricoticklow < marico_prevCandleHeight[1]){
+                            marumbo = true;
+                            marico_marumboThresholdHigh = maricotickhigh;
+                            marico_marumboThresholdLow = maricoticklow;
+                        }
+                }
+
+                if(maricotickType == "green" && marico_currentSwingDirection == "upSwing"){
+                        if(maricotickopen == maricoticklow && maricotickclose == maricotickhigh && maricotickhigh > marico_prevCandleHeight[0]){
+                            marumbo = true;
+                            marico_marumboThresholdHigh = maricotickhigh;
+                            marico_marumboThresholdLow = maricoticklow;
+                        }
+                }
+
+                if(maricotickType == "doji"){
+                         marumbo = false;
+                         marico_marumboThresholdHigh = 0;
+                         marico_marumboThresholdLow = 0;
+                }
+
+              
+
+            maricotickarray = {
+                "open": maricotickopen,
+                "low": maricoticklow,
+                "high": maricotickhigh,
+                "close": maricotickclose,
+                "tickType": maricotickType,
+                'tickLength': maricotickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatamarico(maricotickarray);
+            first = 0;
+            maricoarr = [];
+        };
+
+
+         function get5minDatamaricoTimestamp(d, scope) {
+
+               if(marico_prevCandleMarumbo == true && maricoarr.length == 1){
+                    ;
+                    
+                    if(marico_currentSwingDirection == "upSwing"){
+                        if(maricoarr[0] >=  marico_marumboThresholdHigh){
+                            console.log('buy long here at' + marico_marumboThresholdHigh);
+                            scope.startTrade('MARICO', 'NSE', 'BUY', maricoarr[0],(marico_marumboThresholdHigh+marico_marumboThresholdLow)/2, maricoarr[0] + parseInt(maricoarr[0])*breakevenRatio);
+                        }
+
+                        if(maricoarr[0] <= marico_marumboThresholdHigh){
+
+                        }
+                         marico_prevCandleMarumbo = false;
+                         marico_marumboThresholdHigh = 0;
+                         marico_marumboThresholdLow = 0;
+                    }
+
+
+                    if(marico_currentSwingDirection == "downSwing"){
+                        if(maricoarr[0] > marico_marumboThresholdLow){
+                            console.log('sell short here at' + marico_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', maricoTradePrice, stop, target);
+
+                            scope.startTrade('MARICO', 'NSE', 'SELL', maricoarr[0],(marico_marumboThresholdHigh+marico_marumboThresholdLow)/2 , maricoarr[0]-parseInt(maricoarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(maricoarr[0] <= marico_marumboThresholdLow){
+                    
+                        }
+
+                            marico_prevCandleMarumbo = false;
+                            marico_marumboThresholdHigh = 0;
+                            marico_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            maricoarr.push(d);
+        }
+
+
+
+        //bpcl
+
+        function getbpclOHLC(d) {
+
+            bpcltickopen = bpclarr[0];
+            bpcltickhigh = _.maxBy(bpclarr);
+            bpclticklow = _.minBy(bpclarr);
+            bpcltickclose = bpclarr[bpclarr.length - 1];
+
+            if (bpcltickopen < bpcltickclose) {
+                bpcltickType = "green";
+            } else if (bpcltickopen > bpcltickclose) {
+                bpcltickType = "red";
+            } else if (bpcltickopen = bpcltickclose) {
+                bpcltickType = "doji";
+            }
+
+            bpcltickLength = Math.abs(bpcltickhigh - bpclticklow);
+
+
+                var marumbo = false;
+                if(bpcltickType == "red" && bpcl_currentSwingDirection == 'downSwing'){
+                        if(bpcltickopen == bpcltickhigh && bpcltickclose == bpclticklow && bpclticklow < bpcl_prevCandleHeight[1]){
+                            marumbo = true;
+                            bpcl_marumboThresholdHigh = bpcltickhigh;
+                            bpcl_marumboThresholdLow = bpclticklow;
+                        }
+                }
+
+                if(bpcltickType == "green" && bpcl_currentSwingDirection == "upSwing"){
+                        if(bpcltickopen == bpclticklow && bpcltickclose == bpcltickhigh && bpcltickhigh > bpcl_prevCandleHeight[0]){
+                            marumbo = true;
+                            bpcl_marumboThresholdHigh = bpcltickhigh;
+                            bpcl_marumboThresholdLow = bpclticklow;
+                        }
+                }
+
+                if(bpcltickType == "doji"){
+                         marumbo = false;
+                         bpcl_marumboThresholdHigh = 0;
+                         bpcl_marumboThresholdLow = 0;
+                }
+
+              
+
+            bpcltickarray = {
+                "open": bpcltickopen,
+                "low": bpclticklow,
+                "high": bpcltickhigh,
+                "close": bpcltickclose,
+                "tickType": bpcltickType,
+                'tickLength': bpcltickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatabpcl(bpcltickarray);
+            first = 0;
+            bpclarr = [];
+        };
+
+
+         function get5minDatabpclTimestamp(d, scope) {
+
+               if(bpcl_prevCandleMarumbo == true && bpclarr.length == 1){
+                    ;
+                    
+                    if(bpcl_currentSwingDirection == "upSwing"){
+                        if(bpclarr[0] >=  bpcl_marumboThresholdHigh){
+                            console.log('buy long here at' + bpcl_marumboThresholdHigh);
+                            scope.startTrade('BPCL', 'NSE', 'BUY', bpclarr[0],(bpcl_marumboThresholdHigh+bpcl_marumboThresholdLow)/2, bpclarr[0] + parseInt(bpclarr[0])*breakevenRatio);
+                        }
+
+                        if(bpclarr[0] <= bpcl_marumboThresholdHigh){
+
+                        }
+                         bpcl_prevCandleMarumbo = false;
+                         bpcl_marumboThresholdHigh = 0;
+                         bpcl_marumboThresholdLow = 0;
+                    }
+
+
+                    if(bpcl_currentSwingDirection == "downSwing"){
+                        if(bpclarr[0] > bpcl_marumboThresholdLow){
+                            console.log('sell short here at' + bpcl_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', bpclTradePrice, stop, target);
+
+                            scope.startTrade('BPCL', 'NSE', 'SELL', bpclarr[0],(bpcl_marumboThresholdHigh+bpcl_marumboThresholdLow)/2 , bpclarr[0]-parseInt(bpclarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(bpclarr[0] <= bpcl_marumboThresholdLow){
+                    
+                        }
+
+                            bpcl_prevCandleMarumbo = false;
+                            bpcl_marumboThresholdHigh = 0;
+                            bpcl_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            bpclarr.push(d);
+        }
+
 
 
         function get5minDataCrudeTimestamp(d, scope) {
 
                if(crude_prevCandleMarumbo == true && crudearr.length == 1){
-                    debugger;
+                    ;
                     
                     if(crude_currentSwingDirection == "upSwing"){
                         if(crudearr[0] >=  crude_marumboThresholdHigh){
                             console.log('buy long here at' + crude_marumboThresholdHigh);
+                            scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudearr[0],(crude_marumboThresholdHigh+crude_marumboThresholdLow)/2, crudearr[0] + parseInt(crudearr[0])*breakevenRatio);
                         }
 
                         if(crudearr[0] <= crude_marumboThresholdHigh){
@@ -2952,6 +6971,10 @@ checkArg(0);
                     if(crude_currentSwingDirection == "downSwing"){
                         if(crudearr[0] > crude_marumboThresholdLow){
                             console.log('sell short here at' + crude_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+
+                            scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudearr[0],(crude_marumboThresholdHigh+crude_marumboThresholdLow)/2 , crudearr[0]-parseInt(crudearr[0])*breakevenRatio);
+                     
                         }
 
                         if(crudearr[0] <= crude_marumboThresholdLow){
@@ -2971,7 +6994,7 @@ checkArg(0);
         function get5minDataCopperTimestamp(d, scope) {
 
                if(copper_prevCandleMarumbo == true && copperarr.length == 1){
-                    debugger;
+                  //  ;
                     
                     if(copper_currentSwingDirection == "upSwing"){
                         if(copperarr[0] >=  copper_marumboThresholdHigh){
@@ -3047,13 +7070,7 @@ checkArg(0);
                          crude_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + crudetickType);
-                   console.log('v swing direction  is ' + crude_currentSwingDirection );
-                }
-
-                console.log('current swing crude direction is ' + crude_currentSwingDirection);
-
+              
 
             crudetickarray = {
                 "open": crudetickopen,
@@ -3087,18 +7104,20 @@ checkArg(0);
 
             coppertickLength = Math.abs(coppertickhigh - copperticklow);
 
+            var copperLengthRatio = coppertickLength/coppertickhigh;
 
+             
                 var marumbo = false;
-                if(coppertickType == "red" && copper_currentSwingDirection == 'downSwing'){
-                        if(coppertickopen == coppertickhigh && coppertickclose == copperticklow && copperticklow < copper_prevCandleHeight[1]){
+                if(coppertickType == "red" && copper_currentSwingDirection == 'downSwing' && copperLengthRatio < 0.01) {
+                        if(coppertickclose == copperticklow && copperticklow < copper_prevCandleHeight[1]){
                             marumbo = true;
                             copper_marumboThresholdHigh = coppertickhigh;
                             copper_marumboThresholdLow = copperticklow;
                         }
                 }
 
-                if(coppertickType == "green" && copper_currentSwingDirection == "upSwing"){
-                        if(coppertickopen == copperticklow && coppertickclose == coppertickhigh && coppertickhigh > copper_prevCandleHeight[0]){
+                if(coppertickType == "green" && copper_currentSwingDirection == "upSwing" && copperLengthRatio < 0.01){
+                        if(coppertickclose == coppertickhigh && coppertickhigh > copper_prevCandleHeight[0]){
                             marumbo = true;
                             copper_marumboThresholdHigh = coppertickhigh;
                             copper_marumboThresholdLow = copperticklow;
@@ -3138,11 +7157,13 @@ checkArg(0);
         function get5minDatabankniftyTimestamp(d, scope) {
 
                if(banknifty_prevCandleMarumbo == true && bankniftyarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(banknifty_currentSwingDirection == "upSwing"){
                         if(bankniftyarr[0] >=  banknifty_marumboThresholdHigh){
                             console.log('buy long here at' + banknifty_marumboThresholdHigh);
+                            scope.startTrade('BANKNIFTY19MARFUT', 'NSE', 'BUY', bankniftyarr[0],(banknifty_marumboThresholdHigh+banknifty_marumboThresholdLow)/2, bankniftyarr[0] + parseInt(bankniftyarr[0])*breakevenRatio);
+                     
                         }
 
                         if(bankniftyarr[0] <= banknifty_marumboThresholdHigh){
@@ -3157,6 +7178,8 @@ checkArg(0);
                     if(banknifty_currentSwingDirection == "downSwing"){
                         if(bankniftyarr[0] > banknifty_marumboThresholdLow){
                             console.log('sell short here at' + banknifty_marumboThresholdLow );
+                            scope.startTrade('BANKNIFTY19MARFUT', 'NSE', 'SELL', bankniftyarr[0],(banknifty_marumboThresholdHigh+banknifty_marumboThresholdLow)/2 , bankniftyarr[0]-parseInt(bankniftyarr[0])*breakevenRatio);
+                     
                         }
 
                         if(bankniftyarr[0] <= banknifty_marumboThresholdLow){
@@ -3189,19 +7212,20 @@ checkArg(0);
             }
 
             bankniftytickLength = Math.abs(bankniftytickhigh - bankniftyticklow);
+            var bankniftyLengthRatio = bankniftytickLength/bankniftytickhigh;
 
 
                 var marumbo = false;
-                if(bankniftytickType == "red" && banknifty_currentSwingDirection == 'downSwing'){
-                        if(bankniftytickopen == bankniftytickhigh && bankniftytickclose == bankniftyticklow && bankniftyticklow < banknifty_prevCandleHeight[1]){
+                if(bankniftytickType == "red" && banknifty_currentSwingDirection == 'downSwing' && bankniftyLengthRatio < 0.01){
+                        if( bankniftytickclose == bankniftyticklow && bankniftyticklow < banknifty_prevCandleHeight[1]){
                             marumbo = true;
                             banknifty_marumboThresholdHigh = bankniftytickhigh;
                             banknifty_marumboThresholdLow = bankniftyticklow;
                         }
                 }
 
-                if(bankniftytickType == "green" && banknifty_currentSwingDirection == "upSwing"){
-                        if(bankniftytickopen == bankniftyticklow && bankniftytickclose == bankniftytickhigh && bankniftytickhigh > banknifty_prevCandleHeight[0]){
+                if(bankniftytickType == "green" && banknifty_currentSwingDirection == "upSwing" && bankniftyLengthRatio < 0.01){
+                        if( bankniftytickclose == bankniftytickhigh && bankniftytickhigh > banknifty_prevCandleHeight[0]){
                             marumbo = true;
                             banknifty_marumboThresholdHigh = bankniftytickhigh;
                             banknifty_marumboThresholdLow = bankniftyticklow;
@@ -3243,11 +7267,13 @@ checkArg(0);
         function get5minDataboschTimestamp(d, scope) {
 
                if(bosch_prevCandleMarumbo == true && boscharr.length == 1){
-                    debugger;
+                    ;
                     
                     if(bosch_currentSwingDirection == "upSwing"){
                         if(boscharr[0] >=  bosch_marumboThresholdHigh){
                             console.log('buy long here at' + bosch_marumboThresholdHigh);
+                            scope.startTrade('BOSCHLTD', 'NSE', 'BUY', boscharr[0],(bosch_marumboThresholdHigh+bosch_marumboThresholdLow)/2, boscharr[0] + parseInt(boscharr[0])*breakevenRatio);
+
                         }
 
                         if(boscharr[0] <= bosch_marumboThresholdHigh){
@@ -3262,6 +7288,8 @@ checkArg(0);
                     if(bosch_currentSwingDirection == "downSwing"){
                         if(boscharr[0] > bosch_marumboThresholdLow){
                             console.log('sell short here at' + bosch_marumboThresholdLow );
+                            scope.startTrade('BOSCHLTD', 'NSE', 'SELL', boscharr[0],(bosch_marumboThresholdHigh+bosch_marumboThresholdLow)/2 , boscharr[0]-parseInt(boscharr[0])*breakevenRatio);
+                     
                         }
 
                         if(boscharr[0] <= bosch_marumboThresholdLow){
@@ -3294,11 +7322,12 @@ checkArg(0);
             }
 
             boschtickLength = Math.abs(boschtickhigh - boschticklow);
+            var boschLengthRatio = boschtickLength/boschtickhigh;
 
 
                 var marumbo = false;
                 if(boschtickType == "red" && bosch_currentSwingDirection == 'downSwing'){
-                        if(boschtickopen == boschtickhigh && boschtickclose == boschticklow && boschticklow < bosch_prevCandleHeight[1]){
+                        if( boschtickclose == boschticklow && boschticklow < bosch_prevCandleHeight[1] &&  boschLengthRatio < 0.01){
                             marumbo = true;
                             bosch_marumboThresholdHigh = boschtickhigh;
                             bosch_marumboThresholdLow = boschticklow;
@@ -3306,7 +7335,7 @@ checkArg(0);
                 }
 
                 if(boschtickType == "green" && bosch_currentSwingDirection == "upSwing"){
-                        if(boschtickopen == boschticklow && boschtickclose == boschtickhigh && boschtickhigh > bosch_prevCandleHeight[0]){
+                        if(boschtickclose == boschtickhigh && boschtickhigh > bosch_prevCandleHeight[0]  &&  boschLengthRatio < 0.01){
                             marumbo = true;
                             bosch_marumboThresholdHigh = boschtickhigh;
                             bosch_marumboThresholdLow = boschticklow;
@@ -3346,11 +7375,13 @@ checkArg(0);
           function get5minDatacadilaTimestamp(d, scope) {
 
                if(cadila_prevCandleMarumbo == true && cadilaarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(cadila_currentSwingDirection == "upSwing"){
                         if(cadilaarr[0] >=  cadila_marumboThresholdHigh){
                             console.log('buy long here at' + cadila_marumboThresholdHigh);
+                            scope.startTrade('CADILAHC', 'NSE', 'BUY', cadilaarr[0],(cadila_marumboThresholdHigh+cadila_marumboThresholdLow)/2, cadilaarr[0] + parseInt(cadilaarr[0])*breakevenRatio);
+
                         }
 
                         if(cadilaarr[0] <= cadila_marumboThresholdHigh){
@@ -3365,6 +7396,8 @@ checkArg(0);
                     if(cadila_currentSwingDirection == "downSwing"){
                         if(cadilaarr[0] > cadila_marumboThresholdLow){
                             console.log('sell short here at' + cadila_marumboThresholdLow );
+                            scope.startTrade('CADILAHC', 'NSE', 'SELL', cadilaarr[0],(cadila_marumboThresholdHigh+cadila_marumboThresholdLow)/2 , cadilaarr[0]-parseInt(cadilaarr[0])*breakevenRatio);
+                     
                         }
 
                         if(cadilaarr[0] <= cadila_marumboThresholdLow){
@@ -3397,19 +7430,20 @@ checkArg(0);
             }
 
             cadilatickLength = Math.abs(cadilatickhigh - cadilaticklow);
+            var cadilaLengthRatio = cadilatickLength/cadilatickhigh;
 
 
                 var marumbo = false;
-                if(cadilatickType == "red" && cadila_currentSwingDirection == 'downSwing'){
-                        if(cadilatickopen == cadilatickhigh && cadilatickclose == cadilaticklow && cadilaticklow < cadila_prevCandleHeight[1]){
+                if(cadilatickType == "red" && cadila_currentSwingDirection == 'downSwing' && cadilaLengthRatio <0.01){
+                        if(cadilatickclose == cadilaticklow && cadilaticklow < cadila_prevCandleHeight[1]){
                             marumbo = true;
                             cadila_marumboThresholdHigh = cadilatickhigh;
                             cadila_marumboThresholdLow = cadilaticklow;
                         }
                 }
 
-                if(cadilatickType == "green" && cadila_currentSwingDirection == "upSwing"){
-                        if(cadilatickopen == cadilaticklow && cadilatickclose == cadilatickhigh && cadilatickhigh > cadila_prevCandleHeight[0]){
+                if(cadilatickType == "green" && cadila_currentSwingDirection == "upSwing"  && cadilaLengthRatio <0.01){
+                        if(cadilatickclose == cadilatickhigh && cadilatickhigh > cadila_prevCandleHeight[0]){
                             marumbo = true;
                             cadila_marumboThresholdHigh = cadilatickhigh;
                             cadila_marumboThresholdLow = cadilaticklow;
@@ -3422,13 +7456,9 @@ checkArg(0);
                          cadila_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + cadilatickType);
-                   console.log('v swing direction  is ' + cadila_currentSwingDirection );
-                }
+               
 
-                console.log('current swing cadila direction is ' + cadila_currentSwingDirection);
-
+               
 
             cadilatickarray = {
                 "open": cadilatickopen,
@@ -3450,11 +7480,14 @@ checkArg(0);
         function get5minDataciplaTimestamp(d, scope) {
 
                if(cipla_prevCandleMarumbo == true && ciplaarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(cipla_currentSwingDirection == "upSwing"){
                         if(ciplaarr[0] >=  cipla_marumboThresholdHigh){
                             console.log('buy long here at' + cipla_marumboThresholdHigh);
+                            scope.startTrade('CIPLA', 'NSE', 'BUY', ciplaarr[0],(cipla_marumboThresholdHigh+cipla_marumboThresholdLow)/2, ciplaarr[0] + parseInt(ciplaarr[0])*breakevenRatio);
+
+
                         }
 
                         if(ciplaarr[0] <= cipla_marumboThresholdHigh){
@@ -3469,6 +7502,8 @@ checkArg(0);
                     if(cipla_currentSwingDirection == "downSwing"){
                         if(ciplaarr[0] > cipla_marumboThresholdLow){
                             console.log('sell short here at' + cipla_marumboThresholdLow );
+                             scope.startTrade('CIPLA', 'NSE', 'SELL', ciplaarr[0],(cipla_marumboThresholdHigh+cipla_marumboThresholdLow)/2 , ciplaarr[0]-parseInt(ciplaarr[0])*breakevenRatio);
+                     
                         }
 
                         if(ciplaarr[0] <= cipla_marumboThresholdLow){
@@ -3501,19 +7536,20 @@ checkArg(0);
             }
 
             ciplatickLength = Math.abs(ciplatickhigh - ciplaticklow);
+            var ciplaLengthRatio = ciplatickLength/ciplatickhigh;
 
 
                 var marumbo = false;
-                if(ciplatickType == "red" && cipla_currentSwingDirection == 'downSwing'){
-                        if(ciplatickopen == ciplatickhigh && ciplatickclose == ciplaticklow && ciplaticklow < cipla_prevCandleHeight[1]){
+                if(ciplatickType == "red" && cipla_currentSwingDirection == 'downSwing' && ciplaLengthRatio<0.01){
+                        if(ciplatickclose == ciplaticklow && ciplaticklow < cipla_prevCandleHeight[1]){
                             marumbo = true;
                             cipla_marumboThresholdHigh = ciplatickhigh;
                             cipla_marumboThresholdLow = ciplaticklow;
                         }
                 }
 
-                if(ciplatickType == "green" && cipla_currentSwingDirection == "upSwing"){
-                        if(ciplatickopen == ciplaticklow && ciplatickclose == ciplatickhigh && ciplatickhigh > cipla_prevCandleHeight[0]){
+                if(ciplatickType == "green" && cipla_currentSwingDirection == "upSwing"  && ciplaLengthRatio<0.01){
+                        if(ciplatickclose == ciplatickhigh && ciplatickhigh > cipla_prevCandleHeight[0]){
                             marumbo = true;
                             cipla_marumboThresholdHigh = ciplatickhigh;
                             cipla_marumboThresholdLow = ciplaticklow;
@@ -3553,11 +7589,13 @@ checkArg(0);
         function get5minDatacoalTimestamp(d, scope) {
 
                if(coal_prevCandleMarumbo == true && coalarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(coal_currentSwingDirection == "upSwing"){
                         if(coalarr[0] >=  coal_marumboThresholdHigh){
                             console.log('buy long here at' + coal_marumboThresholdHigh);
+                             scope.startTrade('COALINDIA', 'NSE', 'BUY', coalarr[0],(coal_marumboThresholdHigh+coal_marumboThresholdLow)/2, coalarr[0] + parseInt(coalarr[0])*breakevenRatio);
+
                         }
 
                         if(coalarr[0] <= coal_marumboThresholdHigh){
@@ -3572,6 +7610,9 @@ checkArg(0);
                     if(coal_currentSwingDirection == "downSwing"){
                         if(coalarr[0] > coal_marumboThresholdLow){
                             console.log('sell short here at' + coal_marumboThresholdLow );
+
+                           scope.startTrade('COALINDIA', 'NSE', 'SELL', coalarr[0],(coal_marumboThresholdHigh+coal_marumboThresholdLow)/2 , coalarr[0]-parseInt(coalarr[0])*breakevenRatio);
+                     
                         }
 
                         if(coalarr[0] <= coal_marumboThresholdLow){
@@ -3604,19 +7645,20 @@ checkArg(0);
             }
 
             coaltickLength = Math.abs(coaltickhigh - coalticklow);
+            var coalLengthRatio = coaltickLength/coaltickhigh;
 
 
                 var marumbo = false;
-                if(coaltickType == "red" && coal_currentSwingDirection == 'downSwing'){
-                        if(coaltickopen == coaltickhigh && coaltickclose == coalticklow && coalticklow < coal_prevCandleHeight[1]){
+                if(coaltickType == "red" && coal_currentSwingDirection == 'downSwing' && coalLengthRatio <0.01){
+                        if(coaltickclose == coalticklow && coalticklow < coal_prevCandleHeight[1]){
                             marumbo = true;
                             coal_marumboThresholdHigh = coaltickhigh;
                             coal_marumboThresholdLow = coalticklow;
                         }
                 }
 
-                if(coaltickType == "green" && coal_currentSwingDirection == "upSwing"){
-                        if(coaltickopen == coalticklow && coaltickclose == coaltickhigh && coaltickhigh > coal_prevCandleHeight[0]){
+                if(coaltickType == "green" && coal_currentSwingDirection == "upSwing" && coalLengthRatio <0.01){
+                        if(coaltickclose == coaltickhigh && coaltickhigh > coal_prevCandleHeight[0]){
                             marumbo = true;
                             coal_marumboThresholdHigh = coaltickhigh;
                             coal_marumboThresholdLow = coalticklow;
@@ -3629,13 +7671,7 @@ checkArg(0);
                          coal_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + coaltickType);
-                   console.log('v swing direction  is ' + coal_currentSwingDirection );
-                }
-
-                console.log('current swing coal direction is ' + coal_currentSwingDirection);
-
+               
 
             coaltickarray = {
                 "open": coaltickopen,
@@ -3656,11 +7692,14 @@ checkArg(0);
         function get5minDataconcorTimestamp(d, scope) {
 
                if(concor_prevCandleMarumbo == true && concorarr.length == 1){
-                    debugger;
+                
                     
                     if(concor_currentSwingDirection == "upSwing"){
                         if(concorarr[0] >=  concor_marumboThresholdHigh){
                             console.log('buy long here at' + concor_marumboThresholdHigh);
+                            scope.startTrade('CONCOR', 'NSE', 'BUY', concorarr[0],(concor_marumboThresholdHigh+concor_marumboThresholdLow)/2, concorarr[0] + parseInt(concorarr[0])*breakevenRatio);
+
+
                         }
 
                         if(concorarr[0] <= concor_marumboThresholdHigh){
@@ -3675,6 +7714,8 @@ checkArg(0);
                     if(concor_currentSwingDirection == "downSwing"){
                         if(concorarr[0] > concor_marumboThresholdLow){
                             console.log('sell short here at' + concor_marumboThresholdLow );
+                            scope.startTrade('CONCOR', 'NSE', 'SELL', concorarr[0],(concor_marumboThresholdHigh+concor_marumboThresholdLow)/2 , concorarr[0]-parseInt(concorarr[0])*breakevenRatio);
+                     
                         }
 
                         if(concorarr[0] <= concor_marumboThresholdLow){
@@ -3707,11 +7748,13 @@ checkArg(0);
             }
 
             concortickLength = Math.abs(concortickhigh - concorticklow);
+            var concorLengthRatio = concortickLength/concortickhigh;
+
 
 
                 var marumbo = false;
                 if(concortickType == "red" && concor_currentSwingDirection == 'downSwing'){
-                        if(concortickopen == concortickhigh && concortickclose == concorticklow && concorticklow < concor_prevCandleHeight[1]){
+                        if(concortickclose == concorticklow && concorticklow < concor_prevCandleHeight[1] && concorLengthRatio<0.01){
                             marumbo = true;
                             concor_marumboThresholdHigh = concortickhigh;
                             concor_marumboThresholdLow = concorticklow;
@@ -3719,7 +7762,7 @@ checkArg(0);
                 }
 
                 if(concortickType == "green" && concor_currentSwingDirection == "upSwing"){
-                        if(concortickopen == concorticklow && concortickclose == concortickhigh && concortickhigh > concor_prevCandleHeight[0]){
+                        if(concortickclose == concortickhigh && concortickhigh > concor_prevCandleHeight[0] && concorLengthRatio<0.01){
                             marumbo = true;
                             concor_marumboThresholdHigh = concortickhigh;
                             concor_marumboThresholdLow = concorticklow;
@@ -3733,12 +7776,10 @@ checkArg(0);
                 }
 
                 if(marumbo == true){
-                   console.log('v type is ' + concortickType);
-                   console.log('v swing direction  is ' + concor_currentSwingDirection );
+                   
                 }
 
-                console.log('current swing concor direction is ' + concor_currentSwingDirection);
-
+          
 
             concortickarray = {
                 "open": concortickopen,
@@ -3759,11 +7800,13 @@ checkArg(0);
         function get5minDatacummsindTimestamp(d, scope) {
 
                if(cummsind_prevCandleMarumbo == true && cummsindarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(cummsind_currentSwingDirection == "upSwing"){
                         if(cummsindarr[0] >=  cummsind_marumboThresholdHigh){
                             console.log('buy long here at' + cummsind_marumboThresholdHigh);
+                            scope.startTrade('CUMMINSIND', 'NSE', 'BUY', cummsindarr[0],(cummsind_marumboThresholdHigh+cummsind_marumboThresholdLow)/2, cummsindarr[0] + parseInt(cummsindarr[0])*breakevenRatio);
+
                         }
 
                         if(cummsindarr[0] <= cummsind_marumboThresholdHigh){
@@ -3778,6 +7821,8 @@ checkArg(0);
                     if(cummsind_currentSwingDirection == "downSwing"){
                         if(cummsindarr[0] > cummsind_marumboThresholdLow){
                             console.log('sell short here at' + cummsind_marumboThresholdLow );
+                            scope.startTrade('CUMMINSIND', 'NSE', 'SELL', cummsindarr[0],(cummsind_marumboThresholdHigh+cummsind_marumboThresholdLow)/2 , cummsindarr[0]-parseInt(cummsindarr[0])*breakevenRatio);
+                     
                         }
 
                         if(cummsindarr[0] <= cummsind_marumboThresholdLow){
@@ -3809,20 +7854,21 @@ checkArg(0);
                 cummsindtickType = "doji";
             }
 
-            cummsindtickLength = Math.abs(cummsindtickhigh - cummsindticklow);
+             cummsindtickLength = Math.abs(cummsindtickhigh - cummsindticklow);
+             var cummsindLengthRatio = cummsindtickLength/cummsindtickhigh;
 
 
                 var marumbo = false;
                 if(cummsindtickType == "red" && cummsind_currentSwingDirection == 'downSwing'){
-                        if(cummsindtickopen == cummsindtickhigh && cummsindtickclose == cummsindticklow && cummsindticklow < cummsind_prevCandleHeight[1]){
+                        if(cummsindtickclose == cummsindticklow && cummsindticklow < cummsind_prevCandleHeight[1] && cummsindLengthRatio<0.01){
                             marumbo = true;
                             cummsind_marumboThresholdHigh = cummsindtickhigh;
                             cummsind_marumboThresholdLow = cummsindticklow;
                         }
                 }
 
-                if(cummsindtickType == "green" && cummsind_currentSwingDirection == "upSwing"){
-                        if(cummsindtickopen == cummsindticklow && cummsindtickclose == cummsindtickhigh && cummsindtickhigh > cummsind_prevCandleHeight[0]){
+                if(cummsindtickType == "green" && cummsind_currentSwingDirection == "upSwing" && cummsindLengthRatio<0.01){
+                        if(cummsindtickclose == cummsindtickhigh && cummsindtickhigh > cummsind_prevCandleHeight[0]){
                             marumbo = true;
                             cummsind_marumboThresholdHigh = cummsindtickhigh;
                             cummsind_marumboThresholdLow = cummsindticklow;
@@ -3858,15 +7904,121 @@ checkArg(0);
             cummsindarr = [];
         };
 
+
+        function getsunpharmaOHLC(d) {
+
+            sunpharmatickopen = sunpharmaarr[0];
+            sunpharmatickhigh = _.maxBy(sunpharmaarr);
+            sunpharmaticklow = _.minBy(sunpharmaarr);
+            sunpharmatickclose = sunpharmaarr[sunpharmaarr.length - 1];
+
+            if (sunpharmatickopen < sunpharmatickclose) {
+                sunpharmatickType = "green";
+            } else if (sunpharmatickopen > sunpharmatickclose) {
+                sunpharmatickType = "red";
+            } else if (sunpharmatickopen = sunpharmatickclose) {
+                sunpharmatickType = "doji";
+            }
+
+            sunpharmatickLength = Math.abs(sunpharmatickhigh - sunpharmaticklow);
+
+
+                var marumbo = false;
+                if(sunpharmatickType == "red" && sunpharma_currentSwingDirection == 'downSwing'){
+                        if(sunpharmatickopen == sunpharmatickhigh && sunpharmatickclose == sunpharmaticklow && sunpharmaticklow < sunpharma_prevCandleHeight[1]){
+                            marumbo = true;
+                            sunpharma_marumboThresholdHigh = sunpharmatickhigh;
+                            sunpharma_marumboThresholdLow = sunpharmaticklow;
+                        }
+                }
+
+                if(sunpharmatickType == "green" && sunpharma_currentSwingDirection == "upSwing"){
+                        if(sunpharmatickopen == sunpharmaticklow && sunpharmatickclose == sunpharmatickhigh && sunpharmatickhigh > sunpharma_prevCandleHeight[0]){
+                            marumbo = true;
+                            sunpharma_marumboThresholdHigh = sunpharmatickhigh;
+                            sunpharma_marumboThresholdLow = sunpharmaticklow;
+                        }
+                }
+
+                if(sunpharmatickType == "doji"){
+                         marumbo = false;
+                         sunpharma_marumboThresholdHigh = 0;
+                         sunpharma_marumboThresholdLow = 0;
+                }
+
+              
+
+            sunpharmatickarray = {
+                "open": sunpharmatickopen,
+                "low": sunpharmaticklow,
+                "high": sunpharmatickhigh,
+                "close": sunpharmatickclose,
+                "tickType": sunpharmatickType,
+                'tickLength': sunpharmatickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatasunpharma(sunpharmatickarray);
+            first = 0;
+            sunpharmaarr = [];
+        };
+
+
+         function get5minDatasunpharmaTimestamp(d, scope) {
+
+               if(sunpharma_prevCandleMarumbo == true && sunpharmaarr.length == 1){
+                    ;
+                    
+                    if(sunpharma_currentSwingDirection == "upSwing"){
+                        if(sunpharmaarr[0] >=  sunpharma_marumboThresholdHigh){
+                            console.log('buy long here at' + sunpharma_marumboThresholdHigh);
+                            scope.startTrade('SUNPHARMA', 'NSE', 'BUY', sunpharmaarr[0],(sunpharma_marumboThresholdHigh+sunpharma_marumboThresholdLow)/2, sunpharmaarr[0] + parseInt(sunpharmaarr[0])*breakevenRatio);
+                        }
+
+                        if(sunpharmaarr[0] <= sunpharma_marumboThresholdHigh){
+
+                        }
+                         sunpharma_prevCandleMarumbo = false;
+                         sunpharma_marumboThresholdHigh = 0;
+                         sunpharma_marumboThresholdLow = 0;
+                    }
+
+
+                    if(sunpharma_currentSwingDirection == "downSwing"){
+                        if(sunpharmaarr[0] > sunpharma_marumboThresholdLow){
+                            console.log('sell short here at' + sunpharma_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', sunpharmaTradePrice, stop, target);
+
+                            scope.startTrade('SUNPHARMA', 'NSE', 'SELL', sunpharmaarr[0],(sunpharma_marumboThresholdHigh+sunpharma_marumboThresholdLow)/2 , sunpharmaarr[0]-parseInt(sunpharmaarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(sunpharmaarr[0] <= sunpharma_marumboThresholdLow){
+                    
+                        }
+
+                            sunpharma_prevCandleMarumbo = false;
+                            sunpharma_marumboThresholdHigh = 0;
+                            sunpharma_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            sunpharmaarr.push(d);
+        }
+
+
         //dabur
         function get5minDatadaburTimestamp(d, scope) {
 
                if(dabur_prevCandleMarumbo == true && daburarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(dabur_currentSwingDirection == "upSwing"){
                         if(daburarr[0] >=  dabur_marumboThresholdHigh){
                             console.log('buy long here at' + dabur_marumboThresholdHigh);
+                            scope.startTrade('DABUR', 'NSE', 'BUY', daburarr[0],(dabur_marumboThresholdHigh+dabur_marumboThresholdLow)/2, daburarr[0] + parseInt(daburarr[0])*breakevenRatio);
+
                         }
 
                         if(daburarr[0] <= dabur_marumboThresholdHigh){
@@ -3881,6 +8033,8 @@ checkArg(0);
                     if(dabur_currentSwingDirection == "downSwing"){
                         if(daburarr[0] > dabur_marumboThresholdLow){
                             console.log('sell short here at' + dabur_marumboThresholdLow );
+                             scope.startTrade('DABUR', 'NSE', 'SELL', daburarr[0],(dabur_marumboThresholdHigh+dabur_marumboThresholdLow)/2 , daburarr[0]-parseInt(daburarr[0])*breakevenRatio);
+                     
                         }
 
                         if(daburarr[0] <= dabur_marumboThresholdLow){
@@ -3913,11 +8067,13 @@ checkArg(0);
             }
 
             daburtickLength = Math.abs(daburtickhigh - daburticklow);
+            var  daburLengthRatio =    daburtickLength/daburtickhigh;
+
 
 
                 var marumbo = false;
-                if(daburtickType == "red" && dabur_currentSwingDirection == 'downSwing'){
-                        if(daburtickopen == daburtickhigh && daburtickclose == daburticklow && daburticklow < dabur_prevCandleHeight[1]){
+                if(daburtickType == "red" && dabur_currentSwingDirection == 'downSwing' ){
+                        if( daburtickclose == daburticklow && daburticklow < dabur_prevCandleHeight[1] && daburLengthRatio<0.01){
                             marumbo = true;
                             dabur_marumboThresholdHigh = daburtickhigh;
                             dabur_marumboThresholdLow = daburticklow;
@@ -3925,7 +8081,7 @@ checkArg(0);
                 }
 
                 if(daburtickType == "green" && dabur_currentSwingDirection == "upSwing"){
-                        if(daburtickopen == daburticklow && daburtickclose == daburtickhigh && daburtickhigh > dabur_prevCandleHeight[0]){
+                        if( daburtickclose == daburtickhigh && daburtickhigh > dabur_prevCandleHeight[0] && daburLengthRatio<0.01){
                             marumbo = true;
                             dabur_marumboThresholdHigh = daburtickhigh;
                             dabur_marumboThresholdLow = daburticklow;
@@ -3965,11 +8121,13 @@ checkArg(0);
         function get5minDatadhflTimestamp(d, scope) {
 
                if(dhfl_prevCandleMarumbo == true && dhflarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(dhfl_currentSwingDirection == "upSwing"){
                         if(dhflarr[0] >=  dhfl_marumboThresholdHigh){
                             console.log('buy long here at' + dhfl_marumboThresholdHigh);
+                            scope.startTrade('DHFL', 'NSE', 'BUY', dhflarr[0],(dhfl_marumboThresholdHigh+dhfl_marumboThresholdLow)/2, dhflarr[0] + parseInt(dhflarr[0])*breakevenRatio);
+
                         }
 
                         if(dhflarr[0] <= dhfl_marumboThresholdHigh){
@@ -3984,6 +8142,9 @@ checkArg(0);
                     if(dhfl_currentSwingDirection == "downSwing"){
                         if(dhflarr[0] > dhfl_marumboThresholdLow){
                             console.log('sell short here at' + dhfl_marumboThresholdLow );
+
+                            scope.startTrade('DHFL', 'NSE', 'SELL', dhflarr[0],(dhfl_marumboThresholdHigh+dhfl_marumboThresholdLow)/2 , dhflarr[0]-parseInt(dhflarr[0])*breakevenRatio);
+                   
                         }
 
                         if(dhflarr[0] <= dhfl_marumboThresholdLow){
@@ -4016,11 +8177,12 @@ checkArg(0);
             }
 
             dhfltickLength = Math.abs(dhfltickhigh - dhflticklow);
+            var  dhflLengthRatio =   dhfltickLength/dhfltickhigh;
 
 
                 var marumbo = false;
                 if(dhfltickType == "red" && dhfl_currentSwingDirection == 'downSwing'){
-                        if(dhfltickopen == dhfltickhigh && dhfltickclose == dhflticklow && dhflticklow < dhfl_prevCandleHeight[1]){
+                        if(dhfltickclose == dhflticklow && dhflticklow < dhfl_prevCandleHeight[1] && dhflLengthRatio<0.01){
                             marumbo = true;
                             dhfl_marumboThresholdHigh = dhfltickhigh;
                             dhfl_marumboThresholdLow = dhflticklow;
@@ -4028,7 +8190,7 @@ checkArg(0);
                 }
 
                 if(dhfltickType == "green" && dhfl_currentSwingDirection == "upSwing"){
-                        if(dhfltickopen == dhflticklow && dhfltickclose == dhfltickhigh && dhfltickhigh > dhfl_prevCandleHeight[0]){
+                        if( dhfltickclose == dhfltickhigh && dhfltickhigh > dhfl_prevCandleHeight[0]  && dhflLengthRatio<0.01){
                             marumbo = true;
                             dhfl_marumboThresholdHigh = dhfltickhigh;
                             dhfl_marumboThresholdLow = dhflticklow;
@@ -4041,13 +8203,7 @@ checkArg(0);
                          dhfl_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + dhfltickType);
-                   console.log('v swing direction  is ' + dhfl_currentSwingDirection );
-                }
-
-                console.log('current swing dhfl direction is ' + dhfl_currentSwingDirection);
-
+              
 
             dhfltickarray = {
                 "open": dhfltickopen,
@@ -4064,15 +8220,224 @@ checkArg(0);
             dhflarr = [];
         };
 
+
+        function getkotakbankOHLC(d) {
+
+            kotakbanktickopen = kotakbankarr[0];
+            kotakbanktickhigh = _.maxBy(kotakbankarr);
+            kotakbankticklow = _.minBy(kotakbankarr);
+            kotakbanktickclose = kotakbankarr[kotakbankarr.length - 1];
+
+            if (kotakbanktickopen < kotakbanktickclose) {
+                kotakbanktickType = "green";
+            } else if (kotakbanktickopen > kotakbanktickclose) {
+                kotakbanktickType = "red";
+            } else if (kotakbanktickopen = kotakbanktickclose) {
+                kotakbanktickType = "doji";
+            }
+
+            kotakbanktickLength = Math.abs(kotakbanktickhigh - kotakbankticklow);
+
+
+                var marumbo = false;
+                if(kotakbanktickType == "red" && kotakbank_currentSwingDirection == 'downSwing'){
+                        if(kotakbanktickopen == kotakbanktickhigh && kotakbanktickclose == kotakbankticklow && kotakbankticklow < kotakbank_prevCandleHeight[1]){
+                            marumbo = true;
+                            kotakbank_marumboThresholdHigh = kotakbanktickhigh;
+                            kotakbank_marumboThresholdLow = kotakbankticklow;
+                        }
+                }
+
+                if(kotakbanktickType == "green" && kotakbank_currentSwingDirection == "upSwing"){
+                        if(kotakbanktickopen == kotakbankticklow && kotakbanktickclose == kotakbanktickhigh && kotakbanktickhigh > kotakbank_prevCandleHeight[0]){
+                            marumbo = true;
+                            kotakbank_marumboThresholdHigh = kotakbanktickhigh;
+                            kotakbank_marumboThresholdLow = kotakbankticklow;
+                        }
+                }
+
+                if(kotakbanktickType == "doji"){
+                         marumbo = false;
+                         kotakbank_marumboThresholdHigh = 0;
+                         kotakbank_marumboThresholdLow = 0;
+                }
+
+              
+
+            kotakbanktickarray = {
+                "open": kotakbanktickopen,
+                "low": kotakbankticklow,
+                "high": kotakbanktickhigh,
+                "close": kotakbanktickclose,
+                "tickType": kotakbanktickType,
+                'tickLength': kotakbanktickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatakotakbank(kotakbanktickarray);
+            first = 0;
+            kotakbankarr = [];
+        };
+
+
+         function get5minDatakotakbankTimestamp(d, scope) {
+
+               if(kotakbank_prevCandleMarumbo == true && kotakbankarr.length == 1){
+                    ;
+                    
+                    if(kotakbank_currentSwingDirection == "upSwing"){
+                        if(kotakbankarr[0] >=  kotakbank_marumboThresholdHigh){
+                            console.log('buy long here at' + kotakbank_marumboThresholdHigh);
+                            scope.startTrade('KOTAKBANK', 'NSE', 'BUY', kotakbankarr[0],(kotakbank_marumboThresholdHigh+kotakbank_marumboThresholdLow)/2, kotakbankarr[0] + parseInt(kotakbankarr[0])*breakevenRatio);
+                        }
+
+                        if(kotakbankarr[0] <= kotakbank_marumboThresholdHigh){
+
+                        }
+                         kotakbank_prevCandleMarumbo = false;
+                         kotakbank_marumboThresholdHigh = 0;
+                         kotakbank_marumboThresholdLow = 0;
+                    }
+
+
+                    if(kotakbank_currentSwingDirection == "downSwing"){
+                        if(kotakbankarr[0] > kotakbank_marumboThresholdLow){
+                            console.log('sell short here at' + kotakbank_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', kotakbankTradePrice, stop, target);
+
+                            scope.startTrade('KOTAKBANK', 'NSE', 'SELL', kotakbankarr[0],(kotakbank_marumboThresholdHigh+kotakbank_marumboThresholdLow)/2 , kotakbankarr[0]-parseInt(kotakbankarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(kotakbankarr[0] <= kotakbank_marumboThresholdLow){
+                    
+                        }
+
+                            kotakbank_prevCandleMarumbo = false;
+                            kotakbank_marumboThresholdHigh = 0;
+                            kotakbank_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            kotakbankarr.push(d);
+        }
+
+
+        function getheromotocoOHLC(d) {
+
+            heromotocotickopen = heromotocoarr[0];
+            heromotocotickhigh = _.maxBy(heromotocoarr);
+            heromotocoticklow = _.minBy(heromotocoarr);
+            heromotocotickclose = heromotocoarr[heromotocoarr.length - 1];
+
+            if (heromotocotickopen < heromotocotickclose) {
+                heromotocotickType = "green";
+            } else if (heromotocotickopen > heromotocotickclose) {
+                heromotocotickType = "red";
+            } else if (heromotocotickopen = heromotocotickclose) {
+                heromotocotickType = "doji";
+            }
+
+            heromotocotickLength = Math.abs(heromotocotickhigh - heromotocoticklow);
+
+
+                var marumbo = false;
+                if(heromotocotickType == "red" && heromotoco_currentSwingDirection == 'downSwing'){
+                        if(heromotocotickopen == heromotocotickhigh && heromotocotickclose == heromotocoticklow && heromotocoticklow < heromotoco_prevCandleHeight[1]){
+                            marumbo = true;
+                            heromotoco_marumboThresholdHigh = heromotocotickhigh;
+                            heromotoco_marumboThresholdLow = heromotocoticklow;
+                        }
+                }
+
+                if(heromotocotickType == "green" && heromotoco_currentSwingDirection == "upSwing"){
+                        if(heromotocotickopen == heromotocoticklow && heromotocotickclose == heromotocotickhigh && heromotocotickhigh > heromotoco_prevCandleHeight[0]){
+                            marumbo = true;
+                            heromotoco_marumboThresholdHigh = heromotocotickhigh;
+                            heromotoco_marumboThresholdLow = heromotocoticklow;
+                        }
+                }
+
+                if(heromotocotickType == "doji"){
+                         marumbo = false;
+                         heromotoco_marumboThresholdHigh = 0;
+                         heromotoco_marumboThresholdLow = 0;
+                }
+
+              
+
+            heromotocotickarray = {
+                "open": heromotocotickopen,
+                "low": heromotocoticklow,
+                "high": heromotocotickhigh,
+                "close": heromotocotickclose,
+                "tickType": heromotocotickType,
+                'tickLength': heromotocotickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataheromotoco(heromotocotickarray);
+            first = 0;
+            heromotocoarr = [];
+        };
+
+
+         function get5minDataheromotocoTimestamp(d, scope) {
+
+               if(heromotoco_prevCandleMarumbo == true && heromotocoarr.length == 1){
+                    ;
+                    
+                    if(heromotoco_currentSwingDirection == "upSwing"){
+                        if(heromotocoarr[0] >=  heromotoco_marumboThresholdHigh){
+                            console.log('buy long here at' + heromotoco_marumboThresholdHigh);
+                            scope.startTrade('HEROMOTOCO', 'NSE', 'BUY', heromotocoarr[0],(heromotoco_marumboThresholdHigh+heromotoco_marumboThresholdLow)/2, heromotocoarr[0] + parseInt(heromotocoarr[0])*breakevenRatio);
+                        }
+
+                        if(heromotocoarr[0] <= heromotoco_marumboThresholdHigh){
+
+                        }
+                         heromotoco_prevCandleMarumbo = false;
+                         heromotoco_marumboThresholdHigh = 0;
+                         heromotoco_marumboThresholdLow = 0;
+                    }
+
+
+                    if(heromotoco_currentSwingDirection == "downSwing"){
+                        if(heromotocoarr[0] > heromotoco_marumboThresholdLow){
+                            console.log('sell short here at' + heromotoco_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', heromotocoTradePrice, stop, target);
+
+                            scope.startTrade('HEROMOTOCO', 'NSE', 'SELL', heromotocoarr[0],(heromotoco_marumboThresholdHigh+heromotoco_marumboThresholdLow)/2 , heromotocoarr[0]-parseInt(heromotocoarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(heromotocoarr[0] <= heromotoco_marumboThresholdLow){
+                    
+                        }
+
+                            heromotoco_prevCandleMarumbo = false;
+                            heromotoco_marumboThresholdHigh = 0;
+                            heromotoco_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            heromotocoarr.push(d);
+        }
+
+
         //emami
         function get5minDataemamiTimestamp(d, scope) {
 
                if(emami_prevCandleMarumbo == true && emamiarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(emami_currentSwingDirection == "upSwing"){
                         if(emamiarr[0] >=  emami_marumboThresholdHigh){
                             console.log('buy long here at' + emami_marumboThresholdHigh);
+                            scope.startTrade('EMAMILTD', 'NSE', 'BUY', emamiarr[0],(emami_marumboThresholdHigh+emami_marumboThresholdLow)/2, emamiarr[0] + parseInt(emamiarr[0])*breakevenRatio);
+
                         }
 
                         if(emamiarr[0] <= emami_marumboThresholdHigh){
@@ -4087,6 +8452,8 @@ checkArg(0);
                     if(emami_currentSwingDirection == "downSwing"){
                         if(emamiarr[0] > emami_marumboThresholdLow){
                             console.log('sell short here at' + emami_marumboThresholdLow );
+                            scope.startTrade('EMAMILTD', 'NSE', 'SELL', emamiarr[0],(emami_marumboThresholdHigh+emami_marumboThresholdLow)/2 , emamiarr[0]-parseInt(emamiarr[0])*breakevenRatio);
+                     
                         }
 
                         if(emamiarr[0] <= emami_marumboThresholdLow){
@@ -4103,6 +8470,8 @@ checkArg(0);
             emamiarr.push(d);
         }
 
+
+
  function getemamiOHLC(d) {
 
             emamitickopen = emamiarr[0];
@@ -4118,20 +8487,22 @@ checkArg(0);
                 emamitickType = "doji";
             }
 
-            emamitickLength = Math.abs(emamitickhigh - emamiticklow);
+             emamitickLength = Math.abs(emamitickhigh - emamiticklow);
+             var  emamiLengthRatio =   emamitickLength/emamitickhigh;
+
 
 
                 var marumbo = false;
-                if(emamitickType == "red" && emami_currentSwingDirection == 'downSwing'){
-                        if(emamitickopen == emamitickhigh && emamitickclose == emamiticklow && emamiticklow < emami_prevCandleHeight[1]){
+                if(emamitickType == "red" && emami_currentSwingDirection == 'downSwing' && emamiLengthRatio<0.01){
+                        if(emamitickclose == emamiticklow && emamiticklow < emami_prevCandleHeight[1]){
                             marumbo = true;
                             emami_marumboThresholdHigh = emamitickhigh;
                             emami_marumboThresholdLow = emamiticklow;
                         }
                 }
 
-                if(emamitickType == "green" && emami_currentSwingDirection == "upSwing"){
-                        if(emamitickopen == emamiticklow && emamitickclose == emamitickhigh && emamitickhigh > emami_prevCandleHeight[0]){
+                if(emamitickType == "green" && emami_currentSwingDirection == "upSwing" && emamiLengthRatio<0.01){
+                        if( emamitickclose == emamitickhigh && emamitickhigh > emami_prevCandleHeight[0]){
                             marumbo = true;
                             emami_marumboThresholdHigh = emamitickhigh;
                             emami_marumboThresholdLow = emamiticklow;
@@ -4171,11 +8542,13 @@ checkArg(0);
         function get5minDatagailTimestamp(d, scope) {
 
                if(gail_prevCandleMarumbo == true && gailarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(gail_currentSwingDirection == "upSwing"){
                         if(gailarr[0] >=  gail_marumboThresholdHigh){
                             console.log('buy long here at' + gail_marumboThresholdHigh);
+                             scope.startTrade('GAIL', 'NSE', 'BUY', gailarr[0],(gail_marumboThresholdHigh+gail_marumboThresholdLow)/2, gailarr[0] + parseInt(gailarr[0])*breakevenRatio);
+
                         }
 
                         if(gailarr[0] <= gail_marumboThresholdHigh){
@@ -4190,6 +8563,9 @@ checkArg(0);
                     if(gail_currentSwingDirection == "downSwing"){
                         if(gailarr[0] > gail_marumboThresholdLow){
                             console.log('sell short here at' + gail_marumboThresholdLow );
+
+                            scope.startTrade('GAIL', 'NSE', 'SELL', gailarr[0],(gail_marumboThresholdHigh+gail_marumboThresholdLow)/2 , gailarr[0]-parseInt(gailarr[0])*breakevenRatio);
+                     
                         }
 
                         if(gailarr[0] <= gail_marumboThresholdLow){
@@ -4222,19 +8598,20 @@ checkArg(0);
             }
 
             gailtickLength = Math.abs(gailtickhigh - gailticklow);
+            var  gailLengthRatio =   gailtickLength/gailtickhigh;
 
 
                 var marumbo = false;
-                if(gailtickType == "red" && gail_currentSwingDirection == 'downSwing'){
-                        if(gailtickopen == gailtickhigh && gailtickclose == gailticklow && gailticklow < gail_prevCandleHeight[1]){
+                if(gailtickType == "red" && gail_currentSwingDirection == 'downSwing' && gailLengthRatio<0.01){
+                        if(gailtickclose == gailticklow && gailticklow < gail_prevCandleHeight[1]){
                             marumbo = true;
                             gail_marumboThresholdHigh = gailtickhigh;
                             gail_marumboThresholdLow = gailticklow;
                         }
                 }
 
-                if(gailtickType == "green" && gail_currentSwingDirection == "upSwing"){
-                        if(gailtickopen == gailticklow && gailtickclose == gailtickhigh && gailtickhigh > gail_prevCandleHeight[0]){
+                if(gailtickType == "green" && gail_currentSwingDirection == "upSwing" && gailLengthRatio<0.01){
+                        if(gailtickclose == gailtickhigh && gailtickhigh > gail_prevCandleHeight[0]){
                             marumbo = true;
                             gail_marumboThresholdHigh = gailtickhigh;
                             gail_marumboThresholdLow = gailticklow;
@@ -4274,11 +8651,13 @@ checkArg(0);
         function get5minDatahavellsTimestamp(d, scope) {
 
                if(havells_prevCandleMarumbo == true && havellsarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(havells_currentSwingDirection == "upSwing"){
                         if(havellsarr[0] >=  havells_marumboThresholdHigh){
                             console.log('buy long here at' + havells_marumboThresholdHigh);
+                             scope.startTrade('HAVELLS', 'NSE', 'BUY', havellsarr[0],(havells_marumboThresholdHigh+havells_marumboThresholdLow)/2, havellsarr[0] + parseInt(havellsarr[0])*breakevenRatio);
+
                         }
 
                         if(havellsarr[0] <= havells_marumboThresholdHigh){
@@ -4293,6 +8672,9 @@ checkArg(0);
                     if(havells_currentSwingDirection == "downSwing"){
                         if(havellsarr[0] > havells_marumboThresholdLow){
                             console.log('sell short here at' + havells_marumboThresholdLow );
+
+                            scope.startTrade('HAVELLS', 'NSE', 'SELL', havellsarr[0],(havells_marumboThresholdHigh+havells_marumboThresholdLow)/2 , havellsarr[0]-parseInt(havellsarr[0])*breakevenRatio);
+            
                         }
 
                         if(havellsarr[0] <= havells_marumboThresholdLow){
@@ -4325,19 +8707,20 @@ checkArg(0);
             }
 
             havellstickLength = Math.abs(havellstickhigh - havellsticklow);
+            var  havellsLengthRatio =  havellstickLength/havellstickhigh;
 
 
                 var marumbo = false;
-                if(havellstickType == "red" && havells_currentSwingDirection == 'downSwing'){
-                        if(havellstickopen == havellstickhigh && havellstickclose == havellsticklow && havellsticklow < havells_prevCandleHeight[1]){
+                if(havellstickType == "red" && havells_currentSwingDirection == 'downSwing' && havellsLengthRatio<0.01){
+                        if(havellstickclose == havellsticklow && havellsticklow < havells_prevCandleHeight[1]){
                             marumbo = true;
                             havells_marumboThresholdHigh = havellstickhigh;
                             havells_marumboThresholdLow = havellsticklow;
                         }
                 }
 
-                if(havellstickType == "green" && havells_currentSwingDirection == "upSwing"){
-                        if(havellstickopen == havellsticklow && havellstickclose == havellstickhigh && havellstickhigh > havells_prevCandleHeight[0]){
+                if(havellstickType == "green" && havells_currentSwingDirection == "upSwing" && havellsLengthRatio<0.01){
+                        if(havellstickclose == havellstickhigh && havellstickhigh > havells_prevCandleHeight[0]){
                             marumbo = true;
                             havells_marumboThresholdHigh = havellstickhigh;
                             havells_marumboThresholdLow = havellsticklow;
@@ -4349,13 +8732,6 @@ checkArg(0);
                          havells_marumboThresholdHigh = 0;
                          havells_marumboThresholdLow = 0;
                 }
-
-                if(marumbo == true){
-                   console.log('v type is ' + havellstickType);
-                   console.log('v swing direction  is ' + havells_currentSwingDirection );
-                }
-
-                console.log('current swing havells direction is ' + havells_currentSwingDirection);
 
 
             havellstickarray = {
@@ -4377,11 +8753,13 @@ checkArg(0);
         function get5minDatahdfcTimestamp(d, scope) {
 
                if(hdfc_prevCandleMarumbo == true && hdfcarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(hdfc_currentSwingDirection == "upSwing"){
                         if(hdfcarr[0] >=  hdfc_marumboThresholdHigh){
                             console.log('buy long here at' + hdfc_marumboThresholdHigh);
+                            scope.startTrade('HDFC', 'NSE', 'BUY', hdfcarr[0],(hdfc_marumboThresholdHigh+hdfc_marumboThresholdLow)/2, hdfcarr[0] + parseInt(hdfcarr[0])*breakevenRatio);
+
                         }
 
                         if(hdfcarr[0] <= hdfc_marumboThresholdHigh){
@@ -4396,6 +8774,9 @@ checkArg(0);
                     if(hdfc_currentSwingDirection == "downSwing"){
                         if(hdfcarr[0] > hdfc_marumboThresholdLow){
                             console.log('sell short here at' + hdfc_marumboThresholdLow );
+
+                           scope.startTrade('HDFC', 'NSE', 'SELL', hdfcarr[0],(hdfc_marumboThresholdHigh+hdfc_marumboThresholdLow)/2 , hdfcarr[0]-parseInt(hdfcarr[0])*breakevenRatio);
+                     
                         }
 
                         if(hdfcarr[0] <= hdfc_marumboThresholdLow){
@@ -4428,19 +8809,20 @@ checkArg(0);
             }
 
             hdfctickLength = Math.abs(hdfctickhigh - hdfcticklow);
+            var  hdfcLengthRatio =  hdfctickLength/hdfctickhigh;
 
 
                 var marumbo = false;
-                if(hdfctickType == "red" && hdfc_currentSwingDirection == 'downSwing'){
-                        if(hdfctickopen == hdfctickhigh && hdfctickclose == hdfcticklow && hdfcticklow < hdfc_prevCandleHeight[1]){
+                if(hdfctickType == "red" && hdfc_currentSwingDirection == 'downSwing' && hdfcLengthRatio<0.01){
+                        if(hdfctickclose == hdfcticklow && hdfcticklow < hdfc_prevCandleHeight[1]){
                             marumbo = true;
                             hdfc_marumboThresholdHigh = hdfctickhigh;
                             hdfc_marumboThresholdLow = hdfcticklow;
                         }
                 }
 
-                if(hdfctickType == "green" && hdfc_currentSwingDirection == "upSwing"){
-                        if(hdfctickopen == hdfcticklow && hdfctickclose == hdfctickhigh && hdfctickhigh > hdfc_prevCandleHeight[0]){
+                if(hdfctickType == "green" && hdfc_currentSwingDirection == "upSwing" && hdfcLengthRatio<0.01){
+                        if(hdfctickclose == hdfctickhigh && hdfctickhigh > hdfc_prevCandleHeight[0]){
                             marumbo = true;
                             hdfc_marumboThresholdHigh = hdfctickhigh;
                             hdfc_marumboThresholdLow = hdfcticklow;
@@ -4453,13 +8835,7 @@ checkArg(0);
                          hdfc_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + hdfctickType);
-                   console.log('v swing direction  is ' + hdfc_currentSwingDirection );
-                }
-
-                console.log('current swing hdfc direction is ' + hdfc_currentSwingDirection);
-
+               
 
             hdfctickarray = {
                 "open": hdfctickopen,
@@ -4485,6 +8861,8 @@ checkArg(0);
                     if(hindzinc_currentSwingDirection == "upSwing"){
                         if(hindzincarr[0] >=  hindzinc_marumboThresholdHigh){
                             console.log('buy long here at' + hindzinc_marumboThresholdHigh);
+                             scope.startTrade('HINDZINC', 'NSE', 'BUY', hindzincarr[0],(hindzinc_marumboThresholdHigh+hindzinc_marumboThresholdLow)/2, hindzincarr[0] + parseInt(hindzincarr[0])*breakevenRatio);
+
                         }
 
                         if(hindzincarr[0] <= hindzinc_marumboThresholdHigh){
@@ -4499,6 +8877,9 @@ checkArg(0);
                     if(hindzinc_currentSwingDirection == "downSwing"){
                         if(hindzincarr[0] > hindzinc_marumboThresholdLow){
                             console.log('sell short here at' + hindzinc_marumboThresholdLow );
+
+                              scope.startTrade('HINDZINC', 'NSE', 'SELL', hindzincarr[0],(hindzinc_marumboThresholdHigh+hindzinc_marumboThresholdLow)/2 , hindzincarr[0]-parseInt(hindzincarr[0])*breakevenRatio);
+                     
                         }
 
                         if(hindzincarr[0] <= hindzinc_marumboThresholdLow){
@@ -4513,6 +8894,7 @@ checkArg(0);
                 }
 
             hindzincarr.push(d);
+            console.log('hindzincarr' + hindzincarr);
         }
 
  function gethindzincOHLC(d) {
@@ -4531,19 +8913,21 @@ checkArg(0);
             }
 
             hindzinctickLength = Math.abs(hindzinctickhigh - hindzincticklow);
+             var  hindzincLengthRatio =  hindzinctickLength/hindzinctickhigh;
+
 
 
                 var marumbo = false;
-                if(hindzinctickType == "red" && hindzinc_currentSwingDirection == 'downSwing'){
-                        if(hindzinctickopen == hindzinctickhigh && hindzinctickclose == hindzincticklow && hindzincticklow < hindzinc_prevCandleHeight[1]){
+                if(hindzinctickType == "red" && hindzinc_currentSwingDirection == 'downSwing' && hindzincLengthRatio <0.01){
+                        if( hindzinctickclose == hindzincticklow && hindzincticklow < hindzinc_prevCandleHeight[1]){
                             marumbo = true;
                             hindzinc_marumboThresholdHigh = hindzinctickhigh;
                             hindzinc_marumboThresholdLow = hindzincticklow;
                         }
                 }
 
-                if(hindzinctickType == "green" && hindzinc_currentSwingDirection == "upSwing"){
-                        if(hindzinctickopen == hindzincticklow && hindzinctickclose == hindzinctickhigh && hindzinctickhigh > hindzinc_prevCandleHeight[0]){
+                if(hindzinctickType == "green" && hindzinc_currentSwingDirection == "upSwing" && hindzincLengthRatio <0.01){
+                        if(hindzinctickclose == hindzinctickhigh && hindzinctickhigh > hindzinc_prevCandleHeight[0]){
                             marumbo = true;
                             hindzinc_marumboThresholdHigh = hindzinctickhigh;
                             hindzinc_marumboThresholdLow = hindzincticklow;
@@ -4558,13 +8942,7 @@ checkArg(0);
 
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + hindzinctickType);
-                   console.log('v swing direction  is ' + hindzinc_currentSwingDirection );
-                }
-
-                console.log('current swing hindzinc direction is ' + hindzinc_currentSwingDirection);
-
+               
            
             hindzinctickarray = {
                 "open": hindzinctickopen,
@@ -4585,11 +8963,12 @@ checkArg(0);
         function get5minDatainfratelTimestamp(d, scope) {
 
                if(infratel_prevCandleMarumbo == true && infratelarr.length == 1){
-                    debugger;
                     
                     if(infratel_currentSwingDirection == "upSwing"){
                         if(infratelarr[0] >=  infratel_marumboThresholdHigh){
                             console.log('buy long here at' + infratel_marumboThresholdHigh);
+                            scope.startTrade('INFRATEL', 'NSE', 'BUY', infratelarr[0],(infratel_marumboThresholdHigh+infratel_marumboThresholdLow)/2, infratelarr[0] + parseInt(infratelarr[0])*breakevenRatio);
+
                         }
 
                         if(infratelarr[0] <= infratel_marumboThresholdHigh){
@@ -4604,6 +8983,8 @@ checkArg(0);
                     if(infratel_currentSwingDirection == "downSwing"){
                         if(infratelarr[0] > infratel_marumboThresholdLow){
                             console.log('sell short here at' + infratel_marumboThresholdLow );
+                             scope.startTrade('INFRATEL', 'NSE', 'SELL', infratelarr[0],(infratel_marumboThresholdHigh+infratel_marumboThresholdLow)/2 , infratelarr[0]-parseInt(infratelarr[0])*breakevenRatio);
+                     
                         }
 
                         if(infratelarr[0] <= infratel_marumboThresholdLow){
@@ -4636,19 +9017,20 @@ checkArg(0);
             }
 
             infrateltickLength = Math.abs(infrateltickhigh - infratelticklow);
+            var  infratelLengthRatio =  infrateltickLength/infrateltickhigh;
 
 
                 var marumbo = false;
-                if(infrateltickType == "red" && infratel_currentSwingDirection == 'downSwing'){
-                        if(infrateltickopen == infrateltickhigh && infrateltickclose == infratelticklow && infratelticklow < infratel_prevCandleHeight[1]){
+                if(infrateltickType == "red" && infratel_currentSwingDirection == 'downSwing' && infratelLengthRatio<0.01){
+                        if(infrateltickclose == infratelticklow && infratelticklow < infratel_prevCandleHeight[1]){
                             marumbo = true;
                             infratel_marumboThresholdHigh = infrateltickhigh;
                             infratel_marumboThresholdLow = infratelticklow;
                         }
                 }
 
-                if(infrateltickType == "green" && infratel_currentSwingDirection == "upSwing"){
-                        if(infrateltickopen == infratelticklow && infrateltickclose == infrateltickhigh && infrateltickhigh > infratel_prevCandleHeight[0]){
+                if(infrateltickType == "green" && infratel_currentSwingDirection == "upSwing" && infratelLengthRatio<0.01){
+                        if(infrateltickclose == infrateltickhigh && infrateltickhigh > infratel_prevCandleHeight[0]){
                             marumbo = true;
                             infratel_marumboThresholdHigh = infrateltickhigh;
                             infratel_marumboThresholdLow = infratelticklow;
@@ -4661,13 +9043,7 @@ checkArg(0);
                          infratel_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + infrateltickType);
-                   console.log('v swing direction  is ' + infratel_currentSwingDirection );
-                }
-
-                console.log('current swing infratel direction is ' + infratel_currentSwingDirection);
-
+                
 
             infrateltickarray = {
                 "open": infrateltickopen,
@@ -4684,15 +9060,119 @@ checkArg(0);
             infratelarr = [];
         };
 
+         function getbajajfinservOHLC(d) {
+
+            bajajfinservtickopen = bajajfinservarr[0];
+            bajajfinservtickhigh = _.maxBy(bajajfinservarr);
+            bajajfinservticklow = _.minBy(bajajfinservarr);
+            bajajfinservtickclose = bajajfinservarr[bajajfinservarr.length - 1];
+
+            if (bajajfinservtickopen < bajajfinservtickclose) {
+                bajajfinservtickType = "green";
+            } else if (bajajfinservtickopen > bajajfinservtickclose) {
+                bajajfinservtickType = "red";
+            } else if (bajajfinservtickopen = bajajfinservtickclose) {
+                bajajfinservtickType = "doji";
+            }
+
+            bajajfinservtickLength = Math.abs(bajajfinservtickhigh - bajajfinservticklow);
+
+
+                var marumbo = false;
+                if(bajajfinservtickType == "red" && bajajfinserv_currentSwingDirection == 'downSwing'){
+                        if(bajajfinservtickopen == bajajfinservtickhigh && bajajfinservtickclose == bajajfinservticklow && bajajfinservticklow < bajajfinserv_prevCandleHeight[1]){
+                            marumbo = true;
+                            bajajfinserv_marumboThresholdHigh = bajajfinservtickhigh;
+                            bajajfinserv_marumboThresholdLow = bajajfinservticklow;
+                        }
+                }
+
+                if(bajajfinservtickType == "green" && bajajfinserv_currentSwingDirection == "upSwing"){
+                        if(bajajfinservtickopen == bajajfinservticklow && bajajfinservtickclose == bajajfinservtickhigh && bajajfinservtickhigh > bajajfinserv_prevCandleHeight[0]){
+                            marumbo = true;
+                            bajajfinserv_marumboThresholdHigh = bajajfinservtickhigh;
+                            bajajfinserv_marumboThresholdLow = bajajfinservticklow;
+                        }
+                }
+
+                if(bajajfinservtickType == "doji"){
+                         marumbo = false;
+                         bajajfinserv_marumboThresholdHigh = 0;
+                         bajajfinserv_marumboThresholdLow = 0;
+                }
+
+              
+
+            bajajfinservtickarray = {
+                "open": bajajfinservtickopen,
+                "low": bajajfinservticklow,
+                "high": bajajfinservtickhigh,
+                "close": bajajfinservtickclose,
+                "tickType": bajajfinservtickType,
+                'tickLength': bajajfinservtickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatabajajfinserv(bajajfinservtickarray);
+            first = 0;
+            bajajfinservarr = [];
+        };
+
+
+         function get5minDatabajajfinservTimestamp(d, scope) {
+
+               if(bajajfinserv_prevCandleMarumbo == true && bajajfinservarr.length == 1){
+                    ;
+                    
+                    if(bajajfinserv_currentSwingDirection == "upSwing"){
+                        if(bajajfinservarr[0] >=  bajajfinserv_marumboThresholdHigh){
+                            console.log('buy long here at' + bajajfinserv_marumboThresholdHigh);
+                            scope.startTrade('BAJAJFINSV', 'NSE', 'BUY', bajajfinservarr[0],(bajajfinserv_marumboThresholdHigh+bajajfinserv_marumboThresholdLow)/2, bajajfinservarr[0] + parseInt(bajajfinservarr[0])*breakevenRatio);
+                        }
+
+                        if(bajajfinservarr[0] <= bajajfinserv_marumboThresholdHigh){
+
+                        }
+                         bajajfinserv_prevCandleMarumbo = false;
+                         bajajfinserv_marumboThresholdHigh = 0;
+                         bajajfinserv_marumboThresholdLow = 0;
+                    }
+
+
+                    if(bajajfinserv_currentSwingDirection == "downSwing"){
+                        if(bajajfinservarr[0] > bajajfinserv_marumboThresholdLow){
+                            console.log('sell short here at' + bajajfinserv_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', bajajfinservTradePrice, stop, target);
+
+                            scope.startTrade('BAJAJFINSV', 'NSE', 'SELL', bajajfinservarr[0],(bajajfinserv_marumboThresholdHigh+bajajfinserv_marumboThresholdLow)/2 , bajajfinservarr[0]-parseInt(bajajfinservarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(bajajfinservarr[0] <= bajajfinserv_marumboThresholdLow){
+                    
+                        }
+
+                            bajajfinserv_prevCandleMarumbo = false;
+                            bajajfinserv_marumboThresholdHigh = 0;
+                            bajajfinserv_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            bajajfinservarr.push(d);
+        }
+
         //reddy
         function get5minDatareddyTimestamp(d, scope) {
 
                if(reddy_prevCandleMarumbo == true && reddyarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(reddy_currentSwingDirection == "upSwing"){
                         if(reddyarr[0] >=  reddy_marumboThresholdHigh){
                             console.log('buy long here at' + reddy_marumboThresholdHigh);
+                             scope.startTrade('DRREDDY', 'NSE', 'BUY', reddyarr[0],(reddy_marumboThresholdHigh+reddy_marumboThresholdLow)/2, reddyarr[0] + parseInt(reddyarr[0])*breakevenRatio);
+
                         }
 
                         if(reddyarr[0] <= reddy_marumboThresholdHigh){
@@ -4707,6 +9187,9 @@ checkArg(0);
                     if(reddy_currentSwingDirection == "downSwing"){
                         if(reddyarr[0] > reddy_marumboThresholdLow){
                             console.log('sell short here at' + reddy_marumboThresholdLow );
+
+                            scope.startTrade('DRREDDY', 'NSE', 'SELL', reddyarr[0],(reddy_marumboThresholdHigh+reddy_marumboThresholdLow)/2 , reddyarr[0]-parseInt(reddyarr[0])*breakevenRatio);
+               
                         }
 
                         if(reddyarr[0] <= reddy_marumboThresholdLow){
@@ -4739,19 +9222,21 @@ checkArg(0);
             }
 
             reddytickLength = Math.abs(reddytickhigh - reddyticklow);
+            var reddyLengthRatio =  reddytickLength/reddytickhigh;
+
 
 
                 var marumbo = false;
-                if(reddytickType == "red" && reddy_currentSwingDirection == 'downSwing'){
-                        if(reddytickopen == reddytickhigh && reddytickclose == reddyticklow && reddyticklow < reddy_prevCandleHeight[1]){
+                if(reddytickType == "red" && reddy_currentSwingDirection == 'downSwing' && reddyLengthRatio<0.01){
+                        if(reddytickclose == reddyticklow && reddyticklow < reddy_prevCandleHeight[1]){
                             marumbo = true;
                             reddy_marumboThresholdHigh = reddytickhigh;
                             reddy_marumboThresholdLow = reddyticklow;
                         }
                 }
 
-                if(reddytickType == "green" && reddy_currentSwingDirection == "upSwing"){
-                        if(reddytickopen == reddyticklow && reddytickclose == reddytickhigh && reddytickhigh > reddy_prevCandleHeight[0]){
+                if(reddytickType == "green" && reddy_currentSwingDirection == "upSwing"  && reddyLengthRatio<0.01){
+                        if(reddytickclose == reddytickhigh && reddytickhigh > reddy_prevCandleHeight[0]){
                             marumbo = true;
                             reddy_marumboThresholdHigh = reddytickhigh;
                             reddy_marumboThresholdLow = reddyticklow;
@@ -4792,11 +9277,13 @@ checkArg(0);
         function get5minDatarelianceTimestamp(d, scope) {
 
                if(reliance_prevCandleMarumbo == true && reliancearr.length == 1){
-                    debugger;
+                    ;
                     
                     if(reliance_currentSwingDirection == "upSwing"){
                         if(reliancearr[0] >=  reliance_marumboThresholdHigh){
                             console.log('buy long here at' + reliance_marumboThresholdHigh);
+                            scope.startTrade('RELIANCE', 'NSE', 'BUY', reliancearr[0],(reliance_marumboThresholdHigh+reliance_marumboThresholdLow)/2, reliancearr[0] + parseInt(reliancearr[0])*breakevenRatio);
+
                         }
 
                         if(reliancearr[0] <= reliance_marumboThresholdHigh){
@@ -4811,6 +9298,8 @@ checkArg(0);
                     if(reliance_currentSwingDirection == "downSwing"){
                         if(reliancearr[0] > reliance_marumboThresholdLow){
                             console.log('sell short here at' + reliance_marumboThresholdLow );
+                            scope.startTrade('RELIANCE', 'NSE', 'SELL', reliancearr[0],(reliance_marumboThresholdHigh+reliance_marumboThresholdLow)/2 , reliancearr[0]-parseInt(reliancearr[0])*breakevenRatio);
+                     
                         }
 
                         if(reliancearr[0] <= reliance_marumboThresholdLow){
@@ -4843,19 +9332,20 @@ checkArg(0);
             }
 
             reliancetickLength = Math.abs(reliancetickhigh - relianceticklow);
+             var relianceLengthRatio =  reliancetickLength/reliancetickhigh;
 
 
                 var marumbo = false;
-                if(reliancetickType == "red" && reliance_currentSwingDirection == 'downSwing'){
-                        if(reliancetickopen == reliancetickhigh && reliancetickclose == relianceticklow && relianceticklow < reliance_prevCandleHeight[1]){
+                if(reliancetickType == "red" && reliance_currentSwingDirection == 'downSwing' && relianceLengthRatio<0.01){
+                        if(reliancetickclose == relianceticklow && relianceticklow < reliance_prevCandleHeight[1]){
                             marumbo = true;
                             reliance_marumboThresholdHigh = reliancetickhigh;
                             reliance_marumboThresholdLow = relianceticklow;
                         }
                 }
 
-                if(reliancetickType == "green" && reliance_currentSwingDirection == "upSwing"){
-                        if(reliancetickopen == relianceticklow && reliancetickclose == reliancetickhigh && reliancetickhigh > reliance_prevCandleHeight[0]){
+                if(reliancetickType == "green" && reliance_currentSwingDirection == "upSwing" && relianceLengthRatio<0.01){
+                        if(reliancetickclose == reliancetickhigh && reliancetickhigh > reliance_prevCandleHeight[0]){
                             marumbo = true;
                             reliance_marumboThresholdHigh = reliancetickhigh;
                             reliance_marumboThresholdLow = relianceticklow;
@@ -4868,13 +9358,7 @@ checkArg(0);
                          reliance_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + reliancetickType);
-                   console.log('v swing direction  is ' + reliance_currentSwingDirection );
-                }
-
-                console.log('current swing reliance direction is ' + reliance_currentSwingDirection);
-
+                
 
             reliancetickarray = {
                 "open": reliancetickopen,
@@ -4895,11 +9379,13 @@ checkArg(0);
         function get5minDatasbinTimestamp(d, scope) {
 
                if(sbin_prevCandleMarumbo == true && sbinarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(sbin_currentSwingDirection == "upSwing"){
                         if(sbinarr[0] >=  sbin_marumboThresholdHigh){
                             console.log('buy long here at' + sbin_marumboThresholdHigh);
+                            scope.startTrade('SBIN', 'NSE', 'BUY', sbinarr[0],(sbin_marumboThresholdHigh+sbin_marumboThresholdLow)/2, sbinarr[0] + parseInt(sbinarr[0])*breakevenRatio);
+
                         }
 
                         if(sbinarr[0] <= sbin_marumboThresholdHigh){
@@ -4914,6 +9400,8 @@ checkArg(0);
                     if(sbin_currentSwingDirection == "downSwing"){
                         if(sbinarr[0] > sbin_marumboThresholdLow){
                             console.log('sell short here at' + sbin_marumboThresholdLow );
+                            scope.startTrade('SBIN', 'NSE', 'SELL', sbinarr[0],(sbin_marumboThresholdHigh+sbin_marumboThresholdLow)/2 , sbinarr[0]-parseInt(sbinarr[0])*breakevenRatio);
+      
                         }
 
                         if(sbinarr[0] <= sbin_marumboThresholdLow){
@@ -4946,19 +9434,20 @@ checkArg(0);
             }
 
             sbintickLength = Math.abs(sbintickhigh - sbinticklow);
+             var sbinLengthRatio =  sbintickLength/sbintickhigh;
 
 
                 var marumbo = false;
-                if(sbintickType == "red" && sbin_currentSwingDirection == 'downSwing'){
-                        if(sbintickopen == sbintickhigh && sbintickclose == sbinticklow && sbinticklow < sbin_prevCandleHeight[1]){
+                if(sbintickType == "red" && sbin_currentSwingDirection == 'downSwing' && sbinLengthRatio<0.01){
+                        if(sbintickclose == sbinticklow && sbinticklow < sbin_prevCandleHeight[1]){
                             marumbo = true;
                             sbin_marumboThresholdHigh = sbintickhigh;
                             sbin_marumboThresholdLow = sbinticklow;
                         }
                 }
 
-                if(sbintickType == "green" && sbin_currentSwingDirection == "upSwing"){
-                        if(sbintickopen == sbinticklow && sbintickclose == sbintickhigh && sbintickhigh > sbin_prevCandleHeight[0]){
+                if(sbintickType == "green" && sbin_currentSwingDirection == "upSwing" && sbinLengthRatio<0.01){
+                        if(sbintickclose == sbintickhigh && sbintickhigh > sbin_prevCandleHeight[0]){
                             marumbo = true;
                             sbin_marumboThresholdHigh = sbintickhigh;
                             sbin_marumboThresholdLow = sbinticklow;
@@ -4971,13 +9460,7 @@ checkArg(0);
                          sbin_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + sbintickType);
-                   console.log('v swing direction  is ' + sbin_currentSwingDirection );
-                }
-
-                console.log('current swing sbin direction is ' + sbin_currentSwingDirection);
-
+                
 
             sbintickarray = {
                 "open": sbintickopen,
@@ -4998,11 +9481,14 @@ checkArg(0);
         function get5minDataseimensTimestamp(d, scope) {
 
                if(seimens_prevCandleMarumbo == true && seimensarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(seimens_currentSwingDirection == "upSwing"){
                         if(seimensarr[0] >=  seimens_marumboThresholdHigh){
                             console.log('buy long here at' + seimens_marumboThresholdHigh);
+                             scope.startTrade('SIEMENS', 'NSE', 'BUY', seimensarr[0],(seimens_marumboThresholdHigh+seimens_marumboThresholdLow)/2, seimensarr[0] + parseInt(seimensarr[0])*breakevenRatio);
+
+
                         }
 
                         if(seimensarr[0] <= seimens_marumboThresholdHigh){
@@ -5017,6 +9503,8 @@ checkArg(0);
                     if(seimens_currentSwingDirection == "downSwing"){
                         if(seimensarr[0] > seimens_marumboThresholdLow){
                             console.log('sell short here at' + seimens_marumboThresholdLow );
+                            scope.startTrade('SIEMENS', 'NSE', 'SELL', seimensarr[0],(seimens_marumboThresholdHigh+seimens_marumboThresholdLow)/2 , seimensarr[0]-parseInt(seimensarr[0])*breakevenRatio);
+                     
                         }
 
                         if(seimensarr[0] <= seimens_marumboThresholdLow){
@@ -5048,20 +9536,21 @@ checkArg(0);
                 seimenstickType = "doji";
             }
 
-            seimenstickLength = Math.abs(seimenstickhigh - seimensticklow);
+             seimenstickLength = Math.abs(seimenstickhigh - seimensticklow);
+             var seimensLengthRatio =  seimenstickLength/seimenstickhigh;
 
 
                 var marumbo = false;
-                if(seimenstickType == "red" && seimens_currentSwingDirection == 'downSwing'){
-                        if(seimenstickopen == seimenstickhigh && seimenstickclose == seimensticklow && seimensticklow < seimens_prevCandleHeight[1]){
+                if(seimenstickType == "red" && seimens_currentSwingDirection == 'downSwing' && seimensLengthRatio<0.01){
+                        if(seimenstickclose == seimensticklow && seimensticklow < seimens_prevCandleHeight[1]){
                             marumbo = true;
                             seimens_marumboThresholdHigh = seimenstickhigh;
                             seimens_marumboThresholdLow = seimensticklow;
                         }
                 }
 
-                if(seimenstickType == "green" && seimens_currentSwingDirection == "upSwing"){
-                        if(seimenstickopen == seimensticklow && seimenstickclose == seimenstickhigh && seimenstickhigh > seimens_prevCandleHeight[0]){
+                if(seimenstickType == "green" && seimens_currentSwingDirection == "upSwing" && seimensLengthRatio<0.01){
+                        if(seimenstickclose == seimenstickhigh && seimenstickhigh > seimens_prevCandleHeight[0]){
                             marumbo = true;
                             seimens_marumboThresholdHigh = seimenstickhigh;
                             seimens_marumboThresholdLow = seimensticklow;
@@ -5074,13 +9563,7 @@ checkArg(0);
                          seimens_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + seimenstickType);
-                   console.log('v swing direction  is ' + seimens_currentSwingDirection );
-                }
-
-                console.log('current swing seimens direction is ' + seimens_currentSwingDirection);
-
+               
 
             seimenstickarray = {
                 "open": seimenstickopen,
@@ -5101,11 +9584,14 @@ checkArg(0);
         function get5minDatatcsTimestamp(d, scope) {
 
                if(tcs_prevCandleMarumbo == true && tcsarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(tcs_currentSwingDirection == "upSwing"){
                         if(tcsarr[0] >=  tcs_marumboThresholdHigh){
                             console.log('buy long here at' + tcs_marumboThresholdHigh);
+                             scope.startTrade('TCS', 'NSE', 'BUY', tcsarr[0],(tcs_marumboThresholdHigh+tcs_marumboThresholdLow)/2, tcsarr[0] + parseInt(tcsarr[0])*breakevenRatio);
+
+
                         }
 
                         if(tcsarr[0] <= tcs_marumboThresholdHigh){
@@ -5120,6 +9606,9 @@ checkArg(0);
                     if(tcs_currentSwingDirection == "downSwing"){
                         if(tcsarr[0] > tcs_marumboThresholdLow){
                             console.log('sell short here at' + tcs_marumboThresholdLow );
+
+                            scope.startTrade('TCS', 'NSE', 'SELL', tcsarr[0],(tcs_marumboThresholdHigh+tcs_marumboThresholdLow)/2 , tcsarr[0]-parseInt(tcsarr[0])*breakevenRatio);
+                     
                         }
 
                         if(tcsarr[0] <= tcs_marumboThresholdLow){
@@ -5151,20 +9640,21 @@ checkArg(0);
                 tcstickType = "doji";
             }
 
-            tcstickLength = Math.abs(tcstickhigh - tcsticklow);
+             tcstickLength = Math.abs(tcstickhigh - tcsticklow);
+             var tcsLengthRatio =  tcstickLength/tcstickhigh;
 
 
                 var marumbo = false;
-                if(tcstickType == "red" && tcs_currentSwingDirection == 'downSwing'){
-                        if(tcstickopen == tcstickhigh && tcstickclose == tcsticklow && tcsticklow < tcs_prevCandleHeight[1]){
+                if(tcstickType == "red" && tcs_currentSwingDirection == 'downSwing' && tcsLengthRatio<0.01){
+                        if(tcstickclose == tcsticklow && tcsticklow < tcs_prevCandleHeight[1]){
                             marumbo = true;
                             tcs_marumboThresholdHigh = tcstickhigh;
                             tcs_marumboThresholdLow = tcsticklow;
                         }
                 }
 
-                if(tcstickType == "green" && tcs_currentSwingDirection == "upSwing"){
-                        if(tcstickopen == tcsticklow && tcstickclose == tcstickhigh && tcstickhigh > tcs_prevCandleHeight[0]){
+                if(tcstickType == "green" && tcs_currentSwingDirection == "upSwing" && tcsLengthRatio<0.01){
+                        if(tcstickclose == tcstickhigh && tcstickhigh > tcs_prevCandleHeight[0]){
                             marumbo = true;
                             tcs_marumboThresholdHigh = tcstickhigh;
                             tcs_marumboThresholdLow = tcsticklow;
@@ -5195,7 +9685,7 @@ checkArg(0);
                  'marumbo' : marumbo,
             };
             //
-            d.props.addTickDataohlc(tcstickarray);
+            d.props.addTickDatatcs(tcstickarray);
             first = 0;
             tcsarr = [];
         };
@@ -5204,11 +9694,14 @@ checkArg(0);
         function get5minDataunileverTimestamp(d, scope) {
 
                if(unilever_prevCandleMarumbo == true && unileverarr.length == 1){
-                    debugger;
+                    ;
                     
                     if(unilever_currentSwingDirection == "upSwing"){
                         if(unileverarr[0] >=  unilever_marumboThresholdHigh){
                             console.log('buy long here at' + unilever_marumboThresholdHigh);
+                             scope.startTrade('HINDUNILVR', 'NSE', 'BUY', unileverarr[0],(unilever_marumboThresholdHigh+unilever_marumboThresholdLow)/2, unileverarr[0] + parseInt(unileverarr[0])*breakevenRatio);
+
+
                         }
 
                         if(unileverarr[0] <= unilever_marumboThresholdHigh){
@@ -5223,6 +9716,8 @@ checkArg(0);
                     if(unilever_currentSwingDirection == "downSwing"){
                         if(unileverarr[0] > unilever_marumboThresholdLow){
                             console.log('sell short here at' + unilever_marumboThresholdLow );
+                            scope.startTrade('HINDUNILVR', 'NSE', 'SELL', unileverarr[0],(unilever_marumboThresholdHigh+unilever_marumboThresholdLow)/2 , unileverarr[0]-parseInt(unileverarr[0])*breakevenRatio);
+            
                         }
 
                         if(unileverarr[0] <= unilever_marumboThresholdLow){
@@ -5255,19 +9750,20 @@ checkArg(0);
             }
 
             unilevertickLength = Math.abs(unilevertickhigh - unileverticklow);
+               var unileverLengthRatio =  unilevertickLength/unilevertickhigh;
 
 
                 var marumbo = false;
-                if(unilevertickType == "red" && unilever_currentSwingDirection == 'downSwing'){
-                        if(unilevertickopen == unilevertickhigh && unilevertickclose == unileverticklow && unileverticklow < unilever_prevCandleHeight[1]){
+                if(unilevertickType == "red" && unilever_currentSwingDirection == 'downSwing' && unileverLengthRatio <0.01){
+                        if(unilevertickclose == unileverticklow && unileverticklow < unilever_prevCandleHeight[1]){
                             marumbo = true;
                             unilever_marumboThresholdHigh = unilevertickhigh;
                             unilever_marumboThresholdLow = unileverticklow;
                         }
                 }
 
-                if(unilevertickType == "green" && unilever_currentSwingDirection == "upSwing"){
-                        if(unilevertickopen == unileverticklow && unilevertickclose == unilevertickhigh && unilevertickhigh > unilever_prevCandleHeight[0]){
+                if(unilevertickType == "green" && unilever_currentSwingDirection == "upSwing"  && unileverLengthRatio <0.01){
+                        if(unilevertickclose == unilevertickhigh && unilevertickhigh > unilever_prevCandleHeight[0]){
                             marumbo = true;
                             unilever_marumboThresholdHigh = unilevertickhigh;
                             unilever_marumboThresholdLow = unileverticklow;
@@ -5280,14 +9776,7 @@ checkArg(0);
                          unilever_marumboThresholdLow = 0;
                 }
 
-                if(marumbo == true){
-                   console.log('v type is ' + unilevertickType);
-                   console.log('v swing direction  is ' + unilever_currentSwingDirection );
-                }
-
-                console.log('current swing unilever direction is ' + unilever_currentSwingDirection);
-
-
+               
             unilevertickarray = {
                 "open": unilevertickopen,
                 "low": unileverticklow,
@@ -5302,6 +9791,628 @@ checkArg(0);
             first = 0;
             unileverarr = [];
         };
+
+
+//ntpc
+
+   
+        function getntpcOHLC(d) {
+
+            ntpctickopen = ntpcarr[0];
+            ntpctickhigh = _.maxBy(ntpcarr);
+            ntpcticklow = _.minBy(ntpcarr);
+            ntpctickclose = ntpcarr[ntpcarr.length - 1];
+
+            if (ntpctickopen < ntpctickclose) {
+                ntpctickType = "green";
+            } else if (ntpctickopen > ntpctickclose) {
+                ntpctickType = "red";
+            } else if (ntpctickopen = ntpctickclose) {
+                ntpctickType = "doji";
+            }
+
+            ntpctickLength = Math.abs(ntpctickhigh - ntpcticklow);
+
+
+                var marumbo = false;
+                if(ntpctickType == "red" && ntpc_currentSwingDirection == 'downSwing'){
+                        if(ntpctickopen == ntpctickhigh && ntpctickclose == ntpcticklow && ntpcticklow < ntpc_prevCandleHeight[1]){
+                            marumbo = true;
+                            ntpc_marumboThresholdHigh = ntpctickhigh;
+                            ntpc_marumboThresholdLow = ntpcticklow;
+                        }
+                }
+
+                if(ntpctickType == "green" && ntpc_currentSwingDirection == "upSwing"){
+                        if(ntpctickopen == ntpcticklow && ntpctickclose == ntpctickhigh && ntpctickhigh > ntpc_prevCandleHeight[0]){
+                            marumbo = true;
+                            ntpc_marumboThresholdHigh = ntpctickhigh;
+                            ntpc_marumboThresholdLow = ntpcticklow;
+                        }
+                }
+
+                if(ntpctickType == "doji"){
+                         marumbo = false;
+                         ntpc_marumboThresholdHigh = 0;
+                         ntpc_marumboThresholdLow = 0;
+                }
+
+              
+
+            ntpctickarray = {
+                "open": ntpctickopen,
+                "low": ntpcticklow,
+                "high": ntpctickhigh,
+                "close": ntpctickclose,
+                "tickType": ntpctickType,
+                'tickLength': ntpctickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatantpc(ntpctickarray);
+            first = 0;
+            ntpcarr = [];
+        };
+
+
+         function get5minDatantpcTimestamp(d, scope) {
+
+               if(ntpc_prevCandleMarumbo == true && ntpcarr.length == 1){
+                    ;
+                    
+                    if(ntpc_currentSwingDirection == "upSwing"){
+                        if(ntpcarr[0] >=  ntpc_marumboThresholdHigh){
+                            console.log('buy long here at' + ntpc_marumboThresholdHigh);
+                            scope.startTrade('NTPC', 'NSE', 'BUY', ntpcarr[0],(ntpc_marumboThresholdHigh+ntpc_marumboThresholdLow)/2, ntpcarr[0] + parseInt(ntpcarr[0])*breakevenRatio);
+                        }
+
+                        if(ntpcarr[0] <= ntpc_marumboThresholdHigh){
+
+                        }
+                         ntpc_prevCandleMarumbo = false;
+                         ntpc_marumboThresholdHigh = 0;
+                         ntpc_marumboThresholdLow = 0;
+                    }
+
+
+                    if(ntpc_currentSwingDirection == "downSwing"){
+                        if(ntpcarr[0] > ntpc_marumboThresholdLow){
+                            console.log('sell short here at' + ntpc_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', ntpcTradePrice, stop, target);
+
+                            scope.startTrade('NTPC', 'NSE', 'SELL', ntpcarr[0],(ntpc_marumboThresholdHigh+ntpc_marumboThresholdLow)/2 , ntpcarr[0]-parseInt(ntpcarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(ntpcarr[0] <= ntpc_marumboThresholdLow){
+                    
+                        }
+
+                            ntpc_prevCandleMarumbo = false;
+                            ntpc_marumboThresholdHigh = 0;
+                            ntpc_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            ntpcarr.push(d);
+        }
+
+
+//powergrid
+
+
+        function getpowergridOHLC(d) {
+
+            powergridtickopen = powergridarr[0];
+            powergridtickhigh = _.maxBy(powergridarr);
+            powergridticklow = _.minBy(powergridarr);
+            powergridtickclose = powergridarr[powergridarr.length - 1];
+
+            if (powergridtickopen < powergridtickclose) {
+                powergridtickType = "green";
+            } else if (powergridtickopen > powergridtickclose) {
+                powergridtickType = "red";
+            } else if (powergridtickopen = powergridtickclose) {
+                powergridtickType = "doji";
+            }
+
+            powergridtickLength = Math.abs(powergridtickhigh - powergridticklow);
+
+
+                var marumbo = false;
+                if(powergridtickType == "red" && powergrid_currentSwingDirection == 'downSwing'){
+                        if(powergridtickopen == powergridtickhigh && powergridtickclose == powergridticklow && powergridticklow < powergrid_prevCandleHeight[1]){
+                            marumbo = true;
+                            powergrid_marumboThresholdHigh = powergridtickhigh;
+                            powergrid_marumboThresholdLow = powergridticklow;
+                        }
+                }
+
+                if(powergridtickType == "green" && powergrid_currentSwingDirection == "upSwing"){
+                        if(powergridtickopen == powergridticklow && powergridtickclose == powergridtickhigh && powergridtickhigh > powergrid_prevCandleHeight[0]){
+                            marumbo = true;
+                            powergrid_marumboThresholdHigh = powergridtickhigh;
+                            powergrid_marumboThresholdLow = powergridticklow;
+                        }
+                }
+
+                if(powergridtickType == "doji"){
+                         marumbo = false;
+                         powergrid_marumboThresholdHigh = 0;
+                         powergrid_marumboThresholdLow = 0;
+                }
+
+              
+
+            powergridtickarray = {
+                "open": powergridtickopen,
+                "low": powergridticklow,
+                "high": powergridtickhigh,
+                "close": powergridtickclose,
+                "tickType": powergridtickType,
+                'tickLength': powergridtickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatapowergrid(powergridtickarray);
+            first = 0;
+            powergridarr = [];
+        };
+
+
+         function get5minDatapowergridTimestamp(d, scope) {
+
+               if(powergrid_prevCandleMarumbo == true && powergridarr.length == 1){
+                    ;
+                    
+                    if(powergrid_currentSwingDirection == "upSwing"){
+                        if(powergridarr[0] >=  powergrid_marumboThresholdHigh){
+                            console.log('buy long here at' + powergrid_marumboThresholdHigh);
+                            scope.startTrade('POWERGRID', 'NSE', 'BUY', powergridarr[0],(powergrid_marumboThresholdHigh+powergrid_marumboThresholdLow)/2, powergridarr[0] + parseInt(powergridarr[0])*breakevenRatio);
+                        }
+
+                        if(powergridarr[0] <= powergrid_marumboThresholdHigh){
+
+                        }
+                         powergrid_prevCandleMarumbo = false;
+                         powergrid_marumboThresholdHigh = 0;
+                         powergrid_marumboThresholdLow = 0;
+                    }
+
+
+                    if(powergrid_currentSwingDirection == "downSwing"){
+                        if(powergridarr[0] > powergrid_marumboThresholdLow){
+                            console.log('sell short here at' + powergrid_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', powergridTradePrice, stop, target);
+
+                            scope.startTrade('POWERGRID', 'NSE', 'SELL', powergridarr[0],(powergrid_marumboThresholdHigh+powergrid_marumboThresholdLow)/2 , powergridarr[0]-parseInt(powergridarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(powergridarr[0] <= powergrid_marumboThresholdLow){
+                    
+                        }
+
+                            powergrid_prevCandleMarumbo = false;
+                            powergrid_marumboThresholdHigh = 0;
+                            powergrid_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            powergridarr.push(d);
+        }
+
+         function getadaniportsOHLC(d) {
+
+            adaniportstickopen = adaniportsarr[0];
+            adaniportstickhigh = _.maxBy(adaniportsarr);
+            adaniportsticklow = _.minBy(adaniportsarr);
+            adaniportstickclose = adaniportsarr[adaniportsarr.length - 1];
+
+            if (adaniportstickopen < adaniportstickclose) {
+                adaniportstickType = "green";
+            } else if (adaniportstickopen > adaniportstickclose) {
+                adaniportstickType = "red";
+            } else if (adaniportstickopen = adaniportstickclose) {
+                adaniportstickType = "doji";
+            }
+
+            adaniportstickLength = Math.abs(adaniportstickhigh - adaniportsticklow);
+
+
+                var marumbo = false;
+                if(adaniportstickType == "red" && adaniports_currentSwingDirection == 'downSwing'){
+                        if(adaniportstickopen == adaniportstickhigh && adaniportstickclose == adaniportsticklow && adaniportsticklow < adaniports_prevCandleHeight[1]){
+                            marumbo = true;
+                            adaniports_marumboThresholdHigh = adaniportstickhigh;
+                            adaniports_marumboThresholdLow = adaniportsticklow;
+                        }
+                }
+
+                if(adaniportstickType == "green" && adaniports_currentSwingDirection == "upSwing"){
+                        if(adaniportstickopen == adaniportsticklow && adaniportstickclose == adaniportstickhigh && adaniportstickhigh > adaniports_prevCandleHeight[0]){
+                            marumbo = true;
+                            adaniports_marumboThresholdHigh = adaniportstickhigh;
+                            adaniports_marumboThresholdLow = adaniportsticklow;
+                        }
+                }
+
+                if(adaniportstickType == "doji"){
+                         marumbo = false;
+                         adaniports_marumboThresholdHigh = 0;
+                         adaniports_marumboThresholdLow = 0;
+                }
+
+              
+
+            adaniportstickarray = {
+                "open": adaniportstickopen,
+                "low": adaniportsticklow,
+                "high": adaniportstickhigh,
+                "close": adaniportstickclose,
+                "tickType": adaniportstickType,
+                'tickLength': adaniportstickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataadaniports(adaniportstickarray);
+            first = 0;
+            adaniportsarr = [];
+        };
+
+
+         function get5minDataadaniportsTimestamp(d, scope) {
+
+               if(adaniports_prevCandleMarumbo == true && adaniportsarr.length == 1){
+                    ;
+                    
+                    if(adaniports_currentSwingDirection == "upSwing"){
+                        if(adaniportsarr[0] >=  adaniports_marumboThresholdHigh){
+                            console.log('buy long here at' + adaniports_marumboThresholdHigh);
+                            scope.startTrade('ADANIPORTS', 'NSE', 'BUY', adaniportsarr[0],(adaniports_marumboThresholdHigh+adaniports_marumboThresholdLow)/2, adaniportsarr[0] + parseInt(adaniportsarr[0])*breakevenRatio);
+                        }
+
+                        if(adaniportsarr[0] <= adaniports_marumboThresholdHigh){
+
+                        }
+                         adaniports_prevCandleMarumbo = false;
+                         adaniports_marumboThresholdHigh = 0;
+                         adaniports_marumboThresholdLow = 0;
+                    }
+
+
+                    if(adaniports_currentSwingDirection == "downSwing"){
+                        if(adaniportsarr[0] > adaniports_marumboThresholdLow){
+                            console.log('sell short here at' + adaniports_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', adaniportsTradePrice, stop, target);
+
+                            scope.startTrade('ADANIPORTS', 'NSE', 'SELL', adaniportsarr[0],(adaniports_marumboThresholdHigh+adaniports_marumboThresholdLow)/2 , adaniportsarr[0]-parseInt(adaniportsarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(adaniportsarr[0] <= adaniports_marumboThresholdLow){
+                    
+                        }
+
+                            adaniports_prevCandleMarumbo = false;
+                            adaniports_marumboThresholdHigh = 0;
+                            adaniports_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            adaniportsarr.push(d);
+        }
+
+        function getasianpaintsOHLC(d) {
+
+            asianpaintstickopen = asianpaintsarr[0];
+            asianpaintstickhigh = _.maxBy(asianpaintsarr);
+            asianpaintsticklow = _.minBy(asianpaintsarr);
+            asianpaintstickclose = asianpaintsarr[asianpaintsarr.length - 1];
+
+            if (asianpaintstickopen < asianpaintstickclose) {
+                asianpaintstickType = "green";
+            } else if (asianpaintstickopen > asianpaintstickclose) {
+                asianpaintstickType = "red";
+            } else if (asianpaintstickopen = asianpaintstickclose) {
+                asianpaintstickType = "doji";
+            }
+
+            asianpaintstickLength = Math.abs(asianpaintstickhigh - asianpaintsticklow);
+
+
+                var marumbo = false;
+                if(asianpaintstickType == "red" && asianpaints_currentSwingDirection == 'downSwing'){
+                        if(asianpaintstickopen == asianpaintstickhigh && asianpaintstickclose == asianpaintsticklow && asianpaintsticklow < asianpaints_prevCandleHeight[1]){
+                            marumbo = true;
+                            asianpaints_marumboThresholdHigh = asianpaintstickhigh;
+                            asianpaints_marumboThresholdLow = asianpaintsticklow;
+                        }
+                }
+
+                if(asianpaintstickType == "green" && asianpaints_currentSwingDirection == "upSwing"){
+                        if(asianpaintstickopen == asianpaintsticklow && asianpaintstickclose == asianpaintstickhigh && asianpaintstickhigh > asianpaints_prevCandleHeight[0]){
+                            marumbo = true;
+                            asianpaints_marumboThresholdHigh = asianpaintstickhigh;
+                            asianpaints_marumboThresholdLow = asianpaintsticklow;
+                        }
+                }
+
+                if(asianpaintstickType == "doji"){
+                         marumbo = false;
+                         asianpaints_marumboThresholdHigh = 0;
+                         asianpaints_marumboThresholdLow = 0;
+                }
+
+              
+
+            asianpaintstickarray = {
+                "open": asianpaintstickopen,
+                "low": asianpaintsticklow,
+                "high": asianpaintstickhigh,
+                "close": asianpaintstickclose,
+                "tickType": asianpaintstickType,
+                'tickLength': asianpaintstickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataasianpaints(asianpaintstickarray);
+            first = 0;
+            asianpaintsarr = [];
+        };
+
+
+         function get5minDataasianpaintsTimestamp(d, scope) {
+
+               if(asianpaints_prevCandleMarumbo == true && asianpaintsarr.length == 1){
+                    ;
+                    
+                    if(asianpaints_currentSwingDirection == "upSwing"){
+                        if(asianpaintsarr[0] >=  asianpaints_marumboThresholdHigh){
+                            console.log('buy long here at' + asianpaints_marumboThresholdHigh);
+                            scope.startTrade('ASIANPAINT', 'NSE', 'BUY', asianpaintsarr[0],(asianpaints_marumboThresholdHigh+asianpaints_marumboThresholdLow)/2, asianpaintsarr[0] + parseInt(asianpaintsarr[0])*breakevenRatio);
+                        }
+
+                        if(asianpaintsarr[0] <= asianpaints_marumboThresholdHigh){
+
+                        }
+                         asianpaints_prevCandleMarumbo = false;
+                         asianpaints_marumboThresholdHigh = 0;
+                         asianpaints_marumboThresholdLow = 0;
+                    }
+
+
+                    if(asianpaints_currentSwingDirection == "downSwing"){
+                        if(asianpaintsarr[0] > asianpaints_marumboThresholdLow){
+                            console.log('sell short here at' + asianpaints_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', asianpaintsTradePrice, stop, target);
+
+                            scope.startTrade('ASIANPAINT', 'NSE', 'SELL', asianpaintsarr[0],(asianpaints_marumboThresholdHigh+asianpaints_marumboThresholdLow)/2 , asianpaintsarr[0]-parseInt(asianpaintsarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(asianpaintsarr[0] <= asianpaints_marumboThresholdLow){
+                    
+                        }
+
+                            asianpaints_prevCandleMarumbo = false;
+                            asianpaints_marumboThresholdHigh = 0;
+                            asianpaints_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            asianpaintsarr.push(d);
+        }
+
+
+
+        function getuplOHLC(d) {
+
+            upltickopen = uplarr[0];
+            upltickhigh = _.maxBy(uplarr);
+            uplticklow = _.minBy(uplarr);
+            upltickclose = uplarr[uplarr.length - 1];
+
+            if (upltickopen < upltickclose) {
+                upltickType = "green";
+            } else if (upltickopen > upltickclose) {
+                upltickType = "red";
+            } else if (upltickopen = upltickclose) {
+                upltickType = "doji";
+            }
+
+            upltickLength = Math.abs(upltickhigh - uplticklow);
+
+
+                var marumbo = false;
+                if(upltickType == "red" && upl_currentSwingDirection == 'downSwing'){
+                        if(upltickopen == upltickhigh && upltickclose == uplticklow && uplticklow < upl_prevCandleHeight[1]){
+                            marumbo = true;
+                            upl_marumboThresholdHigh = upltickhigh;
+                            upl_marumboThresholdLow = uplticklow;
+                        }
+                }
+
+                if(upltickType == "green" && upl_currentSwingDirection == "upSwing"){
+                        if(upltickopen == uplticklow && upltickclose == upltickhigh && upltickhigh > upl_prevCandleHeight[0]){
+                            marumbo = true;
+                            upl_marumboThresholdHigh = upltickhigh;
+                            upl_marumboThresholdLow = uplticklow;
+                        }
+                }
+
+                if(upltickType == "doji"){
+                         marumbo = false;
+                         upl_marumboThresholdHigh = 0;
+                         upl_marumboThresholdLow = 0;
+                }
+
+              
+
+            upltickarray = {
+                "open": upltickopen,
+                "low": uplticklow,
+                "high": upltickhigh,
+                "close": upltickclose,
+                "tickType": upltickType,
+                'tickLength': upltickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataupl(upltickarray);
+            first = 0;
+            uplarr = [];
+        };
+
+
+         function get5minDatauplTimestamp(d, scope) {
+
+               if(upl_prevCandleMarumbo == true && uplarr.length == 1){
+                    ;
+                    
+                    if(upl_currentSwingDirection == "upSwing"){
+                        if(uplarr[0] >=  upl_marumboThresholdHigh){
+                            console.log('buy long here at' + upl_marumboThresholdHigh);
+                            scope.startTrade('UPL', 'NSE', 'BUY', uplarr[0],(upl_marumboThresholdHigh+upl_marumboThresholdLow)/2, uplarr[0] + parseInt(uplarr[0])*breakevenRatio);
+                        }
+
+                        if(uplarr[0] <= upl_marumboThresholdHigh){
+
+                        }
+                         upl_prevCandleMarumbo = false;
+                         upl_marumboThresholdHigh = 0;
+                         upl_marumboThresholdLow = 0;
+                    }
+
+
+                    if(upl_currentSwingDirection == "downSwing"){
+                        if(uplarr[0] > upl_marumboThresholdLow){
+                            console.log('sell short here at' + upl_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', uplTradePrice, stop, target);
+
+                            scope.startTrade('UPL', 'NSE', 'SELL', uplarr[0],(upl_marumboThresholdHigh+upl_marumboThresholdLow)/2 , uplarr[0]-parseInt(uplarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(uplarr[0] <= upl_marumboThresholdLow){
+                    
+                        }
+
+                            upl_prevCandleMarumbo = false;
+                            upl_marumboThresholdHigh = 0;
+                            upl_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            uplarr.push(d);
+        }
+
+         function getgrasimOHLC(d) {
+
+            grasimtickopen = grasimarr[0];
+            grasimtickhigh = _.maxBy(grasimarr);
+            grasimticklow = _.minBy(grasimarr);
+            grasimtickclose = grasimarr[grasimarr.length - 1];
+
+            if (grasimtickopen < grasimtickclose) {
+                grasimtickType = "green";
+            } else if (grasimtickopen > grasimtickclose) {
+                grasimtickType = "red";
+            } else if (grasimtickopen = grasimtickclose) {
+                grasimtickType = "doji";
+            }
+
+            grasimtickLength = Math.abs(grasimtickhigh - grasimticklow);
+
+
+                var marumbo = false;
+                if(grasimtickType == "red" && grasim_currentSwingDirection == 'downSwing'){
+                        if(grasimtickopen == grasimtickhigh && grasimtickclose == grasimticklow && grasimticklow < grasim_prevCandleHeight[1]){
+                            marumbo = true;
+                            grasim_marumboThresholdHigh = grasimtickhigh;
+                            grasim_marumboThresholdLow = grasimticklow;
+                        }
+                }
+
+                if(grasimtickType == "green" && grasim_currentSwingDirection == "upSwing"){
+                        if(grasimtickopen == grasimticklow && grasimtickclose == grasimtickhigh && grasimtickhigh > grasim_prevCandleHeight[0]){
+                            marumbo = true;
+                            grasim_marumboThresholdHigh = grasimtickhigh;
+                            grasim_marumboThresholdLow = grasimticklow;
+                        }
+                }
+
+                if(grasimtickType == "doji"){
+                         marumbo = false;
+                         grasim_marumboThresholdHigh = 0;
+                         grasim_marumboThresholdLow = 0;
+                }
+
+              
+
+            grasimtickarray = {
+                "open": grasimtickopen,
+                "low": grasimticklow,
+                "high": grasimtickhigh,
+                "close": grasimtickclose,
+                "tickType": grasimtickType,
+                'tickLength': grasimtickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDatagrasim(grasimtickarray);
+            first = 0;
+            grasimarr = [];
+        };
+
+
+         function get5minDatagrasimTimestamp(d, scope) {
+
+               if(grasim_prevCandleMarumbo == true && grasimarr.length == 1){
+                    ;
+                    
+                    if(grasim_currentSwingDirection == "upSwing"){
+                        if(grasimarr[0] >=  grasim_marumboThresholdHigh){
+                            console.log('buy long here at' + grasim_marumboThresholdHigh);
+                            scope.startTrade('GRASIM', 'NSE', 'BUY', grasimarr[0],(grasim_marumboThresholdHigh+grasim_marumboThresholdLow)/2, grasimarr[0] + parseInt(grasimarr[0])*breakevenRatio);
+                        }
+
+                        if(grasimarr[0] <= grasim_marumboThresholdHigh){
+
+                        }
+                         grasim_prevCandleMarumbo = false;
+                         grasim_marumboThresholdHigh = 0;
+                         grasim_marumboThresholdLow = 0;
+                    }
+
+
+                    if(grasim_currentSwingDirection == "downSwing"){
+                        if(grasimarr[0] > grasim_marumboThresholdLow){
+                            console.log('sell short here at' + grasim_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', grasimTradePrice, stop, target);
+
+                            scope.startTrade('GRASIM', 'NSE', 'SELL', grasimarr[0],(grasim_marumboThresholdHigh+grasim_marumboThresholdLow)/2 , grasimarr[0]-parseInt(grasimarr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(grasimarr[0] <= grasim_marumboThresholdLow){
+                    
+                        }
+
+                            grasim_prevCandleMarumbo = false;
+                            grasim_marumboThresholdHigh = 0;
+                            grasim_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            grasimarr.push(d);
+        }
 
 
 
@@ -5538,7 +10649,7 @@ checkArg(0);
             'access_token': this.props.access,
         };
 
-         debugger;
+         ;
 
 
         var ticker = new KiteTicker(data, headers);
@@ -5637,6 +10748,1023 @@ checkArg(0);
             } <
             /div>
 
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombobosch != undefined && this.props.tickCombobosch.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "Bosch"
+                plotdata = {
+                    this.props.tickCombobosch
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatabosch!= undefined && this.props.trendDatabosch.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "TRENDBOSCH"
+                plotdata = {
+                    this.props.trendDatabosch
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombocadila != undefined && this.props.tickCombocadila.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "Cadila"
+                plotdata = {
+                    this.props.tickCombocadila
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatacadila!= undefined && this.props.trendDatacadila.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "TREND_CADILA"
+                plotdata = {
+                    this.props.trendDatacadila
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombocipla != undefined && this.props.tickCombocipla.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "Cipla"
+                plotdata = {
+                    this.props.tickCombocipla
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatacipla!= undefined && this.props.trendDatacipla.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "TRENDBcipla"
+                plotdata = {
+                    this.props.trendDatacipla
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombocoal != undefined && this.props.tickCombocoal.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "coal"
+                plotdata = {
+                    this.props.tickCombocoal
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatacoal!= undefined && this.props.trendDatacoal.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendcoal"
+                plotdata = {
+                    this.props.trendDatacoal
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboconcor != undefined && this.props.tickComboconcor.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "concor"
+                plotdata = {
+                    this.props.tickComboconcor
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataconcor!= undefined && this.props.trendDataconcor.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendconcor"
+                plotdata = {
+                    this.props.trendDataconcor
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombocummsind != undefined && this.props.tickCombocummsind.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "cummsind"
+                plotdata = {
+                    this.props.tickCombocummsind
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatacummsind!= undefined && this.props.trendDatacummsind.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendcummsind"
+                plotdata = {
+                    this.props.trendDatacummsind
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombodabur != undefined && this.props.tickCombodabur.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "dabur"
+                plotdata = {
+                    this.props.tickCombodabur
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatadabur!= undefined && this.props.trendDatadabur.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trenddabur"
+                plotdata = {
+                    this.props.trendDatadabur
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombodhfl != undefined && this.props.tickCombodhfl.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "dhfl"
+                plotdata = {
+                    this.props.tickCombodhfl
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatadhfl!= undefined && this.props.trendDatadhfl.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trenddhfl"
+                plotdata = {
+                    this.props.trendDatadhfl
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboemami != undefined && this.props.tickComboemami.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "emami"
+                plotdata = {
+                    this.props.tickComboemami
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataemami!= undefined && this.props.trendDataemami.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendemami"
+                plotdata = {
+                    this.props.trendDataemami
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombogail != undefined && this.props.tickCombogail.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "gail"
+                plotdata = {
+                    this.props.tickCombogail
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatagail!= undefined && this.props.trendDatagail.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendgail"
+                plotdata = {
+                    this.props.trendDatagail
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombohavells != undefined && this.props.tickCombohavells.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "havells"
+                plotdata = {
+                    this.props.tickCombohavells
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatahavells!= undefined && this.props.trendDatahavells.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendhavells"
+                plotdata = {
+                    this.props.trendDatahavells
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombohdfc != undefined && this.props.tickCombohdfc.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "hdfc"
+                plotdata = {
+                    this.props.tickCombohdfc
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatahdfc!= undefined && this.props.trendDatahdfc.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendhdfc"
+                plotdata = {
+                    this.props.trendDatahdfc
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboinfratel != undefined && this.props.tickComboinfratel.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "infratel"
+                plotdata = {
+                    this.props.tickComboinfratel
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatainfratel!= undefined && this.props.trendDatainfratel.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendinfratel"
+                plotdata = {
+                    this.props.trendDatainfratel
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboreddy != undefined && this.props.tickComboreddy.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "reddy"
+                plotdata = {
+                    this.props.tickComboreddy
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatareddy!= undefined && this.props.trendDatareddy.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendreddy"
+                plotdata = {
+                    this.props.trendDatareddy
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboreliance != undefined && this.props.tickComboreliance.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "reliance"
+                plotdata = {
+                    this.props.tickComboreliance
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatareliance!= undefined && this.props.trendDatareliance.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendreliance"
+                plotdata = {
+                    this.props.trendDatareliance
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombosbin != undefined && this.props.tickCombosbin.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "sbin"
+                plotdata = {
+                    this.props.tickCombosbin
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatasbin!= undefined && this.props.trendDatasbin.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendsbin"
+                plotdata = {
+                    this.props.trendDatasbin
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboseimens != undefined && this.props.tickComboseimens.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "seimens"
+                plotdata = {
+                    this.props.tickComboseimens
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataseimens!= undefined && this.props.trendDataseimens.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendseimens"
+                plotdata = {
+                    this.props.trendDataseimens
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombotcs != undefined && this.props.tickCombotcs.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "tcs"
+                plotdata = {
+                    this.props.tickCombotcs
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatatcs!= undefined && this.props.trendDatatcs.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendtcs"
+                plotdata = {
+                    this.props.trendDatatcs
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombounilever != undefined && this.props.tickCombounilever.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "unilever"
+                plotdata = {
+                    this.props.tickCombounilever
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataunilever!= undefined && this.props.trendDataunilever.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "trendunilever"
+                plotdata = {
+                    this.props.trendDataunilever
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombontpc != undefined && this.props.tickCombontpc.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "ntpc"
+                plotdata = {
+                    this.props.tickCombontpc
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatantpc!= undefined && this.props.trendDatantpc.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "ntpc1"
+                plotdata = {
+                    this.props.trendDatantpc
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+               <
+            div class = "row" >
+             {
+                (this.props.tickCombobpcl != undefined && this.props.tickCombobpcl.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "bpcl"
+                plotdata = {
+                    this.props.tickCombobpcl
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatabpcl!= undefined && this.props.trendDatabpcl.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "bpcl1"
+                plotdata = {
+                    this.props.trendDatabpcl
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+               <
+            div class = "row" >
+             {
+                (this.props.tickCombopowergrid != undefined && this.props.tickCombopowergrid.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "powergrid"
+                plotdata = {
+                    this.props.tickCombopowergrid
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatapowergrid!= undefined && this.props.trendDatapowergrid.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "powergrid1"
+                plotdata = {
+                    this.props.trendDatapowergrid
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+             <
+            div class = "row" >
+             {
+                (this.props.tickCombolarsen != undefined && this.props.tickCombolarsen.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "larsen"
+                plotdata = {
+                    this.props.tickCombolarsen
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatalarsen!= undefined && this.props.trendDatalarsen.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "larsen1"
+                plotdata = {
+                    this.props.trendDatalarsen
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombotatamotors != undefined && this.props.tickCombotatamotors.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "tatamotors"
+                plotdata = {
+                    this.props.tickCombotatamotors
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatatatamotors!= undefined && this.props.trendDatatatamotors.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "tatamotors1"
+                plotdata = {
+                    this.props.trendDatatatamotors
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboitc != undefined && this.props.tickComboitc.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "itc"
+                plotdata = {
+                    this.props.tickComboitc
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataitc!= undefined && this.props.trendDataitc.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "itc1"
+                plotdata = {
+                    this.props.trendDataitc
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboadaniports != undefined && this.props.tickComboadaniports.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "adaniports"
+                plotdata = {
+                    this.props.tickComboadaniports
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataadaniports!= undefined && this.props.trendDataadaniports.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "adaniports1"
+                plotdata = {
+                    this.props.trendDataadaniports
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboasianpaints != undefined && this.props.tickComboasianpaints.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "asianpaints"
+                plotdata = {
+                    this.props.tickComboasianpaints
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataasianpaints!= undefined && this.props.trendDataasianpaints.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "asianpaints1"
+                plotdata = {
+                    this.props.trendDataasianpaints
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickComboupl != undefined && this.props.tickComboupl.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "upl"
+                plotdata = {
+                    this.props.tickComboupl
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataupl!= undefined && this.props.trendDataupl.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "upl1"
+                plotdata = {
+                    this.props.trendDataupl
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+               <
+            div class = "row" >
+             {
+                (this.props.tickCombozeel != undefined && this.props.tickCombozeel.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "zeel"
+                plotdata = {
+                    this.props.tickCombozeel
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatazeel!= undefined && this.props.trendDatazeel.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "zeel1"
+                plotdata = {
+                    this.props.trendDatazeel
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+               <
+            div class = "row" >
+             {
+                (this.props.tickCombograsim != undefined && this.props.tickCombograsim.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "grasim"
+                plotdata = {
+                    this.props.tickCombograsim
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatagrasim!= undefined && this.props.trendDatagrasim.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "grasim1"
+                plotdata = {
+                    this.props.trendDatagrasim
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombobajajfinserv != undefined && this.props.tickCombobajajfinserv.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "bajajfinserv"
+                plotdata = {
+                    this.props.tickCombobajajfinserv
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatabajajfinserv!= undefined && this.props.trendDatabajajfinserv.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "bajajfinserv1"
+                plotdata = {
+                    this.props.trendDatabajajfinserv
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+             <
+            div class = "row" >
+             {
+                (this.props.tickCombohindalco != undefined && this.props.tickCombohindalco.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "hindalco"
+                plotdata = {
+                    this.props.tickCombohindalco
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatahindalco!= undefined && this.props.trendDatahindalco.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "hindalco1"
+                plotdata = {
+                    this.props.trendDatahindalco
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+               <
+            div class = "row" >
+             {
+                (this.props.tickComboheromotoco != undefined && this.props.tickComboheromotoco.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "heromotoco"
+                plotdata = {
+                    this.props.tickComboheromotoco
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDataheromotoco!= undefined && this.props.trendDataheromotoco.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "heromotoco1"
+                plotdata = {
+                    this.props.trendDataheromotoco
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+               <
+            div class = "row" >
+             {
+                (this.props.tickCombosunpharma != undefined && this.props.tickCombosunpharma.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "sunpharma"
+                plotdata = {
+                    this.props.tickCombosunpharma
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatasunpharma!= undefined && this.props.trendDatasunpharma.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "sunpharma1"
+                plotdata = {
+                    this.props.trendDatasunpharma
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombotatasteel != undefined && this.props.tickCombotatasteel.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "tatasteel"
+                plotdata = {
+                    this.props.tickCombotatasteel
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatatatasteel!= undefined && this.props.trendDatatatasteel.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "tatasteel1"
+                plotdata = {
+                    this.props.trendDatatatasteel
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+            <
+            div class = "row" >
+             {
+                (this.props.tickCombokotakbank != undefined && this.props.tickCombokotakbank.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "kotakbank"
+                plotdata = {
+                    this.props.tickCombokotakbank
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatakotakbank!= undefined && this.props.trendDatakotakbank.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "kotakbank1"
+                plotdata = {
+                    this.props.trendDatakotakbank
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombomarico != undefined && this.props.tickCombomarico.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "marico"
+                plotdata = {
+                    this.props.tickCombomarico
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatamarico!= undefined && this.props.trendDatamarico.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "marico1"
+                plotdata = {
+                    this.props.trendDatamarico
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombolupin != undefined && this.props.tickCombolupin.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "lupin"
+                plotdata = {
+                    this.props.tickCombolupin
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatalupin!= undefined && this.props.trendDatalupin.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "lupin1"
+                plotdata = {
+                    this.props.trendDatalupin
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+                <
+            div class = "row" >
+             {
+                (this.props.tickCombopidilitind != undefined && this.props.tickCombopidilitind.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "pidilitind"
+                plotdata = {
+                    this.props.tickCombopidilitind
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatapidilitind!= undefined && this.props.trendDatapidilitind.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "pidilitind1"
+                plotdata = {
+                    this.props.trendDatapidilitind
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombohcltech != undefined && this.props.tickCombohcltech.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "hcltech"
+                plotdata = {
+                    this.props.tickCombohcltech
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatahcltech!= undefined && this.props.trendDatahcltech.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "hcltech1"
+                plotdata = {
+                    this.props.trendDatahcltech
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+
+
+
             
 
       
@@ -5725,8 +11853,87 @@ checkArg(0);
              tickCombotcs: state.tickDatatcs,
             trendDatatcs: state.plDatatcs,
 
-             tickCombounilever: state.tickDataunilever,
+            tickCombounilever: state.tickDataunilever,
             trendDataunilever: state.plDataunilever,
+
+            tickCombobpcl: state.tickDatabpcl,
+            trendDatabpcl: state.plDatabpcl,
+
+            tickCombontpc: state.tickDatantpc,
+            trendDatantpc: state.plDatantpc,
+
+            tickCombopowergrid: state.tickDatapowergrid,
+            trendDatapowergrid : state.plDatapowergrid,
+
+            tickComboongc: state.tickDataongc,
+            trendDataongc : state.plDataongc,
+
+            tickCombolarsen: state.tickDatalarsen,
+            trendDatalarsen : state.plDatalarsen,
+
+            tickCombotatamotors: state.tickDatatatamotors,
+            trendDatatatamotors : state.plDatatatamotors,
+
+            tickComboitc: state.tickDataitc,
+            trendDataitc : state.plDataitc,
+
+
+            tickComboadaniports: state.tickDataadaniports,
+            trendDataadaniports : state.plDataadaniports,
+
+               tickComboasianpaints: state.tickDataasianpaints,
+            trendDataasianpaints : state.plDataasianpaints,
+
+             tickComboupl: state.tickDataupl,
+            trendDataupl : state.plDataupl,
+
+             tickCombozeel: state.tickDatazeel,
+            trendDatazeel : state.plDatazeel,
+
+
+            tickCombograsim: state.tickDatagrasim,
+            trendDatagrasim : state.plDatagrasim,
+
+            tickCombobajajfinserv: state.tickDatabajajfinserv,
+            trendDatabajajfinserv : state.plDatabajajfinserv,
+
+             tickCombohindalco: state.tickDatahindalco,
+            trendDatahindalco : state.plDatahindalco,
+
+             tickComboheromotoco: state.tickDataheromotoco,
+            trendDataheromotoco : state.plDataheromotoco,
+
+
+            tickCombosunpharma: state.tickDatasunpharma,
+            trendDatasunpharma : state.plDatasunpharma,
+
+             tickCombotatasteel: state.tickDatatatasteel,
+            trendDatatatasteel : state.plDatatatasteel,
+
+             tickCombokotakbank: state.tickDatakotakbank,
+            trendDatakotakbank : state.plDatakotakbank,
+
+             tickCombomarico: state.tickDatamarico,
+            trendDatamarico : state.plDatamarico,
+
+            tickCombolupin: state.tickDatalupin,
+            trendDatalupin : state.plDatalupin,
+
+             tickCombopidilitind: state.tickDatapidilitind,
+            trendDatapidilitind : state.plDatapidilitind,
+
+             tickComboofss: state.tickDataofss,
+            trendDataofss : state.plDataofss,
+
+
+            tickCombohcltech: state.tickDatahcltech,
+            trendDatahcltech : state.plDatahcltech,
+
+            tickCombogodrejcp: state.tickDatagodrejcp,
+            trendDatagodrejcp : state.plDatagodrejcp,
+
+
+
 
              
         }
@@ -5779,4 +11986,54 @@ checkArg(0);
         pivotDatatcs,
         addTickDataunilever,
         pivotDataunilever,
+        addTickDatantpc,
+        pivotDatantpc,
+        pivotDatabpcl,
+        addTickDatabpcl,
+        addTickDatapowergrid,
+        pivotDatapowergrid,
+        addTickDataongc,
+        pivotDataongc,
+        addTickDatalarsen,
+        pivotDatalarsen,
+        addTickDatatatamotors,
+        pivotDatatatamotors ,
+        addTickDataitc,
+        pivotDataitc,
+        addTickDataadaniports,
+pivotDataadaniports,
+addTickDataasianpaints,
+pivotDataasianpaints,
+addTickDataupl,
+pivotDataupl,
+addTickDatabajajfinserv,
+pivotDatabajajfinserv,
+addTickDatasunpharma,
+pivotDatasunpharma,
+addTickDatatatasteel,
+pivotDatatatasteel,
+addTickDatazeel,
+pivotDatazeel,
+addTickDatagrasim,
+pivotDatagrasim,
+addTickDatahindalco,
+pivotDatahindalco,
+addTickDataheromotoco,
+pivotDataheromotoco,
+addTickDatakotakbank,
+pivotDatakotakbank,
+addTickDatapidilitind,
+pivotDatapidilitind,
+addTickDataofss,
+pivotDataofss,
+addTickDatamarico,
+pivotDatamarico,
+addTickDatalupin,
+pivotDatalupin,
+addTickDatahcltech,
+pivotDatahcltech,
+addTickDatagodrejcp,
+pivotDatagodrejcp,
+
+
     })(TestLoginNav));

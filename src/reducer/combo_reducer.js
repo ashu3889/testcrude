@@ -92,20 +92,85 @@ import tickDataunilever from './tickdata_unilever.js';
 import plDataunilever from './plotdata_unilever.js';
 
 
-/*import tickDataCopper from './tickdata_copper.js';
-import plDataCopper from './plotdata_copper.js';
 
 
-import tickDataCopper from './tickdata_copper.js';
-import plDataCopper from './plotdata_copper.js';
+import tickDataadaniports from '../new_reducer/tickdata_adaniports.js';
+import plDataadaniports from '../new_reducer/plotdata_adaniports.js';
+
+import tickDataasianpaints from '../new_reducer/tickdata_asianpaints.js';
+import plDataasianpaints from '../new_reducer/plotdata_asianpaints.js';
+
+import tickDatabajajfinserv from '../new_reducer/tickdata_bajajfinsev.js';
+import plDatabajajfinserv from '../new_reducer/plotdata_bajajfinsev.js';
+
+import tickDatabpcl from '../new_reducer/tickdata_bpcl.js';
+import plDatabpcl from '../new_reducer/plotdata_bpcl.js';
+
+import tickDatantpc from '../new_reducer/tickdata_ntpc.js';
+import plDatantpc from '../new_reducer/plotdata_ntpc.js';
+
+import tickDatahcltech from '../new_reducer/tickdata_hcltech.js';
+import plDatahcltech from '../new_reducer/plotdata_hcltech.js';
+
+import tickDatahindalco from '../new_reducer/tickdata_hindalco.js';
+import plDatahindalco from '../new_reducer/plotdata_hindalco.js';
+
+import tickDataitc from '../new_reducer/tickdata_itc.js';
+import plDataitc from '../new_reducer/plotdata_itc.js';
+
+import tickDatakotakbank from '../new_reducer/tickdata_kotakbank.js';
+import plDatakotakbank from '../new_reducer/plotdata_kotakbank.js';
+
+import tickDatalarsen from '../new_reducer/tickdata_lt.js';
+import plDatalarsen from '../new_reducer/plotdata_lt.js';
+
+import tickDatalupin from '../new_reducer/tickdata_lupin.js';
+import plDatalupin from '../new_reducer/plotdata_lupin.js';
+
+import tickDatamarico from '../new_reducer/tickdata_marico.js';
+import plDatamarico from '../new_reducer/plotdata_marico.js';
+
+import tickDataofss from '../new_reducer/tickdata_ofss.js';
+import plDataofss from '../new_reducer/plotdata_ofss.js';
+
+import tickDataongc from '../new_reducer/tickdata_ongc.js';
+import plDataongc from '../new_reducer/plotdata_ongc.js';
+
+import tickDatapidilitind from '../new_reducer/tickdata_pidilitind.js';
+import plDatapidilitind from '../new_reducer/plotdata_pidilitind.js';
+
+import tickDatapowergrid from '../new_reducer/tickdata_powergrid.js';
+import plDatapowergrid from '../new_reducer/plotdata_powergrid.js';
+
+import tickDatasunpharma from '../new_reducer/tickdata_sunpharma.js';
+import plDatasunpharma from '../new_reducer/plotdata_sunpharma.js';
+
+import tickDatatatamotors from '../new_reducer/tickdata_tatamotors.js';
+import plDatatatamotors from '../new_reducer/plotdata_tatamotors.js';
+
+import tickDatatatasteel from '../new_reducer/tickdata_tatasteel.js';
+import plDatatatasteel from '../new_reducer/plotdata_tatasteel.js';
+
+import tickDataupl from '../new_reducer/tickdata_upl.js';
+import plDataupl from '../new_reducer/plotdata_upl.js';
+
+import tickDatazeel from '../new_reducer/tickdata_zeel.js';
+import plDatazeel from '../new_reducer/plotdata_zeel.js';
+
+import tickDatagrasim from '../new_reducer/tickdata_grasim.js';
+import plDatagrasim from '../new_reducer/plotdata_grasim.js';
 
 
-import tickDataCopper from './tickdata_copper.js';
-import plDataCopper from './plotdata_copper.js';
+import tickDataheromotoco from '../new_reducer/tickdata_heromotoco.js';
+import plDataheromotoco from '../new_reducer/plotdata_heromotoco.js';
+
+import tickDatagodrejcp from '../new_reducer/tickdata_godrejcp.js';
+import plDatagodrejcp from '../new_reducer/plotdata_godrejcp.js';
 
 
-import tickDataCopper from './tickdata_copper.js';
-import plDataCopper from './plotdata_copper.js';*/
+
+
+
 
 
 
@@ -186,6 +251,85 @@ plDatabosch:plDatabosch,
 
 tickDatabanknifty :tickDatabanknifty,
 plDatabanknifty:plDatabanknifty,
+
+            tickDatabpcl: tickDatabpcl,
+            plDatabpcl: plDatabpcl,
+
+            tickDatantpc: tickDatantpc,
+            plDatantpc: plDatantpc,
+
+            tickDatapowergrid: tickDatapowergrid,
+            plDatapowergrid : plDatapowergrid,
+
+            tickDataongc: tickDataongc,
+            plDataongc : plDataongc,
+
+            tickDatalarsen: tickDatalarsen,
+            plDatalarsen : plDatalarsen,
+
+            tickDatatatamotors: tickDatatatamotors,
+            trendDatatatamotors : plDatatatamotors,
+
+            tickDataitc:tickDataitc,
+            plDataitc : plDataitc,
+
+
+            tickDataadaniports: tickDataadaniports,
+            plDataadaniports :plDataadaniports,
+
+               tickDataasianpaints: tickDataasianpaints,
+            plDataasianpaints : plDataasianpaints,
+
+             tickDataupl: tickDataupl,
+            plDataupl : plDataupl,
+
+             tickDatazeel: tickDatazeel,
+            plDatazeel : plDatazeel,
+
+
+            tickDatagrasim: tickDatagrasim,
+            plDatagrasim : plDatagrasim,
+
+            tickDatabajajfinserv: tickDatabajajfinserv,
+            plDatabajajfinserv : plDatabajajfinserv,
+
+             tickDatahindalco: tickDatahindalco,
+            plDatahindalco : plDatahindalco,
+
+             tickDataheromotoco: tickDataheromotoco,
+            plDataheromotoco : plDataheromotoco,
+
+
+            tickDatasunpharma: tickDatasunpharma,
+            plDatasunpharma : plDatasunpharma,
+
+             tickDatatatasteel: tickDatatatasteel,
+            plDatatatasteel : plDatatatasteel,
+
+             tickDatakotakbank: tickDatakotakbank,
+             plDatakotakbank : plDatakotakbank,
+
+             tickDatamarico: tickDatamarico,
+            plDatamarico : plDatamarico,
+
+            tickDatalupin: tickDatalupin,
+            plDatalupin : plDatalupin,
+
+             tickDatapidilitind: tickDatapidilitind,
+            plDatapidilitind : plDatapidilitind,
+
+             tickDataofss: tickDataofss,
+            plDataofss : plDataofss,
+
+
+            tickDatahcltech: tickDatahcltech,
+            plDatahcltech : plDatahcltech,
+
+            tickDatagodrejcp: tickDatagodrejcp,
+            plDatagodrejcp : plDatagodrejcp,
+
+
+
 
 });
 

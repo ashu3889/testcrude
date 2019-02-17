@@ -1,0 +1,240 @@
+var crude_currentSwingDirection = '' ;
+var crude_prevCandleMarumbo = '';
+var crude_marumboThresholdHigh = 0;
+var crude_marumboThresholdLow = 0;
+var crude_prevCandleHeight = [];
+var crude_count = 0;
+var crudearr = [];
+var crudetickcount = 0,
+    crudeticklow = 0,
+    crudetickhigh = 0,
+    crudetickopen = 0,
+    crudetickarray = [],
+    crudetickType = 0,
+    crudetickLength = 0,
+    crudetickclose = 0;
+
+
+
+       let crude_len = nextProps.tickCombocrude.length - 1;
+
+        if ((this.props.tickCombocrude) != undefined) {
+
+            if ((nextProps.tickCombocrude).length >= 1) {
+
+
+            if (crude_len > 2) {
+                crude_prevCandleHeight = [];
+                crude_prevCandleHeight.push(nextProps.tickCombocrude[crude_len-1].high);
+                crude_prevCandleHeight.push(nextProps.tickCombocrude[crude_len-1].low);
+            }
+
+
+                  
+
+
+            if (crude_len > 1) {
+
+                if (nextProps.tickCombocrude[crude_len].marumbo == true){
+                     crude_prevCandleMarumbo = true;
+                }
+
+                if (nextProps.tickCombocrude[crude_len].marumbo == false){
+                     crude_prevCandleMarumbo = false;
+                }
+            }
+
+               
+
+
+                if (nextProps.tickCombocrude[crude_len].pivot != undefined) {
+
+                    //crude oil
+                    if (this.state.crude_pivotpoint != nextProps.tickCombocrude[crude_len].pivot) {
+
+                        crude_count = crude_count + 1;
+
+                        this.setState({
+                            crude_pivotpoint: nextProps.tickCombocrude[crude_len].pivot
+                        });
+
+                        var pivotValue = nextProps.tickCombocrude[crude_len].pivot;
+
+                        let datainput = {
+                            x: crude_count,
+                            y: nextProps.tickCombocrude[crude_len].pivot,
+                            dir: nextProps.tickCombocrude[crude_len].dir,
+                            date: nextProps.tickCombocrude[crude_len].date,
+                            currentPrice: nextProps.tickCombocrude[crude_len].currentPrice,
+                            tradeStatus : nextProps.tickCombocrude[crude_len].tradeStatus
+                        };
+
+                        this.props.pivotData(datainput);
+                        
+                    }
+                }
+            }
+        }
+
+        if ((this.props.trendDatacrude) != undefined && this.props.trendDatacrude.length > 1 && (nextProps.trendDatacrude) != undefined && nextProps.trendDatacrude.length >1) {
+            var crude_nextPropslen = nextProps.trendDatacrude.length-1;
+
+            if (crude_nextPropslen > 1) {
+                if (nextProps.trendDatacrude[crude_nextPropslen].dir == "up"){
+                     crude_currentSwingDirection = 'downSwing';
+                }
+
+                if (nextProps.trendDatacrude[crude_nextPropslen].dir == "low"){
+                     crude_currentSwingDirection = 'upSwing';
+                }
+
+            }
+
+
+        }
+
+
+
+
+        function getCrudeOHLC(d) {
+
+            crudetickopen = crudearr[0];
+            crudetickhigh = _.maxBy(crudearr);
+            crudeticklow = _.minBy(crudearr);
+            crudetickclose = crudearr[crudearr.length - 1];
+
+            if (crudetickopen < crudetickclose) {
+                crudetickType = "green";
+            } else if (crudetickopen > crudetickclose) {
+                crudetickType = "red";
+            } else if (crudetickopen = crudetickclose) {
+                crudetickType = "doji";
+            }
+
+            crudetickLength = Math.abs(crudetickhigh - crudeticklow);
+
+
+                var marumbo = false;
+                if(crudetickType == "red" && crude_currentSwingDirection == 'downSwing'){
+                        if(crudetickopen == crudetickhigh && crudetickclose == crudeticklow && crudeticklow < crude_prevCandleHeight[1]){
+                            marumbo = true;
+                            crude_marumboThresholdHigh = crudetickhigh;
+                            crude_marumboThresholdLow = crudeticklow;
+                        }
+                }
+
+                if(crudetickType == "green" && crude_currentSwingDirection == "upSwing"){
+                        if(crudetickopen == crudeticklow && crudetickclose == crudetickhigh && crudetickhigh > crude_prevCandleHeight[0]){
+                            marumbo = true;
+                            crude_marumboThresholdHigh = crudetickhigh;
+                            crude_marumboThresholdLow = crudeticklow;
+                        }
+                }
+
+                if(crudetickType == "doji"){
+                         marumbo = false;
+                         crude_marumboThresholdHigh = 0;
+                         crude_marumboThresholdLow = 0;
+                }
+
+              
+
+            crudetickarray = {
+                "open": crudetickopen,
+                "low": crudeticklow,
+                "high": crudetickhigh,
+                "close": crudetickclose,
+                "tickType": crudetickType,
+                'tickLength': crudetickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickData(crudetickarray);
+            first = 0;
+            crudearr = [];
+        };
+
+
+         function get5minDataCrudeTimestamp(d, scope) {
+
+               if(crude_prevCandleMarumbo == true && crudearr.length == 1){
+                    ;
+                    
+                    if(crude_currentSwingDirection == "upSwing"){
+                        if(crudearr[0] >=  crude_marumboThresholdHigh){
+                            console.log('buy long here at' + crude_marumboThresholdHigh);
+                            scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'BUY', crudearr[0],(crude_marumboThresholdHigh+crude_marumboThresholdLow)/2, crudearr[0] + parseInt(crudearr[0])*breakevenRatio);
+                        }
+
+                        if(crudearr[0] <= crude_marumboThresholdHigh){
+
+                        }
+                         crude_prevCandleMarumbo = false;
+                         crude_marumboThresholdHigh = 0;
+                         crude_marumboThresholdLow = 0;
+                    }
+
+
+                    if(crude_currentSwingDirection == "downSwing"){
+                        if(crudearr[0] > crude_marumboThresholdLow){
+                            console.log('sell short here at' + crude_marumboThresholdLow );
+                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
+
+                            scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudearr[0],(crude_marumboThresholdHigh+crude_marumboThresholdLow)/2 , crudearr[0]-parseInt(crudearr[0])*breakevenRatio);
+                     
+                        }
+
+                        if(crudearr[0] <= crude_marumboThresholdLow){
+                    
+                        }
+
+                            crude_prevCandleMarumbo = false;
+                            crude_marumboThresholdHigh = 0;
+                            crude_marumboThresholdLow = 0;
+                    }
+                       
+                }
+
+            crudearr.push(d);
+        }
+
+
+              <
+            div class = "row" >
+             {
+                (this.props.tickCombocrude != undefined && this.props.tickCombocrude.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "crude"
+                plotdata = {
+                    this.props.tickCombocrude
+                }
+                /> </div >
+                :
+                ''
+            }
+
+            {
+                (this.props.trendDatacrude!= undefined && this.props.trendDatacrude.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "crude1"
+                plotdata = {
+                    this.props.trendDatacrude
+                }
+                /></div >
+                :
+                ''
+            } <
+            /div>
+
+export function addTickDatacrude(data){
+  //alert(JSON.stringify(data));
+   return ({
+     type :'ADD_DATA_SCOPE_HINDZINC',
+     payload : data
+    })
+}
+
+export function pivotDatacrude(data){
+    return ({
+     type :'PLOT_PIVOT_DATA_HINDZINC',
+     payload : data,
+    })
+}
