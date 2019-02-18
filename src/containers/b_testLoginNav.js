@@ -115,6 +115,7 @@ import _ from "lodash";
 import axios from 'axios';
 import {ducasoft} from './ducasoft.js';
 import {crudedata} from './data.js';
+import moment from "moment";
 
 
 //main changes
@@ -5084,11 +5085,8 @@ checkArg(0);
 
         this.connect = function() {
 
-           // alert(access_token_const);
-
-
-            // 
-
+         
+            
             var self = this;
 
           
@@ -5115,8 +5113,12 @@ checkArg(0);
             ws.binaryType = "arraybuffer";
 
             ws.onmessage = function(e) {
-                // Binary tick data.
+                // Binary tick data. 
+               
+               
                 if (e.data instanceof ArrayBuffer) {
+                    
+
                     if (e.data.byteLength > 2) {
 
                         var d = parseBinary(e.data);
@@ -5422,7 +5424,54 @@ checkArg(0);
         }
 
         //
-        this.connect();
+
+
+            /**/
+
+            
+
+         
+
+        var myVar = setInterval(myTimer, 1000);
+
+        function myTimer() {
+             var currentTime = new Date();
+
+            var currentOffset = currentTime.getTimezoneOffset();
+
+            var ISTOffset = 330;   // IST offset UTC +5:30
+
+            var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+
+
+             var hoursIST = ISTTime.getHours()
+             var minutesIST = ISTTime.getMinutes()
+             var secondIST = ISTTime.getSeconds()
+
+             var date = moment("2019-02-18T18:10:00")
+             var now = moment();
+
+             var format = 'hh:mm:ss'
+
+             var time = moment(hoursIST+":"+minutesIST+":"+ secondIST,format),
+             afterTime = moment('23:40:00', format),
+             beforeTime = moment('19:45:59', format);
+
+             var startWS = time.isBetween(beforeTime, afterTime);
+
+             if(startWS == true){
+
+                self.connect();
+                myStopFunction();
+
+             }
+         }
+
+        function myStopFunction() {
+               clearInterval(myVar);
+        }
+
+        
 
 
         setInterval(function() {
@@ -5497,7 +5546,7 @@ checkArg(0);
                  getgodrejcpOHLC(self);
 
                 
-        }, 10000);
+        }, 60000);
 
  function getlarsenOHLC(d) {
 
@@ -7026,6 +7075,8 @@ function getpidilitindOHLC(d) {
                        
                 }
 
+                console.log("copperarr" + copperarr);
+
             copperarr.push(d);
         }
 
@@ -7071,7 +7122,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+         if(crudearr.length >1){
             crudetickarray = {
                 "open": crudetickopen,
                 "low": crudeticklow,
@@ -7083,6 +7134,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickData(crudetickarray);
+        }
             first = 0;
             crudearr = [];
         };
@@ -7136,19 +7188,24 @@ function getpidilitindOHLC(d) {
                 }
 
                 console.log('current swing copper direction is ' + copper_currentSwingDirection);
+  
+                if(copperarr.length >1){
 
-
-            coppertickarray = {
-                "open": coppertickopen,
-                "low": copperticklow,
-                "high": coppertickhigh,
-                "close": coppertickclose,
-                "tickType": coppertickType,
-                'tickLength': coppertickLength,
-                 'marumbo' : marumbo,
-            };
+                     coppertickarray = {
+                        "open": coppertickopen,
+                        "low": copperticklow,
+                        "high": coppertickhigh,
+                        "close": coppertickclose,
+                        "tickType": coppertickType,
+                        'tickLength': coppertickLength,
+                        'marumbo' : marumbo,
+                    };
             //
-            d.props.addTickDatacopper(coppertickarray);
+                     d.props.addTickDatacopper(coppertickarray);
+
+                }
+
+           
             first = 0;
             copperarr = [];
         };
@@ -7245,7 +7302,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing banknifty direction is ' + banknifty_currentSwingDirection);
 
-
+        if(bankniftyarr.length >1){
             bankniftytickarray = {
                 "open": bankniftytickopen,
                 "low": bankniftyticklow,
@@ -7255,8 +7312,9 @@ function getpidilitindOHLC(d) {
                 'tickLength': bankniftytickLength,
                  'marumbo' : marumbo,
             };
-            //
             d.props.addTickDatabanknifty(bankniftytickarray);
+
+        }
             first = 0;
             bankniftyarr = [];
         };
@@ -7355,7 +7413,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing bosch direction is ' + bosch_currentSwingDirection);
 
-
+        if(boscharr.length >1){
             boschtickarray = {
                 "open": boschtickopen,
                 "low": boschticklow,
@@ -7367,6 +7425,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatabosch(boschtickarray);
+        }
             first = 0;
             boscharr = [];
         };
@@ -7459,7 +7518,7 @@ function getpidilitindOHLC(d) {
                
 
                
-
+        if(cadilaarr.length >1){
             cadilatickarray = {
                 "open": cadilatickopen,
                 "low": cadilaticklow,
@@ -7471,6 +7530,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatacadila(cadilatickarray);
+        }
             first = 0;
             cadilaarr = [];
         };
@@ -7568,7 +7628,8 @@ function getpidilitindOHLC(d) {
                 }
 
                 console.log('current swing cipla direction is ' + cipla_currentSwingDirection);
-
+        
+        if(ciplaarr.length >1){
 
             ciplatickarray = {
                 "open": ciplatickopen,
@@ -7581,6 +7642,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatacipla(ciplatickarray);
+        }
+
             first = 0;
             ciplaarr = [];
         };
@@ -7672,7 +7735,7 @@ function getpidilitindOHLC(d) {
                 }
 
                
-
+         if(coalarr.length >1){
             coaltickarray = {
                 "open": coaltickopen,
                 "low": coalticklow,
@@ -7684,6 +7747,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatacoal(coaltickarray);
+        }
             first = 0;
             coalarr = [];
         };
@@ -7780,7 +7844,7 @@ function getpidilitindOHLC(d) {
                 }
 
           
-
+        if(concorarr.length >1){
             concortickarray = {
                 "open": concortickopen,
                 "low": concorticklow,
@@ -7792,6 +7856,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataconcor(concortickarray);
+        }
             first = 0;
             concorarr = [];
         };
@@ -7888,7 +7953,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing cummsind direction is ' + cummsind_currentSwingDirection);
 
-
+        if(cummsindarr.length >1){
             cummsindtickarray = {
                 "open": cummsindtickopen,
                 "low": cummsindticklow,
@@ -7900,6 +7965,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatacummsind(cummsindtickarray);
+
+        }
             first = 0;
             cummsindarr = [];
         };
@@ -7947,7 +8014,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(sunpharmaarr.length >1){
             sunpharmatickarray = {
                 "open": sunpharmatickopen,
                 "low": sunpharmaticklow,
@@ -7959,6 +8026,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatasunpharma(sunpharmatickarray);
+        }
+
             first = 0;
             sunpharmaarr = [];
         };
@@ -8101,7 +8170,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing dabur direction is ' + dabur_currentSwingDirection);
 
-
+        if(daburarr.length >1){
             daburtickarray = {
                 "open": daburtickopen,
                 "low": daburticklow,
@@ -8113,6 +8182,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatadabur(daburtickarray);
+
+        }
             first = 0;
             daburarr = [];
         };
@@ -8204,7 +8275,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(dhflarr.length >1){
             dhfltickarray = {
                 "open": dhfltickopen,
                 "low": dhflticklow,
@@ -8216,6 +8287,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatadhfl(dhfltickarray);
+
+        }
             first = 0;
             dhflarr = [];
         };
@@ -8263,7 +8336,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(kotakbankarr.length >1){
             kotakbanktickarray = {
                 "open": kotakbanktickopen,
                 "low": kotakbankticklow,
@@ -8275,6 +8348,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatakotakbank(kotakbanktickarray);
+
+        }
             first = 0;
             kotakbankarr = [];
         };
@@ -8366,7 +8441,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(heromotocoarr.length >1){
             heromotocotickarray = {
                 "open": heromotocotickopen,
                 "low": heromotocoticklow,
@@ -8378,6 +8453,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataheromotoco(heromotocotickarray);
+        }
+
             first = 0;
             heromotocoarr = [];
         };
@@ -8521,7 +8598,8 @@ function getpidilitindOHLC(d) {
                 }
 
                 console.log('current swing emami direction is ' + emami_currentSwingDirection);
-
+ 
+        if(emamiarr.length >1){
 
             emamitickarray = {
                 "open": emamitickopen,
@@ -8534,6 +8612,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataemami(emamitickarray);
+
+        }
             first = 0;
             emamiarr = [];
         };
@@ -8631,7 +8711,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing gail direction is ' + gail_currentSwingDirection);
 
-
+        if(gailarr.length >1){
             gailtickarray = {
                 "open": gailtickopen,
                 "low": gailticklow,
@@ -8643,6 +8723,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatagail(gailtickarray);
+        }
             first = 0;
             gailarr = [];
         };
@@ -8733,7 +8814,7 @@ function getpidilitindOHLC(d) {
                          havells_marumboThresholdLow = 0;
                 }
 
-
+        if(havellsarr.length >1){
             havellstickarray = {
                 "open": havellstickopen,
                 "low": havellsticklow,
@@ -8745,6 +8826,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatahavells(havellstickarray);
+        }
+
             first = 0;
             havellsarr = [];
         };
@@ -8836,7 +8919,7 @@ function getpidilitindOHLC(d) {
                 }
 
                
-
+        if(hdfcarr.length >1){
             hdfctickarray = {
                 "open": hdfctickopen,
                 "low": hdfcticklow,
@@ -8848,6 +8931,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatahdfc(hdfctickarray);
+        }
             first = 0;
             hdfcarr = [];
         };
@@ -8943,7 +9027,7 @@ function getpidilitindOHLC(d) {
                 }
 
                
-           
+        if(hindzincarr.length >1){   
             hindzinctickarray = {
                 "open": hindzinctickopen,
                 "low": hindzincticklow,
@@ -8955,6 +9039,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatahindzinc(hindzinctickarray);
+        }
             first = 0;
             hindzincarr = [];
         };
@@ -9044,7 +9129,7 @@ function getpidilitindOHLC(d) {
                 }
 
                 
-
+        if(infratelarr.length >1){
             infrateltickarray = {
                 "open": infrateltickopen,
                 "low": infratelticklow,
@@ -9056,6 +9141,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatainfratel(infrateltickarray);
+        }
             first = 0;
             infratelarr = [];
         };
@@ -9102,7 +9188,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(bajajfinservarr.length >1){
             bajajfinservtickarray = {
                 "open": bajajfinservtickopen,
                 "low": bajajfinservticklow,
@@ -9114,6 +9200,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatabajajfinserv(bajajfinservtickarray);
+        }
             first = 0;
             bajajfinservarr = [];
         };
@@ -9256,7 +9343,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing reddy direction is ' + reddy_currentSwingDirection);
 
-
+        if(reddyarr.length >1){
             reddytickarray = {
                 "open": reddytickopen,
                 "low": reddyticklow,
@@ -9268,6 +9355,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatareddy(reddytickarray);
+        }
+
             first = 0;
             reddyarr = [];
         };
@@ -9359,7 +9448,7 @@ function getpidilitindOHLC(d) {
                 }
 
                 
-
+        if(reliancearr.length >1){
             reliancetickarray = {
                 "open": reliancetickopen,
                 "low": relianceticklow,
@@ -9371,6 +9460,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatareliance(reliancetickarray);
+        }
             first = 0;
             reliancearr = [];
         };
@@ -9461,7 +9551,7 @@ function getpidilitindOHLC(d) {
                 }
 
                 
-
+        if(sbinarr.length >1){
             sbintickarray = {
                 "open": sbintickopen,
                 "low": sbinticklow,
@@ -9473,6 +9563,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatasbin(sbintickarray);
+        }
             first = 0;
             sbinarr = [];
         };
@@ -9564,7 +9655,7 @@ function getpidilitindOHLC(d) {
                 }
 
                
-
+        if(seimensarr.length >1){
             seimenstickarray = {
                 "open": seimenstickopen,
                 "low": seimensticklow,
@@ -9576,6 +9667,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataseimens(seimenstickarray);
+        }
             first = 0;
             seimensarr = [];
         };
@@ -9674,7 +9766,7 @@ function getpidilitindOHLC(d) {
 
                 console.log('current swing tcs direction is ' + tcs_currentSwingDirection);
 
-
+        if(tcsarr.length >1){
             tcstickarray = {
                 "open": tcstickopen,
                 "low": tcsticklow,
@@ -9686,6 +9778,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatatcs(tcstickarray);
+        }
             first = 0;
             tcsarr = [];
         };
@@ -9776,7 +9869,8 @@ function getpidilitindOHLC(d) {
                          unilever_marumboThresholdLow = 0;
                 }
 
-               
+
+        if(unileverarr.length >1){
             unilevertickarray = {
                 "open": unilevertickopen,
                 "low": unileverticklow,
@@ -9788,6 +9882,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataunilever(unilevertickarray);
+        }
             first = 0;
             unileverarr = [];
         };
@@ -9838,7 +9933,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(ntpcarr.length >1){
             ntpctickarray = {
                 "open": ntpctickopen,
                 "low": ntpcticklow,
@@ -9850,6 +9945,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatantpc(ntpctickarray);
+        }
+
             first = 0;
             ntpcarr = [];
         };
@@ -9944,7 +10041,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(powergridarr.length >1){
             powergridtickarray = {
                 "open": powergridtickopen,
                 "low": powergridticklow,
@@ -9956,6 +10053,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatapowergrid(powergridtickarray);
+        }
+
             first = 0;
             powergridarr = [];
         };
@@ -10046,7 +10145,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(adaniportsarr.length >1){
             adaniportstickarray = {
                 "open": adaniportstickopen,
                 "low": adaniportsticklow,
@@ -10058,6 +10157,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataadaniports(adaniportstickarray);
+        }
             first = 0;
             adaniportsarr = [];
         };
@@ -10148,7 +10248,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(asianpaintsarr.length >1){
             asianpaintstickarray = {
                 "open": asianpaintstickopen,
                 "low": asianpaintsticklow,
@@ -10160,6 +10260,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataasianpaints(asianpaintstickarray);
+        }
             first = 0;
             asianpaintsarr = [];
         };
@@ -10252,7 +10353,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(uplarr.length >1){
             upltickarray = {
                 "open": upltickopen,
                 "low": uplticklow,
@@ -10264,6 +10365,8 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDataupl(upltickarray);
+
+        }
             first = 0;
             uplarr = [];
         };
@@ -10354,7 +10457,7 @@ function getpidilitindOHLC(d) {
                 }
 
               
-
+        if(grasimarr.length >1){
             grasimtickarray = {
                 "open": grasimtickopen,
                 "low": grasimticklow,
@@ -10366,6 +10469,7 @@ function getpidilitindOHLC(d) {
             };
             //
             d.props.addTickDatagrasim(grasimtickarray);
+        }
             first = 0;
             grasimarr = [];
         };
