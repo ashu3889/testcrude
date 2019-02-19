@@ -5455,7 +5455,7 @@ checkArg(0);
 
              var time = moment(hoursIST+":"+minutesIST+":"+ secondIST,format),
              afterTime = moment('23:40:00', format),
-             beforeTime = moment('19:45:59', format);
+             beforeTime = moment('17:54:59', format);
 
              var startWS = time.isBetween(beforeTime, afterTime);
 
@@ -5464,22 +5464,13 @@ checkArg(0);
                 self.connect();
                 myStopFunction();
 
-             }
-         }
-
-        function myStopFunction() {
-               clearInterval(myVar);
-        }
-
-        
-
 
         setInterval(function() {
                  getCrudeOHLC(self);
                  getCopperOHLC(self);
 
 
-                 getbankniftyOHLC(self);
+                getbankniftyOHLC(self);
                  getboschOHLC(self);
 
 
@@ -5546,7 +5537,19 @@ checkArg(0);
                  getgodrejcpOHLC(self);
 
                 
-        }, 60000);
+        }, 300000);
+
+
+             }
+         }
+
+        function myStopFunction() {
+               clearInterval(myVar);
+        }
+
+        
+
+
 
  function getlarsenOHLC(d) {
 
@@ -5628,7 +5631,7 @@ checkArg(0);
 
 
                     if(larsen_currentSwingDirection == "downSwing"){
-                        if(larsenarr[0] > larsen_marumboThresholdLow){
+                        if(larsenarr[0] >= larsen_marumboThresholdLow){
                             console.log('sell short here at' + larsen_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', larsenTradePrice, stop, target);
 
@@ -5732,7 +5735,7 @@ function getgodrejcpOHLC(d) {
 
 
                     if(godrejcp_currentSwingDirection == "downSwing"){
-                        if(godrejcparr[0] > godrejcp_marumboThresholdLow){
+                        if(godrejcparr[0] >= godrejcp_marumboThresholdLow){
                             console.log('sell short here at' + godrejcp_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', godrejcpTradePrice, stop, target);
 
@@ -5837,7 +5840,7 @@ function getgodrejcpOHLC(d) {
 
 
                     if(hcltech_currentSwingDirection == "downSwing"){
-                        if(hcltecharr[0] > hcltech_marumboThresholdLow){
+                        if(hcltecharr[0] >=hcltech_marumboThresholdLow){
                             console.log('sell short here at' + hcltech_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', hcltechTradePrice, stop, target);
 
@@ -5940,7 +5943,7 @@ function getofssOHLC(d) {
 
 
                     if(ofss_currentSwingDirection == "downSwing"){
-                        if(ofssarr[0] > ofss_marumboThresholdLow){
+                        if(ofssarr[0] >= ofss_marumboThresholdLow){
                             console.log('sell short here at' + ofss_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', ofssTradePrice, stop, target);
 
@@ -6044,7 +6047,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(pidilitind_currentSwingDirection == "downSwing"){
-                        if(pidilitindarr[0] > pidilitind_marumboThresholdLow){
+                        if(pidilitindarr[0] >=pidilitind_marumboThresholdLow){
                             console.log('sell short here at' + pidilitind_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', pidilitindTradePrice, stop, target);
 
@@ -6147,7 +6150,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(lupin_currentSwingDirection == "downSwing"){
-                        if(lupinarr[0] > lupin_marumboThresholdLow){
+                        if(lupinarr[0] >= lupin_marumboThresholdLow){
                             console.log('sell short here at' + lupin_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', lupinTradePrice, stop, target);
 
@@ -6310,7 +6313,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(itc_currentSwingDirection == "downSwing"){
-                        if(itcarr[0] > itc_marumboThresholdLow){
+                        if(itcarr[0] >= itc_marumboThresholdLow){
                             console.log('sell short here at' + itc_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', itcTradePrice, stop, target);
 
@@ -6412,7 +6415,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(zeel_currentSwingDirection == "downSwing"){
-                        if(zeelarr[0] > zeel_marumboThresholdLow){
+                        if(zeelarr[0] >= zeel_marumboThresholdLow){
                             console.log('sell short here at' + zeel_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', zeelTradePrice, stop, target);
 
@@ -6457,7 +6460,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(tatamotors_currentSwingDirection == "downSwing"){
-                        if(tatamotorsarr[0] > tatamotors_marumboThresholdLow){
+                        if(tatamotorsarr[0] >= tatamotors_marumboThresholdLow){
                             console.log('sell short here at' + tatamotors_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', tatamotorsTradePrice, stop, target);
 
@@ -6559,7 +6562,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(tatasteel_currentSwingDirection == "downSwing"){
-                        if(tatasteelarr[0] > tatasteel_marumboThresholdLow){
+                        if(tatasteelarr[0] >= tatasteel_marumboThresholdLow){
                             console.log('sell short here at' + tatasteel_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', tatasteelTradePrice, stop, target);
 
@@ -6662,7 +6665,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(ongc_currentSwingDirection == "downSwing"){
-                        if(ongcarr[0] > ongc_marumboThresholdLow){
+                        if(ongcarr[0] >=ongc_marumboThresholdLow){
                             console.log('sell short here at' + ongc_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', ongcTradePrice, stop, target);
 
@@ -6765,7 +6768,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(hindalco_currentSwingDirection == "downSwing"){
-                        if(hindalcoarr[0] > hindalco_marumboThresholdLow){
+                        if(hindalcoarr[0] >= hindalco_marumboThresholdLow){
                             console.log('sell short here at' + hindalco_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', hindalcoTradePrice, stop, target);
 
@@ -6867,7 +6870,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(marico_currentSwingDirection == "downSwing"){
-                        if(maricoarr[0] > marico_marumboThresholdLow){
+                        if(maricoarr[0] >= marico_marumboThresholdLow){
                             console.log('sell short here at' + marico_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', maricoTradePrice, stop, target);
 
@@ -6973,7 +6976,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(bpcl_currentSwingDirection == "downSwing"){
-                        if(bpclarr[0] > bpcl_marumboThresholdLow){
+                        if(bpclarr[0] >= bpcl_marumboThresholdLow){
                             console.log('sell short here at' + bpcl_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', bpclTradePrice, stop, target);
 
@@ -7018,7 +7021,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(crude_currentSwingDirection == "downSwing"){
-                        if(crudearr[0] > crude_marumboThresholdLow){
+                        if(crudearr[0] >= crude_marumboThresholdLow){
                             console.log('sell short here at' + crude_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', crudeTradePrice, stop, target);
 
@@ -7060,7 +7063,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(copper_currentSwingDirection == "downSwing"){
-                        if(copperarr[0] > copper_marumboThresholdLow){
+                        if(copperarr[0] >= copper_marumboThresholdLow){
                             console.log('sell short here at' + copper_marumboThresholdLow );
                         }
 
@@ -7233,7 +7236,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(banknifty_currentSwingDirection == "downSwing"){
-                        if(bankniftyarr[0] > banknifty_marumboThresholdLow){
+                        if(bankniftyarr[0] >= banknifty_marumboThresholdLow){
                             console.log('sell short here at' + banknifty_marumboThresholdLow );
                             scope.startTrade('BANKNIFTY19MARFUT', 'NSE', 'SELL', bankniftyarr[0],(banknifty_marumboThresholdHigh+banknifty_marumboThresholdLow)/2 , bankniftyarr[0]-parseInt(bankniftyarr[0])*breakevenRatio);
                      
@@ -7344,7 +7347,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(bosch_currentSwingDirection == "downSwing"){
-                        if(boscharr[0] > bosch_marumboThresholdLow){
+                        if(boscharr[0] >= bosch_marumboThresholdLow){
                             console.log('sell short here at' + bosch_marumboThresholdLow );
                             scope.startTrade('BOSCHLTD', 'NSE', 'SELL', boscharr[0],(bosch_marumboThresholdHigh+bosch_marumboThresholdLow)/2 , boscharr[0]-parseInt(boscharr[0])*breakevenRatio);
                      
@@ -7453,7 +7456,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(cadila_currentSwingDirection == "downSwing"){
-                        if(cadilaarr[0] > cadila_marumboThresholdLow){
+                        if(cadilaarr[0] >= cadila_marumboThresholdLow){
                             console.log('sell short here at' + cadila_marumboThresholdLow );
                             scope.startTrade('CADILAHC', 'NSE', 'SELL', cadilaarr[0],(cadila_marumboThresholdHigh+cadila_marumboThresholdLow)/2 , cadilaarr[0]-parseInt(cadilaarr[0])*breakevenRatio);
                      
@@ -7560,7 +7563,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(cipla_currentSwingDirection == "downSwing"){
-                        if(ciplaarr[0] > cipla_marumboThresholdLow){
+                        if(ciplaarr[0] >= cipla_marumboThresholdLow){
                             console.log('sell short here at' + cipla_marumboThresholdLow );
                              scope.startTrade('CIPLA', 'NSE', 'SELL', ciplaarr[0],(cipla_marumboThresholdHigh+cipla_marumboThresholdLow)/2 , ciplaarr[0]-parseInt(ciplaarr[0])*breakevenRatio);
                      
@@ -7671,7 +7674,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(coal_currentSwingDirection == "downSwing"){
-                        if(coalarr[0] > coal_marumboThresholdLow){
+                        if(coalarr[0] >= coal_marumboThresholdLow){
                             console.log('sell short here at' + coal_marumboThresholdLow );
 
                            scope.startTrade('COALINDIA', 'NSE', 'SELL', coalarr[0],(coal_marumboThresholdHigh+coal_marumboThresholdLow)/2 , coalarr[0]-parseInt(coalarr[0])*breakevenRatio);
@@ -7776,7 +7779,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(concor_currentSwingDirection == "downSwing"){
-                        if(concorarr[0] > concor_marumboThresholdLow){
+                        if(concorarr[0] >=concor_marumboThresholdLow){
                             console.log('sell short here at' + concor_marumboThresholdLow );
                             scope.startTrade('CONCOR', 'NSE', 'SELL', concorarr[0],(concor_marumboThresholdHigh+concor_marumboThresholdLow)/2 , concorarr[0]-parseInt(concorarr[0])*breakevenRatio);
                      
@@ -7884,7 +7887,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(cummsind_currentSwingDirection == "downSwing"){
-                        if(cummsindarr[0] > cummsind_marumboThresholdLow){
+                        if(cummsindarr[0] >=cummsind_marumboThresholdLow){
                             console.log('sell short here at' + cummsind_marumboThresholdLow );
                             scope.startTrade('CUMMINSIND', 'NSE', 'SELL', cummsindarr[0],(cummsind_marumboThresholdHigh+cummsind_marumboThresholdLow)/2 , cummsindarr[0]-parseInt(cummsindarr[0])*breakevenRatio);
                      
@@ -8054,7 +8057,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(sunpharma_currentSwingDirection == "downSwing"){
-                        if(sunpharmaarr[0] > sunpharma_marumboThresholdLow){
+                        if(sunpharmaarr[0] >=sunpharma_marumboThresholdLow){
                             console.log('sell short here at' + sunpharma_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', sunpharmaTradePrice, stop, target);
 
@@ -8100,7 +8103,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(dabur_currentSwingDirection == "downSwing"){
-                        if(daburarr[0] > dabur_marumboThresholdLow){
+                        if(daburarr[0] >=dabur_marumboThresholdLow){
                             console.log('sell short here at' + dabur_marumboThresholdLow );
                              scope.startTrade('DABUR', 'NSE', 'SELL', daburarr[0],(dabur_marumboThresholdHigh+dabur_marumboThresholdLow)/2 , daburarr[0]-parseInt(daburarr[0])*breakevenRatio);
                      
@@ -8211,7 +8214,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(dhfl_currentSwingDirection == "downSwing"){
-                        if(dhflarr[0] > dhfl_marumboThresholdLow){
+                        if(dhflarr[0] >=dhfl_marumboThresholdLow){
                             console.log('sell short here at' + dhfl_marumboThresholdLow );
 
                             scope.startTrade('DHFL', 'NSE', 'SELL', dhflarr[0],(dhfl_marumboThresholdHigh+dhfl_marumboThresholdLow)/2 , dhflarr[0]-parseInt(dhflarr[0])*breakevenRatio);
@@ -8376,7 +8379,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(kotakbank_currentSwingDirection == "downSwing"){
-                        if(kotakbankarr[0] > kotakbank_marumboThresholdLow){
+                        if(kotakbankarr[0] >=kotakbank_marumboThresholdLow){
                             console.log('sell short here at' + kotakbank_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', kotakbankTradePrice, stop, target);
 
@@ -8481,7 +8484,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(heromotoco_currentSwingDirection == "downSwing"){
-                        if(heromotocoarr[0] > heromotoco_marumboThresholdLow){
+                        if(heromotocoarr[0] >=heromotoco_marumboThresholdLow){
                             console.log('sell short here at' + heromotoco_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', heromotocoTradePrice, stop, target);
 
@@ -8527,7 +8530,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(emami_currentSwingDirection == "downSwing"){
-                        if(emamiarr[0] > emami_marumboThresholdLow){
+                        if(emamiarr[0] >=emami_marumboThresholdLow){
                             console.log('sell short here at' + emami_marumboThresholdLow );
                             scope.startTrade('EMAMILTD', 'NSE', 'SELL', emamiarr[0],(emami_marumboThresholdHigh+emami_marumboThresholdLow)/2 , emamiarr[0]-parseInt(emamiarr[0])*breakevenRatio);
                      
@@ -8641,7 +8644,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(gail_currentSwingDirection == "downSwing"){
-                        if(gailarr[0] > gail_marumboThresholdLow){
+                        if(gailarr[0] >=gail_marumboThresholdLow){
                             console.log('sell short here at' + gail_marumboThresholdLow );
 
                             scope.startTrade('GAIL', 'NSE', 'SELL', gailarr[0],(gail_marumboThresholdHigh+gail_marumboThresholdLow)/2 , gailarr[0]-parseInt(gailarr[0])*breakevenRatio);
@@ -8751,7 +8754,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(havells_currentSwingDirection == "downSwing"){
-                        if(havellsarr[0] > havells_marumboThresholdLow){
+                        if(havellsarr[0] >=havells_marumboThresholdLow){
                             console.log('sell short here at' + havells_marumboThresholdLow );
 
                             scope.startTrade('HAVELLS', 'NSE', 'SELL', havellsarr[0],(havells_marumboThresholdHigh+havells_marumboThresholdLow)/2 , havellsarr[0]-parseInt(havellsarr[0])*breakevenRatio);
@@ -8855,7 +8858,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(hdfc_currentSwingDirection == "downSwing"){
-                        if(hdfcarr[0] > hdfc_marumboThresholdLow){
+                        if(hdfcarr[0] >=hdfc_marumboThresholdLow){
                             console.log('sell short here at' + hdfc_marumboThresholdLow );
 
                            scope.startTrade('HDFC', 'NSE', 'SELL', hdfcarr[0],(hdfc_marumboThresholdHigh+hdfc_marumboThresholdLow)/2 , hdfcarr[0]-parseInt(hdfcarr[0])*breakevenRatio);
@@ -8959,7 +8962,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(hindzinc_currentSwingDirection == "downSwing"){
-                        if(hindzincarr[0] > hindzinc_marumboThresholdLow){
+                        if(hindzincarr[0] >=hindzinc_marumboThresholdLow){
                             console.log('sell short here at' + hindzinc_marumboThresholdLow );
 
                               scope.startTrade('HINDZINC', 'NSE', 'SELL', hindzincarr[0],(hindzinc_marumboThresholdHigh+hindzinc_marumboThresholdLow)/2 , hindzincarr[0]-parseInt(hindzincarr[0])*breakevenRatio);
@@ -9066,7 +9069,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(infratel_currentSwingDirection == "downSwing"){
-                        if(infratelarr[0] > infratel_marumboThresholdLow){
+                        if(infratelarr[0] >=infratel_marumboThresholdLow){
                             console.log('sell short here at' + infratel_marumboThresholdLow );
                              scope.startTrade('INFRATEL', 'NSE', 'SELL', infratelarr[0],(infratel_marumboThresholdHigh+infratel_marumboThresholdLow)/2 , infratelarr[0]-parseInt(infratelarr[0])*breakevenRatio);
                      
@@ -9227,7 +9230,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(bajajfinserv_currentSwingDirection == "downSwing"){
-                        if(bajajfinservarr[0] > bajajfinserv_marumboThresholdLow){
+                        if(bajajfinservarr[0] >=bajajfinserv_marumboThresholdLow){
                             console.log('sell short here at' + bajajfinserv_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', bajajfinservTradePrice, stop, target);
 
@@ -9272,7 +9275,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(reddy_currentSwingDirection == "downSwing"){
-                        if(reddyarr[0] > reddy_marumboThresholdLow){
+                        if(reddyarr[0] >=reddy_marumboThresholdLow){
                             console.log('sell short here at' + reddy_marumboThresholdLow );
 
                             scope.startTrade('DRREDDY', 'NSE', 'SELL', reddyarr[0],(reddy_marumboThresholdHigh+reddy_marumboThresholdLow)/2 , reddyarr[0]-parseInt(reddyarr[0])*breakevenRatio);
@@ -9385,7 +9388,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(reliance_currentSwingDirection == "downSwing"){
-                        if(reliancearr[0] > reliance_marumboThresholdLow){
+                        if(reliancearr[0] >=reliance_marumboThresholdLow){
                             console.log('sell short here at' + reliance_marumboThresholdLow );
                             scope.startTrade('RELIANCE', 'NSE', 'SELL', reliancearr[0],(reliance_marumboThresholdHigh+reliance_marumboThresholdLow)/2 , reliancearr[0]-parseInt(reliancearr[0])*breakevenRatio);
                      
@@ -9488,7 +9491,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(sbin_currentSwingDirection == "downSwing"){
-                        if(sbinarr[0] > sbin_marumboThresholdLow){
+                        if(sbinarr[0] >=sbin_marumboThresholdLow){
                             console.log('sell short here at' + sbin_marumboThresholdLow );
                             scope.startTrade('SBIN', 'NSE', 'SELL', sbinarr[0],(sbin_marumboThresholdHigh+sbin_marumboThresholdLow)/2 , sbinarr[0]-parseInt(sbinarr[0])*breakevenRatio);
       
@@ -9592,7 +9595,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(seimens_currentSwingDirection == "downSwing"){
-                        if(seimensarr[0] > seimens_marumboThresholdLow){
+                        if(seimensarr[0] >=seimens_marumboThresholdLow){
                             console.log('sell short here at' + seimens_marumboThresholdLow );
                             scope.startTrade('SIEMENS', 'NSE', 'SELL', seimensarr[0],(seimens_marumboThresholdHigh+seimens_marumboThresholdLow)/2 , seimensarr[0]-parseInt(seimensarr[0])*breakevenRatio);
                      
@@ -9696,7 +9699,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(tcs_currentSwingDirection == "downSwing"){
-                        if(tcsarr[0] > tcs_marumboThresholdLow){
+                        if(tcsarr[0] >=tcs_marumboThresholdLow){
                             console.log('sell short here at' + tcs_marumboThresholdLow );
 
                             scope.startTrade('TCS', 'NSE', 'SELL', tcsarr[0],(tcs_marumboThresholdHigh+tcs_marumboThresholdLow)/2 , tcsarr[0]-parseInt(tcsarr[0])*breakevenRatio);
@@ -9807,7 +9810,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(unilever_currentSwingDirection == "downSwing"){
-                        if(unileverarr[0] > unilever_marumboThresholdLow){
+                        if(unileverarr[0] >=unilever_marumboThresholdLow){
                             console.log('sell short here at' + unilever_marumboThresholdLow );
                             scope.startTrade('HINDUNILVR', 'NSE', 'SELL', unileverarr[0],(unilever_marumboThresholdHigh+unilever_marumboThresholdLow)/2 , unileverarr[0]-parseInt(unileverarr[0])*breakevenRatio);
             
@@ -9973,7 +9976,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(ntpc_currentSwingDirection == "downSwing"){
-                        if(ntpcarr[0] > ntpc_marumboThresholdLow){
+                        if(ntpcarr[0] >=ntpc_marumboThresholdLow){
                             console.log('sell short here at' + ntpc_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', ntpcTradePrice, stop, target);
 
@@ -10081,7 +10084,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(powergrid_currentSwingDirection == "downSwing"){
-                        if(powergridarr[0] > powergrid_marumboThresholdLow){
+                        if(powergridarr[0] >=powergrid_marumboThresholdLow){
                             console.log('sell short here at' + powergrid_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', powergridTradePrice, stop, target);
 
@@ -10184,7 +10187,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(adaniports_currentSwingDirection == "downSwing"){
-                        if(adaniportsarr[0] > adaniports_marumboThresholdLow){
+                        if(adaniportsarr[0] >=adaniports_marumboThresholdLow){
                             console.log('sell short here at' + adaniports_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', adaniportsTradePrice, stop, target);
 
@@ -10287,7 +10290,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(asianpaints_currentSwingDirection == "downSwing"){
-                        if(asianpaintsarr[0] > asianpaints_marumboThresholdLow){
+                        if(asianpaintsarr[0] >=asianpaints_marumboThresholdLow){
                             console.log('sell short here at' + asianpaints_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', asianpaintsTradePrice, stop, target);
 
@@ -10393,7 +10396,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(upl_currentSwingDirection == "downSwing"){
-                        if(uplarr[0] > upl_marumboThresholdLow){
+                        if(uplarr[0] >=upl_marumboThresholdLow){
                             console.log('sell short here at' + upl_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', uplTradePrice, stop, target);
 
@@ -10496,7 +10499,7 @@ function getpidilitindOHLC(d) {
 
 
                     if(grasim_currentSwingDirection == "downSwing"){
-                        if(grasimarr[0] > grasim_marumboThresholdLow){
+                        if(grasimarr[0] >=grasim_marumboThresholdLow){
                             console.log('sell short here at' + grasim_marumboThresholdLow );
                             //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', grasimTradePrice, stop, target);
 
