@@ -25,7 +25,7 @@ export default function(state = [], action) {
 
     var diffBetweenLowBalckPointBuy = 20;
 
-    
+
 
 
             if(statelen ==1){
@@ -40,11 +40,51 @@ export default function(state = [], action) {
                     action.payload.lowest = action.payload.y;
                     action.payload.sidecount = 0;
                }
+
+
+
+                if(action.payload.dir == "up"){
+                  
+                    action.payload.upPivotPointsArr = [action.payload.y]
+                }
+
+                if(action.payload.dir == "low"){
+                    
+                     action.payload.lowPivotPointsArr = [action.payload.y];
+                }
             }
 
 
 
             if(statelen == 2 ){
+
+                if(state[statelen-1].upPivotPointsArr != undefined){
+                  action.payload.upPivotPointsArr = state[statelen-1].upPivotPointsArr;
+                } 
+
+                if(state[statelen-1].lowPivotPointsArr != undefined){
+                  action.payload.lowPivotPointsArr = state[statelen-1].lowPivotPointsArr;
+                } 
+
+
+                if(action.payload.dir == "up"){
+                   
+                     if(action.payload.upPivotPointsArr == undefined){
+                        action.payload.upPivotPointsArr = [action.payload.y];
+                     }
+                     else{
+                        action.payload.upPivotPointsArr =  action.payload.upPivotPointsArr.concat(action.payload.y);
+                     }
+                }
+
+                if(action.payload.dir == "low"){
+                      if(action.payload.lowPivotPointsArr == undefined){
+                        action.payload.lowPivotPointsArr = [action.payload.y];
+                      }
+                      else{
+                        action.payload.lowPivotPointsArr =  action.payload.lowPivotPointsArr.concat(action.payload.y);
+                      }
+                }
 
 
 
@@ -190,13 +230,103 @@ export default function(state = [], action) {
 
               }
             
+              /* if(action.payload.y > state[1].y && action.payload.y < state[0].y ){
+
+                   action.payload.lowest = state[1].y;
+                   action.payload.highest = state[0].y;
+                   action.payload.sidecount = 1;
+               }
+               else if(action.payload.y == state[1].y && action.payload.y < state[0].y){
+                    action.payload.highest = state[0].y;
+                    action.payload.lowest = state[1].y;
+                    action.payload.sidecount = 0;
+               }
+                else if(action.payload.y < state[1].y && state[1].y< state[0].y){
+                    action.payload.highest = state[0].y;
+                    action.payload.lowest =  action.payload.y;
+                    action.payload.sidecount = 0;
+               }
+               else if(action.payload.y > state[1].y && action.payload.y > state[0].y && state[0].y > state[1].y){
+                    action.payload.highest = action.payload.y;
+                    action.payload.lowest = state[1].y;
+                    action.payload.sidecount = 0;
+               }
+
+
+               if(action.payload.y > state[1].y && state[1].y > state[0].y ){
+                   action.payload.lowest = state[0].y;
+                   action.payload.highest = action.payload.y;
+                   action.payload.sidecount = 0;
+               }
+               else if(action.payload.y == state[1].y && state[1].y > state[0].y){
+                    action.payload.highest = state[1].y;
+                    action.payload.lowest = state[0].y;
+                    action.payload.sidecount = 0;
+               }
+                else if(action.payload.y < state[1].y && state[1].y > state[0].y){
+
+                    var diff = state[1].y - action.payload.y;
+                    var sidewaysHeight =  Math.abs(state[0].y - state[1].y) ;
+                    var diffHeightRatio = diff/sidewaysHeight;
+                    var insideSideways = 0;
+
+                    if(sidewaysHeight <= 20){
+                            if(diff< 20){insideSideways = 1;}
+                            else{ insideSideways = 0;}
+                    }
+                    else{
+                            if(diffHeightRatio >= sidewaysClearDiffRatio ){ insideSideways = 0;}
+                            else{insideSideways = 1;}
+                    }
+                    alert(insideSideways);
+
+                    if(insideSideways == 1){
+                      //outside sideways
+                       action.payload.highest = state[1].y;
+                       action.payload.lowest =  state[0].y;
+                       action.payload.sidecount = 1;
+                    }
+                    else{
+                      //inside sideways
+                       action.payload.highest = state[1].y;
+                       action.payload.lowest = action.payload.y;
+                       action.payload.sidecount = 0;
+                    }
+               }*/
 
             }
 
             
 
             if( state.length > 2 ){ 
+                
+                if(state[statelen-1].upPivotPointsArr != undefined){
+                  action.payload.upPivotPointsArr = state[statelen-1].upPivotPointsArr;
+                } 
 
+                if(state[statelen-1].lowPivotPointsArr != undefined){
+                  action.payload.lowPivotPointsArr = state[statelen-1].lowPivotPointsArr;
+                } 
+
+
+                if(action.payload.dir == "up"){
+                   
+                     if(action.payload.upPivotPointsArr == undefined){
+                        action.payload.upPivotPointsArr = [action.payload.y];
+                     }
+                     else{
+                        action.payload.upPivotPointsArr =  action.payload.upPivotPointsArr.concat(action.payload.y);
+                     }
+                }
+
+                if(action.payload.dir == "low"){
+                      if(action.payload.lowPivotPointsArr == undefined){
+                        action.payload.lowPivotPointsArr = [action.payload.y];
+                      }
+                      else{
+                        action.payload.lowPivotPointsArr =  action.payload.lowPivotPointsArr.concat(action.payload.y);
+                      }
+                }
 
 
 
@@ -209,10 +339,10 @@ export default function(state = [], action) {
                        action.payload.downcount = state[statelen-1].downcount;
                 } 
 
-                if(state[statelen-1].sidecount ==4){
-                    let high = state[statelen-1].highest;
-                    let low = state[statelen-1].lowest;
-                }
+                  if(state[statelen-1].sidecount ==4){
+                     let high = state[statelen-1].highest;
+                     let low = state[statelen-1].lowest;
+                  }
 
 
                 if(state[statelen-1].highest != undefined){
@@ -288,10 +418,227 @@ export default function(state = [], action) {
 
 
 
+
+              if(Math.abs(action.payload.y - state[statelen-1].y) > crudeBigDay){
+                 //time to clear everything and loop for short and look respectivity
+                 
+                   if(action.payload.y > state[statelen-1].y && action.payload.crudeTradeManagement != "trailing"){
+                      action.payload.bigDayTrade = 'short'; 
+                      action.payload.bigDayTradePrice = action.payload.y; 
+                      action.payload.highest = action.payload.y;                    
+                      action.payload.lowest = state[statelen-1].y;
+                      action.payload.upcount = 0; 
+                      action.payload.sidecount = 0;
+                      action.payload.downcount =0;  
+                      action.payload.upblackextreme = 0;
+                      action.payload.lowblackextreme = 0;
+                      action.payload.UPblackpoint = 0;
+                      action.payload.Lowblackpoint = 0; 
+                      action.payload.trend = '';
+                      let newstate = state.concat(action.payload);
+                      return newstate ;
+
+                   }
+                   else if(action.payload.y < state[statelen-1].y){
+                      
+                      action.payload.bigDayTrade = 'long'; 
+                      action.payload.bigDayTradePrice = action.payload.y;
+                      action.payload.lowest = action.payload.y;                    
+                      action.payload.highest = state[statelen-1].y;
+                      action.payload.upcount = 0; 
+                      action.payload.sidecount = 0;
+                      action.payload.downcount =0;  
+                      action.payload.upblackextreme = 0;
+                      action.payload.lowblackextreme = 0;
+                      action.payload.UPblackpoint = 0;
+                      action.payload.Lowblackpoint = 0; 
+                      action.payload.trend = '';
+                      let newstate = state.concat(action.payload);
+                      return newstate ;
+
+                   }
+
+              }
+
                 
 
 
-           
+              if(state[statelen-1].trend == 'sideways'){
+                    //write logic of blackline setup here
+
+                    //
+
+
+                    if(action.payload.dir == "up" && state[statelen-1].highest < action.payload.y ){
+                      //alert('111');
+                      //set this point as blackline to test 
+
+                     //  
+
+                      if(state[statelen-1].upblackextreme != undefined &&  state[statelen-1].upblackextreme != 0 ){
+                            var diff = Math.abs(state[statelen-1].upblackextreme-action.payload.y );
+                        
+                        
+                        if(diff <= retestDiff && state[statelen-1].ShortTradeInitiated != true && state[statelen-1].upblackextreme < action.payload.y && state[statelen-1].highest < action.payload.currentPrice){
+                             
+
+                            var priceDiff = Math.abs(state[statelen-1].highest - action.payload.currentPrice);
+
+                            if(priceDiff > minUpSellPriceDiff){
+                                    
+                                  
+                                    action.payload.retesthappen = true;
+                                    action.payload.highest = state[statelen-1].highest;                    
+                                    action.payload.lowest = state[statelen-1].lowest;
+                                    action.payload.ShortTradeInitiated = true;
+                                    action.payload.UPblackpoint = action.payload.upblackextreme;
+                                    action.payload.UPblackpointindex = action.payload.upblackextremeindex;                             
+                                    action.payload.TradeStarted = 'upsell';
+                                    action.payload.TimeToEnter = true;
+                                    action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
+                                    // alert('BPB short at  crude' + action.payload.x);
+                                    // alert('time is' + action.payload.time);
+                                    let newstate = state.concat(action.payload);
+                                    return newstate ; 
+                            }
+
+                             
+                          
+                         }
+                            //
+                           // alert('up black point 2 is' + state[statelen-1].x);
+                            //alert('up black point is ' + action.payload.x);
+
+                            
+                             // 
+                             action.payload.highest = state[statelen-1].highest;                    
+                             action.payload.lowest = state[statelen-1].lowest; 
+
+                             if(action.payload.upblackextreme < action.payload.y){
+
+                                    action.payload.upblackextreme = action.payload.y;
+                                    action.payload.UPblackpoint = action.payload.upblackextreme;
+                             }
+                             action.payload.upcount = state[statelen-1].upcount; 
+
+
+                             
+                             //action.payload.UPblackpointindex = action.payload.upblackextremeindex;
+                               //
+
+                      }
+                      else{ 
+
+                          
+                               
+                            action.payload.upblackextreme = action.payload.y;
+                            action.payload.UPblackpoint = action.payload.y;
+                            action.payload.UPblackpointindex = action.payload.x;
+                            action.payload.highest = state[statelen-1].highest;                    
+                            action.payload.lowest = state[statelen-1].lowest;
+                            action.payload.upcount = state[statelen-1].upcount; 
+
+                            ;
+                             //
+                      }
+
+                    }
+                    else if(action.payload.dir == "low" && state[statelen-1].lowest > action.payload.y){
+                        //set this point as blackline to test 
+
+                        
+                       
+
+                        if(state[statelen-1].lowblackextreme != undefined &&  state[statelen-1].lowblackextreme != 0 && state[statelen-1].lowest > action.payload.currentPrice){
+                       
+                                  var diff = Math.abs(state[statelen-1].lowblackextreme-action.payload.y );
+                              
+                                  //alert('11' + action.payload.y);
+                                 // var diffBetweenLowBalckPointBuy =  Math.abs(action.payload.y-);
+                                
+                                if(state[statelen-1].lowblackextreme > action.payload.y){
+
+                                    if(diff>= diffBetweenLowBalckPointBuy){
+                                       action.payload.lowblackextreme = action.payload.y;
+                                       action.payload.Lowblackpoint = action.payload.y;
+                                       action.payload.highest = state[statelen-1].highest;                    
+                                       action.payload.lowest = state[statelen-1].lowest;
+                                       let newstate = state.concat(action.payload);
+                                       return newstate ;
+                                    }
+
+                                }
+                                  
+
+
+                           /*   if( diff <= retestDiff && state[statelen-1].LongTradeInitiated != true){
+
+
+                               var priceDiff = Math.abs(state[statelen-1].lowest - action.payload.currentPrice);
+
+                              if(priceDiff > minDownBuyPriceDiff){
+
+                                  
+                                  alert('11');
+                                  action.payload.retesthappen = true;
+                                  action.payload.highest = state[statelen-1].highest;                    
+                                  action.payload.lowest = state[statelen-1].lowest;
+                                  action.payload.LongTradeInitiated = true;
+                                  action.payload.Lowblackpoint = action.payload.lowblackextreme;
+                                  action.payload.lowblackindex = action.payload.lowblackextremeindex;
+                                  action.payload.TradeStarted = 'downbuy';
+                                  action.payload.TimeToEnter = true;
+                                  action.payload.TradeTime=  now.getHours().toString()   + now.getMinutes().toString() + now.getSeconds().toString();;
+                                
+                                  let newstate = state.concat(action.payload);
+                                  return newstate ;
+                              }
+
+
+                              }*/
+
+
+
+
+
+                               // alert('low black point 2 is' + action.payload.x);
+
+                              //  
+
+                               action.payload.highest = state[statelen-1].highest;                    
+                               action.payload.lowest = state[statelen-1].lowest; 
+                               //low black extreme lovely
+
+
+                                if(action.payload.lowblackextreme > action.payload.y){
+                                     action.payload.lowblackextreme = action.payload.y;
+                                     action.payload.Lowblackpoint = action.payload.lowblackextreme;
+                                }
+
+                               /*if(Math.abs(action.payload.y-action.payload.lowest) >10){
+                                  action.payload.lowblackextreme = action.payload.y;
+                                  action.payload.Lowblackpoint = action.payload.lowblackextreme;
+                                  action.payload.lowblackindex = action.payload.lowblackextremeindex;
+                               }*/
+
+                        }
+                        else{
+                            // alert('low black point 3 is' + action.payload.x);
+                            // 
+                             action.payload.lowblackextreme = action.payload.y;
+                             action.payload.Lowblackpoint = action.payload.y;
+                             action.payload.lowblackindex = action.payload.x;
+                             action.payload.highest = state[statelen-1].highest;                    
+                             action.payload.lowest = state[statelen-1].lowest; 
+                             let newstate = state.concat(action.payload);
+                             return newstate ;
+
+                        }
+                    }
+              }
+
+                
+
                 //now condition of retest here
                  
                if(state[statelen-1].UPblackpoint != undefined || state[statelen-1].Lowblackpoint != undefined){
@@ -306,14 +653,14 @@ export default function(state = [], action) {
 
                            if((state[statelen-1].UPblackpoint <= action.payload.y && diff <= dayRetestDiff) && state[statelen-1].trend == 'sideways' && state[statelen-1].ShortTradeInitiated != true && state[statelen-1].highest < action.payload.currentPrice){
                                //normal bpb short
-                              // debugger;
+                              // 
                               
                           
 
                             var priceDiff = Math.abs(state[statelen-1].highest - action.payload.currentPrice);
 
                             if(priceDiff > minUpSellPriceDiff){
-                                debugger;
+                                
 
                                 action.payload.retesthappen = true;
                                 action.payload.highest = state[statelen-1].highest;                    
@@ -339,7 +686,7 @@ export default function(state = [], action) {
 
                                if(priceDiff > minDownBuyPriceDiff){
 
-                                       debugger;
+                                       
                                      
                                       action.payload.retesthappen = true;
                                       action.payload.highest = state[statelen-1].highest;                    

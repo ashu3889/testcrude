@@ -1,91 +1,92 @@
-var godrejcp_currentSwingDirection = '' ;
-var godrejcp_prevCandleMarumbo = '';
-var godrejcp_marumboThresholdHigh = 0;
-var godrejcp_marumboThresholdLow = 0;
-var godrejcp_prevCandleHeight = [];
-var godrejcp_count = 0;
-var godrejcparr = [];
-var godrejcptickcount = 0,
-    godrejcpticklow = 0,
-    godrejcptickhigh = 0,
-    godrejcptickopen = 0,
-    godrejcptickarray = [],
-    godrejcptickType = 0,
-    godrejcptickLength = 0,
-    godrejcptickclose = 0;
+var ofss_currentSwingDirection = '' ;
+var ofss_prevCandleMarumbo = '';
+var ofss_marumboThresholdHigh = 0;
+var ofss_marumboThresholdLow = 0;
+var ofss_prevCandleHeight = [];
+var ofss_count = 0;
+var ofssarr = [];
+var ofsstickcount = 0,
+    ofssticklow = 0,
+    ofsstickhigh = 0,
+    ofsstickopen = 0,
+    ofsstickarray = [],
+    ofsstickType = 0,
+    ofsstickLength = 0,
+    ofsstickclose = 0,
+    ofssfirstcall;
 
 
 
-       let godrejcp_len = nextProps.tickCombogodrejcp.length - 1;
+       let ofss_len = nextProps.tickComboofss.length - 1;
 
-        if ((this.props.tickCombogodrejcp) != undefined) {
+        if ((this.props.tickComboofss) != undefined) {
 
-            if ((nextProps.tickCombogodrejcp).length >= 1) {
+            if ((nextProps.tickComboofss).length >= 1) {
 
 
-            if (godrejcp_len > 2) {
-                godrejcp_prevCandleHeight = [];
-                godrejcp_prevCandleHeight.push(nextProps.tickCombogodrejcp[godrejcp_len-1].high);
-                godrejcp_prevCandleHeight.push(nextProps.tickCombogodrejcp[godrejcp_len-1].low);
+            if (ofss_len > 2) {
+                ofss_prevCandleHeight = [];
+                ofss_prevCandleHeight.push(nextProps.tickComboofss[ofss_len-1].high);
+                ofss_prevCandleHeight.push(nextProps.tickComboofss[ofss_len-1].low);
             }
 
 
                   
 
 
-            if (godrejcp_len > 1) {
+            if (ofss_len > 1) {
 
-                if (nextProps.tickCombogodrejcp[godrejcp_len].marumbo == true){
-                     godrejcp_prevCandleMarumbo = true;
+                if (nextProps.tickComboofss[ofss_len].marumbo == true){
+                     ofss_prevCandleMarumbo = true;
                 }
 
-                if (nextProps.tickCombogodrejcp[godrejcp_len].marumbo == false){
-                     godrejcp_prevCandleMarumbo = false;
+                if (nextProps.tickComboofss[ofss_len].marumbo == false){
+                     ofss_prevCandleMarumbo = false;
                 }
             }
 
                
 
 
-                if (nextProps.tickCombogodrejcp[godrejcp_len].pivot != undefined) {
+                if (nextProps.tickComboofss[ofss_len].pivot != undefined) {
 
-                    //godrejcp oil
-                    if (this.state.godrejcp_pivotpoint != nextProps.tickCombogodrejcp[godrejcp_len].pivot) {
+                    //ofss oil
+                    if (this.state.ofss_pivotpoint != nextProps.tickComboofss[ofss_len].pivot) {
 
-                        godrejcp_count = godrejcp_count + 1;
+                        ofss_count = ofss_count + 1;
 
                         this.setState({
-                            godrejcp_pivotpoint: nextProps.tickCombogodrejcp[godrejcp_len].pivot
+                            ofss_pivotpoint: nextProps.tickComboofss[ofss_len].pivot
                         });
 
-                        var pivotValue = nextProps.tickCombogodrejcp[godrejcp_len].pivot;
+                        var pivotValue = nextProps.tickComboofss[ofss_len].pivot;
 
                         let datainput = {
-                            x: godrejcp_count,
-                            y: nextProps.tickCombogodrejcp[godrejcp_len].pivot,
-                            dir: nextProps.tickCombogodrejcp[godrejcp_len].dir,
-                            date: nextProps.tickCombogodrejcp[godrejcp_len].date,
-                            currentPrice: nextProps.tickCombogodrejcp[godrejcp_len].currentPrice,
-                            tradeStatus : nextProps.tickCombogodrejcp[godrejcp_len].tradeStatus
+                            x: ofss_count,
+                            y: nextProps.tickComboofss[ofss_len].pivot,
+                            dir: nextProps.tickComboofss[ofss_len].dir,
+                            date: nextProps.tickComboofss[ofss_len].date,
+                            currentPrice: nextProps.tickComboofss[ofss_len].currentPrice,
+                            tradeStatus : nextProps.tickComboofss[ofss_len].tradeStatus
                         };
 
-                        this.props.pivotDatagodrejcp(datainput);
+                        this.props.pivotDataofss(datainput);
                         
                     }
                 }
             }
         }
 
-        if ((this.props.trendDatagodrejcp) != undefined && this.props.trendDatagodrejcp.length > 1 && (nextProps.trendDatagodrejcp) != undefined && nextProps.trendDatagodrejcp.length >1) {
-            var godrejcp_nextPropslen = nextProps.trendDatagodrejcp.length-1;
+        if ((this.props.trendDataofss) != undefined && this.props.trendDataofss.length > 1 && (nextProps.trendDataofss) != undefined && nextProps.trendDataofss.length >1) {
+            var ofss_nextPropslen = nextProps.trendDataofss.length-1;
 
-            if (godrejcp_nextPropslen > 1) {
-                if (nextProps.trendDatagodrejcp[godrejcp_nextPropslen].dir == "up"){
-                     godrejcp_currentSwingDirection = 'downSwing';
+            if (ofss_nextPropslen > 1) {
+                if (nextProps.trendDataofss[ofss_nextPropslen].dir == "up"){
+                     ofss_currentSwingDirection = 'downSwing';
                 }
 
-                if (nextProps.trendDatagodrejcp[godrejcp_nextPropslen].dir == "low"){
-                     godrejcp_currentSwingDirection = 'upSwing';
+                if (nextProps.trendDataofss[ofss_nextPropslen].dir == "low"){
+                     ofss_currentSwingDirection = 'upSwing';
                 }
 
             }
@@ -96,116 +97,176 @@ var godrejcptickcount = 0,
 
 
 
-        function getgodrejcpOHLC(d) {
+         function get5minDataofssTimestamp(d, scope) {
 
-            godrejcptickopen = godrejcparr[0];
-            godrejcptickhigh = _.maxBy(godrejcparr);
-            godrejcpticklow = _.minBy(godrejcparr);
-            godrejcptickclose = godrejcparr[godrejcparr.length - 1];
-
-            if (godrejcptickopen < godrejcptickclose) {
-                godrejcptickType = "green";
-            } else if (godrejcptickopen > godrejcptickclose) {
-                godrejcptickType = "red";
-            } else if (godrejcptickopen = godrejcptickclose) {
-                godrejcptickType = "doji";
-            }
-
-            godrejcptickLength = Math.abs(godrejcptickhigh - godrejcpticklow);
-
-
-                var marumbo = false;
-                if(godrejcptickType == "red" && godrejcp_currentSwingDirection == 'downSwing'){
-                        if(godrejcptickopen == godrejcptickhigh && godrejcptickclose == godrejcpticklow && godrejcpticklow < godrejcp_prevCandleHeight[1]){
-                            marumbo = true;
-                            godrejcp_marumboThresholdHigh = godrejcptickhigh;
-                            godrejcp_marumboThresholdLow = godrejcpticklow;
-                        }
-                }
-
-                if(godrejcptickType == "green" && godrejcp_currentSwingDirection == "upSwing"){
-                        if(godrejcptickopen == godrejcpticklow && godrejcptickclose == godrejcptickhigh && godrejcptickhigh > godrejcp_prevCandleHeight[0]){
-                            marumbo = true;
-                            godrejcp_marumboThresholdHigh = godrejcptickhigh;
-                            godrejcp_marumboThresholdLow = godrejcpticklow;
-                        }
-                }
-
-                if(godrejcptickType == "doji"){
-                         marumbo = false;
-                         godrejcp_marumboThresholdHigh = 0;
-                         godrejcp_marumboThresholdLow = 0;
-                }
-
-              
-
-            godrejcptickarray = {
-                "open": godrejcptickopen,
-                "low": godrejcpticklow,
-                "high": godrejcptickhigh,
-                "close": godrejcptickclose,
-                "tickType": godrejcptickType,
-                'tickLength': godrejcptickLength,
-                 'marumbo' : marumbo,
-            };
-            //
-            d.props.addTickDatagodrejcp(godrejcptickarray);
-            first = 0;
-            godrejcparr = [];
-        };
-
-
-         function get5minDatagodrejcpTimestamp(d, scope) {
-
-               if(godrejcp_prevCandleMarumbo == true && godrejcparr.length == 1){
-                    ;
+               if(ofss_prevCandleMarumbo == true && ofssarr.length == 0){
+                   
                     
-                    if(godrejcp_currentSwingDirection == "upSwing"){
-                        if(godrejcparr[0] >=  godrejcp_marumboThresholdHigh){
-                            console.log('buy long here at' + godrejcp_marumboThresholdHigh);
-                            scope.startTrade('GODREJCP', 'NSE', 'BUY', godrejcparr[0],(godrejcp_marumboThresholdHigh+godrejcp_marumboThresholdLow)/2, godrejcparr[0] + parseInt(godrejcparr[0])*breakevenRatio);
-                        }
-
-                        if(godrejcparr[0] <= godrejcp_marumboThresholdHigh){
+                    if(ofss_currentSwingDirection == "upSwing"){
+                        if(d >=  ofss_marumboThresholdHigh){
+                             console.log('buy long here at' + ofss_marumboThresholdHigh);
+                             scope.startTrade('DHFL', 'NSE', 'BUY', d,(ofss_marumboThresholdHigh+ofss_marumboThresholdLow)/2, d + parseInt(d)*breakevenRatio);
 
                         }
-                         godrejcp_prevCandleMarumbo = false;
-                         godrejcp_marumboThresholdHigh = 0;
-                         godrejcp_marumboThresholdLow = 0;
                     }
 
 
-                    if(godrejcp_currentSwingDirection == "downSwing"){
-                        if(godrejcparr[0] > godrejcp_marumboThresholdLow){
-                            console.log('sell short here at' + godrejcp_marumboThresholdLow );
-                            //scope.startTrade('CRUDEOILM18DECFUT', 'MCX', 'SELL', godrejcpTradePrice, stop, target);
-
-                            scope.startTrade('GODREJCP', 'NSE', 'SELL', godrejcparr[0],(godrejcp_marumboThresholdHigh+godrejcp_marumboThresholdLow)/2 , godrejcparr[0]-parseInt(godrejcparr[0])*breakevenRatio);
+                    if(ofss_currentSwingDirection == "downSwing"){
+                        if(d <= ofss_marumboThresholdLow){
+                              console.log('sell short here at' + ofss_marumboThresholdLow );
+                              scope.startTrade('DHFL', 'NSE', 'SELL', d,(ofss_marumboThresholdHigh+ofss_marumboThresholdLow)/2 , d-parseInt(ofssarr[0])*breakevenRatio);
                      
                         }
-
-                        if(godrejcparr[0] <= godrejcp_marumboThresholdLow){
-                    
-                        }
-
-                            godrejcp_prevCandleMarumbo = false;
-                            godrejcp_marumboThresholdHigh = 0;
-                            godrejcp_marumboThresholdLow = 0;
                     }
+
+
+
+                       
+                    ofss_prevCandleMarumbo = false;
+                    ofss_marumboThresholdHigh = 0;
+                    ofss_marumboThresholdLow = 0;
                        
                 }
 
-            godrejcparr.push(d);
+            ofssarr.push(d);
+            console.log('ofssarr' + ofssarr);
         }
 
+function getofssOHLC(d) {
+            
+            var marumboPivotCheck = true;
+            ofsstickopen = ofssarr[0];
+            ofsstickhigh = _.maxBy(ofssarr);
+            ofssticklow = _.minBy(ofssarr);
+            ofsstickclose = ofssarr[ofssarr.length - 1];
 
+            if (ofsstickopen < ofsstickclose) {
+                ofsstickType = "green";
+            } else if (ofsstickopen > ofsstickclose) {
+                ofsstickType = "red";
+            } else if (ofsstickopen = ofsstickclose) {
+                ofsstickType = "doji";
+            }
+
+                ofsstickLength = Math.abs(ofsstickhigh - ofssticklow);
+                var  ofssLengthRatio =  ofsstickLength/ofsstickhigh;
+
+                //check if value is contained inside any value 
+
+                if(d.props.trendDataofss.length >1 && ofsstickType == "green" && ofss_currentSwingDirection == "upSwing"){
+
+                    if(d.props.trendDataofss[d.props.trendDataofss.length-1].upPivotPointsArr !== undefined){
+                        
+                         d.props.trendDataofss[d.props.trendDataofss.length-1].upPivotPointsArr.map((v,i) => {
+
+                                 if( ofssticklow <= v && v <= ofsstickhigh){
+                                     marumboPivotCheck = false;
+                                 }
+
+                         })
+                    }
+
+                }
+
+
+                if(d.props.trendDataofss.length >1 && ofsstickType == "red" && ofss_currentSwingDirection == 'downSwing'){
+
+                    if(d.props.trendDataofss[d.props.trendDataofss.length-1].lowPivotPointsArr !== undefined){
+                        
+                         d.props.trendDataofss[d.props.trendDataofss.length-1].lowPivotPointsArr.map((v,i) => {
+
+                                 if( ofssticklow <= v && v <= ofsstickhigh){
+                                     marumboPivotCheck = false;
+                                 }
+
+                         })
+                    }
+
+                }
+
+
+
+
+                var marumbo = false;
+                if(ofsstickType == "red" && ofss_currentSwingDirection == 'downSwing' && ofssLengthRatio <0.01 && marumboPivotCheck == true ){
+                        if( ofsstickclose == ofssticklow && ofssticklow < ofss_prevCandleHeight[1]){
+                            marumbo = true;
+                            ofss_marumboThresholdHigh = ofsstickhigh;
+                            ofss_marumboThresholdLow = ofssticklow;
+                        }
+                }
+
+                if(ofsstickType == "green" && ofss_currentSwingDirection == "upSwing" && ofssLengthRatio <0.01 && marumboPivotCheck == true){
+                        if(ofsstickclose == ofsstickhigh && ofsstickhigh > ofss_prevCandleHeight[0]){
+                            marumbo = true;
+                            ofss_marumboThresholdHigh = ofsstickhigh;
+                            ofss_marumboThresholdLow = ofssticklow;
+                        }
+                }
+
+                if(ofsstickType == "doji"){
+                         marumbo = false;
+                         ofss_marumboThresholdHigh = 0;
+                         ofss_marumboThresholdLow = 0;
+
+
+                }
+
+               
+        if(ofssarr.length >1){   
+            ofsstickarray = {
+                "open": ofsstickopen,
+                "low": ofssticklow,
+                "high": ofsstickhigh,
+                "close": ofsstickclose,
+                "tickType": ofsstickType,
+                'tickLength': ofsstickLength,
+                 'marumbo' : marumbo,
+            };
+            //
+            d.props.addTickDataofss(ofsstickarray);
+        }
+
+                if( ofssfirstcall == false){
+                         ofssfirstcall = true;
+
+                         var value = 0;
+                         if(ofsstickopen < ofsstickclose){
+                             //up direction
+                             value= ofssticklow;
+                              
+                          }
+                          else if(ofsstickopen > ofsstickclose){
+                               //down direction
+                              value= ofsstickhigh;
+                          }
+                          else{
+                              value= ofsstickhigh;
+                          }
+
+                        let datainput = {
+                            x: 0,
+                            y: value
+                        };
+                        d.props.pivotDataofss(datainput);
+                }
+
+
+
+            first = 0;
+            ofssarr = [];
+        };
+
+
+
+        
               <
             div class = "row" >
              {
-                (this.props.tickCombogodrejcp != undefined && this.props.tickCombogodrejcp.length >= 1) ?
-                < div class = "col-md-3" > < KitePlot title = "godrejcp"
+                (this.props.tickComboofss != undefined && this.props.tickComboofss.length >= 1) ?
+                < div class = "col-md-3" > < KitePlot title = "ofss"
                 plotdata = {
-                    this.props.tickCombogodrejcp
+                    this.props.tickComboofss
                 }
                 /> </div >
                 :
@@ -213,10 +274,10 @@ var godrejcptickcount = 0,
             }
 
             {
-                (this.props.trendDatagodrejcp!= undefined && this.props.trendDatagodrejcp.length >= 1) ?
-                < div class = "col-md-8" > < LineApp title = "godrejcp1"
+                (this.props.trendDataofss!= undefined && this.props.trendDataofss.length >= 1) ?
+                < div class = "col-md-8" > < LineApp title = "ofss1"
                 plotdata = {
-                    this.props.trendDatagodrejcp
+                    this.props.trendDataofss
                 }
                 /></div >
                 :
@@ -224,7 +285,7 @@ var godrejcptickcount = 0,
             } <
             /div>
 
-export function addTickDatagodrejcp(data){
+export function addTickDataofss(data){
   //alert(JSON.stringify(data));
    return ({
      type :'ADD_DATA_SCOPE_GODREJCP',
@@ -232,7 +293,7 @@ export function addTickDatagodrejcp(data){
     })
 }
 
-export function pivotDatagodrejcp(data){
+export function pivotDataofss(data){
     return ({
      type :'PLOT_PIVOT_DATA_GODREJCP',
      payload : data,
@@ -240,17 +301,17 @@ export function pivotDatagodrejcp(data){
 }
 
                        if (d[i].instrument_token == "2585345") {
-                                 get5minDatagodrejcpTimestamp(d[i].last_price, self);
+                                 get5minDataofssTimestamp(d[i].last_price, self);
                             }
 
 
 
-            tickCombogodrejcp: state.tickDatagodrejcp,
-            trendDatagodrejcp : state.plDatagodrejcp,
+            tickComboofss: state.tickDataofss,
+            trendDataofss : state.plDataofss,
 
 
-addTickDatagodrejcp,
-pivotDatagodrejcp
+addTickDataofss,
+pivotDataofss
 
 
 
